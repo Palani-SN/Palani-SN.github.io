@@ -5,6 +5,12 @@
   border-left: 2px solid #E6E9ED;
   padding: 1rem 0; }
 
+.timeline-nocard {
+  position: relative;
+  margin-left: 31px;
+  border-left: 2px solid;
+  margin-bottom: 2rem; }
+
 .timeline-card {
   position: relative;
   margin-left: 31px;
@@ -13,6 +19,19 @@
 
 .timeline-card:last-child {
   margin-bottom: 1rem; }
+
+.timeline-nocard:before {
+  content: '';
+  display: inline-block;
+  position: absolute;
+  background-color: #fff;
+  border-radius: 10px;
+  width: 12px;
+  height: 12px;
+  top: 20px;
+  left: -41px;
+  border: 2px solid;
+  z-index: 2; }
 
 .timeline-card:before {
   content: '';
