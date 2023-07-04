@@ -105,8 +105,8 @@ html {
   border-radius: 10px 10px 0 0; }
 
 .avatar {
-  max-width: 216px;
-  max-height: 216px;
+  max-width: 241px;
+  max-height: 241px;
   margin-top: 20px;
   text-align: center;
   margin-left: auto;
@@ -114,7 +114,8 @@ html {
 
 .avatar img {
   /* Safari 6.0 - 9.0 */
-  filter: grayscale(100%); }
+  filter: grayscale(0%); 
+}
 
 footer a:not(.nav-link) {
   color: inherit;
@@ -152,8 +153,12 @@ footer a:not(.nav-link) {
   .skills-section,
   .work-experience-section,
   .education-section,
+  .Participations-section,
+  .Proposals-section, 
   .contant-section {
-    padding: 1.5rem 5rem 2rem !important; }
+    padding: 1.5rem 5rem 2rem !important; 
+    /* font-size: 1.00rem; */
+  }
   .page-break {
     padding-top: 5rem;
     page-break-before: always; } }
