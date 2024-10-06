@@ -214,16 +214,22 @@ footer a:not(.nav-link) {
   font-size: 1.5vw;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   line-height: 2.0em;
-  padding-top: 1vh;
-  padding-left: 1vw;
-  padding-right: 1vw;
-  padding-bottom: 3.5vh;
+  padding-top: 2vw;
+  padding-left: 2vw;
+  padding-right: 2vw;
+  padding-bottom: 2vw;
 }
 
 .fa-quote-left {
   float: left;
+  font-size: 1.5vw;
+  margin-top: -1.55vw;
+  margin-left: -1.55vw;
 }
 
 .fa-quote-right {
   float: right;
+  font-size: 1.5vw;
+  margin-top: 3.10vw;
+  margin-right: -1.55vw;
 }
