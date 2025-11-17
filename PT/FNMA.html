@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>FNMA.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="river-banks-proprioceptors--an-intangible-network">River Banks, Proprioceptors &amp; An Intangible Network</h1>
+<p><em>Transdisciplinary Movement redefining Information System (IS) integral to Socio-Ecological-Technical System (SETS)</em></p>
+<p><strong>Author:</strong> Sathiyanarayanan Palani<br>
+<strong>Date:</strong> 2025-11-17<br>
+<strong>Tags:</strong> #FNMA</p>
+<hr>
+<h2 id="%F0%9F%93%8C-table-of-contents">📌 Table of Contents</h2>
+<ul>
+<li><a href="#%F0%9F%93%9D-introduction">Introduction</a></li>
+<li><a href="#%F0%9F%A7%A9-river-banks">River Banks</a></li>
+<li><a href="#%F0%9F%A7%A0-proprioceptors">Proprioceptors</a></li>
+<li><a href="#%F0%9F%9A%80-an-intangible-network">An Intangible Network</a></li>
+<li><a href="#%F0%9F%8E%AF-conclusion">Conclusion</a></li>
+<li><a href="#%F0%9F%94%97-references">References</a></li>
+</ul>
+<hr>
+<h2 id="%F0%9F%93%9D-introduction">📝 Introduction</h2>
+<p>This essay examines the urgent need to redesign information systems so they operate with transparent, observable standards that consistently bring civic societies closer to ground truth. Such systems would address a critical “supply chain problem” faced by fact-checking organizations: even when accurate information is produced, it rarely reaches the public with the speed, clarity, or scale needed to counter misinformation effectively.</p>
+<p>Predictive research from major global institutions underscores the severity of the growing infodemic:</p>
+<ul>
+<li>
+<p>The World Economic Forum identifies misinformation and disinformation as the most severe short-term technological risk globally (rank 1) and a top long-term risk (rank 5), highlighting the systemic impact these phenomena can have on political stability, public health, and economic functioning.</p>
+</li>
+<li>
+<p>Global surveys between 2017 and 2022 reveal a consistent decline in trust toward news institutions across multiple regions and demographics, suggesting that mistrust is no longer an isolated cultural trend but a structural challenge.</p>
+</li>
+<li>
+<p>Although internet penetration has increased worldwide, the quality of information reaching citizens has deteriorated, creating a paradox where greater access does not equate to better understanding. This decline emphasizes the necessity for streamlined information flows supported by strict, consistent, and resilient fact-checking practices.</p>
+</li>
+</ul>
+<p>Together, these trends illustrate a widening gap between the production of verified information and its public uptake. Addressing this gap requires a new information infrastructure—one that not only validates facts but distributes them reliably, visibly, and equitably. Such an infrastructure would enhance civic literacy, improve collective reasoning, and reinforce democratic resilience in an era where misinformation spreads faster than truth.</p>
+<hr>
+<h2 id="%F0%9F%A7%A9-river-banks">🧩 River Banks</h2>
+<p>The Tigris–Euphrates basin is often called a Cradle of Civilization because its fertile but unpredictable rivers pushed early communities to build irrigation systems, coordinate labor, and develop shared administrative tools such as clay records and cylinder seals. These technologies did not serve as currency but as information systems that enabled authorization, accountability, and collective management of resources.</p>
+<p>Although Mesopotamian city-states often competed, their survival depended on cooperation: maintaining canals, regulating water access, and aligning many actors around common procedures. The rivers thus produced not only agricultural surplus but also the need for organizational practices that bound communities together.</p>
+<p>Today, civic societies face analogous challenges. Instead of water, we manage complex flows of information. Effective coordination, fairness, and social cohesion now rely on digital and institutional infrastructures that allow groups to communicate, trust one another, and act collectively.</p>
+<p>Habermas’s concept of the lifeworld clarifies this continuity: just as early riverine societies depended on shared communicative frameworks to sustain cooperation, modern communities require information systems that reinforce solidarity and enable equitable, collective action.</p>
+<h2 id="%F0%9F%A7%A0-proprioceptors">🧠 Proprioceptors</h2>
+<p>The human body is a remarkable system: despite its vulnerabilities, it coordinates complex actions with extraordinary precision. Signals from the brain travel through the central and peripheral nervous systems, and muscles respond effectively because of continuous feedback from proprioceptors that keep movement synchronized in real time. The brain’s top-down commands may seem dominant, but it is the subtle bottom-up feedback loops that make reliable action possible.</p>
+<p>Societies require a similar balance. Counties, nations, and global communities need transparent, observable feedback systems that reveal patterns in public behavior and collective sentiment. Yet most fact-checking bodies and official institutions lack this responsiveness. Governments and global organizations recognize the dangers of an escalating infodemic, but they cannot solve it through taxis alone—through imposed, centralized directives.</p>
+<p>What is needed is a complementary cosmos: an emergent, bottom-up information ecosystem built by technologists, sociologists, economists, and psychologists. Such a system must arise from shared participation and organic coordination rather than command-and-control edicts. As Douglas Hofstadter observed in Gödel, Escher, Bach, complex collective intelligence emerges when many simple agents align through shared signals.</p>
+<p>By cultivating this cosmos-like culture of collective cognition, societies can build the subtle informational architecture in which shared intelligence—and durable civic cohesion—can genuinely take shape.</p>
+<h2 id="%F0%9F%9A%80-an-intangible-network">🚀 An Intangible Network</h2>
+<p>Over the past decade, artificial intelligence has advanced rapidly, while critical thinking and rational reasoning have eroded at a comparable pace. This imbalance creates fertile ground for using AI to generate soothing symbolic narratives—artifacts that reinforce intangible identities such as race, color, or ethnicity. These narratives offer temporary comfort to individuals experiencing long-term meaning crises, but they can also deepen dependence on these institutions or push people toward more radical sources of identity.</p>
+<p>Recent global events reflect this dynamic. Movements that began as peaceful demonstrations—such as those in Nepal and Bangladesh—escalated into large-scale unrest and even regime change. These upheavals were driven not only by economic inequality but by sociological fragmentation amplified by social media metrics, which function as perverse incentives that reward outrage, polarization, and emotional volatility.</p>
+<p>Restoring social cohesion requires subtle and sustained cultural reforms—measures that steer communities away from the need for disruptive, brute-force revolutions. With thoughtful technology design, we can build infrastructures that bring citizens and governments into recurring, pro-social practices, where long-term well-being is valued over short-term, self-centered engagement. The role of an intangible, distributed network would be to cultivate digital literacy, media literacy, and basic statistical reasoning, equipping people to navigate the post-truth environment rather than be consumed by it.</p>
+<p>This hybrid, horizontal social movement differs from traditional uprisings: it seeks no singular moment of change but a durable shift in collective behavior that endures over time. With measurable improvements and consistent participation, communities can rebuild solidarity—what Ibn Khaldun called asabiyyah—and reinforce the sense of responsibility and meaning that Viktor Frankl described as essential to human purpose and belonging.</p>
+<hr>
+<h2 id="%F0%9F%8E%AF-conclusion">🎯 Conclusion</h2>
+<p>Traditional economics models humans as homo economicus—perfectly rational agents maximizing utility as consumers and profit as producers. Behavioral economics challenged this view by showing how cognitive biases, heuristics, and predictable irrationalities limit the efficiency of free markets and leave them vulnerable to manipulation. But stopping at psychology alone offers only a partial explanation.</p>
+<p>A deeper structural force is the disparity in information available to different actors. Information asymmetry distorts decisions in individual transactions and becomes far more dangerous at the scale of civic life. The spread of unaddressed, fabricated narratives can be more damaging than short-lived propaganda: while such content may not trigger immediate reactions, it gradually shifts the Overton window and produces long-term social polarization that can even alter standards of living.</p>
+<p>Restoring rationality within large populations therefore requires a shared informational infrastructure—something people can rely on to clarify widespread misunderstandings and keep public discourse anchored to verifiable reality. Though subtle, routine access to credible information makes reasoning more critical and less impulsive over time.</p>
+<p>Evidence from development economics supports this approach. As demonstrated in the Nobel Prize–winning work of Abhijit Banerjee and Esther Duflo through the Abdul Latif Jameel Poverty Action Lab (J-PAL), targeted information, structured incentives, reminders, and social nudges can significantly improve decision-making and alleviate poverty. Applying similar principles—combined with essential statistical literacy—can help societies reinforce collective rationality, sustain it, and maintain resilience against misinformation even when future exposure is inevitable.</p>
+<hr>
+<h2 id="%F0%9F%94%97-references">🔗 References</h2>
+<h3 id="home-page">Home Page</h3>
+<ul>
+<li><a href="https://phylum-tardigrada.github.io/">Phylum-Tardigrada</a></li>
+</ul>
+<h3 id="technical-terms">Technical Terms</h3>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Tigris%E2%80%93Euphrates_river_system#:~:text=The%20plain%20between%20the%20two%20rivers%20is%20known%20as%20Mesopotamia.%20As%20part%20of%20the%20larger%20Fertile%20Crescent%2C%20it%20saw%20the%20earliest%20emergence%20of%20literate%20urban%20civilization%20in%20the%20Uruk%20period.%20For%20this%20reason%2C%20it%20is%20often%20described%20as%20a%20%22Cradle%20of%20Civilization%22.">Tigris-Euphrates river basin of mesopotamia</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Brandolini%27s_law#:~:text=The%20amount%20of%20energy%20needed%20to%20refute%20bullshit%20is%20an%20order%20of%20magnitude%20bigger%20than%20that%20needed%20to%20produce%20it.">Brandolini's law</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Lifeworld#:~:text=Social%20coordination%20and,create%20social%20solidarity.">Lifeworld</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Communicative_action#:~:text=In%20sociology%2C%20communicative%20action%20is%20cooperative%20action%20undertaken%20by%20individuals%20based%20upon%20mutual%20deliberation%20and%20argumentation">Communicative Action</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Central_nervous_system#:~:text=The%20central%20nervous%20system%20(CNS)%20is%20the%20part%20of%20the%20nervous%20system%20consisting%20primarily%20of%20the%20brain%2C%20spinal%20cord%20and%20retina.">Central Nervous System</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Peripheral_nervous_system#:~:text=The%20PNS%20consists%20of%20nerves%20and%20ganglia%2C%20which%20lie%20outside%20the%20brain%20and%20the%20spinal%20cord.%5B1%5D%20The%20main%20function%20of%20the%20PNS%20is%20to%20connect%20the%20CNS%20to%20the%20limbs%20and%20organs%2C%20essentially%20serving%20as%20a%20relay%20between%20the%20brain%20and%20spinal%20cord%20and%20the%20rest%20of%20the%20body.">Peripheral Nervous System</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Proprioception#:~:text=Proprioceptive%20signals%20are,coordinating%20body%20movement.">Proprioception</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Infodemic#:~:text=An%20infodemic%20is,COVID%2D19%20pandemic.">Infodemic</a></li>
+<li><a href="https://allenmendenhallblog.com/2019/04/03/taxis-and-cosmos-a-clarifying-table/#_ftn7:~:text=Classical%20Greek%20was%20more%20fortunate%20in%20possessing%20distinct%20single%20words%20for%20the%20two%20kinds%20of%20order%2C%20namely%20taxis%20for%20a%20made%20order%2C%20such%20as%2C%20for%20example%2C%20an%20order%20of%20battle%2C%20and%20kosmos%20for%20a%20grown%20order%2C%20meaning%20originally%20%E2%80%98a%20right%20order%20in%20a%20state%20or%20a%20community.">Taxis vs Cosmos</a></li>
+<li><a href="https://en.wikipedia.org/wiki/G%C3%B6del,_Escher,_Bach#:~:text=One%20point%20in%20the%20book%20presents%20an%20analogy%20about%20how%20individual%20neurons%20in%20the%20brain%20coordinate%20to%20create%20a%20unified%20sense%20of%20a%20coherent%20mind%20by%20comparing%20it%20to%20the%20social%20organization%20displayed%20in%20a%20colony%20of%20ants">Gödel, Escher, Bach</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Economic_inequality#:~:text=Economic%20inequality%20is,among%20the%20spenders.">Economic Inequality</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Perverse_incentive#:~:text=the%20British%20government,wild%20cobra%20population.">Perverse Incentive</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Post-truth#:~:text=Oxford%20Dictionaries%20popularly%20defines%20it%20as%20%22relating%20to%20and%20denoting%20circumstances%20in%20which%20objective%20facts%20are%20less%20influential%20in%20shaping%20public%20opinion%20than%20appeals%20to%20emotion%20and%20personal%20belief">Past-Truth Era</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Asabiyyah#:~:text=concept%20of%20social%20solidarity%20with%20an%20emphasis%20on%20unity%2C%20group%20consciousness%2C%20and%20a%20sense%20of%20shared%20purpose%20and%20social%20cohesion%2C%20originally%20primarily%20used%20in%20the%20context%20of%20tribalism%20and%20clanism.%5B1%5D%5Bfurther%20explanation%20needed%5D%20In%20the%20modern%20period%2C%20it%20is%20generally%20analogous%20to%20solidarity.">Asabiyyah</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Man%27s_Search_for_Meaning#:~:text=Frankl%20observed%20that,affected%20his%20longevity">Man's Search for Meaning</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Homo_economicus#:~:text=Homo%20economicus%20is,best%20possible%20result.">Homo Economicus</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Information_asymmetry#:~:text=In%20contract%20theory%2C%20mechanism%20design%2C%20and%20economics%2C%20an%20information%20asymmetry%20is%20a%20situation%20where%20one%20party%20has%20more%20or%20better%20information%20than%20the%20other.">Information asymmetry</a></li>
+<li><a href="https://blogs.worldbank.org/en/impactevaluations/banerjee-and-duflo-s-poor-economics-micro-steps-towards-a-quiet-revolution#:~:text=One%20of%20the,the%20Dominican%20Republic.">Experimental approach to alleviating global poverty</a></li>
+</ul>
+<h3 id="news-articles">News Articles</h3>
+<ul>
+<li><a href="https://americasquarterly.org/article/one-year-later-brazil-has-never-been-so-prepared-to-fight-fake-news/">Americas Quarterly</a></li>
+<li><a href="https://reutersinstitute.politics.ox.ac.uk/news/despite-efforts-fight-falsehoods-brazils-tight-election-threatened-dangerous-lies">Reuters Oxford</a></li>
+<li><a href="https://odi.org/en/insights/misinformation-in-brazilian-elections-can-the-judiciary-stem-the-tide-of-political-misinformation/">ODI Global</a></li>
+<li><a href="https://www.amnesty.org/en/latest/news/2022/09/myanmar-facebooks-systems-promoted-violence-against-rohingya-meta-owes-reparations-new-report/">amnesty International</a></li>
+<li><a href="https://systemicjustice.org/article/facebook-and-genocide-how-facebook-contributed-to-genocide-in-myanmar-and-why-it-will-not-be-held-accountable/">Systemic Justice Project</a></li>
+<li><a href="https://www.usip.org/publications/2023/04/misinformation-hate-speech-and-ethno-religious-tensions-myanmar">US Institute Of Peace</a></li>
+<li><a href="https://www.dw.com/en/nigeria-un-slams-brutality-against-endsars-protesters/a-55349495">DW Germany</a></li>
+<li><a href="https://www.aljazeera.com/news/2020/10/25/endsars-how-nigerians-use-social-media-against-police-brutality">Aljazeera</a></li>
+</ul>
+<h3 id="global-think-tanks">Global Think Tanks</h3>
+<ul>
+<li><a href="https://www.ipsos.com/en-us/news-polls/cigi-fake-news-global-epidemic">Ipsos-Centre for International Governance Innovation</a></li>
+<li><a href="https://www.who.int/europe/news/item/01-09-2022-infodemics-and-misinformation-negatively-affect-people-s-health-behaviours--new-who-review-finds">World Health Organization</a></li>
+<li><a href="https://www.zdnet.com/article/online-fake-news-costing-us-78-billion-globally-each-year/">ZD Net</a></li>
+<li><a href="https://www.weforum.org/stories/2024/01/ai-disinformation-global-risks/">World Economic Forum - GPI 2024</a></li>
+<li><a href="https://www.weforum.org/press/2025/01/global-risks-report-2025-conflict-environment-and-disinformation-top-threats/#:~:text=Misinformation%20and%20disinformation%20remain,cyber%2Despionage%20and%20warfare.">World Economic Forum - GPI 2025</a></li>
+<li><a href="https://reutersinstitute.politics.ox.ac.uk/digital-news-report/2025/dnr-executive-summary#:~:text=Messaging%20apps%20such,in%20spreading%20misinformation.">Reuters Stats - 2025 India</a></li>
+<li><a href="https://theconversation.com/misinformation-was-rife-during-the-2025-election-new-research-shows-many-people-were-unable-to-identify-it-267852#:~:text=Misinformation%20will%20likely,media%20literacy%20education.">the conversation 2025</a></li>
+<li><a href="https://datawrapper.dwcdn.net/VL9mA/1/#embed">Reuters Oxford - Stats 1</a></li>
+<li><a href="https://datawrapper.dwcdn.net/iPQxe/2/#embed">Reuters Oxford - Stats 2</a></li>
+<li><a href="https://www.visionofhumanity.org/%F0%9F%87%BA%F0%9F%87%B8-the-us-political-violence-civil-unrest-in-6-charts/">Vision Of Humanity - Stats 1</a></li>
+<li><a href="https://www.visionofhumanity.org/civil-unrest-on-the-rise/">Vision Of Humanity - Stats 2</a></li>
+</ul>
+<h3 id="guidelines">Guidelines</h3>
+<ul>
+<li><a href="https://edition.cnn.com/interactive/2019/05/europe/finland-fake-news-intl/">CNN</a></li>
+<li><a href="https://www.weforum.org/stories/2022/10/how-to-address-disinformation/">World Economic Forum</a></li>
+</ul>
+
+</body>
+</html>
