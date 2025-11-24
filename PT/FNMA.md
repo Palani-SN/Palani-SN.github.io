@@ -12,7 +12,8 @@
 - [River Banks](#🧩-river-banks)  
 - [Proprioceptors](#🧠-proprioceptors)  
 - [An Intangible Network](#🚀-an-intangible-network)  
-- [Conclusion](#🎯-conclusion)  
+- [Conclusion](#🎯-conclusion)
+- [Feedback](#📊-feedback)  
 - [References](#🔗-references)
 
 ---
@@ -79,6 +80,18 @@ Evidence from development economics supports this approach. As demonstrated in t
 
 ---
 
+## 📊 Feedback
+
+The Final question is, 
+
+*Should we become ___fragments-of-futile___ (or) Should we embrace ___frameworks-for-future___ ?*
+
+![Plan For Peace](images/plan_4_peace.png)
+
+- [Submit Your Response](https://forms.gle/u1bSDutmwsLoG5aS6)
+
+---
+
 ## 🔗 References
 
 ### Home Page
@@ -103,6 +116,7 @@ Evidence from development economics supports this approach. As demonstrated in t
 - [Asabiyyah](https://en.wikipedia.org/wiki/Asabiyyah#:~:text=concept%20of%20social%20solidarity%20with%20an%20emphasis%20on%20unity%2C%20group%20consciousness%2C%20and%20a%20sense%20of%20shared%20purpose%20and%20social%20cohesion%2C%20originally%20primarily%20used%20in%20the%20context%20of%20tribalism%20and%20clanism.%5B1%5D%5Bfurther%20explanation%20needed%5D%20In%20the%20modern%20period%2C%20it%20is%20generally%20analogous%20to%20solidarity.)
 - [Man's Search for Meaning](https://en.wikipedia.org/wiki/Man%27s_Search_for_Meaning#:~:text=Frankl%20observed%20that,affected%20his%20longevity)
 - [Homo Economicus](https://en.wikipedia.org/wiki/Homo_economicus#:~:text=Homo%20economicus%20is,best%20possible%20result.)
+- [Overton Window](https://en.wikipedia.org/wiki/Overton_window#:~:text=The%20Overton%20window%20is,societal%20values%20and%20norms%22.)
 - [Information asymmetry](https://en.wikipedia.org/wiki/Information_asymmetry#:~:text=In%20contract%20theory%2C%20mechanism%20design%2C%20and%20economics%2C%20an%20information%20asymmetry%20is%20a%20situation%20where%20one%20party%20has%20more%20or%20better%20information%20than%20the%20other.)
 - [Experimental approach to alleviating global poverty](https://blogs.worldbank.org/en/impactevaluations/banerjee-and-duflo-s-poor-economics-micro-steps-towards-a-quiet-revolution#:~:text=One%20of%20the,the%20Dominican%20Republic.)
 
