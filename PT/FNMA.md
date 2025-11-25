@@ -139,7 +139,7 @@ The Final question is,
 - [World Economic Forum - GRR 2024](https://www.weforum.org/stories/2024/01/ai-disinformation-global-risks/)
 - [World Economic Forum - GRR 2025](https://www.weforum.org/press/2025/01/global-risks-report-2025-conflict-environment-and-disinformation-top-threats/#:~:text=Misinformation%20and%20disinformation%20remain,cyber%2Despionage%20and%20warfare.)
 - [Reuters Stats - 2025 India](https://reutersinstitute.politics.ox.ac.uk/digital-news-report/2025/dnr-executive-summary#:~:text=Messaging%20apps%20such,in%20spreading%20misinformation.)
-- [the conversation 2025](https://theconversation.com/misinformation-was-rife-during-the-2025-election-new-research-shows-many-people-were-unable-to-identify-it-267852#:~:text=Misinformation%20will%20likely,media%20literacy%20education.)
+- [The conversation 2025](https://theconversation.com/misinformation-was-rife-during-the-2025-election-new-research-shows-many-people-were-unable-to-identify-it-267852#:~:text=Misinformation%20will%20likely,media%20literacy%20education.)
 - [Reuters Oxford - Stats 1](https://datawrapper.dwcdn.net/VL9mA/1/#embed)
 - [Reuters Oxford - Stats 2](https://datawrapper.dwcdn.net/iPQxe/2/#embed)
 - [Vision Of Humanity - Stats 1](https://www.visionofhumanity.org/%F0%9F%87%BA%F0%9F%87%B8-the-us-political-violence-civil-unrest-in-6-charts/ )
