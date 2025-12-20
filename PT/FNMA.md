@@ -125,7 +125,7 @@ The Final question is,
 - [Americas Quarterly](https://americasquarterly.org/article/one-year-later-brazil-has-never-been-so-prepared-to-fight-fake-news/)
 - [Reuters Oxford](https://reutersinstitute.politics.ox.ac.uk/news/despite-efforts-fight-falsehoods-brazils-tight-election-threatened-dangerous-lies)
 - [ODI Global](https://odi.org/en/insights/misinformation-in-brazilian-elections-can-the-judiciary-stem-the-tide-of-political-misinformation/)
-- [amnesty International](https://www.amnesty.org/en/latest/news/2022/09/myanmar-facebooks-systems-promoted-violence-against-rohingya-meta-owes-reparations-new-report/)
+- [Amnesty International](https://www.amnesty.org/en/latest/news/2022/09/myanmar-facebooks-systems-promoted-violence-against-rohingya-meta-owes-reparations-new-report/)
 - [Systemic Justice Project](https://systemicjustice.org/article/facebook-and-genocide-how-facebook-contributed-to-genocide-in-myanmar-and-why-it-will-not-be-held-accountable/)
 - [US Institute Of Peace](https://www.usip.org/publications/2023/04/misinformation-hate-speech-and-ethno-religious-tensions-myanmar)
 - [DW Germany](https://www.dw.com/en/nigeria-un-slams-brutality-against-endsars-protesters/a-55349495)
