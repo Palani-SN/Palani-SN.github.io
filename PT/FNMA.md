@@ -88,6 +88,8 @@ The Final question is,
 
 ![Plan For Peace](images/plan_4_peace.png)
 
+*( Click the Google Forms link below )*
+
 - [Submit Your Response](https://forms.gle/u1bSDutmwsLoG5aS6)
 
 ---
