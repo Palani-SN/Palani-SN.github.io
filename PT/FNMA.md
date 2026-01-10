@@ -90,7 +90,7 @@ The Final question is,
 
 *( Click the Google Forms link below )*
 
-- [Submit Your Response](https://forms.gle/u1bSDutmwsLoG5aS6)
+[Submit Your Response](https://forms.gle/u1bSDutmwsLoG5aS6)
 
 ---
 
