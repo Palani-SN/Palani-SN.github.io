@@ -397,6 +397,53 @@ code {
 </li>
 </ul>
 <p>Together, these trends illustrate a widening gap between the production of verified information and its public uptake. Addressing this gap requires a new information infrastructure—one that not only validates facts but distributes them reliably, visibly, and equitably. Such an infrastructure would enhance civic literacy, improve collective reasoning, and reinforce democratic resilience in an era where misinformation spreads faster than truth.</p>
+
+<!-- Gentle carousel inserted here -->
+<div class="gentle-carousel" aria-label="Image gallery carousel">
+  <div class="gc-track">
+    <div class="gc-slide"><img src="images/wef_grr_2023.PNG" alt="WEF GRR 2023"></div>
+    <div class="gc-slide"><img src="images/wef_grr_2024.PNG" alt="WEF GRR 2024"></div>
+    <div class="gc-slide"><img src="images/wef_grr_2025.PNG" alt="WEF GRR 2025"></div>
+	<div class="gc-slide"><img src="images/wef_grr_2026.PNG" alt="WEF GRR 2026"></div>
+  </div>
+  <button class="gc-prev" aria-label="Previous slide">‹</button>
+  <button class="gc-next" aria-label="Next slide">›</button>
+  <div class="gc-dots" role="tablist"></div>
+</div>
+
+<style>
+.gentle-carousel { max-width: 900px; margin: 20px auto; position: relative; overflow: hidden; border-radius:8px; box-shadow: 0 6px 18px rgba(0,0,0,0.08);} 
+.gc-track { display:flex; transition:transform .6s cubic-bezier(.22,.9,.35,1); will-change: transform; }
+.gc-slide { flex:0 0 100%; }
+.gc-slide img { width:100%; height:auto; display:block; object-fit:cover; }
+.gc-prev,.gc-next{ position:absolute; top:50%; transform:translateY(-50%); background:rgba(0,0,0,0.28); color:#fff; border:none; padding:8px 12px; cursor:pointer; border-radius:4px; font-size:20px; line-height:1; }
+.gc-prev{ left:10px } .gc-next{ right:10px }
+.gc-dots{ position:absolute; bottom:10px; left:50%; transform:translateX(-50%); display:flex; gap:6px; }
+.gc-dots button{ width:10px;height:10px;border-radius:50%; border:none; background:rgba(255,255,255,0.6); cursor:pointer; padding:0; }
+.gc-dots button.active{ background:#fff; box-shadow:0 1px 3px rgba(0,0,0,0.2);} 
+.gentle-carousel:hover .gc-prev,.gentle-carousel:hover .gc-next{ background:rgba(0,0,0,0.45); }
+@media (max-width:640px){ .gc-prev,.gc-next{ padding:6px 9px; font-size:18px } }
+</style>
+
+<script>
+(function(){
+  var sc = document.querySelector('.gentle-carousel'); if(!sc) return;
+  var track = sc.querySelector('.gc-track'); var slides = Array.prototype.slice.call(track.children);
+  var prev = sc.querySelector('.gc-prev'), next = sc.querySelector('.gc-next'), dots = sc.querySelector('.gc-dots');
+  var index=0, interval=4000, timer=null;
+  function update(){ track.style.transform = 'translateX(' + (-index*100) + '%)'; var bs = dots.querySelectorAll('button'); bs.forEach(function(b,i){ b.classList.toggle('active', i===index); b.setAttribute('aria-pressed', String(i===index)); }); }
+  slides.forEach(function(_,i){ var b = document.createElement('button'); b.setAttribute('aria-label','Go to slide '+(i+1)); b.addEventListener('click', function(){ index = i; reset(); update(); }); dots.appendChild(b); });
+  function nextSlide(){ index = (index+1) % slides.length; update(); }
+  function prevSlide(){ index = (index-1 + slides.length) % slides.length; update(); }
+  function reset(){ clearInterval(timer); timer = setInterval(nextSlide, interval); }
+  next.addEventListener('click', function(){ nextSlide(); reset(); }); prev.addEventListener('click', function(){ prevSlide(); reset(); });
+  sc.addEventListener('mouseenter', function(){ clearInterval(timer); }); sc.addEventListener('mouseleave', reset);
+  sc.addEventListener('touchstart', function(){ clearInterval(timer); }, {passive:true}); sc.addEventListener('touchend', reset);
+  // initialize
+  update(); reset();
+})();
+</script>
+
 <hr>
 <h2 id="%F0%9F%A7%A9-river-banks">🧩 River Banks</h2>
 <p>The Tigris–Euphrates basin is often called a Cradle of Civilization because its fertile but unpredictable rivers pushed early communities to build irrigation systems, coordinate labor, and develop shared administrative tools such as clay records and cylinder seals. These technologies did not serve as currency but as information systems that enabled authorization, accountability, and collective management of resources.</p>
@@ -419,6 +466,59 @@ code {
 <p>A deeper structural force is the disparity in information available to different actors. Information asymmetry distorts decisions in individual transactions and becomes far more dangerous at the scale of civic life. The spread of unaddressed, fabricated narratives can be more damaging than short-lived propaganda: while such content may not trigger immediate reactions, it gradually shifts the Overton window and produces long-term social polarization that can even alter standards of living.</p>
 <p>Restoring rationality within large populations therefore requires a shared informational infrastructure—something people can rely on to clarify widespread misunderstandings and keep public discourse anchored to verifiable reality. Though subtle, routine access to credible information makes reasoning more critical and less impulsive over time.</p>
 <p>Evidence from development economics supports this approach. As demonstrated in the Nobel Prize–winning work of Abhijit Banerjee and Esther Duflo through the Abdul Latif Jameel Poverty Action Lab (J-PAL), targeted information, structured incentives, reminders, and social nudges can significantly improve decision-making and alleviate poverty. Applying similar principles—combined with essential statistical literacy—can help societies reinforce collective rationality, sustain it, and maintain resilience against misinformation even when future exposure is inevitable.</p>
+
+<!-- YouTube thumbnails grid inserted here -->
+<div class="video-grid-wrapper" style="max-width:900px;margin:18px auto;text-align:center;">
+  <div class="video-grid" role="list" aria-label="Featured videos">
+    <button class="video-thumb" data-video-id="nq3VlBpuH7Y" aria-label="Play video 1" type="button">
+      <img src="https://img.youtube.com/vi/nq3VlBpuH7Y/hqdefault.jpg" alt="Video 1 thumbnail">
+      <span class="video-play">▶</span>
+    </button>
+    <button class="video-thumb" data-video-id="08Qyg8H2cRY" aria-label="Play video 2" type="button">
+      <img src="https://img.youtube.com/vi/08Qyg8H2cRY/hqdefault.jpg" alt="Video 2 thumbnail">
+      <span class="video-play">▶</span>
+    </button>
+    <button class="video-thumb" data-video-id="ZK6n30my6To" aria-label="Play video 3" type="button">
+      <img src="https://img.youtube.com/vi/ZK6n30my6To/hqdefault.jpg" alt="Video 3 thumbnail">
+      <span class="video-play">▶</span>
+    </button>
+    <button class="video-thumb" data-video-id="sR9g8xh3rSY" aria-label="Play video 4" type="button">
+      <img src="https://img.youtube.com/vi/sR9g8xh3rSY/hqdefault.jpg" alt="Video 4 thumbnail">
+      <span class="video-play">▶</span>
+    </button>
+  </div>
+</div>
+
+<!-- PDF link: centered under the video thumbnails -->
+<div class="pdf-link-wrap" style="text-align:center; margin:18px 0;">
+  <a class="pdf-link" href="https://palani-sn.github.io/proposals/AI-in-Journalism.pdf" target="_blank" rel="noopener">Download full article (PDF)</a>
+</div>
+
+<style>
+.video-grid{ display:flex; gap:12px; justify-content:center; align-items:center; }
+.video-thumb{ position:relative; border:0; padding:0; background:transparent; cursor:pointer; width:210px; max-width:22vw; min-width:140px; }
+.video-thumb img{ width:100%; height:auto; display:block; border-radius:6px; box-shadow:0 6px 18px rgba(0,0,0,0.08); }
+.video-play{ position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); color:#fff; font-size:28px; text-shadow:0 2px 6px rgba(0,0,0,0.5); pointer-events:none; }
+.pdf-link{ display:inline-block; background:#007acc; color:#fff; padding:10px 16px; border-radius:6px; text-decoration:none; box-shadow:0 6px 16px rgba(0,0,0,0.12); font-weight:600; }
+.pdf-link:hover{ background:#005fa3; }
+@media (max-width:760px){ .video-grid{ flex-wrap:wrap } .video-thumb{ max-width:45vw } }
+</style>
+
+<script>
+(function(){
+  var thumbs = document.querySelectorAll('.video-thumb');
+  if(!thumbs.length) return;
+  thumbs.forEach(function(b){
+    b.addEventListener('click', function(){
+      var id = b.getAttribute('data-video-id') || '';
+      if(!id) return;
+      var url = 'https://www.youtube.com/watch?v=' + encodeURIComponent(id);
+      window.open(url, '_blank', 'noopener');
+    });
+  });
+})();
+</script>
+
 <hr>
 <h2 id="%F0%9F%93%8A-feedback">📊 Feedback</h2>
 <p>The Final question is,</p>
