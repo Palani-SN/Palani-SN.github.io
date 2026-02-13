@@ -1,6 +1,6 @@
 ## 📦 PyPI Projects & Stats Overview
 
-**76,000+ total lifetime downloads across 6 published packages**  
+**86,000+ total lifetime downloads across 6 published packages**  
 All packages available via [PyPI](https://pypi.org/user/Palani-SN/) and [Github](https://github.com/Palani-SN/).
 
 | Package | Description | Version | Monthly Downloads | Total Downloads | PyPI | GitHub |
