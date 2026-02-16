@@ -425,8 +425,11 @@
 	<ul>
 		<li>setup conda env, with <em><strong>python 3.11.6</strong></em></li>
 	</ul>
-	<pre class="hljs"><code><div>conda create -n mlp python=<span class="hljs-number">3</span>.<span class="hljs-number">11</span>.<span class="hljs-number">6</span>
-conda activate mlp
+	<pre class="hljs"><code><div>git clone https://github.com/Palani-SN/monosemanticity-mlp-interpretability.git
+<span class="hljs-built_in">cd</span> monosemanticity-mlp-interpretability
+conda create -n mmi python=<span class="hljs-number">3</span>.<span class="hljs-number">11</span>.<span class="hljs-number">6</span>
+conda activate mmi
+python -m pip install torch==<span class="hljs-number">2</span>.<span class="hljs-number">10</span>.<span class="hljs-number">0</span> torchvision==<span class="hljs-number">0</span>.<span class="hljs-number">25</span>.<span class="hljs-number">0</span> --extra-index-url https://download.pytorch.org/whl/cu126
 python -m pip install -r reqs.txt
 </div></code></pre>
 	<h3 id="execution-steps">Execution Steps</h3>
