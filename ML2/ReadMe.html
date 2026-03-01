@@ -410,7 +410,7 @@
       controllability limits</li>
   </ol>
   <h4 id="task-mechanics">Task Mechanics</h4>
-  <p>The model is presented with a $5 \times 2$ matrix (flattened into a 10-element vector). The network must learn a
+  <p>The model is presented with a 5 x 2 matrix (flattened into a 10-element vector). The network must learn a
     two-stage logic process:</p>
   <ol>
     <li><strong>Pointer Identification (Routing):</strong> The final element of each column serves as a dynamic
@@ -433,7 +433,7 @@
     <li><strong>Disentanglement Testing:</strong> The generator creates balanced datasets across four distinct
       &quot;concept quadrants&quot;.</li>
     <li><strong>Sign Control:</strong> Positive vs. Negative results.</li>
-    <li><strong>Subset Control:</strong> &quot;Small&quot; ($\le 5$) vs. &quot;Large&quot; ($&gt; 5$) absolute values.
+    <li><strong>Subset Control:</strong> &quot;Small&quot; (≤ 5) vs. &quot;Large&quot; (> 5) absolute values.
     </li>
     <li><strong>Mechanistic Mapping:</strong> The primary objective is to determine if an SAE can isolate specific
       features (latents) that correspond to these hidden &quot;pointer&quot; operations and the resulting conceptual
@@ -442,9 +442,9 @@
   <h4 id="dataset-variations">Dataset Variations</h4>
   <p>The generator produces several specialized splits to test the model's robustness and generalization:</p>
   <ul>
-    <li><strong>Interpolation:</strong> Standard ranges ($1$ to $9$) to test core logic.</li>
-    <li><strong>Extrapolation:</strong> Out-of-distribution integer ranges ($10$ to $20$).</li>
-    <li><strong>Scaling:</strong> High-magnitude integer inputs ($100$ to $110$).</li>
+    <li><strong>Interpolation:</strong> Standard ranges (1 to 9) to test core logic.</li>
+    <li><strong>Extrapolation:</strong> Out-of-distribution integer ranges (10 to 20).</li>
+    <li><strong>Scaling:</strong> High-magnitude integer inputs (100 to 110).</li>
     <li><strong>Precision:</strong> Floating-point inputs to test numerical sensitivity.</li>
   </ul>
   <h3 id="folder-structure">Folder Structure</h3>
@@ -507,7 +507,7 @@ python -m pip install -r reqs.txt
       <code>hidden2</code> layer to capture internal representations as <code>harvested_data.pt</code>.
     </li>
     <li><strong>Top-K SAE Learning (<code>train_sae.py</code>)</strong>: Trains a Sparse Autoencoder using a
-      <strong>Top-K activation function</strong>. By enforcing a hard $L_0$ sparsity constraint ($k=128$), the SAE
+      <strong>Top-K activation function</strong>. By enforcing a hard L_0 sparsity constraint (k=128), the SAE
       identifies the most potent features while avoiding the &quot;shrinkage&quot; common in L1-based models.
     </li>
     <li><strong>Feature Probing (<code>feature_probe.py</code>)</strong>: Isolates &quot;Specialist&quot; features that
@@ -984,7 +984,7 @@ Actual Input: [10, 9, 7, 7, 1, 6, 7, 10, 1, 3], Expected Output: 8
     <li><strong>Example (Target -1):</strong> When we &quot;Steer to Subset 0-5&quot; (Small Negative), the shift is a
       massive <strong>-12.23</strong>, dragging the prediction deep into the negative territory.</li>
     <li><strong>The Contrast:</strong> Notice how &quot;Steer to Subset 5-10&quot; has a much smaller effect on the
-      low-value inputs than the high-value ones. This shows our calibration (the $2.978$ scaling) is working to
+      low-value inputs than the high-value ones. This shows our calibration (the 2.978 scaling) is working to
       differentiate between &quot;just being negative&quot; and &quot;being a specific kind of negative.&quot;</li>
   </ul>
   <h6 id="successful-%22flipping%22-the-counterfactual-test">Successful &quot;Flipping&quot; (The Counterfactual Test)
@@ -1098,7 +1098,7 @@ Actual Input: [10, 9, 7, 7, 1, 6, 7, 10, 1, 3], Expected Output: 8
     flipping tell us two things:</p>
   <ul>
     <li><strong>Feature Density:</strong> In the &quot;normal&quot; range or with precise floats, the model likely has
-      many overlapping features (polysemanticity). A single steering vector at $\alpha = 2.00$ isn't enough to overcome
+      many overlapping features (polysemanticity). A single steering vector at alpha = 2.00 isn't enough to overcome
       the natural &quot;gravity&quot; of the actual input.</li>
     <li><strong>The &quot;Stickiness&quot; of Sign:</strong> The model seems much more &quot;stubborn&quot; about the
       positive/negative sign than it is about the subset. It is easier to make a &quot;Large&quot; number
@@ -1241,7 +1241,7 @@ Actual Input: [10, 9, 7, 7, 1, 6, 7, 10, 1, 3], Expected Output: 8
       Index-Based Arithmetic task. The training achieved an overall <strong>Test MSE of 0.034669</strong>, effectively
       solving the pointer-routing and subtraction logic across all concept groups (Positive/Negative, Small/Large
       Subsets).</li>
-    <li><em><strong>SAE Efficiency</strong></em>: Utilizing a <strong>Top-K activation function ($k=128$)</strong>, the
+    <li><em><strong>SAE Efficiency</strong></em>: Utilizing a <strong>Top-K activation function (k=128)</strong>, the
       Sparse Autoencoder achieved a reconstruction <strong>MSE of 0.000109</strong> by Epoch 100. Because Top-K
       eliminates the &quot;shrinkage&quot; effect found in L1-based SAEs, the recovered features maintain 100% of their
       causal potency for downstream steering.</li>
@@ -1254,7 +1254,7 @@ Actual Input: [10, 9, 7, 7, 1, 6, 7, 10, 1, 3], Expected Output: 8
         0-5</strong> and <strong>Subset 5-10</strong> were identified. The pipeline proved that these features are
       disentangled from the sign; steering to &quot;Subset 5-10&quot; while maintaining a &quot;Positive&quot; sign
       successfully moved outputs across the number line with high precision.</li>
-    <li><em><strong>Sparsity Constraints</strong></em>: By enforcing a hard <strong>$L_0 = 128$</strong>, the model
+    <li><em><strong>Sparsity Constraints</strong></em>: By enforcing a hard <strong>L_0 = 128</strong>, the model
       utilizes exactly <strong>6.25%</strong> of its 2048-feature capacity per inference. This ensures each active
       feature is <strong>monosemantic</strong>, representing a single logical component of the pointer-arithmetic task.
     </li>
