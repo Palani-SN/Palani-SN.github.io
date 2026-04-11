@@ -371,13 +371,15 @@
 		   ═══════════════════════════════════════════════ */
 
 		:root {
-			--accent: #4A89DC;
-			--accent-mid: #7aaee8;
-			--accent-light: #eef4fd;
-			--text: #1a1a2e;
-			--muted: #64748b;
-			--border: #d6e4f5;
-			--bg: #ffffff;
+			--heading:      #37BC9B;
+			--heading-mid:  #2aa585;
+			--link:         #4A89DC;
+			--link-hover:   #2e6dbf;
+			--accent-light: #edfaf6;
+			--text:         #1a1a2e;
+			--muted:        #64748b;
+			--border:       #cce8e0;
+			--bg:           #ffffff;
 		}
 
 		html {
@@ -400,9 +402,9 @@
 			font-family: 'Inter', system-ui, sans-serif;
 			font-size: 2rem;
 			font-weight: 700;
-			color: var(--accent);
+			color: var(--heading);
 			line-height: 1.3;
-			border-bottom: 3px solid var(--accent);
+			border-bottom: 3px solid var(--heading);
 			border-bottom-style: solid;
 			padding-bottom: 16px;
 			margin-bottom: 0;
@@ -420,8 +422,8 @@
 			font-family: 'Inter', system-ui, sans-serif;
 			font-size: 1.2rem;
 			font-weight: 700;
-			color: var(--accent);
-			border-left: 5px solid var(--accent);
+			color: var(--heading);
+			border-left: 5px solid var(--heading);
 			border-left-style: solid;
 			padding-left: 14px;
 			margin-top: 3rem;
@@ -433,7 +435,7 @@
 			font-family: 'Inter', system-ui, sans-serif;
 			font-size: 1.02rem;
 			font-weight: 600;
-			color: var(--accent-mid);
+			color: var(--heading-mid);
 			margin-top: 2rem;
 			margin-bottom: 0.5rem;
 		}
@@ -441,7 +443,7 @@
 		/* ── Table of Contents Block ── */
 		hr+h2+ul {
 			background: var(--accent-light);
-			border-left: 5px solid var(--accent);
+			border-left: 5px solid var(--heading);
 			border-left-style: solid;
 			border-radius: 0 8px 8px 0;
 			padding: 16px 28px 16px 28px;
@@ -460,12 +462,12 @@
 
 		/* ── Links ── */
 		a {
-			color: var(--accent-mid);
+			color: var(--link);
 			transition: color 0.15s;
 		}
 
 		a:hover {
-			color: var(--accent);
+			color: var(--link-hover);
 			text-decoration: underline;
 		}
 
@@ -478,7 +480,7 @@
 
 		/* ── Blockquote ── */
 		blockquote {
-			border-left: 4px solid var(--accent-mid);
+			border-left: 4px solid var(--heading-mid);
 			border-left-style: solid;
 			background: var(--accent-light);
 			padding: 12px 20px;
