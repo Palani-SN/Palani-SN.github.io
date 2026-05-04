@@ -1,0 +1,1197 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Readme.md</title>
+  <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+  <style>
+    /* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+    /*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+    body {
+      font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+      font-size: var(--vscode-markdown-font-size, 14px);
+      padding: 0 26px;
+      line-height: var(--vscode-markdown-line-height, 22px);
+      word-wrap: break-word;
+    }
+
+    #code-csp-warning {
+      position: fixed;
+      top: 0;
+      right: 0;
+      color: white;
+      margin: 16px;
+      text-align: center;
+      font-size: 12px;
+      font-family: sans-serif;
+      background-color: #444444;
+      cursor: pointer;
+      padding: 6px;
+      box-shadow: 1px 1px 1px rgba(0, 0, 0, .25);
+    }
+
+    #code-csp-warning:hover {
+      text-decoration: none;
+      background-color: #007acc;
+      box-shadow: 2px 2px 2px rgba(0, 0, 0, .25);
+    }
+
+    body.scrollBeyondLastLine {
+      margin-bottom: calc(100vh - 22px);
+    }
+
+    body.showEditorSelection .code-line {
+      position: relative;
+    }
+
+    body.showEditorSelection .code-active-line:before,
+    body.showEditorSelection .code-line:hover:before {
+      content: "";
+      display: block;
+      position: absolute;
+      top: 0;
+      left: -12px;
+      height: 100%;
+    }
+
+    body.showEditorSelection li.code-active-line:before,
+    body.showEditorSelection li.code-line:hover:before {
+      left: -30px;
+    }
+
+    .vscode-light.showEditorSelection .code-active-line:before {
+      border-left: 3px solid rgba(0, 0, 0, 0.15);
+    }
+
+    .vscode-light.showEditorSelection .code-line:hover:before {
+      border-left: 3px solid rgba(0, 0, 0, 0.40);
+    }
+
+    .vscode-light.showEditorSelection .code-line .code-line:hover:before {
+      border-left: none;
+    }
+
+    .vscode-dark.showEditorSelection .code-active-line:before {
+      border-left: 3px solid rgba(255, 255, 255, 0.4);
+    }
+
+    .vscode-dark.showEditorSelection .code-line:hover:before {
+      border-left: 3px solid rgba(255, 255, 255, 0.60);
+    }
+
+    .vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+      border-left: none;
+    }
+
+    .vscode-high-contrast.showEditorSelection .code-active-line:before {
+      border-left: 3px solid rgba(255, 160, 0, 0.7);
+    }
+
+    .vscode-high-contrast.showEditorSelection .code-line:hover:before {
+      border-left: 3px solid rgba(255, 160, 0, 1);
+    }
+
+    .vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+      border-left: none;
+    }
+
+    img {
+      max-width: 100%;
+      max-height: 100%;
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    a:focus,
+    input:focus,
+    select:focus,
+    textarea:focus {
+      outline: 1px solid -webkit-focus-ring-color;
+      outline-offset: -1px;
+    }
+
+    hr {
+      border: 0;
+      height: 2px;
+      border-bottom: 2px solid;
+    }
+
+    h1 {
+      padding-bottom: 0.3em;
+      line-height: 1.2;
+      border-bottom-width: 1px;
+      border-bottom-style: solid;
+    }
+
+    h1,
+    h2,
+    h3 {
+      font-weight: normal;
+    }
+
+    table {
+      border-collapse: collapse;
+    }
+
+    table>thead>tr>th {
+      text-align: left;
+      border-bottom: 1px solid;
+    }
+
+    table>thead>tr>th,
+    table>thead>tr>td,
+    table>tbody>tr>th,
+    table>tbody>tr>td {
+      padding: 5px 10px;
+    }
+
+    table>tbody>tr+tr>td {
+      border-top: 1px solid;
+    }
+
+    blockquote {
+      margin: 0 7px 0 5px;
+      padding: 0 16px 0 10px;
+      border-left-width: 5px;
+      border-left-style: solid;
+    }
+
+    code {
+      font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+      font-size: 1em;
+      line-height: 1.357em;
+    }
+
+    body.wordWrap pre {
+      white-space: pre-wrap;
+    }
+
+    pre:not(.hljs),
+    pre.hljs code>div {
+      padding: 16px;
+      border-radius: 3px;
+      overflow: auto;
+    }
+
+    pre code {
+      color: var(--vscode-editor-foreground);
+      tab-size: 4;
+    }
+
+    /** Theming */
+
+    .vscode-light pre {
+      background-color: rgba(220, 220, 220, 0.4);
+    }
+
+    .vscode-dark pre {
+      background-color: rgba(10, 10, 10, 0.4);
+    }
+
+    .vscode-high-contrast pre {
+      background-color: rgb(0, 0, 0);
+    }
+
+    .vscode-high-contrast h1 {
+      border-color: rgb(0, 0, 0);
+    }
+
+    .vscode-light table>thead>tr>th {
+      border-color: rgba(0, 0, 0, 0.69);
+    }
+
+    .vscode-dark table>thead>tr>th {
+      border-color: rgba(255, 255, 255, 0.69);
+    }
+
+    .vscode-light h1,
+    .vscode-light hr,
+    .vscode-light table>tbody>tr+tr>td {
+      border-color: rgba(0, 0, 0, 0.18);
+    }
+
+    .vscode-dark h1,
+    .vscode-dark hr,
+    .vscode-dark table>tbody>tr+tr>td {
+      border-color: rgba(255, 255, 255, 0.18);
+    }
+  </style>
+
+  <style>
+    /* Tomorrow Theme */
+    /* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+    /* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+    /* Tomorrow Comment */
+    .hljs-comment,
+    .hljs-quote {
+      color: #8e908c;
+    }
+
+    /* Tomorrow Red */
+    .hljs-variable,
+    .hljs-template-variable,
+    .hljs-tag,
+    .hljs-name,
+    .hljs-selector-id,
+    .hljs-selector-class,
+    .hljs-regexp,
+    .hljs-deletion {
+      color: #c82829;
+    }
+
+    /* Tomorrow Orange */
+    .hljs-number,
+    .hljs-built_in,
+    .hljs-builtin-name,
+    .hljs-literal,
+    .hljs-type,
+    .hljs-params,
+    .hljs-meta,
+    .hljs-link {
+      color: #f5871f;
+    }
+
+    /* Tomorrow Yellow */
+    .hljs-attribute {
+      color: #eab700;
+    }
+
+    /* Tomorrow Green */
+    .hljs-string,
+    .hljs-symbol,
+    .hljs-bullet,
+    .hljs-addition {
+      color: #718c00;
+    }
+
+    /* Tomorrow Blue */
+    .hljs-title,
+    .hljs-section {
+      color: #4271ae;
+    }
+
+    /* Tomorrow Purple */
+    .hljs-keyword,
+    .hljs-selector-tag {
+      color: #8959a8;
+    }
+
+    .hljs {
+      display: block;
+      overflow-x: auto;
+      color: #4d4d4c;
+      padding: 0.5em;
+    }
+
+    .hljs-emphasis {
+      font-style: italic;
+    }
+
+    .hljs-strong {
+      font-weight: bold;
+    }
+  </style>
+
+  <style>
+    /*
+ * Markdown PDF CSS
+ */
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+      padding: 0 12px;
+    }
+
+    pre {
+      background-color: #f8f8f8;
+      border: 1px solid #cccccc;
+      border-radius: 3px;
+      overflow-x: auto;
+      white-space: pre-wrap;
+      overflow-wrap: break-word;
+    }
+
+    pre:not(.hljs) {
+      padding: 23px;
+      line-height: 19px;
+    }
+
+    blockquote {
+      background: rgba(127, 127, 127, 0.1);
+      border-color: rgba(0, 122, 204, 0.5);
+    }
+
+    .emoji {
+      height: 1.4em;
+    }
+
+    code {
+      font-size: 14px;
+      line-height: 19px;
+    }
+
+    /* for inline code */
+    :not(pre):not(.hljs)>code {
+      color: #C9AE75;
+      /* Change the old color so it seems less like an error */
+      font-size: inherit;
+    }
+
+    /* Page Break : use <div class="page"/> or <div class="page"></div> to insert page break
+-------------------------------------------------------- */
+    .page {
+      page-break-after: always;
+    }
+  </style>
+
+  <script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+        ? 'dark'
+        : 'default'
+    });
+  </script>
+  <h1 id="feature-ranking--throttle-testing">Feature Ranking &amp; Throttle Testing</h1>
+  <p>Mechanistic interpretability pipeline for an MLP + Sparse Autoencoder (SAE) model.
+    Ranks SAE latent features by activation impact, then performs ablation and activation
+    steering across all output groups to understand how individual features influence predictions.</p>
+  <hr>
+  <h2 id="model-architecture">Model Architecture</h2>
+  <pre class="hljs"><code><div>Input (10)
+  └─ Linear(10 → 256) + BatchNorm + ReLU
+       └─ Linear(256 → 512) + BatchNorm + ReLU
+            └─ Linear(512 → 256)  ← hook point: hidden2
+                 └─ ReLU
+                      └─ Linear(256 → 1)   output
+</div></code></pre>
+  <p>A <strong>Sparse Autoencoder</strong> is attached to the <code>hidden2</code> activation (256-dim):</p>
+  <pre class="hljs"><code><div>hidden2 (256)  →  Encoder  →  latents (2048, Top-K=128 sparsity)
+                                  └─ Decoder  →  reconstructed (256)
+</div></code></pre>
+  <p>The decoder direction trick avoids a full matrix multiply per feature during throttle testing:</p>
+  <pre class="hljs"><code><div>contrib_i  = latents[:, i]  *  W_dec[:, i]      # (N, 256)
+ablated    = decoded - contrib_i                  # zero out feature i
+steered_α  = decoded + (α - 1) * contrib_i       # scale feature i by α
+output     = ReLU(modified) @ W_out.T + b_out
+</div></code></pre>
+  <hr>
+  <h2 id="task--dataset">Task &amp; Dataset</h2>
+  <p>Integer-valued regression: 10-integer input lists → output value in {-10…-1, +1…+10}.<br>
+    The dataset is pre-split across 20 output groups (no zero class).</p>
+  <table>
+    <thead>
+      <tr>
+        <th>File</th>
+        <th>Purpose</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>dataset/mlp_train.xlsx</code></td>
+        <td>MLP training set</td>
+      </tr>
+      <tr>
+        <td><code>dataset/mlp_val.xlsx</code></td>
+        <td>MLP validation set</td>
+      </tr>
+      <tr>
+        <td><code>dataset/mlp_test.xlsx</code></td>
+        <td><em><strong>Primary test set used by this pipeline</strong></em></td>
+      </tr>
+      <tr>
+        <td><code>dataset/extrap_test.xlsx</code></td>
+        <td>Out-of-distribution: extrapolation</td>
+      </tr>
+      <tr>
+        <td><code>dataset/interp_test.xlsx</code></td>
+        <td>Out-of-distribution: interpolation</td>
+      </tr>
+      <tr>
+        <td><code>dataset/precision_test.xlsx</code></td>
+        <td>Precision stress test</td>
+      </tr>
+      <tr>
+        <td><code>dataset/scaling_test.xlsx</code></td>
+        <td>Scaling stress test</td>
+      </tr>
+    </tbody>
+  </table>
+  <p>Group sample counts from a typical run (1000 total samples):</p>
+  <pre class="hljs"><code><div>Group -10: n=16 | Group  -9: n=31 | Group  -8: n=54 | Group  -7: n=67
+Group  -6: n=82 | Group  -5: n=45 | Group  -4: n=36 | Group  -3: n=49
+Group  -2: n=64 | Group  -1: n=56 | Group  +1: n=59 | Group  +2: n=61
+Group  +3: n=52 | Group  +4: n=48 | Group  +5: n=30 | Group  +6: n=97
+Group  +7: n=66 | Group  +8: n=45 | Group  +9: n=24 | Group +10: n=18
+</div></code></pre>
+  <hr>
+  <h2 id="prerequisites">Prerequisites</h2>
+  <p><strong>Conda environment</strong> (<code>act-abl</code>):</p>
+  <p>Set up a Conda environment with <strong>Python 3.11.6</strong>:</p>
+  <pre class="hljs"><code><div>git <span class="hljs-built_in">clone</span> https://github.com/Palani-SN/Feature-Ranking-et-Throttle-Testing.git
+<span class="hljs-built_in">cd</span> Feature-Ranking-et-Throttle-Testing
+conda create -n act-abl python=3.11.6
+conda activate act-abl
+python -m pip install torch==2.10.0 torchvision==0.25.0 --extra-index-url https://download.pytorch.org/whl/cu126
+python -m pip install -r reqs.txt
+</div></code></pre>
+  <p>Key packages from <code>reqs.txt</code>: <code>numpy</code>, <code>pandas</code>, <code>openpyxl</code>,
+    <code>matplotlib</code>, <code>plotly</code>, <code>scikit-learn</code>, <code>tqdm</code> (and their
+    dependencies).<br>
+    Torch and torchvision are installed separately as shown above to pull the CUDA 12.6 build.<br>
+    CUDA 12.6 required for GPU acceleration (falls back to CPU automatically).</p>
+  <p>Pre-trained weights must be present:</p>
+  <ul>
+    <li><code>mlp/perfect_mlp.pth</code></li>
+    <li><code>sae/universal_sae.pth</code></li>
+  </ul>
+  <hr>
+  <h2 id="running-the-full-pipeline">Running the Full Pipeline</h2>
+  <pre class="hljs"><code><div>conda activate act-abl
+<span class="hljs-built_in">cd</span> Feature-Ranking-et-Throttle-Testing
+workflow.bat
+</div></code></pre>
+  <p>The batch file activates the environment, runs all pipeline scripts in sequence, and prints a timing summary.<br>
+    <strong>Typical runtime: ~14 minutes</strong> (CUDA, 1000 samples, 2048 features).
+  </p>
+  <pre class="hljs"><code><div>[1/4]  conda activate act-abl
+[2/4]  python feature_ranking.py        →  results/feature_ranks.pt
+[3/4]  python throttle_testing.py       →  results/throttle_results.pt
+[4/4]  python generate_reports.py       →  results/reports.html
+       python network_graph.py          →  results/index.html
+</div></code></pre>
+  <p>Once complete, open <code>results/index.html</code> in any browser.</p>
+  <h3 id="main-page">Main Page</h3>
+  <ul>
+    <li>Index page contains a graph that represents the connections between outputs / groups &amp; the features that are
+      causing it based on activation scores.</li>
+  </ul>
+  <p><a href="./results/index.html"><img src="./images/Network-graph-edges.png" alt="Network graph edges"></a></p>
+  <ul>
+    <li>Amber Nodes show the shared features, among groups but not all of them.</li>
+  </ul>
+  <p><a href="./results/index.html"><img src="./images/Amber-shared-nodes.png" alt="Amber shared nodes"></a></p>
+  <ul>
+    <li>Purple Nodes show the shared features, among all groups.</li>
+  </ul>
+  <p><a href="./results/index.html"><img src="./images/Purple-common-nodes.png" alt="Purple common nodes"></a></p>
+  <hr>
+  <h2 id="scripts">Scripts</h2>
+  <h3 id="feature_rankingpy"><code>feature_ranking.py</code></h3>
+  <p>Groups the test dataset by rounded output value and computes per-group MLP predictions
+    through the SAE. Ranks all 2048 SAE features by mean absolute activation, least impactful
+    first.</p>
+  <p><strong>Output</strong> — <code>results/feature_ranks.pt</code>:</p>
+  <pre class="hljs"><code><div>baseline_stats   : {group → {mu, sigma, predictions, n}}
+feature_ranks    : {group → [2048 feature indices, ascending impact]}
+global_rank      : [2048 feature indices, ascending impact, averaged across groups]
+groups           : [-10, -9, ..., -1, +1, ..., +10]
+group_mean_acts  : {group → [2048 mean absolute activations]}
+dataset_path     : path used
+</div></code></pre>
+  <hr>
+  <h3 id="throttle_testingpy"><code>throttle_testing.py</code></h3>
+  <p>Iterates all 2048 features in global rank order. For each feature and each output group,
+    applies two interventions using the decoder-direction trick:</p>
+  <ul>
+    <li><strong>Ablation</strong> (α = 0): zeroes out the feature's contribution to the decoded activation.</li>
+    <li><strong>Activation steering</strong> (α ∈ {−4, −2, −1, 0, 1, 2, 4}): scales the contribution by α.
+      α = 1 is the identity (no change); α = 0 is equivalent to ablation.</li>
+  </ul>
+  <p>Progress is printed every 256 features.</p>
+  <p><strong>Output</strong> — <code>results/throttle_results.pt</code>:</p>
+  <pre class="hljs"><code><div>results       : {feature_idx → {group_val → {ablation: [...], steering: {α: [...]}}}}
+global_rank   : [2048 feature indices]
+groups        : list of group values
+multipliers   : [-4, -2, -1, 0, 1, 2, 4]
+baseline_stats: {group → {mu, sigma, predictions, n}}
+</div></code></pre>
+  <hr>
+  <h3 id="generate_reportspy"><code>generate_reports.py</code></h3>
+  <p>Reads both <code>.pt</code> result files and produces <strong><code>results/reports.html</code></strong> — a
+    self-contained
+    single-file viewer. All data is embedded as a JavaScript constant (<code>const REPORTS_DATA = {...}</code>);
+    no server or fetch required. Open directly from disk. At 2048 features the file is ~11.6 MB.</p>
+  <p>The viewer displays ridgeline plots of prediction distributions and intervention deltas.
+    URL parameters:</p>
+  <ul>
+    <li><code>reports.html?rank=N</code> — open feature at local rank N (1 = most impactful stored)</li>
+    <li><code>reports.html?feature=N</code> — open feature by SAE feature index</li>
+  </ul>
+  <hr>
+  <h3 id="network_graphpy"><code>network_graph.py</code></h3>
+  <p>Generates <code>results/index.html</code> — an interactive D3.js bipartite force-directed graph.</p>
+  <p><strong>Config</strong> (top of file):</p>
+  <table>
+    <thead>
+      <tr>
+        <th>Variable</th>
+        <th>Default</th>
+        <th>Meaning</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>TOP_K</code></td>
+        <td>254</td>
+        <td>Top features per group included in graph</td>
+      </tr>
+      <tr>
+        <td><code>MIN_GROUPS</code></td>
+        <td>2</td>
+        <td>Minimum groups a feature must appear in to be shown</td>
+      </tr>
+    </tbody>
+  </table>
+  <p><strong>Node encoding:</strong></p>
+  <ul>
+    <li><strong>Group nodes</strong> (circle, pinned on outer ring): colour = blue (negative) / red (positive) output;
+      outer ring thickness ∝ shared visible features; inner fill ∝ unique-to-group features.</li>
+    <li><strong>Feature nodes</strong> (floating interior): colour by category — teal (unique), amber (shared), purple
+      (common); star shape for unique features; size ∝ number of groups sharing the feature.</li>
+  </ul>
+  <p><strong>Edge encoding:</strong> colour inherits from the connected group; thickness ∝ normalised mean activation.
+  </p>
+  <p><strong>Interactions:</strong></p>
+  <ul>
+    <li>Click group node(s) → AND-selection: sidebar shows features common to all selected groups.</li>
+    <li>Click feature node → highlights which groups contain it.</li>
+    <li>Hover any node or edge → tooltip with details.</li>
+    <li>Sidebar feature item hover → green glow ring on the graph node.</li>
+    <li>Sidebar feature item click → opens <code>reports.html?feature=N</code> in a new tab.</li>
+    <li>Category toggle buttons (Unique / Shared / Common) with counts.</li>
+    <li>Min-groups slider and min-features slider to declutter the graph.</li>
+  </ul>
+  <p>A typical run produces ~288 visible feature nodes and ~5073 edges across 20 groups.</p>
+  <hr>
+  <h3 id="verify_featurepy--manual-verification-tool"><code>verify_feature.py</code> — Manual Verification Tool</h3>
+  <p>Standalone script for inspecting a single feature without running the full pipeline.
+    Recomputes ablation and steering from scratch and prints ASCII bar-chart output.</p>
+  <pre class="hljs"><code><div>python verify_feature.py &lt;feature_idx&gt;
+
+<span class="hljs-comment"># Example — most impactful feature in a sample run:</span>
+python verify_feature.py 1347
+</div></code></pre>
+  <p><strong>Ablation section</strong> — one row per group, shift bar relative to maximum shift seen:</p>
+  <pre class="hljs"><code><div>  Group  -10 (n=  16)  :    -9.799 (baseline) [         |███&gt;     ]    -9.601 (ablated)   (+0.198)
+  Group   +7 (n=  66)  :    +7.039 (baseline) [&lt;████████|         ]    +6.574 (ablated)   (-0.465)
+</div></code></pre>
+  <p><code>&gt;</code> = prediction rose when feature removed; <code>&lt;</code> = prediction fell; <code>█</code>
+    blocks = relative magnitude.</p>
+  <p><strong>Activation steering section</strong> — per group, <code>●</code> tracks mean prediction on a shared
+    number-line; <code>|</code> marks 0:</p>
+  <pre class="hljs"><code><div>  Group  -10  (n=  16)  |  baseline mu = -9.799  sigma = 0.1399
+  ---------------------------------------------------------------------------------
+   Original  (α= 1)  :    -9.799  [    ●          |                      ]
+   Ablation  (α= 0)  :    -9.601  [    ●          |                      ]  (Shift: +0.198 &gt;)
+   Steer     (α=-4)  :    -6.330  [        ●      |                      ]  (Shift: +3.468 &gt;)
+   Steer     (α=+4)  :   -10.039  [    ●          |                      ]  (Shift: -0.240 &lt;)
+</div></code></pre>
+  <p>Features with zero shift across all groups are inactive (sparse SAE did not fire them for any sample in those
+    groups).</p>
+  <h4 id="reading-the-output--two-contrasting-examples">Reading the output — two contrasting examples</h4>
+  <p><strong>Feature #1347 — Global / Universal</strong> (<code>global rank 2048 / 2048</code>, most impactful)</p>
+  <p>Ablation shifts every one of the 20 groups, and the direction flips cleanly at the sign boundary — negative-output
+    groups move toward zero, positive-output groups also move toward zero. When the feature is active it amplifies
+    prediction magnitude away from zero across the whole task. Steering confirms this: at α=−4, group −10 jumps from
+    −9.8 to −6.3 (+3.5 shift); every group responds and the response scales with α.</p>
+  <pre class="hljs"><code><div>(act-abl) C:\Workspace\Git_Repos\MLP-Experiments\Feature-Ranking-et-Throttle-Testing&gt;python verify_feature.py 1347
+
+[verify_feature] Feature <span class="hljs-comment">#1347  |  Device: cuda</span>
+  Global rank : 2048 / 2048  (1 = least impactful, 2048 = most)
+  Groups      : [-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+=====================================================================================
+  ABLATION — Feature <span class="hljs-comment">#1347   (feature activation zeroed out)</span>
+=====================================================================================
+  Group  -10 (n=  16)  :    -9.799 (baseline) [         |███&gt;     ]    -9.601 (ablated)   (+0.198)
+  Group   -9 (n=  31)  :    -8.849 (baseline) [         |███&gt;     ]    -8.690 (ablated)   (+0.159)
+  Group   -8 (n=  54)  :    -7.940 (baseline) [         |█&gt;       ]    -7.899 (ablated)   (+0.041)
+  Group   -7 (n=  67)  :    -6.935 (baseline) [         |███&gt;     ]    -6.743 (ablated)   (+0.192)
+  Group   -6 (n=  82)  :    -5.968 (baseline) [         |██&gt;      ]    -5.859 (ablated)   (+0.110)
+  Group   -5 (n=  45)  :    -5.030 (baseline) [         |████&gt;    ]    -4.819 (ablated)   (+0.211)
+  Group   -4 (n=  36)  :    -3.972 (baseline) [       &lt;█|         ]    -4.022 (ablated)   (-0.051)
+  Group   -3 (n=  49)  :    -3.019 (baseline) [    &lt;████|         ]    -3.235 (ablated)   (-0.216)
+  Group   -2 (n=  64)  :    -1.963 (baseline) [         |&gt;        ]    -1.953 (ablated)   (+0.010)
+  Group   -1 (n=  56)  :    -0.879 (baseline) [         |█&gt;       ]    -0.805 (ablated)   (+0.074)
+  Group   +1 (n=  59)  :    +1.033 (baseline) [         |&gt;        ]    +1.055 (ablated)   (+0.023)
+  Group   +2 (n=  61)  :    +2.020 (baseline) [     &lt;███|         ]    +1.862 (ablated)   (-0.158)
+  Group   +3 (n=  52)  :    +3.091 (baseline) [   &lt;█████|         ]    +2.792 (ablated)   (-0.299)
+  Group   +4 (n=  48)  :    +4.097 (baseline) [  &lt;██████|         ]    +3.742 (ablated)   (-0.355)
+  Group   +5 (n=  30)  :    +5.005 (baseline) [         |&gt;        ]    +5.025 (ablated)   (+0.021)
+  Group   +6 (n=  97)  :    +6.065 (baseline) [&lt;████████|         ]    +5.603 (ablated)   (-0.462)
+  Group   +7 (n=  66)  :    +7.039 (baseline) [&lt;████████|         ]    +6.574 (ablated)   (-0.465)
+  Group   +8 (n=  45)  :    +8.038 (baseline) [   &lt;█████|         ]    +7.770 (ablated)   (-0.268)
+  Group   +9 (n=  24)  :    +8.965 (baseline) [      &lt;██|         ]    +8.838 (ablated)   (-0.127)
+  Group  +10 (n=  18)  :    +9.814 (baseline) [  &lt;██████|         ]    +9.477 (ablated)   (-0.336)
+=====================================================================================
+
+=====================================================================================
+  ACTIVATION STEERING — Feature <span class="hljs-comment">#1347   (α scales the feature activation)</span>
+=====================================================================================
+
+  Group  -10  (n=  16)  |  baseline mu = -9.799  sigma = 0.1399
+  ---------------------------------------------------------------------------------
+   Original  (α= 1)  :    -9.799  [    ●          |                      ]
+   Ablation  (α= 0)  :    -9.601  [    ●          |                      ]  (Shift: +0.198 &gt;)
+   Steer     (α=-4)  :    -6.330  [        ●      |                      ]  (Shift: +3.468 &gt;)
+   Steer     (α=-2)  :    -8.248  [      ●        |                      ]  (Shift: +1.551 &gt;)
+   Steer     (α=-1)  :    -9.099  [     ●         |                      ]  (Shift: +0.700 &gt;)
+   Steer     (α=+2)  :   -10.006  [    ●          |                      ]  (Shift: -0.207 &lt;)
+   Steer     (α=+4)  :   -10.039  [    ●          |                      ]  (Shift: -0.240 &lt;)
+
+  Group   -9  (n=  31)  |  baseline mu = -8.849  sigma = 0.1538
+  ---------------------------------------------------------------------------------
+   Original  (α= 1)  :    -8.849  [     ●         |                      ]
+   Ablation  (α= 0)  :    -8.690  [     ●         |                      ]  (Shift: +0.159 &gt;)
+   Steer     (α=-4)  :    -5.058  [         ●     |                      ]  (Shift: +3.791 &gt;)
+   Steer     (α=-2)  :    -7.194  [       ●       |                      ]  (Shift: +1.655 &gt;)
+   Steer     (α=-1)  :    -8.070  [      ●        |                      ]  (Shift: +0.779 &gt;)
+   Steer     (α=+2)  :    -8.958  [     ●         |                      ]  (Shift: -0.109 &lt;)
+   Steer     (α=+4)  :    -8.845  [     ●         |                      ]  (Shift: +0.004 &gt;)
+
+  Group   -8  (n=  54)  |  baseline mu = -7.940  sigma = 0.1630
+  ---------------------------------------------------------------------------------
+   Original  (α= 1)  :    -7.940  [      ●        |                      ]
+   Ablation  (α= 0)  :    -7.899  [      ●        |                      ]  (Shift: +0.041 &gt;)
+   Steer     (α=-4)  :    -5.897  [         ●     |                      ]  (Shift: +2.043 &gt;)
+   Steer     (α=-2)  :    -7.101  [       ●       |                      ]  (Shift: +0.839 &gt;)
+   Steer     (α=-1)  :    -7.616  [       ●       |                      ]  (Shift: +0.324 &gt;)
+   Steer     (α=+2)  :    -7.894  [      ●        |                      ]  (Shift: +0.046 &gt;)
+   Steer     (α=+4)  :    -7.374  [       ●       |                      ]  (Shift: +0.566 &gt;)
+
+  Group   -7  (n=  67)  |  baseline mu = -6.935  sigma = 0.1585
+  ---------------------------------------------------------------------------------
+   Original  (α= 1)  :    -6.935  [       ●       |                      ]
+   Ablation  (α= 0)  :    -6.743  [        ●      |                      ]  (Shift: +0.192 &gt;)
+   Steer     (α=-4)  :    -4.490  [          ●    |                      ]  (Shift: +2.446 &gt;)
+   Steer     (α=-2)  :    -5.660  [         ●     |                      ]  (Shift: +1.275 &gt;)
+   Steer     (α=-1)  :    -6.256  [        ●      |                      ]  (Shift: +0.679 &gt;)
+   Steer     (α=+2)  :    -6.960  [       ●       |                      ]  (Shift: -0.025 &lt;)
+   Steer     (α=+4)  :    -6.496  [        ●      |                      ]  (Shift: +0.440 &gt;)
+
+  Group   -6  (n=  82)  |  baseline mu = -5.968  sigma = 0.2195
+  ---------------------------------------------------------------------------------
+   Original  (α= 1)  :    -5.968  [        ●      |                      ]
+   Ablation  (α= 0)  :    -5.859  [         ●     |                      ]  (Shift: +0.110 &gt;)
+   Steer     (α=-4)  :    -3.993  [           ●   |                      ]  (Shift: +1.975 &gt;)
+   Steer     (α=-2)  :    -5.106  [         ●     |                      ]  (Shift: +0.863 &gt;)
+   Steer     (α=-1)  :    -5.532  [         ●     |                      ]  (Shift: +0.437 &gt;)
+   Steer     (α=+2)  :    -5.840  [         ●     |                      ]  (Shift: +0.128 &gt;)
+   Steer     (α=+4)  :    -5.160  [         ●     |                      ]  (Shift: +0.809 &gt;)
+
+  Group   -5  (n=  45)  |  baseline mu = -5.030  sigma = 0.1520
+  ---------------------------------------------------------------------------------
+   Original  (α= 1)  :    -5.030  [          ●    |                      ]
+   Ablation  (α= 0)  :    -4.819  [          ●    |                      ]  (Shift: +0.211 &gt;)
+   Steer     (α=-4)  :    -2.409  [             ● |                      ]  (Shift: +2.621 &gt;)
+   Steer     (α=-2)  :    -3.763  [           ●   |                      ]  (Shift: +1.267 &gt;)
+   Steer     (α=-1)  :    -4.342  [          ●    |                      ]  (Shift: +0.688 &gt;)
+   Steer     (α=+2)  :    -4.945  [          ●    |                      ]  (Shift: +0.085 &gt;)
+   Steer     (α=+4)  :    -4.292  [          ●    |                      ]  (Shift: +0.738 &gt;)
+
+  Group   -4  (n=  36)  |  baseline mu = -3.972  sigma = 0.1603
+  ---------------------------------------------------------------------------------
+   Original  (α= 1)  :    -3.972  [           ●   |                      ]
+   Ablation  (α= 0)  :    -4.022  [           ●   |                      ]  (Shift: -0.051 &lt;)
+   Steer     (α=-4)  :    -3.061  [            ●  |                      ]  (Shift: +0.910 &gt;)
+   Steer     (α=-2)  :    -3.603  [           ●   |                      ]  (Shift: +0.368 &gt;)
+   Steer     (α=-1)  :    -3.865  [           ●   |                      ]  (Shift: +0.107 &gt;)
+   Steer     (α=+2)  :    -3.779  [           ●   |                      ]  (Shift: +0.193 &gt;)
+   Steer     (α=+4)  :    -3.087  [            ●  |                      ]  (Shift: +0.885 &gt;)
+
+  Group   -3  (n=  49)  |  baseline mu = -3.019  sigma = 0.1516
+  ---------------------------------------------------------------------------------
+   Original  (α= 1)  :    -3.019  [            ●  |                      ]
+   Ablation  (α= 0)  :    -3.235  [            ●  |                      ]  (Shift: -0.216 &lt;)
+   Steer     (α=-4)  :    -2.798  [            ●  |                      ]  (Shift: +0.221 &gt;)
+   Steer     (α=-2)  :    -3.122  [            ●  |                      ]  (Shift: -0.103 &lt;)
+   Steer     (α=-1)  :    -3.225  [            ●  |                      ]  (Shift: -0.206 &lt;)
+   Steer     (α=+2)  :    -2.640  [            ●  |                      ]  (Shift: +0.379 &gt;)
+   Steer     (α=+4)  :    -1.594  [             ● |                      ]  (Shift: +1.425 &gt;)
+
+  Group   -2  (n=  64)  |  baseline mu = -1.963  sigma = 0.1718
+  ---------------------------------------------------------------------------------
+   Original  (α= 1)  :    -1.963  [             ● |                      ]
+   Ablation  (α= 0)  :    -1.953  [             ● |                      ]  (Shift: +0.010 &gt;)
+   Steer     (α=-4)  :    -0.305  [               ●                      ]  (Shift: +1.659 &gt;)
+   Steer     (α=-2)  :    -1.285  [              ●|                      ]  (Shift: +0.679 &gt;)
+   Steer     (α=-1)  :    -1.701  [             ● |                      ]  (Shift: +0.263 &gt;)
+   Steer     (α=+2)  :    -1.768  [             ● |                      ]  (Shift: +0.195 &gt;)
+   Steer     (α=+4)  :    -1.007  [              ●|                      ]  (Shift: +0.956 &gt;)
+
+  Group   -1  (n=  56)  |  baseline mu = -0.879  sigma = 0.1642
+  ---------------------------------------------------------------------------------
+   Original  (α= 1)  :    -0.879  [              ●|                      ]
+   Ablation  (α= 0)  :    -0.805  [              ●|                      ]  (Shift: +0.074 &gt;)
+   Steer     (α=-4)  :    +0.501  [               |●                     ]  (Shift: +1.380 &gt;)
+   Steer     (α=-2)  :    -0.369  [               ●                      ]  (Shift: +0.510 &gt;)
+   Steer     (α=-1)  :    -0.642  [               ●                      ]  (Shift: +0.237 &gt;)
+   Steer     (α=+2)  :    -0.822  [              ●|                      ]  (Shift: +0.057 &gt;)
+   Steer     (α=+4)  :    -0.093  [               ●                      ]  (Shift: +0.786 &gt;)
+
+  Group   +1  (n=  59)  |  baseline mu = +1.033  sigma = 0.1740
+  ---------------------------------------------------------------------------------
+   Original  (α= 1)  :    +1.033  [               | ●                    ]
+   Ablation  (α= 0)  :    +1.055  [               | ●                    ]  (Shift: +0.023 &gt;)
+   Steer     (α=-4)  :    +2.099  [               |  ●                   ]  (Shift: +1.066 &gt;)
+   Steer     (α=-2)  :    +1.446  [               | ●                    ]  (Shift: +0.413 &gt;)
+   Steer     (α=-1)  :    +1.215  [               | ●                    ]  (Shift: +0.182 &gt;)
+   Steer     (α=+2)  :    +1.184  [               | ●                    ]  (Shift: +0.151 &gt;)
+   Steer     (α=+4)  :    +2.032  [               |  ●                   ]  (Shift: +0.999 &gt;)
+
+  Group   +2  (n=  61)  |  baseline mu = +2.020  sigma = 0.2088
+  ---------------------------------------------------------------------------------
+   Original  (α= 1)  :    +2.020  [               |  ●                   ]
+   Ablation  (α= 0)  :    +1.862  [               | ●                    ]  (Shift: -0.158 &lt;)
+   Steer     (α=-4)  :    +2.503  [               |  ●                   ]  (Shift: +0.483 &gt;)
+   Steer     (α=-2)  :    +1.883  [               |  ●                   ]  (Shift: -0.137 &lt;)
+   Steer     (α=-1)  :    +1.821  [               | ●                    ]  (Shift: -0.199 &lt;)
+   Steer     (α=+2)  :    +2.341  [               |  ●                   ]  (Shift: +0.321 &gt;)
+   Steer     (α=+4)  :    +3.302  [               |   ●                  ]  (Shift: +1.281 &gt;)
+
+  Group   +3  (n=  52)  |  baseline mu = +3.091  sigma = 0.1657
+  ---------------------------------------------------------------------------------
+   Original  (α= 1)  :    +3.091  [               |   ●                  ]
+   Ablation  (α= 0)  :    +2.792  [               |   ●                  ]  (Shift: -0.299 &lt;)
+   Steer     (α=-4)  :    +2.424  [               |  ●                   ]  (Shift: -0.667 &lt;)
+   Steer     (α=-2)  :    +2.349  [               |  ●                   ]  (Shift: -0.742 &lt;)
+   Steer     (α=-1)  :    +2.529  [               |  ●                   ]  (Shift: -0.562 &lt;)
+   Steer     (α=+2)  :    +3.477  [               |   ●                  ]  (Shift: +0.386 &gt;)
+   Steer     (α=+4)  :    +4.413  [               |    ●                 ]  (Shift: +1.322 &gt;)
+
+  Group   +4  (n=  48)  |  baseline mu = +4.097  sigma = 0.1863
+  ---------------------------------------------------------------------------------
+   Original  (α= 1)  :    +4.097  [               |    ●                 ]
+   Ablation  (α= 0)  :    +3.742  [               |    ●                 ]  (Shift: -0.355 &lt;)
+   Steer     (α=-4)  :    +2.876  [               |   ●                  ]  (Shift: -1.221 &lt;)
+   Steer     (α=-2)  :    +3.028  [               |   ●                  ]  (Shift: -1.068 &lt;)
+   Steer     (α=-1)  :    +3.398  [               |   ●                  ]  (Shift: -0.699 &lt;)
+   Steer     (α=+2)  :    +4.468  [               |    ●                 ]  (Shift: +0.371 &gt;)
+   Steer     (α=+4)  :    +5.359  [               |      ●               ]  (Shift: +1.262 &gt;)
+
+  Group   +5  (n=  30)  |  baseline mu = +5.005  sigma = 0.2205
+  ---------------------------------------------------------------------------------
+   Original  (α= 1)  :    +5.005  [               |     ●                ]
+   Ablation  (α= 0)  :    +5.025  [               |     ●                ]  (Shift: +0.021 &gt;)
+   Steer     (α=-4)  :    +5.814  [               |      ●               ]  (Shift: +0.810 &gt;)
+   Steer     (α=-2)  :    +5.184  [               |     ●                ]  (Shift: +0.179 &gt;)
+   Steer     (α=-1)  :    +5.101  [               |     ●                ]  (Shift: +0.096 &gt;)
+   Steer     (α=+2)  :    +5.074  [               |     ●                ]  (Shift: +0.069 &gt;)
+   Steer     (α=+4)  :    +5.523  [               |      ●               ]  (Shift: +0.519 &gt;)
+
+  Group   +6  (n=  97)  |  baseline mu = +6.065  sigma = 0.1866
+  ---------------------------------------------------------------------------------
+   Original  (α= 1)  :    +6.065  [               |      ●               ]
+   Ablation  (α= 0)  :    +5.603  [               |      ●               ]  (Shift: -0.462 &lt;)
+   Steer     (α=-4)  :    +4.931  [               |     ●                ]  (Shift: -1.134 &lt;)
+   Steer     (α=-2)  :    +4.792  [               |     ●                ]  (Shift: -1.273 &lt;)
+   Steer     (α=-1)  :    +5.121  [               |     ●                ]  (Shift: -0.945 &lt;)
+   Steer     (α=+2)  :    +6.416  [               |       ●              ]  (Shift: +0.351 &gt;)
+   Steer     (α=+4)  :    +7.336  [               |        ●             ]  (Shift: +1.271 &gt;)
+
+  Group   +7  (n=  66)  |  baseline mu = +7.039  sigma = 0.1674
+  ---------------------------------------------------------------------------------
+   Original  (α= 1)  :    +7.039  [               |       ●              ]
+   Ablation  (α= 0)  :    +6.574  [               |       ●              ]  (Shift: -0.465 &lt;)
+   Steer     (α=-4)  :    +5.862  [               |      ●               ]  (Shift: -1.177 &lt;)
+   Steer     (α=-2)  :    +5.576  [               |      ●               ]  (Shift: -1.463 &lt;)
+   Steer     (α=-1)  :    +6.036  [               |      ●               ]  (Shift: -1.003 &lt;)
+   Steer     (α=+2)  :    +7.517  [               |        ●             ]  (Shift: +0.478 &gt;)
+   Steer     (α=+4)  :    +8.697  [               |         ●            ]  (Shift: +1.657 &gt;)
+
+  Group   +8  (n=  45)  |  baseline mu = +8.038  sigma = 0.1778
+  ---------------------------------------------------------------------------------
+   Original  (α= 1)  :    +8.038  [               |         ●            ]
+   Ablation  (α= 0)  :    +7.770  [               |        ●             ]  (Shift: -0.268 &lt;)
+   Steer     (α=-4)  :    +7.806  [               |        ●             ]  (Shift: -0.232 &lt;)
+   Steer     (α=-2)  :    +7.260  [               |        ●             ]  (Shift: -0.778 &lt;)
+   Steer     (α=-1)  :    +7.453  [               |        ●             ]  (Shift: -0.585 &lt;)
+   Steer     (α=+2)  :    +8.297  [               |         ●            ]  (Shift: +0.259 &gt;)
+   Steer     (α=+4)  :    +8.927  [               |          ●           ]  (Shift: +0.889 &gt;)
+
+  Group   +9  (n=  24)  |  baseline mu = +8.965  sigma = 0.1090
+  ---------------------------------------------------------------------------------
+   Original  (α= 1)  :    +8.965  [               |          ●           ]
+   Ablation  (α= 0)  :    +8.838  [               |          ●           ]  (Shift: -0.127 &lt;)
+   Steer     (α=-4)  :    +8.501  [               |         ●            ]  (Shift: -0.464 &lt;)
+   Steer     (α=-2)  :    +8.402  [               |         ●            ]  (Shift: -0.563 &lt;)
+   Steer     (α=-1)  :    +8.669  [               |         ●            ]  (Shift: -0.296 &lt;)
+   Steer     (α=+2)  :    +9.123  [               |          ●           ]  (Shift: +0.158 &gt;)
+   Steer     (α=+4)  :    +9.694  [               |           ●          ]  (Shift: +0.729 &gt;)
+
+  Group  +10  (n=  18)  |  baseline mu = +9.814  sigma = 0.1806
+  ---------------------------------------------------------------------------------
+   Original  (α= 1)  :    +9.814  [               |           ●          ]
+   Ablation  (α= 0)  :    +9.477  [               |          ●           ]  (Shift: -0.336 &lt;)
+   Steer     (α=-4)  :    +8.466  [               |         ●            ]  (Shift: -1.348 &lt;)
+   Steer     (α=-2)  :    +8.501  [               |         ●            ]  (Shift: -1.313 &lt;)
+   Steer     (α=-1)  :    +8.993  [               |          ●           ]  (Shift: -0.820 &lt;)
+   Steer     (α=+2)  :   +10.160  [               |           ●          ]  (Shift: +0.346 &gt;)
+   Steer     (α=+4)  :   +11.023  [               |            ●         ]  (Shift: +1.209 &gt;)
+
+=====================================================================================
+</div></code></pre>
+  <p><a href="./results/reports.html?feature=1347"><img src="./images/Feature-1347.png" alt="Feature-1347"></a></p>
+  <p><strong>Feature #576 — Hyperlocal</strong> (<code>global rank 1753 / 2048</code>)</p>
+  <p>Only fires for samples whose output falls in the −9 to −6 band. Ablation is zero for 16 of 20 groups. In the
+    steering section every alpha returns the identical prediction for those groups — scaling something that is already
+    zero does nothing.</p>
+  <pre class="hljs"><code><div>(act-abl) C:\Workspace\Git_Repos\MLP-Experiments\Feature-Ranking-et-Throttle-Testing&gt;python verify_feature.py 576
+
+[verify_feature] Feature <span class="hljs-comment">#576  |  Device: cuda</span>
+  Global rank : 1753 / 2048  (1 = least impactful, 2048 = most)
+  Groups      : [-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+=====================================================================================
+  ABLATION — Feature <span class="hljs-comment">#576   (feature activation zeroed out)</span>
+=====================================================================================
+  Group  -10 (n=  16)  :    -9.799 (baseline) [         |&gt;        ]    -9.799 (ablated)   (+0.000)
+  Group   -9 (n=  31)  :    -8.849 (baseline) [         |████&gt;    ]    -8.847 (ablated)   (+0.002)
+  Group   -8 (n=  54)  :    -7.940 (baseline) [         |█&gt;       ]    -7.939 (ablated)   (+0.001)
+  Group   -7 (n=  67)  :    -6.935 (baseline) [         |█████&gt;   ]    -6.933 (ablated)   (+0.003)
+  Group   -6 (n=  82)  :    -5.968 (baseline) [         |████████&gt;]    -5.964 (ablated)   (+0.004)
+  Group   -5 (n=  45)  :    -5.030 (baseline) [         |█&gt;       ]    -5.029 (ablated)   (+0.001)
+  Group   -4 (n=  36)  :    -3.972 (baseline) [         |█&gt;       ]    -3.971 (ablated)   (+0.001)
+  Group   -3 (n=  49)  :    -3.019 (baseline) [         |&gt;        ]    -3.019 (ablated)   (+0.000)
+  Group   -2 (n=  64)  :    -1.963 (baseline) [         |&gt;        ]    -1.963 (ablated)   (+0.000)
+  Group   -1 (n=  56)  :    -0.879 (baseline) [         |&gt;        ]    -0.879 (ablated)   (+0.000)
+  Group   +1 (n=  59)  :    +1.033 (baseline) [         |&gt;        ]    +1.033 (ablated)   (+0.000)
+  Group   +2 (n=  61)  :    +2.020 (baseline) [         |&gt;        ]    +2.020 (ablated)   (+0.000)
+  Group   +3 (n=  52)  :    +3.091 (baseline) [         |&gt;        ]    +3.091 (ablated)   (+0.000)
+  Group   +4 (n=  48)  :    +4.097 (baseline) [         |&gt;        ]    +4.097 (ablated)   (+0.000)
+  Group   +5 (n=  30)  :    +5.005 (baseline) [         |&gt;        ]    +5.005 (ablated)   (+0.000)
+  Group   +6 (n=  97)  :    +6.065 (baseline) [         |&gt;        ]    +6.065 (ablated)   (+0.000)
+  Group   +7 (n=  66)  :    +7.039 (baseline) [         |&gt;        ]    +7.039 (ablated)   (+0.000)
+  Group   +8 (n=  45)  :    +8.038 (baseline) [         |&gt;        ]    +8.038 (ablated)   (+0.000)
+  Group   +9 (n=  24)  :    +8.965 (baseline) [         |&gt;        ]    +8.965 (ablated)   (+0.000)
+  Group  +10 (n=  18)  :    +9.814 (baseline) [         |&gt;        ]    +9.814 (ablated)   (+0.000)
+=====================================================================================
+
+=====================================================================================
+  ACTIVATION STEERING — Feature <span class="hljs-comment">#576   (α scales the feature activation)</span>
+=====================================================================================
+
+  Group  -10  (n=  16)  |  baseline mu = -9.799  sigma = 0.1399
+  ---------------------------------------------------------------------------------
+   Original  (α= 1)  :    -9.799  [●                 |                   ]
+   Ablation  (α= 0)  :    -9.799  [●                 |                   ]  (Shift: +0.000 &gt;)
+   Steer     (α=-4)  :    -9.799  [●                 |                   ]  (Shift: +0.000 &gt;)
+   Steer     (α=-2)  :    -9.799  [●                 |                   ]  (Shift: +0.000 &gt;)
+   Steer     (α=-1)  :    -9.799  [●                 |                   ]  (Shift: +0.000 &gt;)
+   Steer     (α=+2)  :    -9.799  [●                 |                   ]  (Shift: +0.000 &gt;)
+   Steer     (α=+4)  :    -9.799  [●                 |                   ]  (Shift: +0.000 &gt;)
+
+  Group   -9  (n=  31)  |  baseline mu = -8.849  sigma = 0.1538
+  ---------------------------------------------------------------------------------
+   Original  (α= 1)  :    -8.849  [  ●               |                   ]
+   Ablation  (α= 0)  :    -8.847  [  ●               |                   ]  (Shift: +0.002 &gt;)
+   Steer     (α=-4)  :    -8.838  [  ●               |                   ]  (Shift: +0.011 &gt;)
+   Steer     (α=-2)  :    -8.842  [  ●               |                   ]  (Shift: +0.006 &gt;)
+   Steer     (α=-1)  :    -8.844  [  ●               |                   ]  (Shift: +0.004 &gt;)
+   Steer     (α=+2)  :    -8.851  [  ●               |                   ]  (Shift: -0.002 &lt;)
+   Steer     (α=+4)  :    -8.855  [  ●               |                   ]  (Shift: -0.006 &lt;)
+
+  Group   -8  (n=  54)  |  baseline mu = -7.940  sigma = 0.1630
+  ---------------------------------------------------------------------------------
+   Original  (α= 1)  :    -7.940  [    ●             |                   ]
+   Ablation  (α= 0)  :    -7.939  [    ●             |                   ]  (Shift: +0.001 &gt;)
+   Steer     (α=-4)  :    -7.936  [    ●             |                   ]  (Shift: +0.004 &gt;)
+   Steer     (α=-2)  :    -7.938  [    ●             |                   ]  (Shift: +0.002 &gt;)
+   Steer     (α=-1)  :    -7.939  [    ●             |                   ]  (Shift: +0.001 &gt;)
+   Steer     (α=+2)  :    -7.941  [    ●             |                   ]  (Shift: -0.001 &lt;)
+   Steer     (α=+4)  :    -7.942  [    ●             |                   ]  (Shift: -0.002 &lt;)
+
+  Group   -7  (n=  67)  |  baseline mu = -6.935  sigma = 0.1585
+  ---------------------------------------------------------------------------------
+   Original  (α= 1)  :    -6.935  [      ●           |                   ]
+   Ablation  (α= 0)  :    -6.933  [      ●           |                   ]  (Shift: +0.003 &gt;)
+   Steer     (α=-4)  :    -6.922  [      ●           |                   ]  (Shift: +0.013 &gt;)
+   Steer     (α=-2)  :    -6.927  [      ●           |                   ]  (Shift: +0.008 &gt;)
+   Steer     (α=-1)  :    -6.930  [      ●           |                   ]  (Shift: +0.005 &gt;)
+   Steer     (α=+2)  :    -6.938  [      ●           |                   ]  (Shift: -0.003 &lt;)
+   Steer     (α=+4)  :    -6.943  [      ●           |                   ]  (Shift: -0.008 &lt;)
+
+  Group   -6  (n=  82)  |  baseline mu = -5.968  sigma = 0.2195
+  ---------------------------------------------------------------------------------
+   Original  (α= 1)  :    -5.968  [        ●         |                   ]
+   Ablation  (α= 0)  :    -5.964  [        ●         |                   ]  (Shift: +0.004 &gt;)
+   Steer     (α=-4)  :    -5.947  [        ●         |                   ]  (Shift: +0.021 &gt;)
+   Steer     (α=-2)  :    -5.956  [        ●         |                   ]  (Shift: +0.013 &gt;)
+   Steer     (α=-1)  :    -5.960  [        ●         |                   ]  (Shift: +0.008 &gt;)
+   Steer     (α=+2)  :    -5.973  [        ●         |                   ]  (Shift: -0.004 &lt;)
+   Steer     (α=+4)  :    -5.981  [       ●          |                   ]  (Shift: -0.013 &lt;)
+
+  Group   -5  (n=  45)  |  baseline mu = -5.030  sigma = 0.1520
+  ---------------------------------------------------------------------------------
+   Original  (α= 1)  :    -5.030  [         ●        |                   ]
+   Ablation  (α= 0)  :    -5.029  [         ●        |                   ]  (Shift: +0.001 &gt;)
+   Steer     (α=-4)  :    -5.027  [         ●        |                   ]  (Shift: +0.003 &gt;)
+   Steer     (α=-2)  :    -5.028  [         ●        |                   ]  (Shift: +0.002 &gt;)
+   Steer     (α=-1)  :    -5.029  [         ●        |                   ]  (Shift: +0.001 &gt;)
+   Steer     (α=+2)  :    -5.031  [         ●        |                   ]  (Shift: -0.001 &lt;)
+   Steer     (α=+4)  :    -5.032  [         ●        |                   ]  (Shift: -0.002 &lt;)
+
+  Group   -4  (n=  36)  |  baseline mu = -3.972  sigma = 0.1603
+  ---------------------------------------------------------------------------------
+   Original  (α= 1)  :    -3.972  [           ●      |                   ]
+   Ablation  (α= 0)  :    -3.971  [           ●      |                   ]  (Shift: +0.001 &gt;)
+   Steer     (α=-4)  :    -3.968  [           ●      |                   ]  (Shift: +0.003 &gt;)
+   Steer     (α=-2)  :    -3.970  [           ●      |                   ]  (Shift: +0.002 &gt;)
+   Steer     (α=-1)  :    -3.970  [           ●      |                   ]  (Shift: +0.001 &gt;)
+   Steer     (α=+2)  :    -3.972  [           ●      |                   ]  (Shift: -0.001 &lt;)
+   Steer     (α=+4)  :    -3.974  [           ●      |                   ]  (Shift: -0.002 &lt;)
+
+  Group   -3  (n=  49)  |  baseline mu = -3.019  sigma = 0.1516
+  ---------------------------------------------------------------------------------
+   Original  (α= 1)  :    -3.019  [             ●    |                   ]
+   Ablation  (α= 0)  :    -3.019  [             ●    |                   ]  (Shift: +0.000 &gt;)
+   Steer     (α=-4)  :    -3.018  [             ●    |                   ]  (Shift: +0.001 &gt;)
+   Steer     (α=-2)  :    -3.018  [             ●    |                   ]  (Shift: +0.001 &gt;)
+   Steer     (α=-1)  :    -3.019  [             ●    |                   ]  (Shift: +0.000 &gt;)
+   Steer     (α=+2)  :    -3.019  [             ●    |                   ]  (Shift: -0.000 &lt;)
+   Steer     (α=+4)  :    -3.020  [             ●    |                   ]  (Shift: -0.001 &lt;)
+
+  Group   -2  (n=  64)  |  baseline mu = -1.963  sigma = 0.1718
+  ---------------------------------------------------------------------------------
+   Original  (α= 1)  :    -1.963  [               ●  |                   ]
+   Ablation  (α= 0)  :    -1.963  [               ●  |                   ]  (Shift: +0.000 &gt;)
+   Steer     (α=-4)  :    -1.963  [               ●  |                   ]  (Shift: +0.000 &gt;)
+   Steer     (α=-2)  :    -1.963  [               ●  |                   ]  (Shift: +0.000 &gt;)
+   Steer     (α=-1)  :    -1.963  [               ●  |                   ]  (Shift: +0.000 &gt;)
+   Steer     (α=+2)  :    -1.963  [               ●  |                   ]  (Shift: +0.000 &gt;)
+   Steer     (α=+4)  :    -1.963  [               ●  |                   ]  (Shift: +0.000 &gt;)
+
+  Group   -1  (n=  56)  |  baseline mu = -0.879  sigma = 0.1642
+  ---------------------------------------------------------------------------------
+   Original  (α= 1)  :    -0.879  [                 ●|                   ]
+   Ablation  (α= 0)  :    -0.879  [                 ●|                   ]  (Shift: +0.000 &gt;)
+   Steer     (α=-4)  :    -0.879  [                 ●|                   ]  (Shift: +0.000 &gt;)
+   Steer     (α=-2)  :    -0.879  [                 ●|                   ]  (Shift: +0.000 &gt;)
+   Steer     (α=-1)  :    -0.879  [                 ●|                   ]  (Shift: +0.000 &gt;)
+   Steer     (α=+2)  :    -0.879  [                 ●|                   ]  (Shift: +0.000 &gt;)
+   Steer     (α=+4)  :    -0.879  [                 ●|                   ]  (Shift: +0.000 &gt;)
+
+  Group   +1  (n=  59)  |  baseline mu = +1.033  sigma = 0.1740
+  ---------------------------------------------------------------------------------
+   Original  (α= 1)  :    +1.033  [                  | ●                 ]
+   Ablation  (α= 0)  :    +1.033  [                  | ●                 ]  (Shift: +0.000 &gt;)
+   Steer     (α=-4)  :    +1.033  [                  | ●                 ]  (Shift: +0.000 &gt;)
+   Steer     (α=-2)  :    +1.033  [                  | ●                 ]  (Shift: +0.000 &gt;)
+   Steer     (α=-1)  :    +1.033  [                  | ●                 ]  (Shift: +0.000 &gt;)
+   Steer     (α=+2)  :    +1.033  [                  | ●                 ]  (Shift: +0.000 &gt;)
+   Steer     (α=+4)  :    +1.033  [                  | ●                 ]  (Shift: +0.000 &gt;)
+
+  Group   +2  (n=  61)  |  baseline mu = +2.020  sigma = 0.2088
+  ---------------------------------------------------------------------------------
+   Original  (α= 1)  :    +2.020  [                  |   ●               ]
+   Ablation  (α= 0)  :    +2.020  [                  |   ●               ]  (Shift: +0.000 &gt;)
+   Steer     (α=-4)  :    +2.020  [                  |   ●               ]  (Shift: +0.000 &gt;)
+   Steer     (α=-2)  :    +2.020  [                  |   ●               ]  (Shift: +0.000 &gt;)
+   Steer     (α=-1)  :    +2.020  [                  |   ●               ]  (Shift: +0.000 &gt;)
+   Steer     (α=+2)  :    +2.020  [                  |   ●               ]  (Shift: +0.000 &gt;)
+   Steer     (α=+4)  :    +2.020  [                  |   ●               ]  (Shift: +0.000 &gt;)
+
+  Group   +3  (n=  52)  |  baseline mu = +3.091  sigma = 0.1657
+  ---------------------------------------------------------------------------------
+   Original  (α= 1)  :    +3.091  [                  |     ●             ]
+   Ablation  (α= 0)  :    +3.091  [                  |     ●             ]  (Shift: +0.000 &gt;)
+   Steer     (α=-4)  :    +3.091  [                  |     ●             ]  (Shift: +0.000 &gt;)
+   Steer     (α=-2)  :    +3.091  [                  |     ●             ]  (Shift: +0.000 &gt;)
+   Steer     (α=-1)  :    +3.091  [                  |     ●             ]  (Shift: +0.000 &gt;)
+   Steer     (α=+2)  :    +3.091  [                  |     ●             ]  (Shift: +0.000 &gt;)
+   Steer     (α=+4)  :    +3.091  [                  |     ●             ]  (Shift: +0.000 &gt;)
+
+  Group   +4  (n=  48)  |  baseline mu = +4.097  sigma = 0.1863
+  ---------------------------------------------------------------------------------
+   Original  (α= 1)  :    +4.097  [                  |       ●           ]
+   Ablation  (α= 0)  :    +4.097  [                  |       ●           ]  (Shift: +0.000 &gt;)
+   Steer     (α=-4)  :    +4.097  [                  |       ●           ]  (Shift: +0.000 &gt;)
+   Steer     (α=-2)  :    +4.097  [                  |       ●           ]  (Shift: +0.000 &gt;)
+   Steer     (α=-1)  :    +4.097  [                  |       ●           ]  (Shift: +0.000 &gt;)
+   Steer     (α=+2)  :    +4.097  [                  |       ●           ]  (Shift: +0.000 &gt;)
+   Steer     (α=+4)  :    +4.097  [                  |       ●           ]  (Shift: +0.000 &gt;)
+
+  Group   +5  (n=  30)  |  baseline mu = +5.005  sigma = 0.2205
+  ---------------------------------------------------------------------------------
+   Original  (α= 1)  :    +5.005  [                  |         ●         ]
+   Ablation  (α= 0)  :    +5.005  [                  |         ●         ]  (Shift: +0.000 &gt;)
+   Steer     (α=-4)  :    +5.005  [                  |         ●         ]  (Shift: +0.000 &gt;)
+   Steer     (α=-2)  :    +5.005  [                  |         ●         ]  (Shift: +0.000 &gt;)
+   Steer     (α=-1)  :    +5.005  [                  |         ●         ]  (Shift: +0.000 &gt;)
+   Steer     (α=+2)  :    +5.005  [                  |         ●         ]  (Shift: +0.000 &gt;)
+   Steer     (α=+4)  :    +5.005  [                  |         ●         ]  (Shift: +0.000 &gt;)
+
+  Group   +6  (n=  97)  |  baseline mu = +6.065  sigma = 0.1866
+  ---------------------------------------------------------------------------------
+   Original  (α= 1)  :    +6.065  [                  |           ●       ]
+   Ablation  (α= 0)  :    +6.065  [                  |           ●       ]  (Shift: +0.000 &gt;)
+   Steer     (α=-4)  :    +6.065  [                  |           ●       ]  (Shift: +0.000 &gt;)
+   Steer     (α=-2)  :    +6.065  [                  |           ●       ]  (Shift: +0.000 &gt;)
+   Steer     (α=-1)  :    +6.065  [                  |           ●       ]  (Shift: +0.000 &gt;)
+   Steer     (α=+2)  :    +6.065  [                  |           ●       ]  (Shift: +0.000 &gt;)
+   Steer     (α=+4)  :    +6.065  [                  |           ●       ]  (Shift: +0.000 &gt;)
+
+  Group   +7  (n=  66)  |  baseline mu = +7.039  sigma = 0.1674
+  ---------------------------------------------------------------------------------
+   Original  (α= 1)  :    +7.039  [                  |            ●      ]
+   Ablation  (α= 0)  :    +7.039  [                  |            ●      ]  (Shift: +0.000 &gt;)
+   Steer     (α=-4)  :    +7.039  [                  |            ●      ]  (Shift: +0.000 &gt;)
+   Steer     (α=-2)  :    +7.039  [                  |            ●      ]  (Shift: +0.000 &gt;)
+   Steer     (α=-1)  :    +7.039  [                  |            ●      ]  (Shift: +0.000 &gt;)
+   Steer     (α=+2)  :    +7.039  [                  |            ●      ]  (Shift: +0.000 &gt;)
+   Steer     (α=+4)  :    +7.039  [                  |            ●      ]  (Shift: +0.000 &gt;)
+
+  Group   +8  (n=  45)  |  baseline mu = +8.038  sigma = 0.1778
+  ---------------------------------------------------------------------------------
+   Original  (α= 1)  :    +8.038  [                  |              ●    ]
+   Ablation  (α= 0)  :    +8.038  [                  |              ●    ]  (Shift: +0.000 &gt;)
+   Steer     (α=-4)  :    +8.038  [                  |              ●    ]  (Shift: +0.000 &gt;)
+   Steer     (α=-2)  :    +8.038  [                  |              ●    ]  (Shift: +0.000 &gt;)
+   Steer     (α=-1)  :    +8.038  [                  |              ●    ]  (Shift: +0.000 &gt;)
+   Steer     (α=+2)  :    +8.038  [                  |              ●    ]  (Shift: +0.000 &gt;)
+   Steer     (α=+4)  :    +8.038  [                  |              ●    ]  (Shift: +0.000 &gt;)
+
+  Group   +9  (n=  24)  |  baseline mu = +8.965  sigma = 0.1090
+  ---------------------------------------------------------------------------------
+   Original  (α= 1)  :    +8.965  [                  |                ●  ]
+   Ablation  (α= 0)  :    +8.965  [                  |                ●  ]  (Shift: +0.000 &gt;)
+   Steer     (α=-4)  :    +8.965  [                  |                ●  ]  (Shift: +0.000 &gt;)
+   Steer     (α=-2)  :    +8.965  [                  |                ●  ]  (Shift: +0.000 &gt;)
+   Steer     (α=-1)  :    +8.965  [                  |                ●  ]  (Shift: +0.000 &gt;)
+   Steer     (α=+2)  :    +8.965  [                  |                ●  ]  (Shift: +0.000 &gt;)
+   Steer     (α=+4)  :    +8.965  [                  |                ●  ]  (Shift: +0.000 &gt;)
+
+  Group  +10  (n=  18)  |  baseline mu = +9.814  sigma = 0.1806
+  ---------------------------------------------------------------------------------
+   Original  (α= 1)  :    +9.814  [                  |                 ● ]
+   Ablation  (α= 0)  :    +9.814  [                  |                 ● ]  (Shift: +0.000 &gt;)
+   Steer     (α=-4)  :    +9.814  [                  |                 ● ]  (Shift: +0.000 &gt;)
+   Steer     (α=-2)  :    +9.814  [                  |                 ● ]  (Shift: +0.000 &gt;)
+   Steer     (α=-1)  :    +9.814  [                  |                 ● ]  (Shift: +0.000 &gt;)
+   Steer     (α=+2)  :    +9.814  [                  |                 ● ]  (Shift: +0.000 &gt;)
+   Steer     (α=+4)  :    +9.814  [                  |                 ● ]  (Shift: +0.000 &gt;)
+
+=====================================================================================
+</div></code></pre>
+  <p><a href="./results/reports.html?feature=576"><img src="./images/Feature-576.png" alt="Feature-576"></a></p>
+  <table>
+    <thead>
+      <tr>
+        <th></th>
+        <th>Feature #1347</th>
+        <th>Feature #576</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Global rank</td>
+        <td>2048 / 2048</td>
+        <td>1753 / 2048</td>
+      </tr>
+      <tr>
+        <td>Groups affected</td>
+        <td><em><strong>All 20</strong></em></td>
+        <td><em><strong>~4 (groups −9 to −6)</strong></em></td>
+      </tr>
+      <tr>
+        <td>Ablation direction</td>
+        <td>Flips across sign boundary</td>
+        <td>Always toward zero</td>
+      </tr>
+      <tr>
+        <td>Steering sensitivity</td>
+        <td>High — α=−4 shifts ±3 units</td>
+        <td>Negligible at any α</td>
+      </tr>
+      <tr>
+        <td>Role</td>
+        <td>Encodes output magnitude universally</td>
+        <td>Narrow detector for mid-negative outputs</td>
+      </tr>
+    </tbody>
+  </table>
+  <p>Feature #1347 is causally load-bearing for the whole model. Feature #576 illustrates why the SAE needs 2048
+    dimensions — fine-grained detectors that handle specific output regions the broad features miss.</p>
+  <hr>
+  <h2 id="output-files-summary">Output Files Summary</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>File</th>
+        <th>Size (typical)</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>results/feature_ranks.pt</code></td>
+        <td>~0.5 MB</td>
+        <td>Per-group feature rankings and mean activations</td>
+      </tr>
+      <tr>
+        <td><code>results/throttle_results.pt</code></td>
+        <td>~145 MB</td>
+        <td>All ablation + steering prediction lists</td>
+      </tr>
+      <tr>
+        <td><code>results/reports.html</code></td>
+        <td>~11.6 MB</td>
+        <td>Self-contained ridgeline report viewer</td>
+      </tr>
+      <tr>
+        <td><code>results/index.html</code></td>
+        <td>~0.5 MB</td>
+        <td>Self-contained D3 network graph</td>
+      </tr>
+    </tbody>
+  </table>
+  <hr>
+  <h2 id="directory-structure">Directory Structure</h2>
+  <pre class="hljs"><code><div>Feature-Ranking-et-Throttle-Testing/
+├── dataset/
+│   ├── mlp_test.xlsx          ← used by pipeline
+│   ├── mlp_train.xlsx
+│   ├── mlp_val.xlsx
+│   ├── extrap_test.xlsx
+│   ├── interp_test.xlsx
+│   ├── precision_test.xlsx
+│   └── scaling_test.xlsx
+├── mlp/
+│   ├── mlp_definition.py      ← InterpretabilityMLP class
+│   └── perfect_mlp.pth        ← pre-trained weights
+├── sae/
+│   ├── sae_definition.py      ← SparseAutoencoder class
+│   └── universal_sae.pth      ← pre-trained weights
+├── results/                   ← generated by pipeline
+│   ├── feature_ranks.pt
+│   ├── throttle_results.pt
+│   ├── reports.html
+│   └── index.html
+├── feature_ranking.py         ← step 2
+├── throttle_testing.py        ← step 3
+├── generate_reports.py        ← step 4a
+├── network_graph.py           ← step 4b
+├── verify_feature.py          ← manual verification (standalone)
+├── workflow.bat               ← full pipeline runner
+├── workflow.log               ← sample pipeline run log
+└── reqs.txt                   ← pip dependencies
+</div></code></pre>
+
+</body>
+
+</html>
