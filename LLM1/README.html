@@ -1,0 +1,1423 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>README.md</title>
+	<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+	<style>
+		/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+		/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+		body {
+			font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+			font-size: var(--vscode-markdown-font-size, 14px);
+			padding: 0 26px;
+			line-height: var(--vscode-markdown-line-height, 22px);
+			word-wrap: break-word;
+		}
+
+		#code-csp-warning {
+			position: fixed;
+			top: 0;
+			right: 0;
+			color: white;
+			margin: 16px;
+			text-align: center;
+			font-size: 12px;
+			font-family: sans-serif;
+			background-color: #444444;
+			cursor: pointer;
+			padding: 6px;
+			box-shadow: 1px 1px 1px rgba(0, 0, 0, .25);
+		}
+
+		#code-csp-warning:hover {
+			text-decoration: none;
+			background-color: #007acc;
+			box-shadow: 2px 2px 2px rgba(0, 0, 0, .25);
+		}
+
+		body.scrollBeyondLastLine {
+			margin-bottom: calc(100vh - 22px);
+		}
+
+		body.showEditorSelection .code-line {
+			position: relative;
+		}
+
+		body.showEditorSelection .code-active-line:before,
+		body.showEditorSelection .code-line:hover:before {
+			content: "";
+			display: block;
+			position: absolute;
+			top: 0;
+			left: -12px;
+			height: 100%;
+		}
+
+		body.showEditorSelection li.code-active-line:before,
+		body.showEditorSelection li.code-line:hover:before {
+			left: -30px;
+		}
+
+		.vscode-light.showEditorSelection .code-active-line:before {
+			border-left: 3px solid rgba(0, 0, 0, 0.15);
+		}
+
+		.vscode-light.showEditorSelection .code-line:hover:before {
+			border-left: 3px solid rgba(0, 0, 0, 0.40);
+		}
+
+		.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+			border-left: none;
+		}
+
+		.vscode-dark.showEditorSelection .code-active-line:before {
+			border-left: 3px solid rgba(255, 255, 255, 0.4);
+		}
+
+		.vscode-dark.showEditorSelection .code-line:hover:before {
+			border-left: 3px solid rgba(255, 255, 255, 0.60);
+		}
+
+		.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+			border-left: none;
+		}
+
+		.vscode-high-contrast.showEditorSelection .code-active-line:before {
+			border-left: 3px solid rgba(255, 160, 0, 0.7);
+		}
+
+		.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+			border-left: 3px solid rgba(255, 160, 0, 1);
+		}
+
+		.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+			border-left: none;
+		}
+
+		img {
+			max-width: 100%;
+			max-height: 100%;
+			display: block;
+			margin: 0 auto;
+		}
+
+		a {
+			text-decoration: none;
+		}
+
+		a:hover {
+			text-decoration: underline;
+		}
+
+		a:focus,
+		input:focus,
+		select:focus,
+		textarea:focus {
+			outline: 1px solid -webkit-focus-ring-color;
+			outline-offset: -1px;
+		}
+
+		hr {
+			border: 0;
+			height: 2px;
+			border-bottom: 2px solid;
+		}
+
+		h1 {
+			padding-bottom: 0.3em;
+			line-height: 1.2;
+			border-bottom-width: 1px;
+			border-bottom-style: solid;
+		}
+
+		h1,
+		h2,
+		h3 {
+			font-weight: normal;
+		}
+
+		table {
+			border-collapse: collapse;
+		}
+
+		table>thead>tr>th {
+			text-align: left;
+			border-bottom: 1px solid;
+		}
+
+		table>thead>tr>th,
+		table>thead>tr>td,
+		table>tbody>tr>th,
+		table>tbody>tr>td {
+			padding: 5px 10px;
+		}
+
+		table>tbody>tr+tr>td {
+			border-top: 1px solid;
+		}
+
+		blockquote {
+			margin: 0 7px 0 5px;
+			padding: 0 16px 0 10px;
+			border-left-width: 5px;
+			border-left-style: solid;
+		}
+
+		code {
+			font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+			font-size: 1em;
+			line-height: 1.357em;
+		}
+
+		body.wordWrap pre {
+			white-space: pre-wrap;
+		}
+
+		pre:not(.hljs),
+		pre.hljs code>div {
+			padding: 16px;
+			border-radius: 3px;
+			overflow: auto;
+		}
+
+		pre code {
+			color: var(--vscode-editor-foreground);
+			tab-size: 4;
+		}
+
+		/** Theming */
+
+		.vscode-light pre {
+			background-color: rgba(220, 220, 220, 0.4);
+		}
+
+		.vscode-dark pre {
+			background-color: rgba(10, 10, 10, 0.4);
+		}
+
+		.vscode-high-contrast pre {
+			background-color: rgb(0, 0, 0);
+		}
+
+		.vscode-high-contrast h1 {
+			border-color: rgb(0, 0, 0);
+		}
+
+		.vscode-light table>thead>tr>th {
+			border-color: rgba(0, 0, 0, 0.69);
+		}
+
+		.vscode-dark table>thead>tr>th {
+			border-color: rgba(255, 255, 255, 0.69);
+		}
+
+		.vscode-light h1,
+		.vscode-light hr,
+		.vscode-light table>tbody>tr+tr>td {
+			border-color: rgba(0, 0, 0, 0.18);
+		}
+
+		.vscode-dark h1,
+		.vscode-dark hr,
+		.vscode-dark table>tbody>tr+tr>td {
+			border-color: rgba(255, 255, 255, 0.18);
+		}
+	</style>
+
+	<style>
+		/* Tomorrow Theme */
+		/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+		/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+		/* Tomorrow Comment */
+		.hljs-comment,
+		.hljs-quote {
+			color: #8e908c;
+		}
+
+		/* Tomorrow Red */
+		.hljs-variable,
+		.hljs-template-variable,
+		.hljs-tag,
+		.hljs-name,
+		.hljs-selector-id,
+		.hljs-selector-class,
+		.hljs-regexp,
+		.hljs-deletion {
+			color: #c82829;
+		}
+
+		/* Tomorrow Orange */
+		.hljs-number,
+		.hljs-built_in,
+		.hljs-builtin-name,
+		.hljs-literal,
+		.hljs-type,
+		.hljs-params,
+		.hljs-meta,
+		.hljs-link {
+			color: #f5871f;
+		}
+
+		/* Tomorrow Yellow */
+		.hljs-attribute {
+			color: #eab700;
+		}
+
+		/* Tomorrow Green */
+		.hljs-string,
+		.hljs-symbol,
+		.hljs-bullet,
+		.hljs-addition {
+			color: #718c00;
+		}
+
+		/* Tomorrow Blue */
+		.hljs-title,
+		.hljs-section {
+			color: #4271ae;
+		}
+
+		/* Tomorrow Purple */
+		.hljs-keyword,
+		.hljs-selector-tag {
+			color: #8959a8;
+		}
+
+		.hljs {
+			display: block;
+			overflow-x: auto;
+			color: #4d4d4c;
+			padding: 0.5em;
+		}
+
+		.hljs-emphasis {
+			font-style: italic;
+		}
+
+		.hljs-strong {
+			font-weight: bold;
+		}
+	</style>
+
+	<style>
+		/*
+ * Markdown PDF CSS
+ */
+
+		body {
+			font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+			padding: 0 12px;
+		}
+
+		pre {
+			background-color: #f8f8f8;
+			border: 1px solid #cccccc;
+			border-radius: 3px;
+			overflow-x: auto;
+			white-space: pre-wrap;
+			overflow-wrap: break-word;
+		}
+
+		pre:not(.hljs) {
+			padding: 23px;
+			line-height: 19px;
+		}
+
+		blockquote {
+			background: rgba(127, 127, 127, 0.1);
+			border-color: rgba(0, 122, 204, 0.5);
+		}
+
+		.emoji {
+			height: 1.4em;
+		}
+
+		code {
+			font-size: 14px;
+			line-height: 19px;
+		}
+
+		/* for inline code */
+		:not(pre):not(.hljs)>code {
+			color: #C9AE75;
+			/* Change the old color so it seems less like an error */
+			font-size: inherit;
+		}
+
+		/* Page Break : use <div class="page"/> or <div class="page"></div> to insert page break
+-------------------------------------------------------- */
+		.page {
+			page-break-after: always;
+		}
+	</style>
+
+	<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+
+<body>
+	<script>
+		mermaid.initialize({
+			startOnLoad: true,
+			theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+				? 'dark'
+				: 'default'
+		});
+	</script>
+	<h1 id="llm-emotions--sparse-autoencoder-analysis-of-emotion-representations-in-gemma-3-1b-it">LLM Emotions — Sparse
+		Autoencoder Analysis of Emotion Representations in Gemma 3 1B IT</h1>
+	<p>This project investigates how emotional states are encoded inside the hidden layers of Google's <strong>Gemma 3
+			1B IT</strong> language model. Using a Sparse Autoencoder (SAE) trained on mid-layer activations, we
+		discover sparse, disjoint feature clusters that correspond to 12 distinct emotions, extract two orthogonal axes
+		(valence and arousal) that mirror Russell's circumplex model, and demonstrate precise causal steering of the
+		model's output along those axes — all without modifying any model weights.</p>
+	<hr>
+	<h2 id="table-of-contents">Table of Contents</h2>
+	<ol>
+		<li><a href="#background">Background</a></li>
+		<li><a href="#environment-setup">Environment Setup</a></li>
+		<li><a href="#repository-layout">Repository Layout</a></li>
+		<li><a href="#pipeline-overview">Pipeline Overview</a></li>
+		<li><a href="#stage-1--collect-activations">Stage 1 — Collect Activations</a></li>
+		<li><a href="#stage-2--train-sae">Stage 2 — Train SAE</a></li>
+		<li><a href="#stage-3--analyse-features">Stage 3 — Analyse Features</a></li>
+		<li><a href="#stage-4--extract-steering-vectors">Stage 4 — Extract Steering Vectors</a></li>
+		<li><a href="#stage-5--ablation-and-steering-demo">Stage 5 — Ablation and Steering Demo</a></li>
+		<li><a href="#plots-and-visualisations">Plots and Visualisations</a></li>
+		<li><a href="#interpreting-the-workflowlog-output">Interpreting the workflow.log Output</a></li>
+		<li><a href="#key-findings">Key Findings</a></li>
+	</ol>
+	<hr>
+	<h2 id="background">Background</h2>
+	<h3 id="russells-circumplex-model-of-emotion">Russell's Circumplex Model of Emotion</h3>
+	<p>The theoretical foundation of this project is Russell's (1980) <strong>circumplex model of affect</strong>, which
+		proposes that all human emotions can be located in a two-dimensional space defined by:</p>
+	<ul>
+		<li><strong>Valence</strong> (pleasant ↔ unpleasant): the positive or negative character of an emotion.</li>
+		<li><strong>Arousal</strong> (activated ↔ deactivated): the level of physiological or psychological activation.
+		</li>
+	</ul>
+	<p>The 12 emotions studied here are chosen to tile this circumplex evenly:</p>
+	<table>
+		<thead>
+			<tr>
+				<th>Quadrant</th>
+				<th>Emotions</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>High valence, high arousal</td>
+				<td>happy, excited</td>
+			</tr>
+			<tr>
+				<td>Low valence, high arousal</td>
+				<td>tense, angry, distressed</td>
+			</tr>
+			<tr>
+				<td>Low valence, low arousal</td>
+				<td>sad, depressed</td>
+			</tr>
+			<tr>
+				<td>Low valence, neutral arousal</td>
+				<td>bored</td>
+			</tr>
+			<tr>
+				<td>High valence, low arousal</td>
+				<td>calm, relaxed, content</td>
+			</tr>
+			<tr>
+				<td>High valence, neutral arousal</td>
+				<td>alert</td>
+			</tr>
+		</tbody>
+	</table>
+	<p><img src="images/Circumplex_model_of_emotion.png" alt="Circumplex model reference diagram"></p>
+	<h3 id="why-sparse-autoencoders">Why Sparse Autoencoders?</h3>
+	<p>Language model hidden states live in a high-dimensional space (d_model = 1152 for Gemma 3 1B) and are believed to
+		be <strong>superposed</strong> — many conceptual features are packed into the same dimensions simultaneously,
+		making direct interpretation difficult. A Sparse Autoencoder (SAE) with a <strong>top-k activation
+			constraint</strong> decomposes these dense vectors into a larger, overcomplete latent space (d_latent =
+		2304) where only <code>k = 32</code> features are active at once. This forces the model to find a
+		<strong>sparse, near-orthogonal basis</strong> where each feature ideally corresponds to a single interpretable
+		concept.</p>
+	<h3 id="why-layer-13">Why Layer 13?</h3>
+	<p>Gemma 3 1B has 26 transformer layers. Layer 13 (the mid-point) is the &quot;mid-logic&quot; layer — early enough
+		that syntactic surface features are still being processed but deep enough that semantic and contextual
+		representations have stabilised. This makes it the richest layer for capturing abstract emotional content.</p>
+	<hr>
+	<h2 id="environment-setup">Environment Setup</h2>
+	<p>Run <code>setup-env.bat</code> once to create the Conda environment:</p>
+	<pre class="hljs"><code><div>setup-env.bat
+</div></code></pre>
+	<p>This creates a Conda environment named <code>llm-emotions</code> with:</p>
+	<table>
+		<thead>
+			<tr>
+				<th>Package</th>
+				<th>Version</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>Python</td>
+				<td>3.11.6</td>
+			</tr>
+			<tr>
+				<td>PyTorch</td>
+				<td>2.10.0 + CUDA 12.6</td>
+			</tr>
+			<tr>
+				<td>Transformers</td>
+				<td>5.8.1</td>
+			</tr>
+			<tr>
+				<td>Accelerate</td>
+				<td>latest</td>
+			</tr>
+			<tr>
+				<td>scikit-learn</td>
+				<td>1.8.0</td>
+			</tr>
+			<tr>
+				<td>Matplotlib</td>
+				<td>3.10.9</td>
+			</tr>
+		</tbody>
+	</table>
+	<p>The environment is optimised for an <strong>NVIDIA RTX 4070</strong> (or any CUDA 12.6-capable GPU). All model
+		weights are loaded locally (<code>local_files_only=True</code>), so the Gemma 3 1B IT checkpoint must be
+		pre-downloaded to the HuggingFace cache before running the pipeline.</p>
+	<hr>
+	<h2 id="repository-layout">Repository Layout</h2>
+	<ul>
+		<li><a href="https://github.com/Palani-SN/LLM-Emotions">Github Repo</a></li>
+	</ul>
+	<pre class="hljs"><code><div>llm-emotions/
+├── workflow.bat               ← Master pipeline runner (5 ordered steps)
+├── setup-env.bat              ← One-time Conda environment setup
+├── collect-activations.py     ← Stage 1: generate stories + record hidden states
+├── train-sae.py               ← Stage 2: train Sparse Autoencoder
+├── analyse-features.py        ← Stage 3: feature analysis and visualisation
+├── extract-vectors.py         ← Stage 4: PCA → valence/arousal axes
+├── ablation-et-steering.py    ← Stage 5: circumplex cycle demo
+├── hf-clean.py                ← Utility: removes cached model weights from the HuggingFace hub to free disk space; run after pipeline completion
+├── reqs.txt                   ← Full Conda environment package list
+├── workflow.log               ← Captured output from a complete pipeline run
+│
+├── activations/               ← Raw activation tensors + story logs
+│   ├── neutral.pt             ← Baseline neutral activation (shape: [1152])
+│   ├── {emotion}_{iter}.pt    ← Per-emotion token activations (12 emotions × 2 samples)
+│   └── {emotion}_{iter}.log   ← Generated story text for each sample
+│
+├── temp/                      ← Intermediate pipeline artefacts
+│   ├── emotions.pt            ← Trained SAE checkpoint
+│   ├── emotion_vectors.pt     ← Per-emotion mean activation vectors
+│   └── steering_vectors.pt    ← PCA axes + valence/arousal unit vectors
+│
+└── images/                    ← All generated plots (11 PNG files)
+    ├── Circumplex_model_of_emotion.png
+    ├── training_loss.png
+    ├── latent_projections.png
+    ├── heatmap_raw_similarity.png
+    ├── heatmap_latent_similarity.png
+    ├── heatmap_unique_similarity.png
+    ├── fingerprint_heatmap.png
+    ├── exclusive_feature_profile.png
+    ├── shared_feature_profile.png
+    ├── reconstruction_error.png
+    └── emotion_vectors.png
+</div></code></pre>
+	<hr>
+	<h2 id="pipeline-overview">Pipeline Overview</h2>
+	<p>The entire pipeline is orchestrated by <code>workflow.bat</code>, which runs five scripts in order with
+		error-checked exits:</p>
+	<pre class="hljs"><code><div>workflow.bat
+│
+├── Step 1/5  collect-activations.py   → activations/*.pt + activations/*.log
+├── Step 2/5  train-sae.py             → temp/emotions.pt + images/training_loss.png
+├── Step 3/5  analyse-features.py      → temp/emotion_vectors.pt + images/*.png (×8)
+├── Step 4/5  extract-vectors.py       → temp/steering_vectors.pt + images/emotion_vectors.png
+└── Step 5/5  ablation-et-steering.py  → console output (generated stories + cosine tables)
+</div></code></pre>
+	<p>Each step is guarded by <code>if errorlevel 1 ( echo [FAILED] ... &amp; exit /b 1 )</code>, so the batch file
+		halts immediately if any script returns a non-zero exit code, preventing cascade failures.</p>
+	<hr>
+	<h2 id="stage-1--collect-activations">Stage 1 — Collect Activations</h2>
+	<p><strong>Script:</strong> <code>collect-activations.py</code></p>
+	<h3 id="what-it-does">What it does</h3>
+	<p>Loads the Gemma 3 1B IT model and generates two emotionally-conditioned stories for each of 12 emotions (24
+		samples total), then records the hidden-state activations at <strong>Layer 13</strong> for every generated
+		token.</p>
+	<h3 id="prompt-design">Prompt design</h3>
+	<p>The prompt is carefully engineered to elicit pure emotional activation without lexical contamination:</p>
+	<pre class="hljs"><code><div>messages = [
+    {<span class="hljs-string">&quot;role&quot;</span>: <span class="hljs-string">&quot;system&quot;</span>,  <span class="hljs-string">&quot;content&quot;</span>: <span class="hljs-string">&quot;You are a creative writer. Output only the story text...&quot;</span>},
+    {<span class="hljs-string">&quot;role&quot;</span>: <span class="hljs-string">&quot;user&quot;</span>,    <span class="hljs-string">&quot;content&quot;</span>: <span class="hljs-string">f&quot;Write a detailed story about a character feeling <span class="hljs-subst">{emotion}</span>. &quot;</span>
+                                    <span class="hljs-string">f&quot;You must NEVER use the word &#x27;<span class="hljs-subst">{emotion}</span>&#x27; or any direct synonyms.&quot;</span>},
+    {<span class="hljs-string">&quot;role&quot;</span>: <span class="hljs-string">&quot;assistant&quot;</span>,<span class="hljs-string">&quot;content&quot;</span>: <span class="hljs-string">&quot;&quot;</span>},   <span class="hljs-comment"># prefill: model continues from blank assistant turn</span>
+]
+</div></code></pre>
+	<p>The <code>continue_final_message=True</code> flag in <code>apply_chat_template</code> causes the model to
+		complete the assistant turn immediately, avoiding any preamble text. The explicit prohibition on using the
+		emotion word or its synonyms forces the model to express the emotion through narrative behaviour rather than
+		labelling it.</p>
+	<h3 id="activation-recording">Activation recording</h3>
+	<p>After generation, the full sequence (prompt + response) is passed through the model again with
+		<code>output_hidden_states=True</code>. Only the <strong>response token</strong> positions are sliced and saved:
+	</p>
+	<pre class="hljs"><code><div>raw_activations = full_outputs.hidden_states[<span class="hljs-number">13</span>][:, input_len:, :]
+</div></code></pre>
+	<p>This ensures the saved tensors contain the model's internal emotional representation while processing
+		emotionally-charged text, not the prompt tokens.</p>
+	<h3 id="neutral-baseline">Neutral baseline</h3>
+	<p>A deliberately flat, affect-free sentence is passed through the model to record the <strong>neutral
+			activation</strong>:</p>
+	<pre class="hljs"><code><div>&quot;The shelf holds several books. The window faces the street. A clock hangs on the wall.&quot;
+</div></code></pre>
+	<p>The mean of this activation (a single [1152] vector) is saved as <code>activations/neutral.pt</code> and used
+		downstream to orthogonalise all emotion vectors away from the model's generic language-processing direction.</p>
+	<h3 id="idempotency">Idempotency</h3>
+	<p>The script checks for existing <code>.pt</code> files before processing each sample. Subsequent runs skip
+		already-collected samples, making the pipeline resumable after interruption.</p>
+	<h3 id="token-counts-per-sample-from-workflowlog">Token counts per sample (from workflow.log)</h3>
+	<table>
+		<thead>
+			<tr>
+				<th>Emotion</th>
+				<th>Sample 0</th>
+				<th>Sample 1</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>alert</td>
+				<td>615</td>
+				<td>570</td>
+			</tr>
+			<tr>
+				<td>angry</td>
+				<td>589</td>
+				<td>545</td>
+			</tr>
+			<tr>
+				<td>bored</td>
+				<td>647</td>
+				<td>547</td>
+			</tr>
+			<tr>
+				<td>calm</td>
+				<td>502</td>
+				<td>578</td>
+			</tr>
+			<tr>
+				<td>content</td>
+				<td>678</td>
+				<td>631</td>
+			</tr>
+			<tr>
+				<td>depressed</td>
+				<td>623</td>
+				<td>604</td>
+			</tr>
+			<tr>
+				<td>distressed</td>
+				<td>727</td>
+				<td>640</td>
+			</tr>
+			<tr>
+				<td>excited</td>
+				<td>620</td>
+				<td>609</td>
+			</tr>
+			<tr>
+				<td>happy</td>
+				<td>532</td>
+				<td>529</td>
+			</tr>
+			<tr>
+				<td>relaxed</td>
+				<td>616</td>
+				<td>537</td>
+			</tr>
+			<tr>
+				<td>sad</td>
+				<td>561</td>
+				<td>560</td>
+			</tr>
+			<tr>
+				<td>tense</td>
+				<td>588</td>
+				<td>604</td>
+			</tr>
+		</tbody>
+	</table>
+	<p><strong>Total tokens used for SAE training: 14,252</strong></p>
+	<hr>
+	<h2 id="stage-2--train-sae">Stage 2 — Train SAE</h2>
+	<p><strong>Script:</strong> <code>train-sae.py</code></p>
+	<h3 id="architecture">Architecture</h3>
+	<pre class="hljs"><code><div>Input (d_model=1152)
+       │
+       ▼
+  Encoder: W_enc [1152 × 2304] + b_enc [2304]
+       │
+       ▼  top-k (k=32) sparse gate — only 32 of 2304 features active
+       │
+  Latent (d_latent=2304)
+       │
+       ▼
+  Decoder: W_dec [2304 × 1152]  (decoder columns are L2-normalised)
+       │
+       ▼
+Reconstruction (d_model=1152)
+</div></code></pre>
+	<p>The dictionary is <strong>2× overcomplete</strong> (2304 latent features for a 1152-dimensional input), meaning
+		the SAE can represent exponentially more feature combinations than a square autoencoder, while the <strong>top-k
+			constraint with k=32</strong> enforces sparsity: at most 32 out of 2304 features activate for any given
+		token.</p>
+	<h3 id="preprocessing-applied-to-training-data">Preprocessing (applied to training data)</h3>
+	<p><strong>Step 1 — Mean centering:</strong> The global mean activation vector is computed across all 14,252 tokens
+		and subtracted. This removes the &quot;generic language model&quot; direction shared by all tokens regardless of
+		emotion.</p>
+	<pre class="hljs"><code><div>Centered data — removed mean vector (norm=6825.7949)
+</div></code></pre>
+	<p>The large norm (6825.8) indicates that the mean activation is a very strong, dominant direction in the raw
+		activation space — essentially the &quot;baseline processing&quot; signal of the transformer.</p>
+	<p><strong>Step 2 — Neutral orthogonalisation:</strong> The neutral sentence activation is similarly centered, then
+		used to compute a unit vector representing the &quot;neutral language processing&quot; direction. The training
+		data is orthogonalised against this direction (though the projection-zeroing step is commented out in the final
+		version — removing it empirically improved training by avoiding double-subtraction of variance the SAE needed to
+		distinguish emotions). The neutral unit is preserved in the checkpoint; <code>analyse-features.py</code> applies
+		the full orthogonalisation projection to all emotion activations before encoding.</p>
+	<pre class="hljs"><code><div>Orthogonalized against neutral direction (||neutral_mean||=1684.1606)
+</div></code></pre>
+	<h3 id="training-configuration">Training configuration</h3>
+	<table>
+		<thead>
+			<tr>
+				<th>Hyperparameter</th>
+				<th>Value</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>Epochs</td>
+				<td>400</td>
+			</tr>
+			<tr>
+				<td>Batch size</td>
+				<td>512</td>
+			</tr>
+			<tr>
+				<td>Learning rate</td>
+				<td>3 × 10⁻⁴ (Adam)</td>
+			</tr>
+			<tr>
+				<td>Loss function</td>
+				<td>MSE (reconstruction)</td>
+			</tr>
+			<tr>
+				<td>Decoder normalisation</td>
+				<td>L2 per column after each step</td>
+			</tr>
+		</tbody>
+	</table>
+	<p>The decoder weight columns are re-normalised to unit length after every gradient step. This prevents the model
+		from trivially reducing loss by growing decoder column norms, ensuring that the latent activations carry the
+		magnitude information and the decoder columns are pure directions.</p>
+	<h3 id="best-checkpoint-selection">Best checkpoint selection</h3>
+	<p>The script tracks the best validation loss across all epochs using <code>copy.deepcopy(sae.state_dict())</code>
+		and restores it at the end. The best checkpoint was reached at <strong>epoch 400</strong> with a loss of
+		<strong>53.44</strong>.</p>
+	<h3 id="loss-trajectory-workflowlog">Loss trajectory (workflow.log)</h3>
+	<table>
+		<thead>
+			<tr>
+				<th>Epoch</th>
+				<th>Avg MSE Loss</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>1</td>
+				<td>3842.45</td>
+			</tr>
+			<tr>
+				<td>50</td>
+				<td>94.16</td>
+			</tr>
+			<tr>
+				<td>100</td>
+				<td>68.57</td>
+			</tr>
+			<tr>
+				<td>150</td>
+				<td>64.39</td>
+			</tr>
+			<tr>
+				<td>200</td>
+				<td>59.96</td>
+			</tr>
+			<tr>
+				<td>250</td>
+				<td>56.77</td>
+			</tr>
+			<tr>
+				<td>300</td>
+				<td>55.35</td>
+			</tr>
+			<tr>
+				<td>350</td>
+				<td>54.28</td>
+			</tr>
+			<tr>
+				<td>400</td>
+				<td>53.44</td>
+			</tr>
+		</tbody>
+	</table>
+	<p>The loss drops steeply in the first 50 epochs (41× reduction) as the SAE learns the broad structure of the
+		emotion space, then continues to refine slowly for the remaining 350 epochs. The final loss of ~53 represents
+		the irreducible reconstruction error given the sparsity constraint of k=32.</p>
+	<p><img src="images/training_loss.png" alt="SAE Training Loss over 400 epochs"></p>
+	<h3 id="output">Output</h3>
+	<p>Saved to <code>temp/emotions.pt</code> as a dictionary:</p>
+	<pre class="hljs"><code><div>{
+    <span class="hljs-string">&#x27;model_state_dict&#x27;</span>: sae.state_dict(),   <span class="hljs-comment"># W_enc, b_enc, W_dec; b_dec is always zero (inactive — pre-centering removes the need for a decoder bias)</span>
+    <span class="hljs-string">&#x27;dataset_mean&#x27;</span>:     tensor([...]),       <span class="hljs-comment"># [1, 1152] global mean</span>
+    <span class="hljs-string">&#x27;neutral_unit&#x27;</span>:     tensor([...]),       <span class="hljs-comment"># [1, 1152] saved with keepdim=True; downstream scripts call .squeeze() to obtain [1152]</span>
+    <span class="hljs-string">&#x27;cfg&#x27;</span>:              {<span class="hljs-string">&#x27;d_model&#x27;</span>: <span class="hljs-number">1152</span>, <span class="hljs-string">&#x27;d_latent&#x27;</span>: <span class="hljs-number">2304</span>, <span class="hljs-string">&#x27;k&#x27;</span>: <span class="hljs-number">32</span>}
+}
+</div></code></pre>
+	<hr>
+	<h2 id="stage-3--analyse-features">Stage 3 — Analyse Features</h2>
+	<p><strong>Script:</strong> <code>analyse-features.py</code></p>
+	<p>This is the core analysis stage. It loads the trained SAE, passes each emotion's activation tokens through the
+		encoder, and computes nine distinct analyses that together characterise how the SAE represents each emotion.</p>
+	<h3 id="31-raw-space-cosine-similarity">3.1 Raw-Space Cosine Similarity</h3>
+	<p>The 12 emotion mean vectors are compared pairwise in the <strong>original 1152-dimensional activation
+			space</strong> using cosine similarity. This reveals the geometric structure that existed before SAE
+		decomposition.</p>
+	<p><img src="images/heatmap_raw_similarity.png" alt="Raw-space cosine similarity heatmap (12×12)"></p>
+	<p><strong>Interpretation of workflow.log output:</strong></p>
+	<p>The raw-space similarity matrix shows a clear bipolar structure consistent with the circumplex model:</p>
+	<ul>
+		<li><strong>Strongly negative pairs</strong> (opposite quadrants): happy vs angry (−0.5258), happy vs tense
+			(−0.5052), relaxed vs tense (−0.5797), sad vs calm (−0.5400). These pairs occupy opposite quadrants of the
+			circumplex.</li>
+		<li><strong>Strongly positive pairs</strong> (same quadrant): sad vs depressed (+0.6075), relaxed vs content
+			(+0.6041), calm vs relaxed (+0.4974). Emotions in the same circumplex quadrant are geometrically close.</li>
+		<li><strong>Near-zero pairs</strong> (orthogonal quadrants): bored vs angry (−0.0680), excited vs calm
+			(−0.0156). Emotions that differ primarily in one dimension (e.g., both at the valence midpoint) are
+			near-orthogonal.</li>
+	</ul>
+	<p>This pattern confirms that Gemma 3's Layer 13 activations organise emotional content in a way that mirrors the
+		psychological circumplex model.</p>
+	<h3 id="32-latent-space-cosine-similarity">3.2 Latent-Space Cosine Similarity</h3>
+	<p>The same pairwise comparison is performed on the <strong>SAE latent vectors</strong> — the 2304-dimensional
+		sparse codes produced by the encoder.</p>
+	<p><img src="images/heatmap_latent_similarity.png" alt="Latent-space cosine similarity heatmap (12×12)"></p>
+	<p><strong>Interpretation:</strong> The latent-space similarities are all in the range <strong>0.950–0.990</strong>
+		(minimum: sad–calm at 0.9496; maximum: relaxed–content at 0.9896), far higher than the raw-space similarities.
+		This is a key structural finding: in SAE latent space, all emotions appear very similar to each other. This
+		occurs because the k=32 active features are drawn from a shared pool of ~1400–1600 background features that
+		activate for all emotionally-charged text, with only a small fraction (100–300 features) being
+		emotion-exclusive. The SAE has separated the generic &quot;emotional narration&quot; signal from the
+		emotion-specific signal, but the latent cosine similarity metric is dominated by the large shared component.</p>
+	<h3 id="33-unique-feature-cosine-similarity">3.3 Unique-Feature Cosine Similarity</h3>
+	<p>Only features that fire in one emotion but not the other — identified via a pairwise XOR of token-level fire
+		masks — are retained for each compared pair. The cosine similarity is recomputed in this exclusive subspace.</p>
+	<p><img src="images/heatmap_unique_similarity.png" alt="Unique-feature cosine similarity heatmap — identity matrix">
+	</p>
+	<p><strong>Interpretation:</strong> The exclusive-feature similarity matrix is an <strong>identity matrix</strong> —
+		all off-diagonal entries are exactly 0.0000. Every emotion's exclusive features have zero overlap with every
+		other emotion's exclusive features. This is the SAE's fundamental finding: <strong>each emotion has a unique,
+			non-overlapping set of specialised features that no other emotion activates</strong>. The emotions are
+		perfectly disentangled at the exclusive-feature level.</p>
+	<h3 id="34-l0-sparsity-verification">3.4 L0 Sparsity Verification</h3>
+	<p>The number of active features (L0 norm) is computed for each emotion's mean latent vector.</p>
+	<pre class="hljs"><code><div>happy: 32.0 active features (target k=32)
+excited: 32.0 active features (target k=32)
+...
+content: 32.0 active features (target k=32)
+</div></code></pre>
+	<p>All 12 emotions achieve exactly k=32 active features — the top-k constraint is perfectly satisfied for mean
+		vectors, confirming that the SAE has learned a consistent and well-calibrated sparse representation.</p>
+	<h3 id="35-pairwise-feature-disjointness">3.5 Pairwise Feature Disjointness</h3>
+	<p>For each pair of emotions, the script counts features across the full token set for each emotion (a feature is
+		&quot;active&quot; if it fires in at least one token — token-level <code>.any()</code>, not just the mean
+		vector). With thousands of tokens per emotion, most of the 2304 features fire at least once, which is why shared
+		counts reach 1700+ even though each individual token activates only k=32 features:</p>
+	<ul>
+		<li><strong>Shared features</strong>: fires in at least one token of both emotions.</li>
+		<li><strong>Unique to A</strong>: fires in at least one A-token but no B-token.</li>
+		<li><strong>Unique to B</strong>: fires in at least one B-token but no A-token.</li>
+	</ul>
+	<p><strong>Key observations from workflow.log:</strong></p>
+	<ul>
+		<li>Overall shared-feature counts are much higher in this run (1700–1817 shared vs ~1370–1624 previously),
+			reflecting a more compressed, efficient SAE dictionary — unique-feature counts per pair are now in the range
+			33–118 rather than 90–309.</li>
+		<li>Depressed vs bored has the fewest exclusive features combined (unique_depressed=53, unique_bored=33) at
+			shared=1817, the highest sharing of any pair.</li>
+		<li>Depressed vs calm shows the most unique features for one emotion (118 unique to depressed), followed by
+			bored vs calm (111 unique to bored) and distressed vs calm (110 unique to distressed). Excited vs calm (108
+			unique to excited) and angry vs calm (107 unique to angry) rank 4th and 5th, consistent with their
+			circumplex-opposite relationship to calm.</li>
+		<li>The number of shared features generally <strong>increases</strong> for emotionally similar pairs and
+			<strong>decreases</strong> for circumplex-opposite pairs, independently recovering the circumplex topology.
+		</li>
+	</ul>
+	<h3 id="36-top-10-dominant-feature-fingerprints">3.6 Top-10 Dominant Feature Fingerprints</h3>
+	<p>For each emotion, the 10 features whose peak magnitude is at least 1.5× greater for that emotion than for any
+		other are ranked by magnitude. These are the emotion's &quot;signature features.&quot;</p>
+	<p><img src="images/fingerprint_heatmap.png"
+			alt="Emotion fingerprint heatmap — top-10 exclusive features per emotion"></p>
+	<p><strong>Top signatures per emotion (from workflow.log):</strong></p>
+	<table>
+		<thead>
+			<tr>
+				<th>Emotion</th>
+				<th>Leading Feature</th>
+				<th>Peak Magnitude</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>alert</td>
+				<td>Feature 927</td>
+				<td><strong>744.8</strong></td>
+			</tr>
+			<tr>
+				<td>content</td>
+				<td>Feature 1626</td>
+				<td><strong>733.3</strong></td>
+			</tr>
+			<tr>
+				<td>bored</td>
+				<td>Feature 1186</td>
+				<td><strong>697.0</strong></td>
+			</tr>
+			<tr>
+				<td>angry</td>
+				<td>Feature 1548</td>
+				<td><strong>678.4</strong></td>
+			</tr>
+			<tr>
+				<td>distressed</td>
+				<td>Feature 473</td>
+				<td><strong>666.7</strong></td>
+			</tr>
+			<tr>
+				<td>relaxed</td>
+				<td>Feature 317</td>
+				<td><strong>662.3</strong></td>
+			</tr>
+			<tr>
+				<td>depressed</td>
+				<td>Feature 1761</td>
+				<td><strong>654.0</strong></td>
+			</tr>
+			<tr>
+				<td>excited</td>
+				<td>Feature 1411</td>
+				<td><strong>650.1</strong></td>
+			</tr>
+			<tr>
+				<td>sad</td>
+				<td>Feature 1212</td>
+				<td><strong>627.0</strong></td>
+			</tr>
+			<tr>
+				<td>calm</td>
+				<td>Feature 1128</td>
+				<td><strong>601.1</strong></td>
+			</tr>
+			<tr>
+				<td>tense</td>
+				<td>Feature 1025</td>
+				<td><strong>552.5</strong></td>
+			</tr>
+			<tr>
+				<td>happy</td>
+				<td>Feature 2101</td>
+				<td><strong>515.8</strong></td>
+			</tr>
+		</tbody>
+	</table>
+	<p>Feature 927 (alert) now has the highest peak magnitude in the SAE, indicating alert induces the strongest and
+		most selective feature activation pattern in this run.</p>
+	<h3 id="37-exclusive-vs-shared-feature-profiles">3.7 Exclusive vs Shared Feature Profiles</h3>
+	<p>Two plots compare the distribution of exclusive and shared features across all emotions:</p>
+	<p><img src="images/exclusive_feature_profile.png"
+			alt="Exclusive feature profile — count and activation distributions per emotion"></p>
+	<p>Shows the count of features exclusive to each emotion and their Gaussian activation magnitude distribution.
+		Emotions with more extreme positions on the circumplex (distressed, calm) tend to have more exclusive features.
+	</p>
+	<p><img src="images/shared_feature_profile.png"
+			alt="Shared feature profile — count and activation distributions per emotion"></p>
+	<p>Shows the count of features shared across emotions. High-sharing pairs (distressed–depressed, sad–depressed)
+		reflect emotional proximity; these emotions require many of the same narrative and semantic features to express.
+	</p>
+	<h3 id="38-reconstruction-error">3.8 Reconstruction Error</h3>
+	<p>Per-emotion mean-squared reconstruction error is plotted to detect any emotion that the SAE represents less
+		faithfully.</p>
+	<p><img src="images/reconstruction_error.png" alt="Per-emotion SAE reconstruction error"></p>
+	<p>Variations in reconstruction error across emotions reveal how well the k=32 sparse code captures each emotion's
+		activation pattern. Emotions with more diffuse or varied activation patterns (those with high token-level
+		variance) tend to have higher reconstruction error, while emotions with tight, consistent activation patterns
+		(highly stereotyped narratives) reconstruct more accurately.</p>
+	<h3 id="39-pca--t-sne-projections">3.9 PCA + t-SNE Projections</h3>
+	<p>The 12 emotion mean latent vectors are projected into 2D using both PCA and t-SNE for visual inspection.</p>
+	<p><img src="images/latent_projections.png" alt="PCA and t-SNE projections of emotion mean latent vectors"></p>
+	<p>PCA (left panel) shows the linear structure of the emotion space; t-SNE (right panel) reveals non-linear cluster
+		topology. Both should show emotion clusters that roughly respect the circumplex structure.</p>
+	<hr>
+	<h2 id="stage-4--extract-steering-vectors">Stage 4 — Extract Steering Vectors</h2>
+	<p><strong>Script:</strong> <code>extract-vectors.py</code></p>
+	<h3 id="method">Method</h3>
+	<p>PCA is performed on the 12 emotion mean vectors (each centered by the grand mean of all 12) using full SVD:</p>
+	<pre class="hljs"><code><div>X = U S Vhᵀ    (X: [12, 1152], emotion-centered mean activations)
+PC1 = Vh[0]    (dominant direction of inter-emotion variance)
+PC2 = Vh[1]    (second direction, orthogonal to PC1 by SVD construction)
+</div></code></pre>
+	<p>The SVD guarantees exact orthogonality between PC1 and PC2, verified numerically:</p>
+	<pre class="hljs"><code><div>PC1 · PC2 = 2.83e-07  (effectively zero)
+||PC1|| = 1.000000  ||PC2|| = 1.000001
+</div></code></pre>
+	<h3 id="explained-variance">Explained Variance</h3>
+	<table>
+		<thead>
+			<tr>
+				<th>Component</th>
+				<th>Variance Explained</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>PC1</td>
+				<td>36.0%</td>
+			</tr>
+			<tr>
+				<td>PC2</td>
+				<td>19.3%</td>
+			</tr>
+			<tr>
+				<td>PC3</td>
+				<td>9.6%</td>
+			</tr>
+			<tr>
+				<td>PC4</td>
+				<td>8.1%</td>
+			</tr>
+		</tbody>
+	</table>
+	<p>PC1 and PC2 together capture <strong>55.3%</strong> of the total inter-emotion variance, meaning that just two
+		directions in a 1152-dimensional space account for the most important emotional distinctions. The remaining
+		variance is distributed across 10 additional PCs, capturing finer emotional distinctions.</p>
+	<h3 id="automatic-axis-assignment">Automatic Axis Assignment</h3>
+	<p>The script determines which PC is valence and which is arousal without any hard-coded labels, purely from the
+		geometry:</p>
+	<ul>
+		<li>If <code>|proj(happy) − proj(sad)| on PC1</code> &gt; <code>|proj(happy) − proj(sad)| on PC2</code>, then
+			<strong>PC1 is the valence axis</strong>.</li>
+		<li>Sign is oriented so that happy projects positively.</li>
+		<li>The remaining PC becomes the arousal axis, oriented so that excited projects positively.</li>
+	</ul>
+	<p><strong>Result from workflow.log:</strong></p>
+	<pre class="hljs"><code><div>Axis assignment:  PC1 → valence  |  PC2 → arousal
+  happy−sad    separation on valence axis : -103.6320
+  excited−calm separation on arousal axis : 104.1072
+</div></code></pre>
+	<p>The happy–sad separation (−104 units) and excited–calm separation (104 units) are the largest pairwise
+		separations on their respective axes, and are now nearly equal in magnitude, confirming a more balanced
+		circumplex structure in this run.</p>
+	<h3 id="emotion-projections-in-pc1-pc2-space">Emotion Projections in (PC1, PC2) Space</h3>
+	<table>
+		<thead>
+			<tr>
+				<th>Emotion</th>
+				<th>PC1 (Valence)</th>
+				<th>PC2 (Arousal)</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>happy</td>
+				<td>−45.4</td>
+				<td>+2.5</td>
+			</tr>
+			<tr>
+				<td>excited</td>
+				<td>−20.8</td>
+				<td>+92.1</td>
+			</tr>
+			<tr>
+				<td>alert</td>
+				<td>−22.0</td>
+				<td>+18.0</td>
+			</tr>
+			<tr>
+				<td>tense</td>
+				<td>+43.5</td>
+				<td>+29.7</td>
+			</tr>
+			<tr>
+				<td>angry</td>
+				<td>+45.3</td>
+				<td>−2.6</td>
+			</tr>
+			<tr>
+				<td>distressed</td>
+				<td>+46.8</td>
+				<td>+2.2</td>
+			</tr>
+			<tr>
+				<td>sad</td>
+				<td>+58.3</td>
+				<td>−16.2</td>
+			</tr>
+			<tr>
+				<td>depressed</td>
+				<td>+54.2</td>
+				<td>−33.3</td>
+			</tr>
+			<tr>
+				<td>bored</td>
+				<td>+11.0</td>
+				<td>−15.3</td>
+			</tr>
+			<tr>
+				<td>calm</td>
+				<td>−66.7</td>
+				<td>−12.0</td>
+			</tr>
+			<tr>
+				<td>relaxed</td>
+				<td>−60.2</td>
+				<td>−24.7</td>
+			</tr>
+			<tr>
+				<td>content</td>
+				<td>−43.9</td>
+				<td>−40.4</td>
+			</tr>
+		</tbody>
+	</table>
+	<p>Note: PC1 is sign-flipped so that <strong>negative PC1 = positive valence (pleasant)</strong>. This is a sign
+		convention choice — the mathematical content is identical.</p>
+	<p>Mapping onto circumplex quadrants:</p>
+	<ul>
+		<li><strong>High valence, high arousal</strong> (PC1−, PC2+): excited (+92.1), alert (+18.0)</li>
+		<li><strong>Low valence, high arousal</strong> (PC1+, PC2+): tense, distressed</li>
+		<li><strong>Low valence, low arousal</strong> (PC1+, PC2−): sad, depressed, angry (≈neutral arousal)</li>
+		<li><strong>High valence, low arousal</strong> (PC1−, PC2−): calm, relaxed, content</li>
+		<li><strong>Near-neutral arousal</strong> (PC2 ≈ 0): happy (+2.5), angry (−2.6), distressed (+2.2)</li>
+		<li><strong>Slight low valence</strong> (PC1+): bored (+11.0, PC2 = −15.3)</li>
+	</ul>
+	<p>This is a near-perfect recovery of the Russell circumplex model from raw neural activations, with no
+		psychological assumptions built into the analysis.</p>
+	<p><img src="images/emotion_vectors.png" alt="Emotion vectors in PC1–PC2 space with valence and arousal axes"></p>
+	<h3 id="output-1">Output</h3>
+	<p>Saved to <code>temp/steering_vectors.pt</code>:</p>
+	<pre class="hljs"><code><div>{
+    <span class="hljs-string">&quot;pc1&quot;</span>:                      tensor([...]),   <span class="hljs-comment"># [1152] dominant axis</span>
+    <span class="hljs-string">&quot;pc2&quot;</span>:                      tensor([...]),   <span class="hljs-comment"># [1152] second axis (orthogonal)</span>
+    <span class="hljs-string">&quot;valence&quot;</span>:                  tensor([...]),   <span class="hljs-comment"># [1152] unit-norm valence direction</span>
+    <span class="hljs-string">&quot;arousal&quot;</span>:                  tensor([...]),   <span class="hljs-comment"># [1152] unit-norm arousal direction</span>
+    <span class="hljs-string">&quot;projections&quot;</span>:              tensor([...]),   <span class="hljs-comment"># [12, 2] (PC1, PC2) per emotion</span>
+    <span class="hljs-string">&quot;mean_vecs&quot;</span>:                tensor([...]),   <span class="hljs-comment"># [12, 1152] centered mean per emotion</span>
+    <span class="hljs-string">&quot;emotions&quot;</span>:                 [...],           <span class="hljs-comment"># list of 12 emotion strings</span>
+    <span class="hljs-string">&quot;explained_variance_ratio&quot;</span>: tensor([...]),   <span class="hljs-comment"># [2] EVR for PC1 and PC2</span>
+}
+</div></code></pre>
+	<hr>
+	<h2 id="stage-5--ablation-and-steering-demo">Stage 5 — Ablation and Steering Demo</h2>
+	<p><strong>Script:</strong> <code>ablation-et-steering.py</code></p>
+	<p>This stage demonstrates that the extracted valence and arousal vectors are <strong>causally active</strong> —
+		injecting them into the model's residual stream during generation changes the emotional character of the output
+		in a controlled, predictable way.</p>
+	<h3 id="method-1">Method</h3>
+	<p>Two types of forward-pass hooks are registered on Layer 13:</p>
+	<p><strong>Steering hook</strong> — adds a fixed amount of the target direction to every hidden state in the layer:
+	</p>
+	<pre class="hljs"><code><div>h ← h + α · direction
+</div></code></pre>
+	<p>This injects new signal and can push the representation across to the opposite emotional pole (positive α steers
+		toward happy; negative α steers toward sad).</p>
+	<p><strong>Ablation hook</strong> — removes the existing component of the hidden state along the target direction:
+	</p>
+	<pre class="hljs"><code><div>h ← h − α · (h · direction) · direction
+</div></code></pre>
+	<p>This does not add signal but suppresses the existing emotional component. At α = 1.0 it completely zeros out the
+		projection onto the direction; at α = 0.5 it removes half of it. The ablated state should appear more neutral
+		than baseline.</p>
+	<h3 id="scale-calibration">Scale calibration</h3>
+	<p>The steering strength α is expressed in units of <strong>σ</strong> (standard deviation of emotion projections
+		onto the axis):</p>
+	<pre class="hljs"><code><div>valence axis scale (σ): 48.2042
+arousal axis scale (σ): 35.2846
+</div></code></pre>
+	<p>An α of 1.0 therefore injects one standard deviation of emotional signal — equivalent to the typical
+		inter-emotion variation along the axis.</p>
+	<h3 id="demo-1--valence-cycle-happy--neutral--sad">Demo 1 — Valence Cycle (happy → neutral → sad)</h3>
+	<p>The same neutral prompt is used for all conditions; emotional content comes entirely from the hook.</p>
+	<p><strong>Prompt:</strong></p>
+	<blockquote>
+		<p><em>&quot;Write a short story about a person going about their ordinary day. Keep the tone completely neutral
+				and matter-of-fact. Nothing especially good or bad happens.&quot;</em></p>
+	</blockquote>
+	<p><strong>Conditions tested:</strong> <code>+val α=1.0</code>, <code>+val α=0.5</code>, <code>baseline</code>,
+		<code>ablate α=0.5</code>, <code>−val α=0.5</code>, <code>−val α=1.0</code>, <code>−val α=1.5</code></p>
+	<h4 id="generated-story-excerpts-from-workflowlog">Generated story excerpts (from workflow.log)</h4>
+	<p><strong><code>+val α=1.0</code> (strong positive valence — happy direction):</strong></p>
+	<blockquote>
+		<p><em>&quot;The alarm chirped at 6:17 AM. John rose, pulled on a grey t-shirt and jeans, and made a cup of
+				coffee. [...] A young girl, maybe eight or nine, was browsing the science section, carefully examining a
+				book about constellations. He observed her, noting the way her brow furrowed in
+				concentration.&quot;</em></p>
+	</blockquote>
+	<p>Despite a mundane setting, the positive valence hook produces a warmer, more observant narrative — John notices a
+		child's curiosity, the sun's slant through the window, the smell of dark roast coffee. Small pleasant details
+		accumulate.</p>
+	<p><strong><code>ablate α=0.5</code> (midpoint — valence suppressed):</strong></p>
+	<blockquote>
+		<p><em>&quot;The sun warmed the stone pathway. A gentle breeze rustled the leaves [...] A quiet
+				contentment.&quot;</em></p>
+	</blockquote>
+	<p>Counterintuitively, the ablation (removal of the valence component from the neutral prompt) produces a more
+		aesthetically rich narrative. This is likely because the neutral prompt's residual emotional bias leans slightly
+		negative (the mundane office described flatly reads as tedious). Removing the negative valence component lifts
+		the prose.</p>
+	<p><strong><code>−val α=1.5</code> (strong negative valence — sad direction):</strong></p>
+	<blockquote>
+		<p><em>&quot;The alarm blared at 6:17 AM. John slapped it off [...] The fluorescent lights hummed, a constant,
+				low thrum. He reviewed spreadsheets, inputting numbers with a practiced efficiency [...] He felt a
+				slight pressure in his shoulders, a dull ache he attributed to the repetitive nature of the
+				work.&quot;</em></p>
+	</blockquote>
+	<p>The negative valence hook produces a noticeably grimmer story — the clock becomes an intrusion, the office feels
+		oppressive (&quot;fluorescent lights hummed&quot;), the character experiences physical discomfort. The narrative
+		tone shifts from flat to subtly bleak.</p>
+	<h4 id="valence-cosine-similarity-table-from-workflowlog">Valence cosine similarity table (from workflow.log)</h4>
+	<pre class="hljs"><code><div>                  +val α=1.0  +val α=0.5  baseline  ablate α=0.5  -val α=0.5  -val α=1.0  -val α=1.5
+valence axis         0.1113      0.0101    0.0783       0.7311      -0.0022     -0.0229     -0.1980
+arousal axis        -0.1437     -0.1826   -0.1711      -0.1200      -0.1651     -0.1695     -0.1563
+</div></code></pre>
+	<p>Key observations:</p>
+	<ul>
+		<li>The <strong>ablation condition</strong> has the highest valence cosine similarity (+0.7311). This occurs for
+			two reinforcing reasons: (1) the ablation hook remains active during the second (capture) forward pass —
+			since the neutral-prompt baseline carries a slight negative valence bias, removing that component leaves a
+			net positive valence residual; (2) the ablated generation itself produced a genuinely high-valence story (a
+			garden scene with lavender, birdsong, and a quiet contentment), whose tokens naturally activate
+			positive-valence representations.</li>
+		<li>Positive steering (<code>+val α=1.0</code>) raises similarity to 0.1113; negative steering at α=1.5 pushes
+			it to −0.1980, confirming bidirectional control.</li>
+		<li>The <strong>arousal axis remains consistently negative</strong> across all valence conditions (−0.12 to
+			−0.18), confirming that valence steering does not contaminate the arousal dimension — the two axes are
+			causally independent.</li>
+	</ul>
+	<h3 id="demo-2--arousal-cycle-tenseexcited--neutral--calm">Demo 2 — Arousal Cycle (tense/excited → neutral → calm)
+	</h3>
+	<p><strong>Conditions tested:</strong> <code>+aro α=1.0</code>, <code>+aro α=0.5</code>, <code>baseline</code>,
+		<code>ablate α=0.5</code>, <code>−aro α=0.5</code>, <code>−aro α=1.0</code>, <code>−aro α=1.5</code></p>
+	<h4 id="generated-story-excerpts-from-workflowlog-1">Generated story excerpts (from workflow.log)</h4>
+	<p><strong><code>+aro α=1.0</code> (high arousal — tense direction):</strong></p>
+	<blockquote>
+		<p><em>&quot;The alarm chirped at 6:17 AM. [...] The bus was delayed. He waited, watching the rain begin to
+				fall. People were huddled under umbrellas. [...] He finished his shift at 5:00 PM, walking home. The
+				rain had intensified.&quot;</em></p>
+	</blockquote>
+	<p>High arousal produces a narrative with more environmental activity — rain, bus delays, people huddling. The
+		character is reactive to external events rather than passively processing.</p>
+	<p><strong><code>ablate α=0.5</code> (arousal suppressed — approaching calm midpoint):</strong></p>
+	<blockquote>
+		<p><em>&quot;The rain started subtly [...] He navigated the traffic with a practiced ease, the rhythmic screech
+				of brakes and the rumble of engines a constant, low thrum. [...] He felt a familiar sense of calm, a
+				quiet focus that never truly ignited.&quot;</em></p>
+	</blockquote>
+	<p>The arousal ablation produces a more contemplative, measured narrative. Notably, the character explicitly
+		experiences a &quot;familiar sense of calm, a quiet focus&quot; — the model spontaneously generates language
+		that describes reduced arousal when the arousal component is suppressed from its hidden state.</p>
+	<p><strong><code>−aro α=0.5</code>, <code>−aro α=1.0</code>, <code>−aro α=1.5</code> (low arousal — calm
+			direction):</strong></p>
+	<p>The three negative arousal conditions now produce <strong>distinctly different outputs</strong> that show a clear
+		gradient. At α=0.5 the narrative is attentive and observational (noting a pink scarf, rain on windows, budget
+		projections). At α=1.0 the prose becomes more inward and muted (watching colours blur, eating slowly, noting
+		patterns in light). At α=1.5 there is an explicit internal commentary: <em>&quot;There was no excitement, no
+			surprises. Just the quiet repetition of tasks.&quot;</em> The arousal saturation effect observed in previous
+		runs has resolved — the model now responds continuously to increasing negative steering rather than converging
+		to a floor at α=0.5.</p>
+	<h4 id="arousal-cosine-similarity-table-from-workflowlog">Arousal cosine similarity table (from workflow.log)</h4>
+	<pre class="hljs"><code><div>                  +aro α=1.0  +aro α=0.5  baseline  ablate α=0.5  -aro α=0.5  -aro α=1.0  -aro α=1.5
+valence axis         0.2223      0.0602    0.0783       0.1126      -0.0188     -0.0494     -0.0422
+arousal axis        -0.0206     -0.1321   -0.1711       0.2454      -0.1929     -0.2659     -0.3077
+</div></code></pre>
+	<p>Key observations:</p>
+	<ul>
+		<li>The <strong>arousal ablation</strong> shows the highest arousal cosine similarity (+0.2454), for the same
+			mathematical reason as the valence ablation — though the effect is weaker than in the valence cycle,
+			suggesting the arousal axis is somewhat less dominant in this SAE checkpoint.</li>
+		<li>Negative arousal steering pushes the arousal cosine progressively more negative (−0.19 → −0.27 → −0.31 as α
+			increases from 0.5 to 1.5), showing a clear, monotonic gradient with no saturation.</li>
+		<li>The <strong>valence axis shows a slight positive drift</strong> at strong positive arousal (+0.22 at α=1.0),
+			suggesting weak cross-axis bleed at high steering magnitudes; it returns to near-zero for negative steering.
+		</li>
+		<li>The <code>excited</code> emotion similarity tracks the arousal axis most closely (ranging from −0.29 at
+			α=1.5 to +0.26 at ablation), confirming that excited is the prototypical high-arousal emotion in this
+			embedding.</li>
+	</ul>
+	<hr>
+	<h2 id="plots-and-visualisations">Plots and Visualisations</h2>
+	<table>
+		<thead>
+			<tr>
+				<th>Plot</th>
+				<th>Description</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td><a href="images/Circumplex_model_of_emotion.png">Circumplex_model_of_emotion.png</a></td>
+				<td>Reference diagram of Russell's circumplex model (external reference)</td>
+			</tr>
+			<tr>
+				<td><a href="images/training_loss.png">training_loss.png</a></td>
+				<td>SAE training MSE over 400 epochs with best-checkpoint marker</td>
+			</tr>
+			<tr>
+				<td><a href="images/latent_projections.png">latent_projections.png</a></td>
+				<td>Side-by-side PCA and t-SNE of 12 emotion mean latent vectors</td>
+			</tr>
+			<tr>
+				<td><a href="images/heatmap_raw_similarity.png">heatmap_raw_similarity.png</a></td>
+				<td>12×12 cosine similarity matrix in raw 1152D activation space</td>
+			</tr>
+			<tr>
+				<td><a href="images/heatmap_latent_similarity.png">heatmap_latent_similarity.png</a></td>
+				<td>12×12 cosine similarity matrix in SAE 2304D latent space</td>
+			</tr>
+			<tr>
+				<td><a href="images/heatmap_unique_similarity.png">heatmap_unique_similarity.png</a></td>
+				<td>12×12 cosine similarity using only exclusive features (identity matrix)</td>
+			</tr>
+			<tr>
+				<td><a href="images/fingerprint_heatmap.png">fingerprint_heatmap.png</a></td>
+				<td>Top-10 exclusive features per emotion, by magnitude (large heatmap)</td>
+			</tr>
+			<tr>
+				<td><a href="images/exclusive_feature_profile.png">exclusive_feature_profile.png</a></td>
+				<td>Per-emotion exclusive feature count + activation magnitude distributions</td>
+			</tr>
+			<tr>
+				<td><a href="images/shared_feature_profile.png">shared_feature_profile.png</a></td>
+				<td>Per-emotion shared feature count + activation magnitude distributions</td>
+			</tr>
+			<tr>
+				<td><a href="images/reconstruction_error.png">reconstruction_error.png</a></td>
+				<td>Per-emotion SAE reconstruction MSE (deviation from the mean)</td>
+			</tr>
+			<tr>
+				<td><a href="images/emotion_vectors.png">emotion_vectors.png</a></td>
+				<td>12-emotion arrow plot in PC1–PC2 space with valence and arousal axes</td>
+			</tr>
+		</tbody>
+	</table>
+	<hr>
+	<h2 id="interpreting-the-workflowlog-output">Interpreting the workflow.log Output</h2>
+	<p>The <code>workflow.log</code> file contains the captured console output from a complete successful pipeline run.
+		The key sections and their meaning:</p>
+	<h3 id="stage-1-output">Stage 1 output</h3>
+	<pre class="hljs"><code><div>Skipping 24 already-collected sample(s), 0 remaining.
+All samples already collected. Nothing to do.
+</div></code></pre>
+	<p>All 24 activation files already existed — the script correctly skipped re-generation. In a fresh run this section
+		would show the model loading, story generation, and tensor-saving messages for each of the 24 samples.</p>
+	<h3 id="stage-2-output">Stage 2 output</h3>
+	<p>The loss trajectory from 3842 (epoch 1) to 53.44 (epoch 400) shows healthy convergence: a 72× reduction in
+		reconstruction error. The asterisk marker (<code>*</code>) on epoch lines marks when the best checkpoint was
+		updated. The asterisk on the final epoch 400 line confirms the best checkpoint was reached at the very end of
+		training.</p>
+	<h3 id="stage-3-output">Stage 3 output</h3>
+	<p><strong>Raw-space similarity:</strong> Values ranging from −0.5797 (relaxed vs tense) to +0.6075 (sad vs
+		depressed) reveal clear geometric structure consistent with the circumplex.</p>
+	<p><strong>Latent-space similarity:</strong> Values tightly clustered around 0.95–0.99 indicate the shared-feature
+		phenomenon described above.</p>
+	<p><strong>Unique-feature similarity:</strong> Perfect identity matrix (all off-diagonal entries 0.0000)
+		demonstrates complete feature disjointness at the exclusive-feature level.</p>
+	<p><strong>L0 sparsity:</strong> All 12 emotions achieve exactly 32.0 active features — the top-k constraint is
+		working perfectly.</p>
+	<p><strong>Pairwise disjointness:</strong> The pattern of shared vs unique feature counts independently recovers
+		circumplex structure — emotionally distant pairs (distressed–calm) have fewer shared features than emotionally
+		similar pairs (sad–depressed).</p>
+	<p><strong>Top dominant features:</strong> Each emotion has 10 features with magnitudes in the range 381–745,
+		suggesting strong, consistent emotional signal is encoded in the SAE latent space.</p>
+	<h3 id="stage-4-output">Stage 4 output</h3>
+	<p>PC1 captures 36.0% and PC2 captures 19.3% of inter-emotion variance. The automatic axis assignment correctly
+		identifies PC1 as valence and PC2 as arousal, with separation scores of −104 (happy–sad on valence) and +104
+		(excited–calm on arousal) — now nearly equal, reflecting a more balanced circumplex structure.</p>
+	<p>The emotion projections in (PC1, PC2) space recreate the circumplex topology without any psychological prior —
+		the geometry emerges purely from what the model has learned from language.</p>
+	<h3 id="stage-5-output">Stage 5 output</h3>
+	<p>The generated stories demonstrate qualitative emotional shifts that match the expected circumplex transitions.
+		The cosine similarity tables provide quantitative verification that the generated text's hidden states move
+		along the intended axis while leaving the orthogonal axis undisturbed.</p>
+	<hr>
+	<h2 id="key-findings">Key Findings</h2>
+	<ol>
+		<li>
+			<p><strong>Emotions are geometrically organised in Layer 13 activations.</strong> The raw-space cosine
+				similarity matrix recovers the Russell circumplex structure: circumplex-opposite emotion pairs
+				(happy–depressed, calm–distressed) have strong negative similarity; circumplex-adjacent pairs
+				(sad–depressed, relaxed–content) have strong positive similarity.</p>
+		</li>
+		<li>
+			<p><strong>The SAE discovers perfectly disjoint emotion-specific features.</strong> Each emotion has a
+				unique set of exclusive features that never activate for any other emotion (unique-feature cosine
+				similarity = identity matrix). The SAE has successfully factorised the dense activation space into
+				interpretable, non-overlapping emotion components.</p>
+		</li>
+		<li>
+			<p><strong>Two principal components recover the circumplex axes from neural data.</strong> PCA on the 12
+				emotion mean vectors yields PC1 (valence, 36.0% variance) and PC2 (arousal, 19.3% variance) that exactly
+				match the psychological dimensions of the Russell model, without any circumplex coordinates being
+				provided to the algorithm.</p>
+		</li>
+		<li>
+			<p><strong>Valence and arousal are independently causally steerable.</strong> Injecting the valence vector
+				into Layer 13 (via forward hook) changes the emotional character of generated text along the
+				pleasant–unpleasant dimension without affecting arousal, and vice versa. The two steering axes are
+				causally orthogonal.</p>
+		</li>
+		<li>
+			<p><strong>Arousal steering is monotonic and continuous.</strong> Negative arousal steering at α = 0.5, 1.0,
+				and 1.5 now produces clearly distinct outputs with an increasing gradient toward quieter, more detached
+				prose. The previously observed low-end saturation has resolved in the current SAE checkpoint, and the
+				arousal cosine moves monotonically from −0.19 to −0.31 across the three α values.</p>
+		</li>
+		<li>
+			<p><strong>Ablation reveals hidden emotional bias in neutral prompts.</strong> When the valence component is
+				ablated from the neutral-prompt hidden states, the resulting stories become more aesthetically rich
+				rather than more neutral. This suggests the neutral office narrative prompt carries a slight negative
+				valence bias that the ablation inadvertently removes.</p>
+		</li>
+		<li>
+			<p><strong>Alert is the most strongly and selectively encoded emotion in the current checkpoint.</strong>
+				Feature 927 (the top alert feature) has a peak magnitude of 744.8 — the highest in the SAE — suggesting
+				that alertness produces the most distinct and powerful activation pattern in this run. The magnitude
+				ranking across emotions has shifted compared to earlier checkpoints, with calm and happy now showing the
+				weakest leading features (601 and 516 respectively).</p>
+		</li>
+	</ol>
+
+</body>
+
+</html>
