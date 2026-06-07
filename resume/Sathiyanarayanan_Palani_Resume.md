@@ -1,5 +1,5 @@
 # SATHIYANARAYANAN PALANI
-**Senior Software Engineer | Applied AI & Civic Technology**
+**Senior Software Engineer (Transitioning to AI Safety) | Interpretability & Civic Technology**
 
 [sathiyanarayanan396@gmail.com](mailto:sathiyanarayanan396@gmail.com) | +91-8072500974 |
 [Github](https://github.com/Palani-SN) | [LinkedIn](https://www.linkedin.com/in/sathiyanarayanan-palani-19b621117/) | [Portfolio](https://palani-sn.github.io/) | [Kaggle](https://www.kaggle.com/code/sathiyanarayanan396)
