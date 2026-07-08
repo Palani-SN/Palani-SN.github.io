@@ -33,6 +33,18 @@ Software Engineer with 8+ years building production systems and 2+ years develop
 
 ---
 
+### Abliteration & Constitutional Classifiers++ | Jun 2026 - Jul 2026
+
+[Article : Refusal-Direction Abliteration & Constitutional-Classifiers++ Pipeline](https://palani-sn.github.io/LLM2/README.html) | [Repo](https://github.com/Palani-SN/abliteration-et-constitutional-classifier)
+
+- Located and extracted refusal direction from Falcon3-1B-Instruct via runtime activation ablation (no weight modification)
+- Implemented Anthropic's Constitutional Classifiers++ two-stage architecture: FastGate (activation probe) + ExchangeClassifier
+- 36-coordinate Cohen's-d signature matches 38,912-coordinate baseline at identical 99.5% OOD accuracy (0.08% of information)
+- Classifier restores 99/100 harmful prompt blocking at 60% lower latency than original model's refusals
+- **Tech:** PyTorch, Transformers, Falcon3-1B, Ollama/gemma4, Plotly
+
+---
+
 ### LLM-Emotions - Interpretability Research | Mar 2026 – May 2026
 
 [Article : LLM Emotions — Sparse Autoencoder Analysis of Emotion Representations in Gemma 3 1B IT](https://palani-sn.github.io/LLM1/README.html) | [Repo](https://github.com/Palani-SN/LLM-Emotions)
