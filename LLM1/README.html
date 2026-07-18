@@ -392,6 +392,7 @@
 		<li><a href="#plots-and-visualisations">Plots and Visualisations</a></li>
 		<li><a href="#interpreting-the-workflowlog-output">Interpreting the workflow.log Output</a></li>
 		<li><a href="#key-findings">Key Findings</a></li>
+		<li><a href="#related-work">Related Work</a></li>
 	</ol>
 	<hr>
 	<h2 id="background">Background</h2>
@@ -1433,6 +1434,28 @@ All samples already collected. Nothing to do.
 				weakest leading features (601 and 516 respectively).</p>
 		</li>
 	</ol>
+	<h2 id="related-work">Related Work</h2>
+	<p>This project is methodologically related to Anthropic's interpretability research on emotion
+		representations in LLMs:</p>
+	<blockquote>
+		<p>Sofroniew, N., Kauvar, I., Saunders, W., Chen, B., et al. <strong>&quot;Emotion Concepts and their Function
+				in a Large Language Model.&quot;</strong> <em>Transformer Circuits Thread</em>, Anthropic, April 2026.
+			https://transformer-circuits.pub/2026/emotions/index.html</p>
+	</blockquote>
+	<p>Anthropic's paper studies Claude Sonnet 4.5 and finds internal representations of emotion concepts
+		that track the operative emotion at a given token position and causally influence model behavior —
+		including alignment-relevant behaviors such as reward hacking, blackmail, and sycophancy. Their
+		emotion vectors are extracted via contrastive activation differences between emotionally-conditioned
+		and neutral text, and validated using logit-lens projections onto the unembedding matrix.</p>
+	<p>This project takes a different but related approach: emotion representations are extracted via a
+		<strong>Sparse Autoencoder</strong> trained on Gemma 3 1B IT's mid-layer activations, rather than contrastive
+		mean-difference vectors, and the resulting feature space is mapped onto Russell's (1980) valence/
+		arousal circumplex via PCA rather than validated through logit-lens token predictions. Both projects
+		independently demonstrate that emotion directions in an LLM's residual stream are <strong>causally
+			steerable</strong> via activation injection — Anthropic on a frontier proprietary model (Claude Sonnet 4.5),
+		this project on a small open-weight model (Gemma 3 1B), using an SAE-based decomposition rather than
+		raw contrastive vectors.
+	</p>
 
 </body>
 
