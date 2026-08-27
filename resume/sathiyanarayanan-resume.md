@@ -8,7 +8,7 @@
 
 ## Professional Summary
 
-Software Engineer with 8+ years building production systems and 2+ years developing LLM-powered applications for civic impact.
+Software Engineer with 9+ years building production systems and 2+ years developing LLM-powered applications for civic impact.
 
 - Built FNMA, a full-stack fact-checking platform (React, Python, Flutter, LLM APIs) designed to combat misinformation—WEF's #1 global risk—through adaptive behavioral systems
 - Published 6 PyPI packages with 86k+ downloads, demonstrating commitment to public goods and developer enablement
@@ -29,19 +29,22 @@ Software Engineer with 8+ years building production systems and 2+ years develop
 - Designed Adaptive Targeted Diffusion Control system—self-regulating behavioral engine reducing spam without manual moderation
 - Implemented comprehensive data analytics with 7+ visualization types (heatmaps, trend analysis, geo-spatial mapping)
 - Platform designed for reproducible deployment across regions to improve collective civic reasoning
-- **Tech:** React, Python (FastAPI), ELK Stack, Claude/Gemini API, Flutter
+
+**Tech:** React, Python (FastAPI), ELK Stack, Claude/Gemini API, Flutter
 
 ---
 
-### Abliteration & Constitutional Classifiers++ | Jun 2026 - Jul 2026
+### Abliteration & Constitutional Classifiers++ | Jun 2026 – Aug 2026
 
 [Article : Refusal-Direction Abliteration & Constitutional-Classifiers++ Pipeline](https://palani-sn.github.io/LLM2/README.html) | [Repo](https://github.com/Palani-SN/abliteration-et-constitutional-classifier)
 
 - Located and extracted refusal direction from Falcon3-1B-Instruct via runtime activation ablation (no weight modification)
 - Implemented Anthropic's Constitutional Classifiers++ two-stage architecture: FastGate (activation probe) + ExchangeClassifier
-- 36-coordinate Cohen's-d signature matches 38,912-coordinate baseline at identical 99.5% OOD accuracy (0.08% of information)
-- Classifier restores 99/100 harmful prompt blocking at 60% lower latency than original model's refusals
-- **Tech:** PyTorch, Transformers, Falcon3-1B, Ollama/gemma4, Plotly
+- 36-coordinate Cohen's-d signature matches 38,912-coordinate baseline at identical 99.5% OOD accuracy (0.09% of information)
+- Cross-architecture evaluation across 21 models (0.6B–12B, 11 families, 27h GPU time)
+- Defence robustness (91–99/100) generalises far more reliably than attack success (7–100/100) across all architectures tested
+
+**Tech:** PyTorch, Transformers, 21 models, Ollama/gemma4, Plotly
 
 ---
 
@@ -53,7 +56,8 @@ Software Engineer with 8+ years building production systems and 2+ years develop
 - Trained SAE (2304 latent features, top-k=32 sparsity) achieving perfect feature disjointness (identity matrix similarity)
 - Discovered valence and arousal axes via PCA, recovering Russell's circumplex model from raw neural activations
 - Demonstrated causal steering: injecting learned vectors during inference shifted emotional tone without weight modification
-- **Tech:** PyTorch, Transformers, scikit-learn, Matplotlib
+
+**Tech:** PyTorch, Transformers, scikit-learn, Matplotlib
 
 ---
 
@@ -86,13 +90,11 @@ Articles:
 ### Infrastructure as Code & Deployment | Sep 2025 & Oct 2022
 [Repo : Code2Cloud-Terraform-Helm](https://github.com/Palani-SN/Code2Cloud-Terraform-Helm) | [Repo : ansible-LogExAnWebApp-deployment](https://github.com/Palani-SN/ansible-LogExAnWebApp-deployment)
 
-- Built end-to-end IaC pipeline: Terraform → Kubernetes → Helm charts 
-  for deploying web applications on GCP/GKE
-- Automated deployment of LogExAnWebApp using Ansible playbooks for 
-  multi-environment configuration management
-- Demonstrates production deployment patterns applicable to LLM 
-  application infrastructure
-- **Tech:** Terraform, Helm, Kubernetes, Ansible, GCP, Docker
+- Built end-to-end IaC pipeline: Terraform → Kubernetes → Helm charts for deploying web applications on GCP/GKE
+- Automated deployment of LogExAnWebApp using Ansible playbooks for multi-environment configuration management
+- Demonstrates production deployment patterns applicable to LLM application infrastructure
+
+**Tech:** Terraform, Helm, Kubernetes, Ansible, GCP, Docker
 
 ---
 
