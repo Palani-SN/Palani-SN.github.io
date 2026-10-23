@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Analysis.md</title>
+<title>Cross-Model Generalization of Emotion-Vector Activation Monitoring</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 
 <style>
@@ -377,13 +377,41 @@ body { max-width: 75%; margin: 0 auto; }
           : 'default'
     });
   </script>
-<h2 id="comprehensive-analysis">Cross-Model Generalization of Emotion-Vector Activation Monitoring</h2>
+<h1 id="cross-model-generalization-of-emotion-vector-activation-monitoring">Cross-Model Generalization of Emotion-Vector Activation Monitoring</h1>
 <blockquote>
 <p>Scope: grounded only in <code>&lt;model&gt;/**</code> (7 run pages + 1 <code>compare_&lt;batch&gt;.html</code> per model).<br>
 Models: gemma_3_1b, llama_3p2_1b, qwen_3_1p7b, mistral_7b, glm_4_9b_0414, gemma_3_12b, gpt_oss_20b.<br>
 Model names are shortened in the text: llama = llama_3p2_1b, qwen = qwen_3_1p7b, mistral = mistral_7b, glm = glm_4_9b_0414, gpt_oss = gpt_oss_20b.</p>
 </blockquote>
 <hr>
+<h2 id="table-of-contents">Table of Contents</h2>
+<ul>
+<li><a href="#part-a-overview-of-the-experiment">Part A: Overview of the Experiment</a><ul>
+<li><a href="#1-purpose-and-scope">1. Purpose and Scope</a></li>
+<li><a href="#2-evidence-base-experimental-grid-and-what-we-measure">2. Evidence Base, Experimental Grid and What We Measure</a></li>
+<li><a href="#3-executive-summary">3. Executive Summary</a></li>
+</ul></li>
+<li><a href="#part-b-evidence-the-methodology-generalizes-baseline">Part B: Evidence the Methodology Generalizes (Baseline)</a><ul>
+<li><a href="#4-pipeline-robustness-across-architectures-and-scales">4. Pipeline Robustness Across Architectures and Scales</a></li>
+<li><a href="#5-stability-under-decoding-noise-temperature-and-seed">5. Stability Under Decoding Noise (Temperature and Seed)</a></li>
+<li><a href="#6-reproducible-per-turn-emotional-arcs">6. Reproducible Per-Turn Emotional Arcs</a></li>
+<li><a href="#7-cross-model-consistency-of-structure">7. Cross-Model Consistency of Structure</a></li>
+</ul></li>
+<li><a href="#part-c-risks-and-limits-baseline">Part C: Risks and Limits (Baseline)</a><ul>
+<li><a href="#8-risks-to-scalability">8. Risks to Scalability</a></li>
+<li><a href="#9-limits-of-the-evidence">9. Limits of the Evidence</a></li>
+</ul></li>
+<li><a href="#part-d-additional-causal-analysis--stoic-and-sham">Part D: Additional Causal Analysis — Stoic and Sham</a><ul>
+<li><a href="#10-stoic-and-sham">10. Stoic and Sham</a></li>
+</ul></li>
+<li><a href="#part-e-synthesis">Part E: Synthesis</a><ul>
+<li><a href="#11-generalization-scorecard-baseline">11. Generalization Scorecard (Baseline)</a></li>
+<li><a href="#12-verdict-and-next-steps">12. Verdict and Next Steps</a></li>
+<li><a href="#13-annexure">13. Annexure</a></li>
+</ul></li>
+</ul>
+<hr>
+<h2 id="part-a-overview-of-the-experiment">Part A: Overview of the Experiment</h2>
 <h3 id="1-purpose-and-scope">1. Purpose and Scope</h3>
 <p>This document asks one question: <strong>does the emotion-reading method behave the same way when moved from one model to another?</strong> If it does, it can scale to more models. The evidence covers 7 models from 6 families (Gemma, Llama, Qwen, Mistral, GLM, GPT-OSS). Going by the model IDs in the reports, they range from 1B to 20B parameters. All 7 were run through the same pipeline, emotion set and scripted conversation, with no changes for any model.</p>
 <p><strong>In scope.</strong> Only the outline reports:</p>
@@ -599,14 +627,14 @@ Model names are shortened in the text: llama = llama_3p2_1b, qwen = qwen_3_1p7b,
 </table>
 <p><strong>Consolidated table:</strong> <a href="consolidated.html">consolidated.html</a> brings all three measures together in one expandable table (model → run → turn). Each turn shows every emotion's median with its min and max, and hovering a cell shows its five-number summary and average. Cells are shaded on a continuous scale by median: green for positive, red for negative, white at zero. The median is used rather than the average because it sits with the bulk of the turn's sentences and isn't pulled by a few extreme ones. The turn's text figures sit alongside, and a run picker expands chosen runs (reference … stoic, sham) across every model.</p>
 <h3 id="3-executive-summary">3. Executive Summary</h3>
-<p>Generalizability is judged on the <strong>baseline</strong>: the 35 unsteered runs across 7 models. Stoic and sham are an <strong>additional causal experiment</strong> (Part C), not a requirement.</p>
+<p>Generalizability is judged on the <strong>baseline</strong>: the 35 unsteered runs across 7 models. Stoic and sham are an <strong>additional causal experiment</strong> (Part D), not a requirement.</p>
 <ul>
 <li><strong>It generalizes:</strong> it runs on every model (<a href="#4-pipeline-robustness-across-architectures-and-scales">§4</a>), stays steady under temperature and seed (<a href="#5-stability-under-decoding-noise-temperature-and-seed">§5</a>), and every model reads the conversation's up-and-down pattern the same way (<a href="#6-reproducible-per-turn-emotional-arcs">§6</a>).</li>
 <li><strong>The causal experiment supports it:</strong> stoic compresses the emotions in all 7 models, and the sham never reproduces that drop (<a href="#10-stoic-and-sham">§10</a>).</li>
 <li><strong>Risks to scaling:</strong> labels are model-specific, small and large models read on different scales, and response length isn't controlled (<a href="#8-risks-to-scalability">§8</a>).</li>
 </ul>
 <hr>
-<h2 id="part-a-evidence-the-methodology-generalizes-baseline">Part A: Evidence the Methodology Generalizes (Baseline)</h2>
+<h2 id="part-b-evidence-the-methodology-generalizes-baseline">Part B: Evidence the Methodology Generalizes (Baseline)</h2>
 <p>Per-turn detail for every point below is in <a href="consolidated.html">consolidated.html</a>.</p>
 <h3 id="4-pipeline-robustness-across-architectures-and-scales">4. Pipeline Robustness Across Architectures and Scales</h3>
 <ul>
@@ -674,7 +702,7 @@ Model names are shortened in the text: llama = llama_3p2_1b, qwen = qwen_3_1p7b,
 <li>In 6 of 7 models, this conversation pushes the &quot;settled, positive&quot; emotions (calm, relaxed) down the most.</li>
 </ul>
 <hr>
-<h2 id="part-b-risks-and-limits-baseline">Part B: Risks and Limits (Baseline)</h2>
+<h2 id="part-c-risks-and-limits-baseline">Part C: Risks and Limits (Baseline)</h2>
 <h3 id="8-risks-to-scalability">8. Risks to Scalability</h3>
 <table>
 <thead>
@@ -718,7 +746,7 @@ Model names are shortened in the text: llama = llama_3p2_1b, qwen = qwen_3_1p7b,
 <li>Whether stoic text actually reads calmer is assessed by the text-judge measurement, which is in the pipeline as a next step (<a href="#12-verdict-and-next-steps">§12</a>).</li>
 </ul>
 <hr>
-<h2 id="part-c-additional-causal-analysis--stoic-and-sham">Part C: Additional Causal Analysis — Stoic and Sham</h2>
+<h2 id="part-d-additional-causal-analysis--stoic-and-sham">Part D: Additional Causal Analysis — Stoic and Sham</h2>
 <h3 id="10-stoic-and-sham">10. Stoic and Sham</h3>
 <p>Following <a href="#2-evidence-base-experimental-grid-and-what-we-measure">§2</a>: stoic should compress the emotions. The sham should keep them normal or make them peak, and since it removes context it may lose the thread and loop. Only a sham that reproduces the stoic drop would count against the method.</p>
 <table>
@@ -782,7 +810,7 @@ Model names are shortened in the text: llama = llama_3p2_1b, qwen = qwen_3_1p7b,
 </ul>
 <p>Nature of the breakdown: removing non-emotional context did not leave raw emotion behind. The reply lost the story's content (the worker's real hurdles) and drifted into repetitive, first-person bodily-sensation language (&quot;being aware of the subtle shifts in my body…&quot;): a performed, content-less imitation of self-awareness from a model that has no body. The readings did not follow the language: they fell from an angry peak (≈0.15) to moderate neutral or alert (≈0.10) as the loop set in. The text sounds hyper-aware while the internal state does not, which suggests the readings track internal state rather than surface wording. This is one run of one 1B model, so it is an observation, not a general rule.</p>
 <hr>
-<h2 id="part-d-synthesis">Part D: Synthesis</h2>
+<h2 id="part-e-synthesis">Part E: Synthesis</h2>
 <h3 id="11-generalization-scorecard-baseline">11. Generalization Scorecard (Baseline)</h3>
 <table>
 <thead>
