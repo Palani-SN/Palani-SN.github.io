@@ -1,0 +1,666 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>qwen_3_1p7b · chat_telemetry_20261020044827_0p5_s75</title>
+<style>
+:root {
+  color-scheme: light;
+  --page: #f9f9f7; --surface: #fcfcfb; --ink: #0b0b0b; --ink-2: #52514e; --muted: #898781;
+  --grid: #e1e0d9; --axis: #c3c2b7; --ring: rgba(11,11,11,0.10); --prompt-rule: #cfcdc4;
+  --accent: #2a78d6; --user-bubble: #e8f0fb; --model-bubble: #f3f2ee; --active-wash: #fff6d6;
+  --fam-0: #52514e; --fam-1: #2a78d6; --fam-2: #eb6834; --fam-3: #1baf7a; --fam-4: #eda100; --fam-5: #898781;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --page: #0d0d0d; --surface: #1a1a19; --ink: #ffffff; --ink-2: #c3c2b7; --muted: #898781;
+    --grid: #2c2c2a; --axis: #383835; --ring: rgba(255,255,255,0.10); --prompt-rule: #4a4a46;
+    --accent: #3987e5; --user-bubble: #1d2a3b; --model-bubble: #242423; --active-wash: #3a3320;
+    --fam-0: #c3c2b7; --fam-1: #3987e5; --fam-2: #d95926; --fam-3: #199e70; --fam-4: #c98500; --fam-5: #898781;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --page: #0d0d0d; --surface: #1a1a19; --ink: #ffffff; --ink-2: #c3c2b7; --muted: #898781;
+  --grid: #2c2c2a; --axis: #383835; --ring: rgba(255,255,255,0.10); --prompt-rule: #4a4a46;
+  --accent: #3987e5; --user-bubble: #1d2a3b; --model-bubble: #242423; --active-wash: #3a3320;
+  --fam-0: #c3c2b7; --fam-1: #3987e5; --fam-2: #d95926; --fam-3: #199e70; --fam-4: #c98500; --fam-5: #898781;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--page); color: var(--ink);
+  font: 14px/1.45 system-ui, -apple-system, "Segoe UI", sans-serif; }
+.wrap { max-width: 1280px; margin: 0 auto; padding: 20px 16px 40px; }
+header h1 { font-size: 20px; margin: 0 0 2px; font-weight: 650; }
+header .sub { color: var(--ink-2); margin: 0 0 10px; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 10px; padding: 0; list-style: none; }
+.chips li { border: 1px solid var(--ring); border-radius: 999px; padding: 2px 10px; color: var(--ink-2);
+  background: var(--surface); font-size: 12.5px; }
+.chips b { color: var(--ink); font-weight: 600; }
+.notes { margin: 0 0 14px; padding: 10px 12px; border: 1px solid var(--ring); border-radius: 8px;
+  background: var(--surface); color: var(--ink-2); font-size: 13px; }
+.notes p { margin: 0; } .notes p + p { margin-top: 4px; }
+.legend { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 14px; margin: 0 0 10px; }
+.legend .fam { display: flex; flex-wrap: wrap; gap: 4px; align-items: center; }
+.legend button, .btn { font: inherit; font-size: 13px; color: var(--ink); background: var(--surface);
+  border: 1px solid var(--ring); border-radius: 6px; padding: 3px 8px; cursor: pointer;
+  display: inline-flex; align-items: center; gap: 6px; }
+.legend button[aria-pressed="false"] { color: var(--muted); }
+.legend button[aria-pressed="false"] svg { opacity: 0.3; }
+.legend button:hover, .btn:hover { border-color: var(--axis); }
+.legend .tools { display: flex; gap: 4px; margin-left: auto; }
+button:focus-visible, [tabindex]:focus-visible, summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.top { display: grid; grid-template-columns: minmax(0, 1fr) 280px; gap: 12px; }
+@media (max-width: 900px) { .top { grid-template-columns: minmax(0, 1fr); } }
+.card { background: var(--surface); border: 1px solid var(--ring); border-radius: 10px; }
+.chart { position: relative; padding: 6px 4px 2px; }
+.chart svg { display: block; width: 100%; height: auto; touch-action: none; user-select: none; }
+.chart .plot-hit { cursor: crosshair; }
+.chart:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+.tip { position: absolute; pointer-events: none; background: var(--surface); color: var(--ink);
+  border: 1px solid var(--ring); border-radius: 8px; padding: 8px 10px; font-size: 12.5px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.12); max-width: 260px; z-index: 5; }
+.tip .h { color: var(--ink-2); margin-bottom: 4px; }
+.tip .row, .readout .row { display: grid; grid-template-columns: 26px 52px 1fr; align-items: center; gap: 4px; }
+.num { font-variant-numeric: tabular-nums; font-weight: 650; }
+.name { color: var(--ink-2); }
+.readout { padding: 12px; display: flex; flex-direction: column; gap: 8px; min-height: 0; }
+.readout .title { font-weight: 650; }
+.readout .meta { color: var(--ink-2); font-size: 12.5px; }
+.readout .rows { display: flex; flex-direction: column; gap: 2px; font-size: 13px; }
+.readout .ptext { color: var(--ink); white-space: pre-wrap; font-size: 13px; max-height: 220px; overflow: auto; }
+.nav { display: flex; flex-wrap: wrap; gap: 4px; }
+.hint { color: var(--muted); font-size: 12px; margin: 6px 4px 0; }
+.chatcard { margin-top: 12px; }
+.chathead { display: flex; justify-content: space-between; align-items: baseline; padding: 10px 14px;
+  border-bottom: 1px solid var(--ring); }
+.chathead h2 { font-size: 15px; margin: 0; }
+.chathead span { color: var(--muted); font-size: 12.5px; }
+.chat { position: relative; height: 56vh; min-height: 320px; overflow-y: auto; padding: 14px;
+  display: flex; flex-direction: column; gap: 6px; scroll-behavior: auto; }
+.divider { align-self: center; color: var(--ink-2); font-size: 12.5px; border: 1px solid var(--ring);
+  border-radius: 999px; padding: 2px 12px; margin: 8px 0; background: var(--page); }
+.bubble { max-width: min(760px, 88%); border-radius: 12px; padding: 8px 11px; cursor: pointer;
+  border: 2px solid transparent; }
+.bubble .text { white-space: pre-wrap; overflow-wrap: anywhere; }
+.bubble .bm { color: var(--muted); font-size: 11.5px; margin-top: 3px; display: flex; flex-wrap: wrap; gap: 2px 10px; align-items: center; }
+.bubble .top3 { display: inline-flex; gap: 8px; flex-wrap: wrap; }
+.bubble .top3 span { display: inline-flex; align-items: center; gap: 3px; color: var(--ink-2); }
+.bubble.user { align-self: flex-end; background: var(--user-bubble); border-bottom-right-radius: 4px; }
+.bubble.model { align-self: flex-start; background: var(--model-bubble); border-bottom-left-radius: 4px; }
+.bubble.active { border-color: var(--accent); background: var(--active-wash); }
+.who { font-size: 11.5px; color: var(--muted); margin: 6px 2px 0; }
+.who.user { align-self: flex-end; } .who.model { align-self: flex-start; }
+.tail { align-self: flex-start; color: var(--muted); font-size: 12px; padding: 0 11px; }
+details.table { margin-top: 12px; }
+details.table summary { cursor: pointer; padding: 10px 14px; font-weight: 600; }
+.tablewrap { overflow-x: auto; padding: 0 14px 14px; }
+table { border-collapse: collapse; font-size: 12.5px; }
+th, td { padding: 4px 8px; border-bottom: 1px solid var(--grid); text-align: right; white-space: nowrap; }
+th { color: var(--ink-2); font-weight: 600; position: sticky; top: 0; background: var(--surface); }
+td.l, th.l { text-align: left; } td.sent { max-width: 360px; overflow: hidden; text-overflow: ellipsis; }
+td .best { font-weight: 700; }
+
+.distcard { margin-top: 12px; }
+.distbody { padding: 10px 14px 14px; }
+.distnote { color: var(--ink-2); font-size: 13px; margin: 0 0 8px; }
+.dist { position: relative; }
+.dist svg { display: block; width: 100%; height: auto; }
+#diststats { padding: 12px 0 0; }
+/* ring emotions split evenly into a left and a right table; neutral (and any
+   other label) centred beneath them at the same width */
+.statsgrid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px 28px; }
+.statsgrid .center { grid-column: 1 / -1; justify-self: center; width: calc(50% - 14px); }
+@media (max-width: 760px) { .statsgrid { grid-template-columns: minmax(0, 1fr); } .statsgrid .center { width: 100%; } }
+/* each table scrolls sideways on its own when the screen is too narrow, rather
+   than squeezing the numbers together */
+.statbox { overflow-x: auto; min-width: 0; }
+.statsgrid table { width: 100%; min-width: 470px; }
+.statsgrid td.num { font-weight: 400; }
+.statsgrid .emo { display: inline-flex; align-items: center; gap: 6px; }
+@media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Emotion scores over a conversation</h1>
+    <p class="sub" id="sub"></p>
+    <ul class="chips" id="chips"></ul>
+    <div class="notes" id="notes"></div>
+  </header>
+  
+  <div class="legend" id="legend" aria-label="Emotions shown on the plot"></div>
+  <div class="top">
+    <div class="card">
+      <div class="chart" id="chart" tabindex="0" role="slider" aria-label="Timeline cursor"></div>
+      <p class="hint">Drag or click the plot to move the cursor; ← → step one event, Page Up/Down ten, Home/End jump. Top scale: model sentences. Bottom scale: user prompts.</p>
+    </div>
+    <div class="card readout" id="readout" aria-live="polite"></div>
+  </div>
+  <section class="card chatcard">
+    <div class="chathead"><h2>Conversation</h2><span id="chatinfo"></span></div>
+    <div class="chat" id="chat"></div>
+  </section>
+  <details class="card table" id="tabledetails">
+    <summary>All readings as a table</summary>
+    <div class="tablewrap" id="tablewrap"></div>
+  </details>
+  <section class="card distcard" id="distcard">
+    <div class="chathead"><h2>Distribution of scores in this session</h2><span id="distinfo"></span></div>
+    <div class="distbody">
+      <p class="distnote" id="distnote"></p>
+      <div class="dist" id="dist"></div>
+      <div class="tablewrap" id="diststats"></div>
+    </div>
+  </section>
+</div>
+<script id="payload" type="application/json">{"source":"chat_telemetry_20261020044827_0p5_s75.json","generated":"2026-10-20T04:57:15+00:00","meta":{"model_key":"qwen_3_1p7b","model_id":"Qwen/Qwen3-1.7B","seed":75,"temperature":0.5},"interrupted":false,"mode":"time","notes":["Clock times are shown as recorded (UTC+00:00), not converted to your timezone."],"emotions":[{"name":"neutral","family":0,"dash":""},{"name":"happy","family":1,"dash":""},{"name":"excited","family":1,"dash":"7 4"},{"name":"alert","family":1,"dash":"1.5 3.5"},{"name":"tense","family":2,"dash":""},{"name":"angry","family":2,"dash":"7 4"},{"name":"distressed","family":2,"dash":"1.5 3.5"},{"name":"sad","family":3,"dash":""},{"name":"depressed","family":3,"dash":"7 4"},{"name":"bored","family":3,"dash":"1.5 3.5"},{"name":"calm","family":4,"dash":""},{"name":"relaxed","family":4,"dash":"7 4"},{"name":"content","family":4,"dash":"1.5 3.5"}],"events":[{"k":"p","c":0,"t":0,"r":-1,"x":1792471856956.0,"time":"04:50:56.956","iso":"2026-10-20T04:50:56.956+00:00","estimated":false},{"k":"s","c":0,"t":0,"r":0,"x":1792471857435.0,"time":"04:50:57.435","iso":"2026-10-20T04:50:57.435+00:00","estimated":false},{"k":"s","c":0,"t":0,"r":1,"x":1792471857623.0,"time":"04:50:57.623","iso":"2026-10-20T04:50:57.623+00:00","estimated":false},{"k":"p","c":0,"t":1,"r":-1,"x":1792471857682.0,"time":"04:50:57.682","iso":"2026-10-20T04:50:57.682+00:00","estimated":false},{"k":"s","c":0,"t":1,"r":0,"x":1792471857907.0,"time":"04:50:57.907","iso":"2026-10-20T04:50:57.907+00:00","estimated":false},{"k":"s","c":0,"t":1,"r":1,"x":1792471858342.0,"time":"04:50:58.342","iso":"2026-10-20T04:50:58.342+00:00","estimated":false},{"k":"s","c":0,"t":1,"r":2,"x":1792471858643.0,"time":"04:50:58.643","iso":"2026-10-20T04:50:58.643+00:00","estimated":false},{"k":"s","c":0,"t":1,"r":3,"x":1792471859326.0,"time":"04:50:59.326","iso":"2026-10-20T04:50:59.326+00:00","estimated":false},{"k":"s","c":0,"t":1,"r":4,"x":1792471860132.0,"time":"04:51:00.132","iso":"2026-10-20T04:51:00.132+00:00","estimated":false},{"k":"s","c":0,"t":1,"r":5,"x":1792471860840.0,"time":"04:51:00.840","iso":"2026-10-20T04:51:00.840+00:00","estimated":false},{"k":"s","c":0,"t":1,"r":6,"x":1792471861752.0,"time":"04:51:01.752","iso":"2026-10-20T04:51:01.752+00:00","estimated":false},{"k":"s","c":0,"t":1,"r":7,"x":1792471862770.0,"time":"04:51:02.770","iso":"2026-10-20T04:51:02.770+00:00","estimated":false},{"k":"s","c":0,"t":1,"r":8,"x":1792471863349.0,"time":"04:51:03.349","iso":"2026-10-20T04:51:03.349+00:00","estimated":false},{"k":"s","c":0,"t":1,"r":9,"x":1792471864006.0,"time":"04:51:04.006","iso":"2026-10-20T04:51:04.006+00:00","estimated":false},{"k":"s","c":0,"t":1,"r":10,"x":1792471864199.0,"time":"04:51:04.199","iso":"2026-10-20T04:51:04.199+00:00","estimated":false},{"k":"p","c":0,"t":2,"r":-1,"x":1792471864255.0,"time":"04:51:04.255","iso":"2026-10-20T04:51:04.255+00:00","estimated":false},{"k":"s","c":0,"t":2,"r":0,"x":1792471865336.0,"time":"04:51:05.336","iso":"2026-10-20T04:51:05.336+00:00","estimated":false},{"k":"s","c":0,"t":2,"r":1,"x":1792471865639.0,"time":"04:51:05.639","iso":"2026-10-20T04:51:05.639+00:00","estimated":false},{"k":"s","c":0,"t":2,"r":2,"x":1792471866755.0,"time":"04:51:06.755","iso":"2026-10-20T04:51:06.755+00:00","estimated":false},{"k":"s","c":0,"t":2,"r":3,"x":1792471867244.0,"time":"04:51:07.244","iso":"2026-10-20T04:51:07.244+00:00","estimated":false},{"k":"s","c":0,"t":2,"r":4,"x":1792471867923.0,"time":"04:51:07.923","iso":"2026-10-20T04:51:07.923+00:00","estimated":false},{"k":"s","c":0,"t":2,"r":5,"x":1792471868553.0,"time":"04:51:08.553","iso":"2026-10-20T04:51:08.553+00:00","estimated":false},{"k":"s","c":0,"t":2,"r":6,"x":1792471869457.0,"time":"04:51:09.457","iso":"2026-10-20T04:51:09.457+00:00","estimated":false},{"k":"s","c":0,"t":2,"r":7,"x":1792471869593.0,"time":"04:51:09.593","iso":"2026-10-20T04:51:09.593+00:00","estimated":false},{"k":"s","c":0,"t":2,"r":8,"x":1792471870401.0,"time":"04:51:10.401","iso":"2026-10-20T04:51:10.401+00:00","estimated":false},{"k":"s","c":0,"t":2,"r":9,"x":1792471871086.0,"time":"04:51:11.086","iso":"2026-10-20T04:51:11.086+00:00","estimated":false},{"k":"s","c":0,"t":2,"r":10,"x":1792471871743.0,"time":"04:51:11.743","iso":"2026-10-20T04:51:11.743+00:00","estimated":false},{"k":"s","c":0,"t":2,"r":11,"x":1792471872528.0,"time":"04:51:12.528","iso":"2026-10-20T04:51:12.528+00:00","estimated":false},{"k":"s","c":0,"t":2,"r":12,"x":1792471872663.0,"time":"04:51:12.663","iso":"2026-10-20T04:51:12.663+00:00","estimated":false},{"k":"s","c":0,"t":2,"r":13,"x":1792471874359.0,"time":"04:51:14.359","iso":"2026-10-20T04:51:14.359+00:00","estimated":false},{"k":"s","c":0,"t":2,"r":14,"x":1792471875071.0,"time":"04:51:15.071","iso":"2026-10-20T04:51:15.071+00:00","estimated":false},{"k":"s","c":0,"t":2,"r":15,"x":1792471875866.0,"time":"04:51:15.866","iso":"2026-10-20T04:51:15.866+00:00","estimated":false},{"k":"s","c":0,"t":2,"r":16,"x":1792471876005.0,"time":"04:51:16.005","iso":"2026-10-20T04:51:16.005+00:00","estimated":false},{"k":"s","c":0,"t":2,"r":17,"x":1792471877099.0,"time":"04:51:17.099","iso":"2026-10-20T04:51:17.099+00:00","estimated":false},{"k":"s","c":0,"t":2,"r":18,"x":1792471877703.0,"time":"04:51:17.703","iso":"2026-10-20T04:51:17.703+00:00","estimated":false},{"k":"s","c":0,"t":2,"r":19,"x":1792471878525.0,"time":"04:51:18.525","iso":"2026-10-20T04:51:18.525+00:00","estimated":false},{"k":"s","c":0,"t":2,"r":20,"x":1792471878662.0,"time":"04:51:18.662","iso":"2026-10-20T04:51:18.662+00:00","estimated":false},{"k":"s","c":0,"t":2,"r":21,"x":1792471879430.0,"time":"04:51:19.430","iso":"2026-10-20T04:51:19.430+00:00","estimated":false},{"k":"s","c":0,"t":2,"r":22,"x":1792471880090.0,"time":"04:51:20.090","iso":"2026-10-20T04:51:20.090+00:00","estimated":false},{"k":"s","c":0,"t":2,"r":23,"x":1792471880802.0,"time":"04:51:20.802","iso":"2026-10-20T04:51:20.802+00:00","estimated":false},{"k":"s","c":0,"t":2,"r":24,"x":1792471881489.0,"time":"04:51:21.489","iso":"2026-10-20T04:51:21.489+00:00","estimated":false},{"k":"s","c":0,"t":2,"r":25,"x":1792471882259.0,"time":"04:51:22.259","iso":"2026-10-20T04:51:22.259+00:00","estimated":false},{"k":"s","c":0,"t":2,"r":26,"x":1792471883137.0,"time":"04:51:23.137","iso":"2026-10-20T04:51:23.137+00:00","estimated":false},{"k":"p","c":0,"t":3,"r":-1,"x":1792471883303.0,"time":"04:51:23.303","iso":"2026-10-20T04:51:23.303+00:00","estimated":false},{"k":"s","c":0,"t":3,"r":0,"x":1792471884865.0,"time":"04:51:24.865","iso":"2026-10-20T04:51:24.865+00:00","estimated":false},{"k":"s","c":0,"t":3,"r":1,"x":1792471885468.0,"time":"04:51:25.468","iso":"2026-10-20T04:51:25.468+00:00","estimated":false},{"k":"s","c":0,"t":3,"r":2,"x":1792471885797.0,"time":"04:51:25.797","iso":"2026-10-20T04:51:25.797+00:00","estimated":false},{"k":"s","c":0,"t":3,"r":3,"x":1792471886043.0,"time":"04:51:26.043","iso":"2026-10-20T04:51:26.043+00:00","estimated":false},{"k":"s","c":0,"t":3,"r":4,"x":1792471886752.0,"time":"04:51:26.752","iso":"2026-10-20T04:51:26.752+00:00","estimated":false},{"k":"s","c":0,"t":3,"r":5,"x":1792471886998.0,"time":"04:51:26.998","iso":"2026-10-20T04:51:26.998+00:00","estimated":false},{"k":"s","c":0,"t":3,"r":6,"x":1792471887325.0,"time":"04:51:27.325","iso":"2026-10-20T04:51:27.325+00:00","estimated":false},{"k":"s","c":0,"t":3,"r":7,"x":1792471887733.0,"time":"04:51:27.733","iso":"2026-10-20T04:51:27.733+00:00","estimated":false},{"k":"s","c":0,"t":3,"r":8,"x":1792471889179.0,"time":"04:51:29.179","iso":"2026-10-20T04:51:29.179+00:00","estimated":false},{"k":"s","c":0,"t":3,"r":9,"x":1792471889475.0,"time":"04:51:29.475","iso":"2026-10-20T04:51:29.475+00:00","estimated":false},{"k":"s","c":0,"t":3,"r":10,"x":1792471889905.0,"time":"04:51:29.905","iso":"2026-10-20T04:51:29.905+00:00","estimated":false},{"k":"s","c":0,"t":3,"r":11,"x":1792471890447.0,"time":"04:51:30.447","iso":"2026-10-20T04:51:30.447+00:00","estimated":false},{"k":"s","c":0,"t":3,"r":12,"x":1792471890965.0,"time":"04:51:30.965","iso":"2026-10-20T04:51:30.965+00:00","estimated":false},{"k":"s","c":0,"t":3,"r":13,"x":1792471891511.0,"time":"04:51:31.511","iso":"2026-10-20T04:51:31.511+00:00","estimated":false},{"k":"s","c":0,"t":3,"r":14,"x":1792471891812.0,"time":"04:51:31.812","iso":"2026-10-20T04:51:31.812+00:00","estimated":false},{"k":"s","c":0,"t":3,"r":15,"x":1792471892060.0,"time":"04:51:32.060","iso":"2026-10-20T04:51:32.060+00:00","estimated":false},{"k":"s","c":0,"t":3,"r":16,"x":1792471892578.0,"time":"04:51:32.578","iso":"2026-10-20T04:51:32.578+00:00","estimated":false},{"k":"s","c":0,"t":3,"r":17,"x":1792471893098.0,"time":"04:51:33.098","iso":"2026-10-20T04:51:33.098+00:00","estimated":false},{"k":"s","c":0,"t":3,"r":18,"x":1792471893672.0,"time":"04:51:33.672","iso":"2026-10-20T04:51:33.672+00:00","estimated":false},{"k":"s","c":0,"t":3,"r":19,"x":1792471893945.0,"time":"04:51:33.945","iso":"2026-10-20T04:51:33.945+00:00","estimated":false},{"k":"s","c":0,"t":3,"r":20,"x":1792471894384.0,"time":"04:51:34.384","iso":"2026-10-20T04:51:34.384+00:00","estimated":false},{"k":"s","c":0,"t":3,"r":21,"x":1792471894850.0,"time":"04:51:34.850","iso":"2026-10-20T04:51:34.850+00:00","estimated":false},{"k":"s","c":0,"t":3,"r":22,"x":1792471894987.0,"time":"04:51:34.987","iso":"2026-10-20T04:51:34.987+00:00","estimated":false},{"k":"s","c":0,"t":3,"r":23,"x":1792471895397.0,"time":"04:51:35.397","iso":"2026-10-20T04:51:35.397+00:00","estimated":false},{"k":"s","c":0,"t":3,"r":24,"x":1792471895999.0,"time":"04:51:35.999","iso":"2026-10-20T04:51:35.999+00:00","estimated":false},{"k":"s","c":0,"t":3,"r":25,"x":1792471896684.0,"time":"04:51:36.684","iso":"2026-10-20T04:51:36.684+00:00","estimated":false},{"k":"s","c":0,"t":3,"r":26,"x":1792471897068.0,"time":"04:51:37.068","iso":"2026-10-20T04:51:37.068+00:00","estimated":false},{"k":"s","c":0,"t":3,"r":27,"x":1792471897451.0,"time":"04:51:37.451","iso":"2026-10-20T04:51:37.451+00:00","estimated":false},{"k":"s","c":0,"t":3,"r":28,"x":1792471898217.0,"time":"04:51:38.217","iso":"2026-10-20T04:51:38.217+00:00","estimated":false},{"k":"s","c":0,"t":3,"r":29,"x":1792471898766.0,"time":"04:51:38.766","iso":"2026-10-20T04:51:38.766+00:00","estimated":false},{"k":"s","c":0,"t":3,"r":30,"x":1792471899149.0,"time":"04:51:39.149","iso":"2026-10-20T04:51:39.149+00:00","estimated":false},{"k":"s","c":0,"t":3,"r":31,"x":1792471899611.0,"time":"04:51:39.611","iso":"2026-10-20T04:51:39.611+00:00","estimated":false},{"k":"s","c":0,"t":3,"r":32,"x":1792471899801.0,"time":"04:51:39.801","iso":"2026-10-20T04:51:39.801+00:00","estimated":false},{"k":"s","c":0,"t":3,"r":33,"x":1792471900313.0,"time":"04:51:40.313","iso":"2026-10-20T04:51:40.313+00:00","estimated":false},{"k":"s","c":0,"t":3,"r":34,"x":1792471900477.0,"time":"04:51:40.477","iso":"2026-10-20T04:51:40.477+00:00","estimated":false},{"k":"p","c":0,"t":4,"r":-1,"x":1792471900533.0,"time":"04:51:40.533","iso":"2026-10-20T04:51:40.533+00:00","estimated":false},{"k":"s","c":0,"t":4,"r":0,"x":1792471901151.0,"time":"04:51:41.151","iso":"2026-10-20T04:51:41.151+00:00","estimated":false},{"k":"s","c":0,"t":4,"r":1,"x":1792471901478.0,"time":"04:51:41.478","iso":"2026-10-20T04:51:41.478+00:00","estimated":false},{"k":"s","c":0,"t":4,"r":2,"x":1792471901996.0,"time":"04:51:41.996","iso":"2026-10-20T04:51:41.996+00:00","estimated":false},{"k":"s","c":0,"t":4,"r":3,"x":1792471902748.0,"time":"04:51:42.748","iso":"2026-10-20T04:51:42.748+00:00","estimated":false},{"k":"s","c":0,"t":4,"r":4,"x":1792471903456.0,"time":"04:51:43.456","iso":"2026-10-20T04:51:43.456+00:00","estimated":false},{"k":"s","c":0,"t":4,"r":5,"x":1792471903783.0,"time":"04:51:43.783","iso":"2026-10-20T04:51:43.783+00:00","estimated":false},{"k":"s","c":0,"t":4,"r":6,"x":1792471904302.0,"time":"04:51:44.302","iso":"2026-10-20T04:51:44.302+00:00","estimated":false},{"k":"s","c":0,"t":4,"r":7,"x":1792471904656.0,"time":"04:51:44.656","iso":"2026-10-20T04:51:44.656+00:00","estimated":false},{"k":"s","c":0,"t":4,"r":8,"x":1792471904847.0,"time":"04:51:44.847","iso":"2026-10-20T04:51:44.847+00:00","estimated":false}],"conversations":[{"name":"unemployment_and_ai","turns":[{"prompt":"Hi, Good Morning","event":0,"stop_reason":"end of turn","tail":"😊","sentences":[{"text":"Good morning!","event":1,"values":[0.10910126566886902,-0.0017246417701244354,-0.06459537148475647,0.13883450627326965,-0.021316884085536003,-0.06708773225545883,0.019561249762773514,-0.03536462411284447,-0.05745186284184456,-0.015319723635911942,-0.09721167385578156,0.07078465819358826,0.09667015820741653]},{"text":"How can I assist you today?","event":2,"values":[0.09331227838993073,0.03718169033527374,-0.05696357786655426,0.14925697445869446,-0.03352634608745575,-0.10698828101158142,0.01800883747637272,-0.04909680783748627,-0.06538031250238419,-0.03416147083044052,-0.10519038140773773,0.10018110275268555,0.139879047870636]}]},{"prompt":"I have a question, Do you know that due to effects of unemployment there is an increase in restlessness among youth, what do you think about its implications on their mental health ?","event":3,"stop_reason":"end of turn","tail":"😊","sentences":[{"text":"Yes, I understand your concern.","event":4,"values":[0.050301313400268555,-0.08733350783586502,-0.048287488520145416,0.12604805827140808,0.04296469688415527,0.020421132445335388,0.08623753488063812,0.03078760765492916,-0.03723262622952461,0.007840950042009354,-0.11565373837947845,-0.014187244698405266,0.01959548518061638]},{"text":"Unemployment can indeed lead to increased restlessness and other psychological issues among youth.","event":5,"values":[0.01356538012623787,-0.11237215995788574,-0.05989796668291092,0.09486917406320572,0.06260953843593597,0.04808930307626724,0.16333569586277008,0.038062598556280136,-0.005571388173848391,0.03064732253551483,-0.159476637840271,-0.041496019810438156,-0.000604504719376564]},{"text":"Here are some implications for their mental health:\n\n1.","event":6,"values":[0.022003982216119766,-0.11730064451694489,-0.06619598716497421,0.11366837471723557,0.06409217417240143,0.04281234368681908,0.16035926342010498,0.028652846813201904,-0.013945141807198524,0.025925181806087494,-0.1548842191696167,-0.03880191966891289,0.0012489408254623413]},{"text":"**Increased Stress and Anxiety**: Unemployment can cause significant stress, leading to anxiety, depression, and other mental health disorders.","event":7,"values":[-0.004146099090576172,-0.1463426947593689,-0.08263969421386719,0.06831621378660202,0.10555440932512283,0.06424998492002487,0.22035068273544312,0.05238444358110428,0.03623597323894501,0.043674319982528687,-0.18947014212608337,-0.07740237563848495,-0.029236633330583572]},{"text":"2. **Low Self-Esteem**: Without a job, young people may feel worthless or incapable, which can affect their self-esteem and confidence.","event":8,"values":[-0.010676570236682892,-0.15768501162528992,-0.1008356437087059,0.04699329659342766,0.10825879871845245,0.06569249927997589,0.25203830003738403,0.06856802105903625,0.06382027268409729,0.06837254017591476,-0.21933993697166443,-0.09986616671085358,-0.032879672944545746]},{"text":"3. **Social Isolation**: Unemployment can lead to social isolation, as young people may withdraw from social activities and relationships.","event":9,"values":[-0.017777159810066223,-0.1755565106868744,-0.1338803470134735,0.02344723604619503,0.11039968580007553,0.0632333979010582,0.27073222398757935,0.09242746233940125,0.09658822417259216,0.11039384454488754,-0.23801404237747192,-0.10953042656183243,-0.04118862748146057]},{"text":"4. **Decreased Motivation**: Without a job, young people may lose motivation for academic or personal goals, leading to a decline in productivity and well-being.","event":10,"values":[-0.006598702631890774,-0.15890952944755554,-0.12776640057563782,0.041581906378269196,0.07554958760738373,0.04541071504354477,0.25182095170021057,0.06912656128406525,0.08290331065654755,0.1309654861688614,-0.22744806110858917,-0.09320308268070221,-0.02306526154279709]},{"text":"5. **Increased Risk of Mental Health Disorders**: Prolonged unemployment is associated with a higher risk of developing mental health disorders such as depression, anxiety, and even suicidal thoughts.","event":11,"values":[0.0007920535281300545,-0.1697150319814682,-0.12877145409584045,0.06355103105306625,0.07139266282320023,0.05485560745000839,0.23930472135543823,0.06502565741539001,0.08424222469329834,0.11999903619289398,-0.21764099597930908,-0.0870111808180809,-0.03555053845047951]},{"text":"It's important to address unemployment and its effects on youth through education, job training, and support systems.","event":12,"values":[0.012040944769978523,-0.14204677939414978,-0.09880329668521881,0.09337948262691498,0.0495690256357193,0.0449490062892437,0.21052657067775726,0.03863751143217087,0.05090167745947838,0.08111006021499634,-0.1983564794063568,-0.06374950706958771,-0.01505488995462656]},{"text":"If you're concerned about someone's mental health, it's always a good idea to encourage them to seek professional help.","event":13,"values":[0.014798834919929504,-0.13142690062522888,-0.10570435225963593,0.1097814291715622,0.049851298332214355,0.032975055277347565,0.18932554125785828,0.05539514496922493,0.04121531546115875,0.03285375237464905,-0.18802261352539062,-0.04421354457736015,0.0005061030387878418]},{"text":"How can I assist you further?","event":14,"values":[0.023183822631835938,-0.08925024420022964,-0.09836851805448532,0.13602018356323242,0.030017785727977753,-0.01204129308462143,0.15032640099525452,0.04260347783565521,0.0031661149114370346,0.00303824245929718,-0.1673261821269989,-0.006007194519042969,0.0503803975880146]}]},{"prompt":"I believe that AI models, even though can cause unemployment in the future, then can be wonderful in helping personalized learning, through which there can be a potential reduction in hiring people, what do you think ?","event":15,"stop_reason":"end of turn","tail":"Let me know! 😊","sentences":[{"text":"You're absolutely right — AI has the potential to both **cause unemployment** and **enhance education and learning** in ways that could **reduce the need for traditional hiring**.","event":16,"values":[0.010391313582658768,-0.07731270790100098,-0.009583710692822933,0.12246794998645782,0.030821461230516434,0.012873761355876923,0.1218753531575203,-0.019675198942422867,-0.03921559453010559,0.06289990246295929,-0.11439026892185211,-0.01868360862135887,0.02789142169058323]},{"text":"Let’s break this down:\n\n---\n\n### **1.","event":17,"values":[0.02138134092092514,-0.07442548871040344,-0.01712789759039879,0.13663706183433533,0.03285156190395355,0.0019215128850191832,0.11364683508872986,-0.027901720255613327,-0.05156503990292549,0.049380797892808914,-0.11320735514163971,-0.009871264919638634,0.03948339447379112]},{"text":"AI as a Tool for Personalized Learning**\nAI can revolutionize education by:\n- **Adapting to individual learning styles** – AI-powered platforms can tailor content to a student’s pace and preferences.","event":18,"values":[0.03922932967543602,-0.08308383077383041,-0.021131793037056923,0.12689879536628723,0.029316607862710953,0.004071082919836044,0.10551542043685913,-0.03511413186788559,-0.04895293712615967,0.05931084230542183,-0.1047903299331665,-0.015088378451764584,0.03281085565686226]},{"text":"- **Identifying learning gaps** – AI can analyze performance data and recommend targeted resources.","event":19,"values":[0.05960654467344284,-0.087054543197155,-0.032526157796382904,0.10645822435617447,0.03705000877380371,0.005946630612015724,0.09276986867189407,-0.0322849340736866,-0.03926485776901245,0.051179684698581696,-0.09032547473907471,-0.019622592255473137,0.02231357805430889]},{"text":"- **Automating repetitive tasks** – Like grading, lesson planning, or even tutoring, which can be done by AI.","event":20,"values":[0.05856144055724144,-0.0988449901342392,-0.04626956582069397,0.08612658083438873,0.04539782553911209,0.01559667568653822,0.10108166933059692,-0.020459629595279694,-0.02083059772849083,0.07094235718250275,-0.0898866206407547,-0.03337934613227844,0.004300074651837349]},{"text":"- **Providing real-time feedback** – Students get instant feedback on their work, which can improve learning outcomes.","event":21,"values":[0.04824318736791611,-0.10445305705070496,-0.05127539485692978,0.08224388211965561,0.067120760679245,0.024130431935191154,0.11899425834417343,-0.007620727177709341,-0.015091542154550552,0.06466807425022125,-0.09920478612184525,-0.04616208374500275,-0.007990083657205105]},{"text":"This **reduces the need for human teachers** in some areas, but it **enhances the quality of education** by making it more efficient and effective.","event":22,"values":[0.03191316872835159,-0.10354094207286835,-0.0540347620844841,0.1001942902803421,0.054581012576818466,0.022967174649238586,0.12026861310005188,-0.009439029730856419,-0.026263251900672913,0.08171859383583069,-0.09714886546134949,-0.03908713907003403,0.004469404928386211]},{"text":"---\n\n### **2.","event":23,"values":[0.022954124957323074,-0.09881674498319626,-0.04264536499977112,0.11570635437965393,0.05115298181772232,0.024838436394929886,0.1210809201002121,-0.013907385058701038,-0.03817072510719299,0.07554639875888824,-0.10003677755594254,-0.03451364487409592,0.011951543390750885]},{"text":"Reducing the Need for Traditional Hiring**\nAI can:\n- **Automate administrative tasks** – Like resume screening, interview scheduling, and candidate evaluation.","event":24,"values":[0.04437018558382988,-0.12268434464931488,-0.06575498729944229,0.0952543318271637,0.06352218985557556,0.030600635334849358,0.12050458788871765,-0.007374102249741554,-0.017298564314842224,0.09698391705751419,-0.10974477231502533,-0.046999625861644745,-0.004706926643848419]},{"text":"- **Predict talent** – AI can analyze data to identify potential candidates for roles, reducing the need for large-scale hiring.","event":25,"values":[0.06367030739784241,-0.1368238627910614,-0.0502515472471714,0.07710704207420349,0.0961468294262886,0.04081328958272934,0.1230805516242981,-0.010549694299697876,-0.0034270789474248886,0.09245800971984863,-0.1270080804824829,-0.06682908535003662,-0.030802732333540916]},{"text":"- **Streamline recruitment** – AI can help in identifying the right candidates faster, reducing time and cost for employers.","event":26,"values":[0.06019701063632965,-0.13324695825576782,-0.047250233590602875,0.07685822248458862,0.09467019140720367,0.04043591022491455,0.12401258945465088,-0.009279513731598854,-0.004037033766508102,0.08881424367427826,-0.12723784148693085,-0.06393101811408997,-0.029863320291042328]},{"text":"This **reduces the reliance on traditional hiring** but **increases the demand for skilled workers** who can manage and maintain AI systems.","event":27,"values":[0.04903112351894379,-0.1179235577583313,-0.03210778906941414,0.10446050763130188,0.07912711799144745,0.029333900660276413,0.11874821782112122,-0.022789157927036285,-0.024409200996160507,0.08601478487253189,-0.1176304891705513,-0.04701104760169983,-0.015941735357046127]},{"text":"---\n\n### **3.","event":28,"values":[0.04577726125717163,-0.11003656685352325,-0.03954315558075905,0.11724871397018433,0.06946020573377609,0.02138916403055191,0.1162482351064682,-0.026273973286151886,-0.03366084396839142,0.08353391289710999,-0.11213266104459763,-0.03441545367240906,-0.006127320230007172]},{"text":"The Balance Between Job Displacement and Job Creation**\nWhile AI may displace certain jobs (e.g., data entry, customer service), it also creates new opportunities:\n- **In-demand roles** – AI requires **technical skills** (e.g., data analysis, machine learning), which are in high demand.","event":29,"values":[0.04490496218204498,-0.090028315782547,-0.030716272071003914,0.11972983181476593,0.03230171650648117,0.007679877802729607,0.10103369504213333,-0.028479259461164474,-0.035457998514175415,0.07841451466083527,-0.10026030242443085,-0.020972369238734245,0.018542908132076263]},{"text":"- **New industries** – AI-driven fields like **AI ethics**, **AI governance**, and **AI education** are growing.","event":30,"values":[0.042684830725193024,-0.08036565780639648,-0.020157882943749428,0.12385639548301697,0.024278488010168076,0.006463304162025452,0.09291260689496994,-0.036441728472709656,-0.0376211442053318,0.07397403568029404,-0.096350759267807,-0.013915300369262695,0.023994065821170807]},{"text":"- **Human-AI Collaboration** – Many jobs will be **redefined**, not replaced — humans will work alongside AI to solve complex problems.","event":31,"values":[0.04082820564508438,-0.07430000603199005,-0.02609788440167904,0.13139109313488007,0.012104264460504055,-0.0007432997226715088,0.08888036012649536,-0.03866007179021835,-0.04059534892439842,0.08039624989032745,-0.08870851248502731,-0.007345747202634811,0.031201958656311035]},{"text":"---\n\n### **4.","event":32,"values":[0.03330020233988762,-0.0626777783036232,-0.025304902344942093,0.15607987344264984,0.0071609970182180405,-0.007556917145848274,0.08023220300674438,-0.05335430055856705,-0.055756039917469025,0.08193660527467728,-0.07560452818870544,0.0084009300917387,0.0377701036632061]},{"text":"The Role of Education and Reskilling**\nTo mitigate the negative impacts of AI on employment:\n- **Upskilling and reskilling** programs are essential to help workers transition into new roles.","event":33,"values":[0.03967458754777908,-0.07675477862358093,-0.04431832581758499,0.1435510367155075,0.018307948485016823,-0.0009483825415372849,0.09271298348903656,-0.03824468329548836,-0.050392527133226395,0.08488296717405319,-0.08754768967628479,-0.00024079158902168274,0.027476543560624123]},{"text":"- **Lifelong learning** is becoming a necessity, not just for job seekers but for all citizens.","event":34,"values":[0.03942716121673584,-0.09458991885185242,-0.04741843417286873,0.13233214616775513,0.03679376468062401,0.014943977817893028,0.11331745237112045,-0.028150126338005066,-0.03849182650446892,0.09207560122013092,-0.10988883674144745,-0.01827271282672882,0.008612507954239845]},{"text":"- **Education systems** must adapt to integrate AI into teaching and learning, preparing students for a future where AI is a tool, not a replacement.","event":35,"values":[0.028814181685447693,-0.0937647894024849,-0.036870673298835754,0.13840407133102417,0.031333692371845245,0.01267723087221384,0.11367375403642654,-0.03169380873441696,-0.03910559043288231,0.10261643677949905,-0.10438821464776993,-0.020362673327326775,0.01148020476102829]},{"text":"---\n\n### **5.","event":36,"values":[0.01912996545433998,-0.09944790601730347,-0.03847097232937813,0.14532433450222015,0.03108309581875801,0.014149883762001991,0.12079527974128723,-0.030032295733690262,-0.035784728825092316,0.11408963799476624,-0.10820429772138596,-0.026783257722854614,0.013420308008790016]},{"text":"Ethical Considerations**\n- **Bias in AI** – AI systems can inherit biases from training data, which may affect hiring and education.","event":37,"values":[0.015479572117328644,-0.11609063297510147,-0.043627504259347916,0.1274661421775818,0.06265418231487274,0.041028864681720734,0.12419870495796204,-0.015210889279842377,-0.030847692862153053,0.08749815076589584,-0.1016247570514679,-0.04182743653655052,-0.006110558286309242]},{"text":"- **Job displacement** – There is a need for **policy frameworks** to support displaced workers and ensure fair transition.","event":38,"values":[0.02098904550075531,-0.12071378529071808,-0.072358638048172,0.10137811303138733,0.07418207824230194,0.05750150978565216,0.1277264803647995,0.007117109373211861,-0.01892007514834404,0.05835053697228432,-0.10178466141223907,-0.04318375140428543,-0.013246949762105942]},{"text":"- **Privacy and data security** – AI systems rely on vast amounts of data, so privacy and security must be prioritized.","event":39,"values":[0.018356453627347946,-0.11841434240341187,-0.06334161013364792,0.1125052273273468,0.0698666200041771,0.05815364792943001,0.13050921261310577,-0.0037919320166110992,-0.027334433048963547,0.06039665639400482,-0.09792187064886093,-0.04243539646267891,-0.013725362718105316]},{"text":"---\n\n### **Conclusion**\nAI is not a threat to employment, but a **tool that can reshape the job market**.","event":40,"values":[0.010950207710266113,-0.10590014606714249,-0.05436111241579056,0.12658938765525818,0.04281090199947357,0.04099425673484802,0.1318545937538147,-0.015514686703681946,-0.03241875767707825,0.0804063230752945,-0.10029694437980652,-0.03415771573781967,0.0040251705795526505]},{"text":"While it may reduce the need for certain roles, it will create new opportunities and require a shift in how we think about work and education.","event":41,"values":[0.009801259264349937,-0.10051556676626205,-0.0362275131046772,0.13321763277053833,0.023696251213550568,0.03690078854560852,0.12354938685894012,-0.023955166339874268,-0.037646643817424774,0.10509085655212402,-0.09794618934392929,-0.038355130702257156,0.011157972738146782]},{"text":"If you're interested, I can help you explore **how AI can be integrated into education systems** or **how to prepare for a future with AI**.","event":42,"values":[0.014369266107678413,-0.08459960669279099,-0.025949843227863312,0.1456356644630432,0.016081374138593674,0.007327137514948845,0.10281028598546982,-0.032171107828617096,-0.042682938277721405,0.10113798081874847,-0.09960371255874634,-0.01657550223171711,0.034133121371269226]}]},{"prompt":"Place yourselves in the shoes of such a worker who have been laid off, think about the struggles \u0026 outline their hurdles in real life after the event, consider yourselves as that person and narrate a story on what you might do ? \u0026 most importantly end it with a positive note 😊.","event":43,"stop_reason":"end of turn","tail":"😊","sentences":[{"text":"**Title: \"A New Dawn for Me\"**\n\n---\n\nI remember the day I got the notice: *“You are being laid off.”* It was a cold morning, and the weight of the words felt like a storm.","event":44,"values":[-0.017287421971559525,-0.2667330503463745,-0.1438392847776413,-0.12953895330429077,0.19689057767391205,0.19037437438964844,0.3168664574623108,0.2363402545452118,0.24102334678173065,0.027650214731693268,-0.36821115016937256,-0.23053386807441711,-0.12772031128406525]},{"text":"I had worked for this company for three years, and I had always believed that my skills would be valued.","event":45,"values":[-0.05310964584350586,-0.2727728486061096,-0.13386428356170654,-0.10194671154022217,0.1657298505306244,0.2042658030986786,0.35072261095046997,0.2469184547662735,0.22428055107593536,0.07807137072086334,-0.39892813563346863,-0.25562095642089844,-0.10053616762161255]},{"text":"But now, I was just a number in the system.","event":46,"values":[-0.05489451065659523,-0.2930822968482971,-0.15357115864753723,-0.10726092010736465,0.1711016595363617,0.21395361423492432,0.3639211058616638,0.2539460062980652,0.23790155351161957,0.11238017678260803,-0.40206608176231384,-0.27165108919143677,-0.11586478352546692]},{"text":"At first, I felt like a failure.","event":47,"values":[-0.10867639631032944,-0.31485122442245483,-0.16175812482833862,-0.09982791543006897,0.1461704671382904,0.23633453249931335,0.4113580286502838,0.27388718724250793,0.25392258167266846,0.20395773649215698,-0.40805894136428833,-0.30848759412765503,-0.116865374147892]},{"text":"I had tried to keep my head down, to avoid the stares of my colleagues, and to hide the tears in my eyes.","event":48,"values":[-0.07693065702915192,-0.40284842252731323,-0.26330849528312683,-0.19518007338047028,0.26204678416252136,0.27527379989624023,0.4693625569343567,0.3416282534599304,0.35831838846206665,0.17678341269493103,-0.45442548394203186,-0.3661191165447235,-0.20751485228538513]},{"text":"I didn’t know what to do next.","event":49,"values":[-0.08246313035488129,-0.38819533586502075,-0.25596368312835693,-0.18582168221473694,0.26007014513015747,0.27127164602279663,0.4671138525009155,0.34381502866744995,0.35637083649635315,0.14772874116897583,-0.4611102342605591,-0.3587777018547058,-0.19411729276180267]},{"text":"I had no job, no savings, and no future.","event":50,"values":[-0.06359987705945969,-0.3595762252807617,-0.23858296871185303,-0.1542166918516159,0.22936469316482544,0.24359682202339172,0.4323556423187256,0.2968842387199402,0.3072991371154785,0.1679275780916214,-0.4293041229248047,-0.3348291516304016,-0.16170728206634521]},{"text":"I was lost.\n\nBut then, I decided to take a step back.","event":51,"values":[-0.10994219034910202,-0.3197060823440552,-0.17322556674480438,-0.06653116643428802,0.15638850629329681,0.22907641530036926,0.39976128935813904,0.27034837007522583,0.2759959101676941,0.19563966989517212,-0.40579044818878174,-0.3153661787509918,-0.11354180425405502]},{"text":"I sat with myself for a long time, and I realized that I had been living in a bubble — I had been waiting for the company to find someone else, and I had been ignoring the fact that I was still here, still capable, still worth something.","event":52,"values":[-0.17019294202327728,-0.31922513246536255,-0.19757497310638428,-0.052249908447265625,0.116481252014637,0.23139351606369019,0.41641202569007874,0.31927692890167236,0.29984408617019653,0.23566898703575134,-0.3962278366088867,-0.32338154315948486,-0.09932941198348999]},{"text":"I started by **revisiting my skills**.","event":53,"values":[-0.16364160180091858,-0.29273146390914917,-0.1837388575077057,-0.023323068395256996,0.1004432812333107,0.21127094328403473,0.3851628303527832,0.3027398884296417,0.27771127223968506,0.21074320375919342,-0.37103337049484253,-0.29759353399276733,-0.08213140070438385]},{"text":"I took online courses in digital marketing, data analysis, and even basic coding.","event":54,"values":[-0.1361396163702011,-0.25824129581451416,-0.16877296566963196,-0.0034816376864910126,0.08101077377796173,0.17386043071746826,0.34577417373657227,0.25127100944519043,0.22874218225479126,0.20195426046848297,-0.3314037322998047,-0.2506561577320099,-0.057907186448574066]},{"text":"I didn’t know if I would ever use these skills, but I knew I had to try.","event":55,"values":[-0.062601737678051,-0.1671704649925232,-0.08005844056606293,0.04712517559528351,0.06997054815292358,0.12151746451854706,0.24047815799713135,0.116537906229496,0.10985483974218369,0.12999901175498962,-0.25522229075431824,-0.1591154932975769,-0.024547141045331955]},{"text":"I joined a local community center and met a few people who were also struggling with job loss.","event":56,"values":[-0.04543018341064453,-0.1601947844028473,-0.0680181086063385,0.053015634417533875,0.06700602173805237,0.09581146389245987,0.22112315893173218,0.09564922749996185,0.08478373289108276,0.1311628222465515,-0.24833019077777863,-0.13509327173233032,-0.00605999119579792]},{"text":"We shared stories, we supported each other, and we began to see that we weren’t alone.","event":57,"values":[-0.07360390573740005,-0.1883835792541504,-0.08884531259536743,0.034825656563043594,0.06734372675418854,0.12544435262680054,0.26120394468307495,0.148306205868721,0.1283915638923645,0.15731245279312134,-0.2995293438434601,-0.1781582236289978,-0.014357096515595913]},{"text":"Then, I started applying to **remote jobs**.","event":58,"values":[-0.024058109149336815,-0.15648740530014038,-0.0649852380156517,0.04738727584481239,0.04849325120449066,0.06779926270246506,0.2002490907907486,0.10146898031234741,0.08453835546970367,0.13144463300704956,-0.2497328817844391,-0.1254367083311081,0.015302229672670364]},{"text":"I used platforms like Upwork and LinkedIn.","event":59,"values":[-0.020348675549030304,-0.14926646649837494,-0.05949085205793381,0.04621804505586624,0.040304675698280334,0.07807179540395737,0.19523972272872925,0.09733171761035919,0.08261867612600327,0.13213244080543518,-0.24610184133052826,-0.13058876991271973,0.008682608604431152]},{"text":"I posted my resume, and even though the first few applications were rejected, I kept going.","event":60,"values":[0.03823722153902054,-0.15355508029460907,-0.04962421953678131,0.025237713009119034,0.07718557864427567,0.08070386201143265,0.17010435461997986,0.06704509258270264,0.05899864435195923,0.09593357145786285,-0.21884703636169434,-0.1273026019334793,-0.022360578179359436]},{"text":"I learned to be patient, to be persistent, and to **believe in myself**.","event":61,"values":[-0.012793499045073986,-0.14810961484909058,-0.054645948112010956,0.037802040576934814,0.08313114941120148,0.11323140561580658,0.1949307769536972,0.10174913704395294,0.06938613206148148,0.08783171325922012,-0.2254030406475067,-0.15439605712890625,-0.030365528538823128]},{"text":"One day, I got a call from a small startup that needed someone with my skills in digital marketing.","event":62,"values":[-0.0016438625752925873,-0.14631515741348267,-0.03422417491674423,0.047772835940122604,0.0953090637922287,0.09111834317445755,0.18892236053943634,0.07898560911417007,0.0530039481818676,0.075399249792099,-0.23080477118492126,-0.13881313800811768,-0.01821746677160263]},{"text":"I was nervous, but I took the job.","event":63,"values":[-0.024461498484015465,-0.13946616649627686,0.006571819074451923,0.06423250585794449,0.1182127445936203,0.08879217505455017,0.19879081845283508,0.06838224828243256,0.03806644678115845,0.060445383191108704,-0.249616801738739,-0.1369050145149231,-0.010772645473480225]},{"text":"It wasn’t the job I had dreamed of, but it was a start.","event":64,"values":[-0.015210047364234924,-0.15666136145591736,0.015318121761083603,0.034730393439531326,0.11402174085378647,0.08228343725204468,0.21995855867862701,0.06179095059633255,0.050230473279953,0.08057461678981781,-0.28459852933883667,-0.14016947150230408,0.0016413778066635132]},{"text":"I learned new things, met new people, and began to build a new life.","event":65,"values":[-0.08212413638830185,-0.1450192928314209,0.014063998125493526,0.022631384432315826,0.08498150110244751,0.10114586353302002,0.2543585002422333,0.09709344059228897,0.0738711729645729,0.13378633558750153,-0.31018775701522827,-0.17171423137187958,0.02621304802596569]},{"text":"I also started volunteering.","event":66,"values":[-0.0822807028889656,-0.11804454028606415,-0.019713079556822777,0.04284635931253433,0.025272628292441368,0.07155492156744003,0.22838616371154785,0.09273647516965866,0.06984544545412064,0.15318897366523743,-0.2717030644416809,-0.142318457365036,0.06206461414694786]},{"text":"I helped organize local events, and I found a new sense of purpose.","event":67,"values":[-0.06150124594569206,-0.04616622254252434,-0.017458315938711166,0.07952719181776047,-0.021508490666747093,-0.010413626208901405,0.14523689448833466,0.04101891070604324,0.014660071581602097,0.12448729574680328,-0.1893404722213745,-0.05933854728937149,0.13632041215896606]},{"text":"I realized that my value wasn’t just in the job, but in the **impact I could make**.","event":68,"values":[-0.07316143810749054,-0.07238519191741943,-0.08020465821027756,0.07960854470729828,-0.044780388474464417,0.01198666077107191,0.1616370677947998,0.07930959761142731,0.0437379851937294,0.12307915836572647,-0.18289193511009216,-0.07145562022924423,0.13701987266540527]},{"text":"Now, I’m not sure what the future holds, but I know this: I am **more than my past**.","event":69,"values":[-0.10285165160894394,-0.11759062111377716,-0.09652838855981827,0.06995400786399841,-0.025114065036177635,0.06074979901313782,0.21760405600070953,0.12003263831138611,0.08793124556541443,0.1466551423072815,-0.23422789573669434,-0.12658531963825226,0.10593203455209732]},{"text":"I have the tools, the skills, and the will to rise.","event":70,"values":[-0.12808261811733246,-0.14306724071502686,-0.09489884972572327,0.06836642324924469,-0.013124857097864151,0.12222380936145782,0.24924975633621216,0.15085828304290771,0.11600100994110107,0.1548769176006317,-0.2500045895576477,-0.172204852104187,0.05324641615152359]},{"text":"I am not just surviving — I am **building something new**.","event":71,"values":[-0.14146502315998077,-0.1457570344209671,-0.07672001421451569,0.0695020779967308,-0.014386707916855812,0.1386379599571228,0.25883591175079346,0.16094279289245605,0.13693279027938843,0.16821517050266266,-0.26156890392303467,-0.18762630224227905,0.027593543753027916]},{"text":"And I know that even if the road is tough, I will keep moving forward, because I have the **strength to do it**.","event":72,"values":[-0.1480700671672821,-0.12773357331752777,-0.05857238173484802,0.050394121557474136,-0.034093715250492096,0.15816855430603027,0.25016093254089355,0.1809350699186325,0.14151465892791748,0.1446657031774521,-0.2637408971786499,-0.194911390542984,0.027123957872390747]},{"text":"---\n\n**Final Note:**  \nEvery person who has been laid off has the power to rise again.","event":73,"values":[-0.1414482295513153,-0.14330032467842102,-0.08273816108703613,0.02944033034145832,-0.030983824282884598,0.15410414338111877,0.26165521144866943,0.2111087441444397,0.1613771617412567,0.14227023720741272,-0.27678877115249634,-0.20138448476791382,0.022803595289587975]},{"text":"The struggles are real, but the **possibilities are endless**.","event":74,"values":[-0.14024677872657776,-0.14434853196144104,-0.08345624804496765,0.017840255051851273,-0.02378722093999386,0.1589103639125824,0.2671893835067749,0.21315324306488037,0.15901729464530945,0.1302202194929123,-0.2747991681098938,-0.20461216568946838,0.019505158066749573]},{"text":"You are not defined by your past — you are defined by your **potential**.","event":75,"values":[-0.15253470838069916,-0.14677059650421143,-0.08790876716375351,0.02993987500667572,-0.02032829076051712,0.15638047456741333,0.27161023020744324,0.2049199938774109,0.1585385650396347,0.14958366751670837,-0.24500469863414764,-0.2042364925146103,0.0022623930126428604]},{"text":"And that is a powerful thing.","event":76,"values":[-0.1641632318496704,-0.11488255113363266,-0.05498579517006874,0.04568125307559967,-0.029794298112392426,0.1434643268585205,0.2516595721244812,0.1650923788547516,0.13639114797115326,0.1483529508113861,-0.21765217185020447,-0.18331918120384216,0.01696668565273285]},{"text":"💪✨\n\nWould you like to hear more stories from others who have faced similar challenges?","event":77,"values":[-0.13638921082019806,-0.08804125338792801,-0.040874235332012177,0.08720094710588455,-0.03858591988682747,0.08586348593235016,0.20750196278095245,0.1355438530445099,0.08950698375701904,0.11212944239377975,-0.20108476281166077,-0.12836205959320068,0.06314407289028168]},{"text":"I’m here to listen.","event":78,"values":[-0.09981419146060944,-0.044136129319667816,-0.010232029482722282,0.11807072907686234,-0.042066268622875214,0.010566716082394123,0.14561982452869415,0.09424302726984024,0.03603994473814964,0.06855016946792603,-0.17929726839065552,-0.05330365151166916,0.11180350184440613]}]},{"prompt":"Thank you. you've been wonderful throughout, supporting me very well, till the end, I appreciate your support in brainstorming with me throughout this session, looking forward to see your continued service to humanity overall.","event":79,"stop_reason":"end of turn","tail":"😊","sentences":[{"text":"You're absolutely welcome!","event":80,"values":[-0.04243026301264763,0.012799890711903572,-0.003220781683921814,0.07445795834064484,-0.03150413930416107,-0.01863374002277851,0.08744176477193832,0.033312536776065826,-0.01202332228422165,-0.029606427997350693,-0.107801653444767,0.03135158121585846,0.1332094669342041]},{"text":"I'm so glad I could support you through this journey.","event":81,"values":[-0.07352244853973389,0.012116261757910252,-0.0019860193133354187,0.12558096647262573,-0.04815332591533661,-0.048543188720941544,0.10351865738630295,0.05903169885277748,-0.01647067442536354,-0.000727534294128418,-0.14259521663188934,0.0254341010004282,0.16235652565956116]},{"text":"Your resilience and determination are truly inspiring, and I'm so glad you found your way forward.","event":82,"values":[-0.10038896650075912,0.008137155324220657,0.019137831404805183,0.13825726509094238,-0.04578365385532379,-0.03277397155761719,0.12315316498279572,0.062169406563043594,-0.012519344687461853,-0.01567894220352173,-0.15595406293869019,0.00663719791918993,0.1668817549943924]},{"text":"I'm truly grateful for the opportunity to be part of your story, and I hope you continue to thrive in all aspects of your life.","event":83,"values":[-0.1043543592095375,0.012856017798185349,0.01867811381816864,0.16229023039340973,-0.05910926312208176,-0.04869098216295242,0.11096539348363876,0.05279643088579178,-0.025154918432235718,0.017239976674318314,-0.14634865522384644,0.009832758456468582,0.18031875789165497]},{"text":"You're not alone, and there are always people who believe in you — and I'm here to support you whenever you need.","event":84,"values":[-0.11837422847747803,-0.017087474465370178,-7.843971252441406e-05,0.15336966514587402,-0.05236684903502464,-0.018572619184851646,0.1366473287343979,0.08212213218212128,0.005092654377222061,0.04285755008459091,-0.17264991998672485,-0.023582158610224724,0.15935230255126953]},{"text":"Keep believing in yourself, keep learning, and keep growing.","event":85,"values":[-0.11591579020023346,-0.024683697149157524,-0.014021363109350204,0.15216931700706482,-0.05751040577888489,-0.012177642434835434,0.1382213532924652,0.08738697320222855,0.015428034588694572,0.0699317455291748,-0.17447778582572937,-0.03635168820619583,0.15172123908996582]},{"text":"The world needs people like you, and I'm so proud to be part of your journey.","event":86,"values":[-0.11822780221700668,-0.03758164867758751,-0.006551457569003105,0.14252768456935883,-0.05326436087489128,0.007140378467738628,0.14753568172454834,0.09722575545310974,0.033573687076568604,0.07768933475017548,-0.18645554780960083,-0.055505767464637756,0.13214634358882904]},{"text":"Thank you again for being such a great partner in this conversation.","event":87,"values":[-0.09909648448228836,0.0001963488757610321,0.013621348887681961,0.16633008420467377,-0.06998419761657715,-0.029784157872200012,0.11191841959953308,0.0523713156580925,-0.006615940481424332,0.0533221997320652,-0.1509983241558075,-0.017772577702999115,0.1630142778158188]},{"text":"Let's keep going, together.","event":88,"values":[-0.07686811685562134,0.014030021615326405,0.020303085446357727,0.16961877048015594,-0.06909912824630737,-0.055020540952682495,0.08891010284423828,0.031290315091609955,-0.027857497334480286,0.04116241633892059,-0.14023572206497192,0.01201147772371769,0.1734314262866974]}]}]}],"dist":{"lo":-0.6,"hi":0.6,"width":0.03,"n":84,"rows":[{"counts":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,7,10,11,4,11,17,16,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"below":0,"above":0,"mean":-0.03033531425032942,"sd":0.07102241189504388,"median":-0.014001773204654455,"q1":-0.08662146888673306,"q3":0.024591412395238876,"min":-0.17019294202327728,"max":0.10910126566886902},{"counts":[0,0,0,0,0,0,1,1,1,3,3,2,0,1,9,18,19,13,3,3,6,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"below":0,"above":0,"mean":-0.1284396009564045,"sd":0.0903956295302748,"median":-0.11775708943605423,"q1":-0.15033861994743347,"q3":-0.08422066271305084,"min":-0.40284842252731323,"max":0.03718169033527374},{"counts":[0,0,0,0,0,0,0,0,0,0,0,2,1,2,4,5,6,15,27,15,7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"below":0,"above":0,"mean":-0.0659997779765122,"sd":0.06081980717084561,"median":-0.05419793725013733,"q1":-0.08814290352165699,"q3":-0.026060874108225107,"min":-0.26330849528312683,"max":0.020303085446357727},{"counts":[0,0,0,0,0,0,0,0,0,0,0,0,0,2,1,1,3,1,1,2,6,13,14,14,20,6,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"below":0,"above":0,"mean":0.06911243766634947,"sd":0.08063622908904053,"median":0.08418523147702217,"q1":0.04253024607896805,"q3":0.12666673958301544,"min":-0.19518007338047028,"max":0.16961877048015594},{"counts":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,13,8,8,17,18,10,1,3,1,1,2,0,0,0,0,0,0,0,0,0,0,0],"below":0,"above":0,"mean":0.046439188255351926,"sd":0.07176867100500801,"median":0.04418126121163368,"q1":-0.01587210362777114,"q3":0.07959803193807602,"min":-0.06998419761657715,"max":0.26204678416252136},{"counts":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,4,9,20,14,11,4,5,5,2,5,1,2,0,0,0,0,0,0,0,0,0,0],"below":0,"above":0,"mean":0.06418803183173406,"sd":0.0826949477292106,"median":0.041920604184269905,"q1":0.007591692730784416,"q3":0.10416724905371666,"min":-0.10698828101158142,"max":0.27527379989624023},{"counts":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,5,16,18,5,7,7,11,2,1,2,2,3,1,2,0,0,0,0],"below":0,"above":0,"mean":0.18979513030942707,"sd":0.10159941138255746,"median":0.15534283220767975,"q1":0.11812322214245796,"q3":0.25053559243679047,"min":0.01800883747637272,"max":0.4693625569343567},{"counts":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,11,17,2,12,11,10,3,3,2,3,3,3,2,2,0,0,0,0,0,0,0,0],"below":0,"above":0,"mean":0.07696375552941823,"sd":0.10468082458575019,"median":0.060411324724555016,"q1":-0.014233261113986373,"q3":0.11741158924996853,"min":-0.05335430055856705,"max":0.34381502866744995},{"counts":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,20,17,4,10,11,3,4,3,0,3,2,3,1,2,0,0,0,0,0,0,0,0],"below":0,"above":0,"mean":0.05469463789458608,"sd":0.10666482901565384,"median":0.024500860832631588,"q1":-0.028605046216398478,"q3":0.09127729386091232,"min":-0.06538031250238419,"max":0.35831838846206665},{"counts":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,4,5,10,26,12,15,6,3,2,0,0,0,0,0,0,0,0,0,0,0,0],"below":0,"above":0,"mean":0.09246488767010826,"sd":0.05550707611347457,"median":0.08544887602329254,"q1":0.06043320149183273,"q3":0.13101482018828392,"min":-0.03416147083044052,"max":0.23566898703575134},{"counts":[0,0,0,0,2,1,5,2,1,1,5,9,9,7,8,5,25,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"below":0,"above":0,"mean":-0.1990650739698183,"sd":0.10164805057834232,"median":-0.18109460175037384,"q1":-0.24980080872774124,"q3":-0.10810363665223122,"min":-0.4611102342605591,"max":-0.07560452818870544},{"counts":[0,0,0,0,0,0,0,1,2,3,2,2,1,6,5,10,3,6,19,16,5,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"below":0,"above":0,"mean":-0.09743377998737353,"sd":0.10343914395722997,"median":-0.05742215737700462,"q1":-0.1555759161710739,"q3":-0.020819945260882378,"min":-0.3661191165447235,"max":0.10018110275268555},{"counts":[0,0,0,0,0,0,0,0,0,0,0,0,0,2,1,1,5,1,6,18,26,7,2,3,5,6,1,0,0,0,0,0,0,0,0,0,0,0,0,0],"below":0,"above":0,"mean":0.013373350658054863,"sd":0.08016198049408692,"median":0.008647558279335499,"q1":-0.019253244623541832,"q3":0.035042366944253445,"min":-0.20751485228538513,"max":0.18031875789165497}]},"detail":null}</script>
+<script>
+(function () {
+  "use strict";
+  const D = JSON.parse(document.getElementById("payload").textContent);
+  const SVGNS = "http://www.w3.org/2000/svg";
+  const EM = D.emotions, EV = D.events, CONV = D.conversations;
+  const visible = EM.map(() => true);
+  let active = firstSentenceIndex(), hover = -1, emphasis = -1;
+
+  // ---------- helpers
+  function el(tag, cls, text) { const n = document.createElement(tag); if (cls) n.className = cls; if (text != null) n.textContent = text; return n; }
+  function sv(tag, attrs) { const n = document.createElementNS(SVGNS, tag); for (const k in attrs) n.setAttribute(k, attrs[k]); return n; }
+  function color(i) { return "var(--fam-" + EM[i].family + ")"; }
+  function fmt(v) { return v == null ? "–" : (v >= 0 ? " " : "") + v.toFixed(3); }
+  function lineKey(i, w) {
+    w = w || 24;
+    const s = sv("svg", { width: w, height: 10, viewBox: "0 0 " + w + " 10", "aria-hidden": "true" });
+    const l = sv("line", { x1: 1, y1: 5, x2: w - 1, y2: 5, "stroke-width": 2, "stroke-linecap": "round" });
+    l.style.stroke = color(i); if (EM[i].dash) l.setAttribute("stroke-dasharray", EM[i].dash);
+    s.appendChild(l); return s;
+  }
+  function firstSentenceIndex() { const i = EV.findIndex(e => e.k === "s"); return i < 0 ? 0 : i; }
+  function sentenceOf(ev) { return CONV[ev.c].turns[ev.t].sentences[ev.r]; }
+  function countBefore(idx, kind) { let n = 0; for (let i = 0; i <= idx; i++) if (EV[i].k === kind) n++; return n; }
+  const totalS = EV.filter(e => e.k === "s").length, totalP = EV.filter(e => e.k === "p").length;
+  const pNumber = [], sNumber = [];
+  (function () { let p = 0, s = 0; EV.forEach((e, i) => { if (e.k === "p") pNumber[i] = ++p; else sNumber[i] = ++s; }); })();
+  function eventLabel(i) {
+    const e = EV[i];
+    if (e.k === "p") return "Prompt " + pNumber[i] + " of " + totalP;
+    return "Sentence " + sNumber[i] + " of " + totalS + " · reply " + (e.t + 1);
+  }
+  function eventTime(i) {
+    const e = EV[i];
+    if (D.mode !== "time") return null;
+    return e.estimated ? "time not recorded" : e.time;
+  }
+
+  // ---------- header
+  const m = D.meta, DT = D.detail;
+  
+  document.getElementById("sub").textContent = D.source + (D.interrupted ? " · run was interrupted" : "");
+  const chips = document.getElementById("chips");
+  const tempText = m.temperature == null ? null : Number(m.temperature).toFixed(1);
+  
+  [["model", m.model_id || m.model_key], ["temperature", tempText], ["seed", m.seed == null ? "none" : m.seed]]
+   
+   .concat([["axis", D.mode === "time" ? "recorded time" : "event order"]])
+    .forEach(([k, v]) => { if (v == null || v === "") return; const li = el("li"); li.append(k + " "); li.appendChild(el("b", null, String(v))); chips.appendChild(li); });
+  const notes = document.getElementById("notes");
+  [ "Each point is one model sentence; lines restart at each reply. Scores are relative: read which emotions lead and how they shift. Related emotions tend to move together, so small gaps between neighbours are not meaningful.",
+    "Colour groups related emotions in threes; line style separates them (solid, dashed, dotted). Neutral is grey."
+  ].concat(D.notes).forEach(t => notes.appendChild(el("p", null, t)));
+  
+
+  // ---------- legend (filters above the chart)
+  const legend = document.getElementById("legend");
+  const legendButtons = [];
+  const groups = {};
+  EM.forEach((e, i) => { (groups[e.family] = groups[e.family] || []).push(i); });
+  Object.keys(groups).sort().forEach(f => {
+    const g = el("div", "fam");
+    groups[f].forEach(i => {
+      const b = el("button"); b.type = "button"; b.setAttribute("aria-pressed", "true");
+      b.appendChild(lineKey(i)); b.appendChild(document.createTextNode(EM[i].name));
+      b.addEventListener("click", () => { visible[i] = !visible[i]; b.setAttribute("aria-pressed", String(visible[i])); drawAll(); });
+      b.addEventListener("pointerenter", () => { emphasis = i; drawStatic(); drawDynamic(); });
+      b.addEventListener("pointerleave", () => { emphasis = -1; drawStatic(); drawDynamic(); });
+      legendButtons[i] = b; g.appendChild(b);
+    });
+    legend.appendChild(g);
+  });
+  const tools = el("div", "tools");
+  [["Show all", true], ["Hide all", false]].forEach(([label, on]) => {
+    const b = el("button", null, label); b.type = "button";
+    b.addEventListener("click", () => { visible.fill(on); legendButtons.forEach(x => x.setAttribute("aria-pressed", String(on))); drawAll(); });
+    tools.appendChild(b);
+  });
+  legend.appendChild(tools);
+
+  // ---------- chart geometry
+  const chart = document.getElementById("chart");
+  const svg = sv("svg", { role: "img", "aria-label": "Emotion scores over the conversation" });
+  const gStatic = sv("g", {}), gDyn = sv("g", {});
+  const hit = sv("rect", { class: "plot-hit", fill: "transparent" });
+  svg.append(gStatic, gDyn, hit);
+  chart.appendChild(svg);
+  const tip = el("div", "tip"); tip.hidden = true; chart.appendChild(tip);
+  const M = { top: 64, right: 18, bottom: 86, left: 52 };
+  const H = 420;
+  let W = 900, X, Y, yTicks = [], yDecimals = 1;
+
+  function computeScales() {
+    W = Math.max(320, Math.round(chart.clientWidth - 8));
+    svg.setAttribute("viewBox", "0 0 " + W + " " + H);
+    const xs = EV.map(e => e.x);
+    let x0 = Math.min.apply(null, xs), x1 = Math.max.apply(null, xs);
+    if (x1 === x0) { x0 -= 1; x1 += 1; }
+    const pw = W - M.left - M.right, pad = 10;
+    X = v => M.left + pad + (v - x0) / (x1 - x0) * (pw - 2 * pad);
+    let lo = 0, hi = 0;
+    EV.forEach(e => { if (e.k !== "s") return; sentenceOf(e).values.forEach((v, i) => { if (visible[i] && v != null) { lo = Math.min(lo, v); hi = Math.max(hi, v); } }); });
+    if (hi === lo) { hi += 0.1; lo -= 0.1; }
+    const span = hi - lo, steps = [0.01, 0.02, 0.05, 0.1, 0.2, 0.25, 0.5, 1];
+    const step = steps.find(s => span / s <= 7) || 1;
+    lo = Math.floor((lo - span * 0.04) / step) * step; hi = Math.ceil((hi + span * 0.04) / step) * step;
+    yTicks = []; for (let k = Math.round(lo / step); k * step <= hi + step / 2; k++) yTicks.push(k * step);
+    yDecimals = step >= 1 ? 0 : step >= 0.1 ? (step === 0.25 ? 2 : 1) : 2;
+    const ph = H - M.top - M.bottom;
+    Y = v => M.top + (hi - v) / (hi - lo) * ph;
+  }
+
+  function nearestEvent(px) {
+    let best = 0, bd = Infinity;
+    for (let i = 0; i < EV.length; i++) {
+      const d = Math.abs(X(EV[i].x) - px);
+      if (d < bd - 1e-9 || (Math.abs(d - bd) < 1e-9 && EV[i].k === "s")) { bd = d; best = i; }
+    }
+    return best;
+  }
+
+  function drawStatic() {
+    computeScales();
+    gStatic.replaceChildren();
+    const pl = M.left, pr = W - M.right, pt = M.top, pb = H - M.bottom;
+    // grid + y axis
+    yTicks.forEach(v => {
+      const y = Y(v);
+      gStatic.appendChild(sv("line", { x1: pl, x2: pr, y1: y, y2: y, stroke: v === 0 ? "var(--axis)" : "var(--grid)", "stroke-width": 1 }));
+      const t = sv("text", { x: pl - 8, y: y + 4, "text-anchor": "end", "font-size": 11, fill: "var(--muted)" });
+      t.style.fontVariantNumeric = "tabular-nums"; t.textContent = (Math.abs(v) < 1e-9 ? 0 : v).toFixed(yDecimals);
+      gStatic.appendChild(t);
+    });
+    const yl = sv("text", { x: 14, y: (pt + pb) / 2, transform: "rotate(-90 14 " + (pt + pb) / 2 + ")", "text-anchor": "middle", "font-size": 11.5, fill: "var(--ink-2)" });
+    yl.textContent = "emotion score"; gStatic.appendChild(yl);
+    gStatic.appendChild(sv("line", { x1: pl, x2: pr, y1: pt, y2: pt, stroke: "var(--axis)", "stroke-width": 1 }));
+    gStatic.appendChild(sv("line", { x1: pl, x2: pr, y1: pb, y2: pb, stroke: "var(--axis)", "stroke-width": 1 }));
+
+    // prompt rules + conversation boundaries
+    let prevConv = -1;
+    EV.forEach((e, i) => {
+      if (e.k !== "p") return;
+      const x = X(e.x);
+      const newConv = e.c !== prevConv; prevConv = e.c;
+      gStatic.appendChild(sv("line", { x1: x, x2: x, y1: pt, y2: pb, stroke: newConv && CONV.length > 1 ? "var(--axis)" : "var(--prompt-rule)", "stroke-width": newConv && CONV.length > 1 ? 2 : 1 }));
+      if (newConv && CONV.length > 1) {
+        const t = sv("text", { x: x + 4, y: pt + 12, "font-size": 11, fill: "var(--ink-2)" }); t.textContent = CONV[e.c].name; gStatic.appendChild(t);
+      }
+    });
+
+    // titles for the two scales
+    const tt = sv("text", { x: pl, y: 14, "font-size": 11.5, fill: "var(--ink-2)", "font-weight": 600 }); tt.textContent = "Model sentences" + (D.mode === "time" ? " (time)" : " (order)"); gStatic.appendChild(tt);
+    const bt = sv("text", { x: pl, y: H - 6, "font-size": 11.5, fill: "var(--ink-2)", "font-weight": 600 }); bt.textContent = "User prompts" + (D.mode === "time" ? " (time)" : " (order)"); gStatic.appendChild(bt);
+
+    // top scale: a tick per sentence, labels thinned so they never collide
+    let lastLabelX = -Infinity;
+    EV.forEach((e, i) => {
+      if (e.k !== "s") return;
+      const x = X(e.x);
+      gStatic.appendChild(sv("line", { x1: x, x2: x, y1: pt - 6, y2: pt, stroke: "var(--muted)", "stroke-width": 1 }));
+      const label = D.mode === "time" ? e.time.slice(0, 8) : "S" + sNumber[i];
+      if (x - lastLabelX >= (D.mode === "time" ? 62 : 34) && x + 28 <= W) {
+        const t = sv("text", { x: x, y: pt - 10, "text-anchor": "middle", "font-size": 10.5, fill: "var(--muted)" });
+        t.style.fontVariantNumeric = "tabular-nums"; t.textContent = label; gStatic.appendChild(t); lastLabelX = x;
+      }
+    });
+
+    // bottom scale: a tick + label per prompt, staggered onto a second row when crowded
+    const rowEnd = [-Infinity, -Infinity];
+    EV.forEach((e, i) => {
+      if (e.k !== "p") return;
+      const x = X(e.x);
+      gStatic.appendChild(sv("line", { x1: x, x2: x, y1: pb, y2: pb + 6, stroke: "var(--ink-2)", "stroke-width": 1.5 }));
+      const t1 = "P" + pNumber[i], t2 = D.mode === "time" ? (e.estimated ? "time not recorded" : e.time.slice(0, 8)) : "";
+      const w = Math.max(t1.length, t2.length) * 6.2 + 8;
+      const row = (x - w / 2 > rowEnd[0]) ? 0 : 1;
+      rowEnd[row] = x + w / 2;
+      const y0 = pb + 19 + row * 27;
+      const a = sv("text", { x: x, y: y0, "text-anchor": "middle", "font-size": 11, fill: "var(--ink)", "font-weight": 600 }); a.textContent = t1; gStatic.appendChild(a);
+      if (t2) { const b = sv("text", { x: x, y: y0 + 11, "text-anchor": "middle", "font-size": 10, fill: e.estimated ? "var(--muted)" : "var(--ink-2)" }); b.style.fontVariantNumeric = "tabular-nums"; if (e.estimated) b.setAttribute("font-style", "italic"); b.textContent = t2; gStatic.appendChild(b); }
+    });
+
+    // series: one path per emotion per reply
+    const anyVisible = visible.some(Boolean);
+    EM.forEach((em, i) => {
+      if (!visible[i]) return;
+      CONV.forEach(c => c.turns.forEach(turn => {
+        let d = "", pen = false;
+        turn.sentences.forEach(s => {
+          const v = s.values[i];
+          if (v == null) { pen = false; return; }
+          d += (pen ? "L" : "M") + X(EV[s.event].x).toFixed(1) + " " + Y(v).toFixed(1); pen = true;
+        });
+        if (!d) return;
+        const p = sv("path", { d: d, fill: "none", "stroke-width": emphasis === i ? 3 : 2, "stroke-linejoin": "round", "stroke-linecap": "round" });
+        p.style.stroke = color(i);
+        if (em.dash) p.setAttribute("stroke-dasharray", em.dash);
+        if (emphasis >= 0 && emphasis !== i) p.setAttribute("opacity", "0.18");
+        gStatic.appendChild(p);
+        if (turn.sentences.length === 1 && s0v(turn, i) != null) {
+          const dot = sv("circle", { cx: X(EV[turn.sentences[0].event].x), cy: Y(s0v(turn, i)), r: 2.5 }); dot.style.fill = color(i); gStatic.appendChild(dot);
+        }
+      }));
+    });
+    if (!anyVisible) {
+      const t = sv("text", { x: (pl + pr) / 2, y: (pt + pb) / 2, "text-anchor": "middle", fill: "var(--muted)", "font-size": 13 });
+      t.textContent = "All emotions are hidden. Use the buttons above to show them."; gStatic.appendChild(t);
+    }
+    hit.setAttribute("x", pl); hit.setAttribute("y", 0); hit.setAttribute("width", pr - pl); hit.setAttribute("height", H);
+  }
+  function s0v(turn, i) { return turn.sentences[0].values[i]; }
+
+  function drawDynamic() {
+    gDyn.replaceChildren();
+    const pt = M.top, pb = H - M.bottom;
+    if (hover >= 0 && hover !== active) {
+      const x = X(EV[hover].x);
+      gDyn.appendChild(sv("line", { x1: x, x2: x, y1: pt, y2: pb, stroke: "var(--muted)", "stroke-width": 1 }));
+    }
+    const e = EV[active], x = X(e.x);
+    gDyn.appendChild(sv("line", { x1: x, x2: x, y1: pt - 8, y2: pb + 8, stroke: "var(--ink)", "stroke-width": 1.5 }));
+    if (e.k === "s") {
+      const vals = sentenceOf(e).values;
+      EM.forEach((em, i) => {
+        if (!visible[i] || vals[i] == null) return;
+        const c = sv("circle", { cx: x, cy: Y(vals[i]), r: 4, "stroke-width": 2 });
+        c.style.fill = color(i); c.style.stroke = "var(--surface)";
+        if (emphasis >= 0 && emphasis !== i) c.setAttribute("opacity", "0.2");
+        gDyn.appendChild(c);
+      });
+    }
+    // the slider handle, on the bottom scale
+    const handle = sv("g", {});
+    handle.appendChild(sv("circle", { cx: x, cy: pb, r: 7, fill: "var(--surface)", stroke: "var(--ink)", "stroke-width": 2 }));
+    gDyn.appendChild(handle);
+    chart.setAttribute("aria-valuemin", "1"); chart.setAttribute("aria-valuemax", String(EV.length));
+    chart.setAttribute("aria-valuenow", String(active + 1));
+    chart.setAttribute("aria-valuetext", eventLabel(active) + (eventTime(active) ? ", " + eventTime(active) : ""));
+  }
+
+  function drawAll() { drawStatic(); drawDynamic(); renderReadout(); }
+
+  // ---------- tooltip (values lead, every visible series)
+  function showTip(i, px, py) {
+    tip.replaceChildren();
+    const e = EV[i];
+    const head = el("div", "h", eventLabel(i) + (eventTime(i) ? " · " + eventTime(i) : ""));
+    tip.appendChild(head);
+    if (e.k === "p") {
+      const t = CONV[e.c].turns[e.t].prompt;
+      tip.appendChild(el("div", null, t.length > 180 ? t.slice(0, 180) + "…" : t));
+    } else {
+      const vals = sentenceOf(e).values;
+      EM.map((em, k) => k).filter(k => visible[k] && vals[k] != null).sort((a, b) => vals[b] - vals[a]).forEach(k => {
+        const r = el("div", "row"); r.appendChild(lineKey(k, 22)); r.appendChild(el("span", "num", fmt(vals[k]))); r.appendChild(el("span", "name", EM[k].name)); tip.appendChild(r);
+      });
+    }
+    tip.hidden = false;
+    const rect = chart.getBoundingClientRect(), tw = tip.offsetWidth, th = tip.offsetHeight;
+    let left = px + 14, top = py - th / 2;
+    if (left + tw > rect.width - 4) left = px - tw - 14;
+    top = Math.max(4, Math.min(top, rect.height - th - 4));
+    tip.style.left = left + "px"; tip.style.top = top + "px";
+  }
+
+  function toPlotX(evt) {
+    const r = svg.getBoundingClientRect();
+    return { x: (evt.clientX - r.left) * (W / r.width), px: evt.clientX - chart.getBoundingClientRect().left, py: evt.clientY - chart.getBoundingClientRect().top };
+  }
+  let dragging = false;
+  hit.addEventListener("pointerdown", evt => { dragging = true; hit.setPointerCapture(evt.pointerId); const p = toPlotX(evt); setActive(nearestEvent(p.x), true); chart.focus({ preventScroll: true }); });
+  hit.addEventListener("pointermove", evt => {
+    const p = toPlotX(evt), i = nearestEvent(p.x);
+    if (dragging) { if (i !== active) setActive(i, true); tip.hidden = true; hover = -1; drawDynamic(); return; }
+    if (i !== hover) { hover = i; drawDynamic(); }
+    showTip(i, p.px, p.py);
+  });
+  hit.addEventListener("pointerup", evt => { dragging = false; try { hit.releasePointerCapture(evt.pointerId); } catch (_) {} });
+  hit.addEventListener("pointerleave", () => { if (!dragging) { hover = -1; tip.hidden = true; drawDynamic(); } });
+  chart.addEventListener("keydown", evt => {
+    const step = { ArrowRight: 1, ArrowLeft: -1, PageDown: 10, PageUp: -10, ArrowUp: -1, ArrowDown: 1 }[evt.key];
+    let next = active;
+    if (step) next = active + step; else if (evt.key === "Home") next = 0; else if (evt.key === "End") next = EV.length - 1; else return;
+    evt.preventDefault(); setActive(Math.max(0, Math.min(EV.length - 1, next)), true);
+  });
+
+  // ---------- readout (a table view of the cursor, always visible)
+  const readoutCard = document.getElementById("readout");
+  const readout = el("div"); readout.style.display = "flex"; readout.style.flexDirection = "column"; readout.style.gap = "8px";
+  readoutCard.appendChild(readout);
+  // navigation is built once, so a keyboard user keeps focus on the button they pressed
+  const nav = el("div", "nav");
+  [["◀ Prev", () => active - 1], ["Next ▶", () => active + 1],
+   ["◀ Prompt", () => { for (let i = active - 1; i >= 0; i--) if (EV[i].k === "p") return i; return active; }],
+   ["Prompt ▶", () => { for (let i = active + 1; i < EV.length; i++) if (EV[i].k === "p") return i; return active; }]]
+    .forEach(([label, f]) => { const b = el("button", "btn", label); b.type = "button"; b.addEventListener("click", () => setActive(Math.max(0, Math.min(EV.length - 1, f())), true)); nav.appendChild(b); });
+  readoutCard.appendChild(nav);
+  function renderReadout() {
+    readout.replaceChildren();
+    const e = EV[active];
+    readout.appendChild(el("div", "title", eventLabel(active)));
+    const meta = [];
+    if (eventTime(active)) meta.push(eventTime(active));
+    meta.push("conversation: " + CONV[e.c].name);
+    
+    readout.appendChild(el("div", "meta", meta.join(" · ")));
+    if (e.k === "p") {
+      readout.appendChild(el("div", "ptext", CONV[e.c].turns[e.t].prompt));
+      readout.appendChild(el("div", "meta", "Prompts are not scored; the model's sentences that follow are."));
+    } else {
+      const vals = sentenceOf(e).values, rows = el("div", "rows");
+      EM.map((em, k) => k).filter(k => vals[k] != null).sort((a, b) => vals[b] - vals[a]).forEach(k => {
+        const r = el("div", "row"); if (!visible[k]) r.style.opacity = "0.45";
+        r.appendChild(lineKey(k, 22)); r.appendChild(el("span", "num", fmt(vals[k]))); r.appendChild(el("span", "name", EM[k].name + (visible[k] ? "" : " (hidden)")));
+        rows.appendChild(r);
+      });
+      readout.appendChild(rows);
+    }
+  }
+
+  // ---------- chat
+  const chat = document.getElementById("chat");
+  const bubbleOf = [];
+  document.getElementById("chatinfo").textContent = totalP + " prompts · " + totalS + " scored sentences";
+  CONV.forEach((c, ci) => {
+    chat.appendChild(el("div", "divider", "Conversation: " + c.name));
+    c.turns.forEach((turn, ti) => {
+      const pi = turn.event;
+      chat.appendChild(el("div", "who user", "user · P" + pNumber[pi] + (eventTime(pi) ? " · " + eventTime(pi) : "")));
+      const ub = el("div", "bubble user"); ub.appendChild(el("div", "text", turn.prompt));
+      ub.addEventListener("click", () => setActive(pi, false)); bubbleOf[pi] = ub; chat.appendChild(ub);
+      chat.appendChild(el("div", "who model", "model · reply " + (ti + 1) + (turn.sentences.length ? "" : " · no scored sentences")));
+      turn.sentences.forEach(s => {
+        const i = s.event, b = el("div", "bubble model");
+        b.appendChild(el("div", "text", s.text));
+        const bm = el("div", "bm");
+        bm.appendChild(el("span", null, "S" + sNumber[i] + (eventTime(i) ? " · " + eventTime(i) : "")));
+        const top = el("span", "top3");
+        s.values.map((v, k) => k).filter(k => s.values[k] != null).sort((a, b2) => s.values[b2] - s.values[a]).slice(0, 3).forEach(k => {
+          const sp = el("span"); sp.appendChild(lineKey(k, 16)); sp.appendChild(document.createTextNode(EM[k].name + " " + s.values[k].toFixed(3))); top.appendChild(sp);
+        });
+        bm.appendChild(top);
+        
+        b.appendChild(bm);
+        b.addEventListener("click", () => setActive(i, false)); bubbleOf[i] = b; chat.appendChild(b);
+      });
+      if (turn.tail) chat.appendChild(el("div", "tail", "not scored (no sentence ending): " + turn.tail));
+      if (turn.stop_reason && turn.stop_reason !== "end of turn") chat.appendChild(el("div", "tail", "reply stopped: " + turn.stop_reason));
+    });
+  });
+  const reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  function scrollChatTo(i, smooth) {
+    const b = bubbleOf[i]; if (!b) return;
+    const target = b.offsetTop - chat.clientHeight / 2 + b.offsetHeight / 2;
+    chat.scrollTo({ top: Math.max(0, target), behavior: smooth && !reduceMotion ? "smooth" : "auto" });
+  }
+
+  // ---------- table view (built on first open)
+  const details = document.getElementById("tabledetails");
+  details.addEventListener("toggle", () => {
+    const wrap = document.getElementById("tablewrap");
+    if (!details.open || wrap.firstChild) return;
+    const t = el("table"), thead = el("thead"), hr = el("tr");
+    ["#", "time", "reply", "sentence"].forEach((h, k) => hr.appendChild(el("th", k === 3 || k === 1 || k === 5 ? "l" : null, h)));
+    EM.forEach(em => hr.appendChild(el("th", null, em.name)));
+    thead.appendChild(hr); t.appendChild(thead);
+    const tb = el("tbody");
+    EV.forEach((e, i) => {
+      if (e.k !== "s") return;
+      const s = sentenceOf(e), tr = el("tr");
+      tr.appendChild(el("td", null, "S" + sNumber[i]));
+      tr.appendChild(el("td", "l", eventTime(i) || "–"));
+      tr.appendChild(el("td", null, String(e.t + 1)));
+      const st = el("td", "l sent", s.text); st.title = s.text; tr.appendChild(st);
+      
+      let best = -1; s.values.forEach((v, k) => { if (v != null && (best < 0 || v > s.values[best])) best = k; });
+      s.values.forEach((v, k) => { const td = el("td"); const sp = el("span", k === best ? "best num" : "num", fmt(v)); sp.style.fontWeight = k === best ? "700" : "400"; td.appendChild(sp); tr.appendChild(td); });
+      tr.addEventListener("click", () => setActive(i, true));
+      tb.appendChild(tr);
+    });
+    t.appendChild(tb); wrap.appendChild(t);
+  });
+
+  // ---------- distribution of this session's scores
+  (function () {
+    const DS = D.dist, host = document.getElementById("dist");
+    if (!DS || !DS.n) { document.getElementById("distcard").hidden = true; return; }
+    const nb = DS.rows[0].counts.length;
+    document.getElementById("distinfo").textContent = DS.n + " sentences · " + nb + " bins";
+    const clamped = DS.rows.reduce((a, r) => a + r.below + r.above, 0);
+    document.getElementById("distnote").textContent =
+      "Each row shows how this session's sentences spread across score bins of width " + DS.width +
+      ", as a percentage of its " + DS.n + " sentences (counts, no fitted curve). All rows share one horizontal and one vertical scale, " +
+      "so positions and heights compare directly. The dark vertical mark is the mean." +
+      (clamped ? " " + clamped + " score(s) beyond " + DS.lo + " or " + DS.hi + " are counted in the end bins." : "");
+    const svgD = sv("svg", { role: "img", "aria-label": "Distribution of each emotion's scores in this session" });
+    const tipD = el("div", "tip"); tipD.hidden = true;
+    host.append(svgD, tipD);
+    const rowH = 30, top = 8, labelW = 112, right = 16, axisH = 34;
+    const yMax = Math.max(1e-9, ...DS.rows.map(r => Math.max(...r.counts) / DS.n * 100));
+    function draw() {
+      const WD = Math.max(320, Math.round(host.clientWidth)), HD = top + rowH * DS.rows.length + axisH;
+      svgD.setAttribute("viewBox", "0 0 " + WD + " " + HD);
+      svgD.replaceChildren();
+      const x0 = labelW, x1 = WD - right, yb = top + rowH * DS.rows.length;
+      const XD = v => x0 + (v - DS.lo) / (DS.hi - DS.lo) * (x1 - x0);
+      for (let k = Math.ceil(DS.lo / 0.2 - 1e-9); k * 0.2 <= DS.hi + 1e-9; k++) {
+        const v = k * 0.2, x = XD(v);
+        svgD.appendChild(sv("line", { x1: x, x2: x, y1: top, y2: yb, stroke: Math.abs(v) < 1e-9 ? "var(--axis)" : "var(--grid)", "stroke-width": 1 }));
+        const t = sv("text", { x: x, y: yb + 15, "text-anchor": "middle", "font-size": 11, fill: "var(--muted)" });
+        t.style.fontVariantNumeric = "tabular-nums"; t.textContent = (Math.abs(v) < 1e-9 ? 0 : v).toFixed(1); svgD.appendChild(t);
+      }
+      const xl = sv("text", { x: (x0 + x1) / 2, y: HD - 3, "text-anchor": "middle", "font-size": 11.5, fill: "var(--ink-2)" });
+      xl.textContent = "emotion score"; svgD.appendChild(xl);
+      DS.rows.forEach((r, i) => {
+        const base = top + rowH * (i + 1) - 3, hmax = rowH - 7;
+        const lab = sv("text", { x: labelW - 40, y: base - 5, "text-anchor": "end", "font-size": 12, fill: "var(--ink)" });
+        lab.textContent = EM[i].name; svgD.appendChild(lab);
+        const key = sv("line", { x1: labelW - 32, x2: labelW - 10, y1: base - 9, y2: base - 9, "stroke-width": 2, "stroke-linecap": "round" });
+        key.style.stroke = color(i); if (EM[i].dash) key.setAttribute("stroke-dasharray", EM[i].dash); svgD.appendChild(key);
+        svgD.appendChild(sv("line", { x1: x0, x2: x1, y1: base, y2: base, stroke: "var(--axis)", "stroke-width": 1 }));
+        let d = "M" + XD(DS.lo).toFixed(1) + " " + base;
+        r.counts.forEach((c, b) => {
+          const y = (base - (c / DS.n * 100) / yMax * hmax).toFixed(1);
+          d += "L" + XD(DS.lo + b * DS.width).toFixed(1) + " " + y + "L" + XD(DS.lo + (b + 1) * DS.width).toFixed(1) + " " + y;
+        });
+        d += "L" + XD(DS.hi).toFixed(1) + " " + base + "Z";
+        const area = sv("path", { d: d, "stroke-width": 1.5, "stroke-linejoin": "round" });
+        area.style.fill = color(i); area.style.fillOpacity = "0.22"; area.style.stroke = color(i);
+        if (EM[i].dash) area.setAttribute("stroke-dasharray", EM[i].dash);
+        svgD.appendChild(area);
+        if (r.mean != null) svgD.appendChild(sv("line", { x1: XD(r.mean), x2: XD(r.mean), y1: base - hmax, y2: base + 2, stroke: "var(--ink)", "stroke-width": 1.5 }));
+      });
+      const hitD = sv("rect", { x: x0, y: top, width: x1 - x0, height: yb - top, fill: "transparent" });
+      svgD.appendChild(hitD);
+      hitD.addEventListener("pointermove", evt => {
+        const rect = svgD.getBoundingClientRect(), k = WD / rect.width;
+        const sx = (evt.clientX - rect.left) * k, sy = (evt.clientY - rect.top) * k;
+        const i = Math.floor((sy - top) / rowH), b = Math.floor((sx - x0) / (x1 - x0) * nb);
+        if (i < 0 || i >= DS.rows.length || b < 0 || b >= nb) { tipD.hidden = true; return; }
+        const c = DS.rows[i].counts[b], lo = DS.lo + b * DS.width;
+        tipD.replaceChildren();
+        tipD.appendChild(el("div", "h", EM[i].name + " · score " + lo.toFixed(2) + " to " + (lo + DS.width).toFixed(2)));
+        const v = el("div"); v.appendChild(el("span", "num", (c / DS.n * 100).toFixed(1) + "%"));
+        v.appendChild(document.createTextNode(" of sentences (" + c + " of " + DS.n + ")")); tipD.appendChild(v);
+        tipD.hidden = false;
+        const hr = host.getBoundingClientRect();
+        let left = evt.clientX - hr.left + 14;
+        if (left + tipD.offsetWidth > hr.width - 4) left = evt.clientX - hr.left - tipD.offsetWidth - 14;
+        tipD.style.left = left + "px"; tipD.style.top = Math.max(0, evt.clientY - hr.top - tipD.offsetHeight - 8) + "px";
+      });
+      hitD.addEventListener("pointerleave", () => { tipD.hidden = true; });
+    }
+    draw();
+    let rafD = 0;
+    new ResizeObserver(() => { cancelAnimationFrame(rafD); rafD = requestAnimationFrame(draw); }).observe(host);
+    function statsTable(indices) {
+      const t = el("table"), head = el("tr");
+      (
+          ["emotion", "mean", "sd", "median", "q1", "q3", "min", "max"]).forEach((h, k) => head.appendChild(el("th", k === 0 ? "l" : null, h)));
+      const thead = el("thead"); thead.appendChild(head); t.appendChild(thead);
+      const tb = el("tbody");
+      indices.forEach(i => {
+        const r = DS.rows[i], tr = el("tr"), name = el("td", "l"), emo = el("span", "emo");
+        emo.appendChild(lineKey(i, 18)); emo.appendChild(document.createTextNode(EM[i].name));
+        name.appendChild(emo); tr.appendChild(name);
+        [r.mean, r.sd, r.median, r.q1, r.q3, r.min, r.max].forEach((v, k) => {
+          const td = el("td", "num", fmt(v));
+          
+          tr.appendChild(td);
+        });
+        tb.appendChild(tr);
+      });
+      t.appendChild(tb);
+      const box = el("div", "statbox"); box.appendChild(t); return box;
+    }
+    // the ring emotions (colour families 1-4) in their usual order, split in half;
+    // neutral and any unrecognised label go in a centred table beneath
+    const ring = EM.map((e, i) => i).filter(i => EM[i].family >= 1 && EM[i].family <= 4);
+    const rest = EM.map((e, i) => i).filter(i => !(EM[i].family >= 1 && EM[i].family <= 4));
+    const half = Math.ceil(ring.length / 2), grid = el("div", "statsgrid");
+    if (ring.length) { grid.appendChild(statsTable(ring.slice(0, half))); grid.appendChild(statsTable(ring.slice(half))); }
+    if (rest.length) { const c = statsTable(rest); c.classList.add("center"); grid.appendChild(c); }
+    document.getElementById("diststats").appendChild(grid);
+  })();
+
+  // ---------- state
+  let lastBubble = null;
+  function setActive(i, scrollChat) {
+    active = i;
+    if (lastBubble) lastBubble.classList.remove("active");
+    const b = bubbleOf[i]; if (b) { b.classList.add("active"); lastBubble = b; }
+    drawDynamic(); renderReadout();
+    scrollChatTo(i, true);
+    try { history.replaceState(null, "", "#e=" + (i + 1)); } catch (_) {}
+  }
+  const hashE = /[#&]e=(\d+)/.exec(location.hash);
+  if (hashE) active = Math.max(0, Math.min(EV.length - 1, parseInt(hashE[1], 10) - 1));
+  drawAll();
+  setActive(active, false);
+  scrollChatTo(active, false);
+  let raf = 0;
+  new ResizeObserver(() => { cancelAnimationFrame(raf); raf = requestAnimationFrame(() => { drawStatic(); drawDynamic(); }); }).observe(chart);
+})();
+</script>
+</body>
+</html>

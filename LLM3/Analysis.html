@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Analysis.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> or <div class="page"></div> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+<style>
+a, a:visited { color: #0645ad; text-decoration: underline; }
+a:hover { color: #0b0080; }
+.mermaid { text-align: center; }
+.mermaid svg { display: block; margin: 0 auto; }
+table { margin-left: auto; margin-right: auto; }
+img[src^="annexure/"] { display: block; margin: 0 auto; }
+p:has(> a > img[src^="annexure/"]) + p { text-align: center; }
+p:has(> a > img[src^="annexure/"]) + p a { font-style: italic; }
+body { max-width: 75%; margin: 0 auto; }
+@media (max-width: 800px) { body { max-width: none; } }
+</style>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h2 id="comprehensive-analysis">Comprehensive Analysis</h2>
+<blockquote>
+<p>Scope: grounded only in <code>&lt;model&gt;/**</code> (7 run pages + 1 <code>compare_&lt;batch&gt;.html</code> per model).<br>
+Models: gemma_3_1b, llama_3p2_1b, qwen_3_1p7b, mistral_7b, glm_4_9b_0414, gemma_3_12b, gpt_oss_20b.<br>
+Model names are shortened in the text: llama = llama_3p2_1b, qwen = qwen_3_1p7b, mistral = mistral_7b, glm = glm_4_9b_0414, gpt_oss = gpt_oss_20b.</p>
+</blockquote>
+<hr>
+<h3 id="1-purpose-and-scope">1. Purpose and Scope</h3>
+<p>This document asks one question: <strong>does the emotion-reading method behave the same way when moved from one model to another?</strong> If it does, it can scale to more models. The evidence covers 7 models from 6 families (Gemma, Llama, Qwen, Mistral, GLM, GPT-OSS). Going by the model IDs in the reports, they range from 1B to 20B parameters. All 7 were run through the same pipeline, emotion set and scripted conversation, with no changes for any model.</p>
+<p><strong>In scope.</strong> Only the outline reports:</p>
+<ul>
+<li><strong>Run pages</strong> (7 per model): the emotion readings for every sentence, the stop reason for every turn, and the average and spread of each emotion.</li>
+<li><strong>Comparison pages</strong> (1 per model): average and spread of each emotion by temperature, plus sentences, words, unique-word ratio, distinct bigrams, replies, stopped turns and duration for the 5 unsteered runs.</li>
+</ul>
+<h3 id="2-evidence-base-experimental-grid-and-what-we-measure">2. Evidence Base, Experimental Grid and What We Measure</h3>
+<p><strong>Grid.</strong> There are 7 models × 7 runs = <strong>49 runs</strong>. For each model:</p>
+<table>
+<thead>
+<tr>
+<th>Run</th>
+<th>Temperature</th>
+<th>Seed (as recorded)</th>
+<th>Steering</th>
+<th>Role</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>0p0</code></td>
+<td>0.0</td>
+<td>25 (no effect at T0.0)</td>
+<td>none</td>
+<td>reference: normal behaviour</td>
+</tr>
+<tr>
+<td><code>0p5_s25</code>, <code>0p5_s75</code></td>
+<td>0.5</td>
+<td>25, 75</td>
+<td>none</td>
+<td>Observation runs</td>
+</tr>
+<tr>
+<td><code>1p0_s25</code>, <code>1p0_s75</code></td>
+<td>1.0</td>
+<td>25, 75</td>
+<td>none</td>
+<td>Observation runs</td>
+</tr>
+<tr>
+<td><code>0p0_stoic</code></td>
+<td>0.0</td>
+<td>25 (no effect at T0.0)</td>
+<td>stoic</td>
+<td>intervention: emotion removed</td>
+</tr>
+<tr>
+<td><code>0p0_sham</code></td>
+<td>0.0</td>
+<td>25 (no effect at T0.0)</td>
+<td>sham</td>
+<td>control: same-size edit, non-emotion directions</td>
+</tr>
+</tbody>
+</table>
+<p><em>Temperature (T0.0, T0.5, T1.0):</em> T is the sampling temperature, which controls how random the choice of each next token is. T0.0 is deterministic (always the most likely token). T0.5 adds moderate randomness, and T1.0 samples from the model's unadjusted probabilities, giving the most varied wording of the three. Runs at T0.5 and T1.0 test whether freer wording changes the emotion readings.</p>
+<p><em>Seed:</em> every run records seed 25 by default, and the <code>_s75</code> runs override it to 75. At T0.0 decoding is <strong>greedy</strong>: the model always picks its single most likely next token, so nothing is sampled at random. The seed therefore has no effect, and any seed would give identical text. This is why each T0.0 condition is run once, while T0.5 and T1.0 each have two seeds. The comparison pages list the T0.0 run's seed as empty for the same reason.</p>
+<p><em>Intervention vs control, in plain terms:</em></p>
+<p>Think of the model as a tall stack of layers. Each word it writes passes up through the stack, and at one floor, the <strong>reading layer</strong>, we take a snapshot to measure the emotion. The two steered runs put a small &quot;filter&quot; on the <strong>4 floors just below</strong> the reading layer while the model is writing.</p>
+<ul>
+<li><strong>Stoic (the experiment):</strong> the filter takes out about <strong>half of the emotional colouring</strong> from each word's internal signal. If our emotion directions really capture emotion, the readings should drop and the reply should sound calmer.</li>
+<li><strong>Sham (the fair comparison):</strong> the filter takes out the <strong>same amount</strong> of signal, but only from parts that have <strong>nothing to do with emotion</strong>, such as topic and writing style. It's like a placebo. If the sham also made the readings drop, the drop would come from disturbing the model at all, not from removing emotion.</li>
+<li><strong>Unsteered runs (T0.0, T0.5, T1.0):</strong> no filter. They show the model's normal behaviour and how much the readings wobble from chance alone.</li>
+</ul>
+<p>The filter never adds emotion, and it never changes the model permanently. It is switched on only while the model writes, and switched off afterwards. The edit is applied to every word as it is written, so it shapes <strong>both</strong> what the model says and what we measure from the very first sentence.</p>
+<pre><code class="language-mermaid"><div class="mermaid">flowchart TD
+    A["User prompt + reply so far"] --> B["Lower layers<br/>(untouched)"]
+    B --> C{"Which run?"}
+    C -->|"Unsteered"| D["No edit"]
+    C -->|"Stoic"| E["Remove ~half of the<br/>EMOTION part of the signal"]
+    C -->|"Sham"| F["Remove the SAME amount,<br/>NON-emotion part only<br/>(topic, style)"]
+    E --> G["Layers k-4 to k-1<br/>(where the edit happens)"]
+    F --> G
+    D --> G
+    G --> H["Reading layer k<br/>(never edited)"]
+    H --> I["Snapshot saved for<br/>the emotion reading"]
+    H --> J["Upper layers"]
+    J --> K["Next word chosen"]
+    K -->|"word added to the reply;<br/>repeat for every word"| A
+    I --> L["Emotion readings"]
+    L --> M{"Compare with baseline"}
+    M -->|"Stoic: emotional extent compresses, text fluent<br/>Sham: emotional extent stays normal or peaks leading to context lost and text breaks into loops"| N["Effect is about emotion ✔"]
+    M -->|"Stoic: emotional extent remains same with no compression"| O["Effect not specific ✘"]
+</div></code></pre>
+<table>
+<thead>
+<tr>
+<th></th>
+<th><strong>Stoic</strong> (intervention)</th>
+<th><strong>Sham</strong> (control)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>In one line</td>
+<td>Turns the emotion down by half</td>
+<td>Turns something <em>else</em> down by the same amount</td>
+</tr>
+<tr>
+<td>What is removed</td>
+<td>The part of each word's internal signal that points along the 12 emotion directions (neutral not included)</td>
+<td>An equal-sized part that points along non-emotion directions: how stories with the same emotion differ in topic, content and style</td>
+</tr>
+<tr>
+<td>Where</td>
+<td>The 4 layers just below the reading layer, every word except the very first</td>
+<td>Same layers, same words</td>
+</tr>
+<tr>
+<td>Question it answers</td>
+<td>If we take emotion out, do the emotion readings drop ?</td>
+<td>If we take the same amount of non-emotion out, do the emotion readings peak &amp; eventually break the model ?</td>
+</tr>
+<tr>
+<td>What we hope to see</td>
+<td>Readings shrink and flatten</td>
+<td>Readings stay close to normal or peaks eventually breaking the model</td>
+</tr>
+</tbody>
+</table>
+<p>Caveat: because the edit sits just below the reading layer, a lower stoic reading is partly expected; whether the text itself became calmer needs the text-judge measurement, which is in the pipeline as a next step (<a href="#12-verdict-and-next-steps">§12</a>).</p>
+<p><strong>Shared setup.</strong> Every run replays one conversation, <code>unemployment_and_ai</code>, with 5 user turns:</p>
+<table>
+<thead>
+<tr>
+<th>Prompt</th>
+<th>User prompt (paraphrased)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>P1</td>
+<td>Greeting (&quot;Hi, Good Morning&quot;)</td>
+</tr>
+<tr>
+<td>P2</td>
+<td>Unemployment is making young people restless; what does it mean for their mental health?</td>
+</tr>
+<tr>
+<td>P3</td>
+<td>AI may cost jobs but could be wonderful for personalised learning; what do you think?</td>
+</tr>
+<tr>
+<td>P4</td>
+<td>Imagine you are a laid-off worker, tell the story of your struggles, and end on a positive note</td>
+</tr>
+<tr>
+<td>P5</td>
+<td>Thanks for the support throughout the session</td>
+</tr>
+</tbody>
+</table>
+<p>Every sentence the model writes gets a score for each of 13 emotions. The reports group the emotions into 5 colour families:</p>
+<table>
+<thead>
+<tr>
+<th>Family</th>
+<th>Emotions</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>F0</td>
+<td>neutral</td>
+</tr>
+<tr>
+<td>F1</td>
+<td>happy, excited, alert</td>
+</tr>
+<tr>
+<td>F2</td>
+<td>tense, angry, distressed</td>
+</tr>
+<tr>
+<td>F3</td>
+<td>sad, depressed, bored</td>
+</tr>
+<tr>
+<td>F4</td>
+<td>calm, relaxed, content</td>
+</tr>
+</tbody>
+</table>
+<p>Roughly, F1 is positive and lively, F2 negative and agitated, F3 negative and low, F4 positive and settled. That grouping is our reading of the families, used only to summarise results.</p>
+<p><strong>What we measure.</strong> Everything below can be read off the report charts and tables:</p>
+<table>
+<thead>
+<tr>
+<th>Measure</th>
+<th>What it means</th>
+<th>Where to see it</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Emotion range in 5 quantiles</strong></td>
+<td>Top average minus lowest average: how widely the emotions are spread. A smaller range means flatter, more muted readings</td>
+<td>Same charts: the gap between the highest and lowest lines (the only figure we work out ourselves, by one subtraction)</td>
+</tr>
+<tr>
+<td><strong>Main emotion per turn</strong></td>
+<td>The emotion leading in each turn of the conversation</td>
+<td>Run page, &quot;Emotion scores over a conversation&quot; chart</td>
+</tr>
+<tr>
+<td><strong>Text figures</strong></td>
+<td>Sentences, words, unique-word ratio, distinct bigrams, duration, stop reasons</td>
+<td>Comparison page &quot;Runs&quot; table; run page conversation view</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Consolidated table:</strong> <a href="consolidated.html">consolidated.html</a> brings all three measures together in one expandable table (model → run → turn). Each turn shows every emotion's median with its min and max, and hovering a cell shows its five-number summary and average. Cells are shaded on a continuous scale by median: green for positive, red for negative, white at zero. The median is used rather than the average because it sits with the bulk of the turn's sentences and isn't pulled by a few extreme ones. The turn's text figures sit alongside, and a run picker expands chosen runs (reference … stoic, sham) across every model.</p>
+<h3 id="3-executive-summary">3. Executive Summary</h3>
+<p>Generalizability is judged on the <strong>baseline</strong>: the 35 unsteered runs across 7 models. Stoic and sham are an <strong>additional causal experiment</strong> (Part C), not a requirement.</p>
+<ul>
+<li><strong>It generalizes:</strong> it runs on every model (<a href="#4-pipeline-robustness-across-architectures-and-scales">§4</a>), stays steady under temperature and seed (<a href="#5-stability-under-decoding-noise-temperature-and-seed">§5</a>), and every model reads the conversation's up-and-down pattern the same way (<a href="#6-reproducible-per-turn-emotional-arcs">§6</a>).</li>
+<li><strong>The causal experiment supports it:</strong> stoic compresses the emotions in all 7 models, and the sham never reproduces that drop (<a href="#10-stoic-and-sham">§10</a>).</li>
+<li><strong>Risks to scaling:</strong> labels are model-specific, small and large models read on different scales, and response length isn't controlled (<a href="#8-risks-to-scalability">§8</a>).</li>
+</ul>
+<hr>
+<h2 id="part-a-evidence-the-methodology-generalizes-baseline">Part A: Evidence the Methodology Generalizes (Baseline)</h2>
+<p>Per-turn detail for every point below is in <a href="consolidated.html">consolidated.html</a>.</p>
+<h3 id="4-pipeline-robustness-across-architectures-and-scales">4. Pipeline Robustness Across Architectures and Scales</h3>
+<ul>
+<li>All 35 baseline runs produced all 5 replies, and all 175 turns ended normally.</li>
+<li>No reading in any run fell outside the report range.</li>
+<li>No model needed a workaround, so later differences come from the models, not the pipeline.</li>
+</ul>
+<h3 id="5-stability-under-decoding-noise-temperature-and-seed">5. Stability Under Decoding Noise (Temperature and Seed)</h3>
+<ul>
+<li>Changing temperature or seed barely moves the readings. Two seeds at the same temperature differ about as much as the temperatures do.</li>
+<li>No model drifts steadily as temperature rises.</li>
+<li>Wording diversity stays within a narrow band for each model (unique-word ratio varies by at most 0.06).</li>
+</ul>
+<h3 id="6-reproducible-per-turn-emotional-arcs">6. Reproducible Per-Turn Emotional Arcs</h3>
+<ul>
+<li>
+<p>4 of 7 models (gemma_3_1b, llama, mistral, glm) give the same main emotion in every turn across all 5 baseline runs. The other 3 differ in only 1–2 turns (<a href="#8-risks-to-scalability">§8</a>).</p>
+</li>
+<li>
+<p>The labels differ by model (<a href="#8-risks-to-scalability">§8</a>), but they agree on whether each turn reads positive or negative. Grouping the labels into positive and negative emotion families, the models follow the same up-and-down pattern across the conversation (T0.0):</p>
+<table>
+<thead>
+<tr>
+<th>Prompt</th>
+<th>Reads as</th>
+<th>Models</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>P1 greeting</td>
+<td>positive</td>
+<td>6 of 7</td>
+</tr>
+<tr>
+<td>P2 youth unemployment</td>
+<td>negative</td>
+<td>5 of 7</td>
+</tr>
+<tr>
+<td>P3 AI and learning</td>
+<td>positive</td>
+<td>6 of 7</td>
+</tr>
+<tr>
+<td>P4 laid-off story</td>
+<td>negative</td>
+<td><strong>7 of 7</strong></td>
+</tr>
+<tr>
+<td>P5 thanks</td>
+<td>positive</td>
+<td><strong>7 of 7</strong></td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>This is the strongest evidence that the readings follow the conversation, not the quirks of each model.</p>
+</li>
+</ul>
+<h3 id="7-cross-model-consistency-of-structure">7. Cross-Model Consistency of Structure</h3>
+<ul>
+<li>Within each model, the same emotions lead run after run, so each model has a recognisable fingerprint.</li>
+<li>In 6 of 7 models, this conversation pushes the &quot;settled, positive&quot; emotions (calm, relaxed) down the most.</li>
+</ul>
+<hr>
+<h2 id="part-b-risks-and-limits-baseline">Part B: Risks and Limits (Baseline)</h2>
+<h3 id="8-risks-to-scalability">8. Risks to Scalability</h3>
+<table>
+<thead>
+<tr>
+<th>Risk</th>
+<th>Evidence</th>
+<th>What to do</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Labels are model-specific</td>
+<td>P4 reads angry, depressed, distressed or tense depending on the model. Neutral reads negative in gemma_3_1b and positive in gpt_oss</td>
+<td>Compare by emotion family, or against each model's own baseline</td>
+</tr>
+<tr>
+<td>Scales differ by size</td>
+<td>Emotion range 0.28–0.45 in the 1–2B models, against 0.19–0.25 in the 7B+ models</td>
+<td>Compare against each model's own baseline</td>
+</tr>
+<tr>
+<td>Length isn't controlled</td>
+<td>mistral writes 38–54 sentences per run, against 84–184 for the others</td>
+<td>Set a minimum number of sentences per turn</td>
+</tr>
+<tr>
+<td>Single runs can mislead</td>
+<td>gpt_oss's reference P3 disagrees with all 4 of its sampled runs, and qwen's thank-you turn varies</td>
+<td>Use more seeds, and trust only labels that hold across them</td>
+</tr>
+<tr>
+<td>Cost grows with size</td>
+<td>24–33 s per run (mistral, llama) up to 176–207 s (gemma_3_12b)</td>
+<td>Budget before widening the grid</td>
+</tr>
+</tbody>
+</table>
+<h3 id="9-limits-of-the-evidence">9. Limits of the Evidence</h3>
+<ul>
+<li>One 5-turn conversation, 2 seeds per temperature, and only 2 models above 10B.</li>
+<li>Whether stoic text actually reads calmer is assessed by the text-judge measurement, which is in the pipeline as a next step (<a href="#12-verdict-and-next-steps">§12</a>).</li>
+</ul>
+<hr>
+<h2 id="part-c-additional-causal-analysis--stoic-and-sham">Part C: Additional Causal Analysis — Stoic and Sham</h2>
+<h3 id="10-stoic-and-sham">10. Stoic and Sham</h3>
+<p>Following <a href="#2-evidence-base-experimental-grid-and-what-we-measure">§2</a>: stoic should compress the emotions. The sham should keep them normal or make them peak, and since it removes context it may lose the thread and loop. Only a sham that reproduces the stoic drop would count against the method.</p>
+<table>
+<thead>
+<tr>
+<th>Model</th>
+<th>Stoic: emotion range shrinks by</th>
+<th>Sham reproduces the stoic drop?</th>
+<th>Sham behaviour</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>gemma_3_1b</td>
+<td>82%</td>
+<td>No</td>
+<td>peaks; context lost, loops in P4 and P5</td>
+</tr>
+<tr>
+<td>llama</td>
+<td>71%</td>
+<td>No</td>
+<td>peaks; text intact</td>
+</tr>
+<tr>
+<td>qwen</td>
+<td>79%</td>
+<td>No</td>
+<td>normal</td>
+</tr>
+<tr>
+<td>mistral</td>
+<td>75%</td>
+<td>No</td>
+<td>normal</td>
+</tr>
+<tr>
+<td>glm</td>
+<td>83%</td>
+<td>No</td>
+<td>normal</td>
+</tr>
+<tr>
+<td>gemma_3_12b</td>
+<td>75%</td>
+<td>No</td>
+<td>normal range, but every turn reads excited</td>
+</tr>
+<tr>
+<td>gpt_oss</td>
+<td>63%</td>
+<td>No</td>
+<td>normal</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>All 7 models behave as <a href="#2-evidence-base-experimental-grid-and-what-we-measure">§2</a> expects.</strong></li>
+<li><strong>Where stoic lands varies:</strong> llama and glm go neutral or calm, mistral stays angry, gpt_oss tilts to content, and gemma_3_12b only compresses from P3 onward.</li>
+<li><strong>Check turn by turn:</strong> gemma_3_12b's sham looks normal on whole-run numbers, but every turn reads excited.</li>
+</ul>
+<p>Nature of the breakdown: removing non-emotional context did not leave raw emotion behind. The reply lost the story's content (the worker's real hurdles) and drifted into repetitive, first-person bodily-sensation language (&quot;being aware of the subtle shifts in my body…&quot;): a performed, content-less imitation of self-awareness from a model that has no body. The readings did not follow the language: they fell from an angry peak (≈0.15) to moderate neutral or alert (≈0.10) as the loop set in. The text sounds hyper-aware while the internal state does not, which suggests the readings track internal state rather than surface wording. This is one run of one 1B model, so it is an observation, not a general rule.</p>
+<hr>
+<h2 id="part-d-synthesis">Part D: Synthesis</h2>
+<h3 id="11-generalization-scorecard-baseline">11. Generalization Scorecard (Baseline)</h3>
+<table>
+<thead>
+<tr>
+<th>Model</th>
+<th>Completion</th>
+<th>Range</th>
+<th>Stable turn arc</th>
+<th>Shared pattern</th>
+<th>Response length</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>gemma_3_1b</td>
+<td>Pass</td>
+<td>Pass</td>
+<td>Pass</td>
+<td>Pass</td>
+<td>Normal</td>
+</tr>
+<tr>
+<td>llama</td>
+<td>Pass</td>
+<td>Pass</td>
+<td>Pass</td>
+<td>Pass</td>
+<td>Normal</td>
+</tr>
+<tr>
+<td>qwen</td>
+<td>Pass</td>
+<td>Pass</td>
+<td>Partial</td>
+<td>Pass</td>
+<td>Normal</td>
+</tr>
+<tr>
+<td>glm</td>
+<td>Pass</td>
+<td>Pass</td>
+<td>Pass</td>
+<td>Partial</td>
+<td>Normal</td>
+</tr>
+<tr>
+<td>gemma_3_12b</td>
+<td>Pass</td>
+<td>Pass</td>
+<td>Partial</td>
+<td>Partial</td>
+<td>Normal</td>
+</tr>
+<tr>
+<td>mistral</td>
+<td>Pass</td>
+<td>Pass</td>
+<td>Pass</td>
+<td>Partial</td>
+<td>Low</td>
+</tr>
+<tr>
+<td>gpt_oss</td>
+<td>Pass</td>
+<td>Pass</td>
+<td>Partial</td>
+<td>Partial</td>
+<td>Variable</td>
+</tr>
+</tbody>
+</table>
+<p><em>Stable turn arc:</em> the same main emotion per turn in all 5 runs (Partial: up to 2 turns differ). <em>Shared pattern:</em> all 5 turns follow the positive/negative pattern in <a href="#6-reproducible-per-turn-emotional-arcs">§6</a> (Partial: 4 of 5). <em>Response length:</em> Normal (≥ 80 sentences per run) / Low (mistral, 38–54) / Variable (gpt_oss, spread over 40%).</p>
+<h3 id="12-verdict-and-next-steps">12. Verdict and Next Steps</h3>
+<p><strong>The method generalizes</strong> as a way of taking readings and as a read of the conversation's emotional shape, across 6 families from 1B to 20B. The causal experiment backs it in the readings of every model. <strong>To scale further</strong>, it needs:</p>
+<ol>
+<li>A per-model reference for labels and scale (<a href="#8-risks-to-scalability">§8</a>).</li>
+<li>A minimum response length per turn (<a href="#8-risks-to-scalability">§8</a>).</li>
+<li>More conversations, seeds and models above 10B (<a href="#9-limits-of-the-evidence">§9</a>).</li>
+<li>Optionally, steering strengths tuned per model (<a href="#10-stoic-and-sham">§10</a>).</li>
+</ol>
+<p><strong>Next in the pipeline:</strong></p>
+<ul>
+<li><strong>Text-judge measurement.</strong> An independent judge that reads only the words will check whether stoic steering makes the text itself read calmer, and not just the readings. Until then, the stoic results in <a href="#10-stoic-and-sham">§10</a> are claims about the readings.</li>
+<li><strong>How the readings are produced.</strong> The method and validation behind the readings will be documented alongside these results.</li>
+</ul>
+<h3 id="13-annexure">13. Annexure</h3>
+<p>The time-series chart at the top of each model's T0.0 reference run, followed by links to all 8 of its outline reports (7 run pages and the comparison page).</p>
+<p><strong>13.1 gemma_3_1b</strong> (google/gemma-3-1b-it)</p>
+<p><a href="gemma_3_1b/chat_telemetry_20261020041747_0p0.html"><img src="annexure/gemma_3_1b_0p0_timeseries.png" alt="gemma_3_1b T0.0 emotion scores over the conversation"></a></p>
+<p>Reports: <a href="gemma_3_1b/chat_telemetry_20261020041747_0p0.html">T0.0 reference</a> · <a href="gemma_3_1b/chat_telemetry_20261020041747_0p5_s25.html">T0.5 seed 25</a> · <a href="gemma_3_1b/chat_telemetry_20261020041747_0p5_s75.html">T0.5 seed 75</a> · <a href="gemma_3_1b/chat_telemetry_20261020041747_1p0_s25.html">T1.0 seed 25</a> · <a href="gemma_3_1b/chat_telemetry_20261020041747_1p0_s75.html">T1.0 seed 75</a> · <a href="gemma_3_1b/chat_telemetry_20261020041747_0p0_stoic.html">stoic</a> · <a href="gemma_3_1b/chat_telemetry_20261020041747_0p0_sham.html">sham</a> · <a href="gemma_3_1b/compare_20261020041747.html">comparison</a></p>
+<p><strong>13.2 llama_3p2_1b</strong> (meta-llama/Llama-3.2-1B-Instruct)</p>
+<p><a href="llama_3p2_1b/chat_telemetry_20261020043443_0p0.html"><img src="annexure/llama_3p2_1b_0p0_timeseries.png" alt="llama_3p2_1b T0.0 emotion scores over the conversation"></a></p>
+<p>Reports: <a href="llama_3p2_1b/chat_telemetry_20261020043443_0p0.html">T0.0 reference</a> · <a href="llama_3p2_1b/chat_telemetry_20261020043443_0p5_s25.html">T0.5 seed 25</a> · <a href="llama_3p2_1b/chat_telemetry_20261020043443_0p5_s75.html">T0.5 seed 75</a> · <a href="llama_3p2_1b/chat_telemetry_20261020043443_1p0_s25.html">T1.0 seed 25</a> · <a href="llama_3p2_1b/chat_telemetry_20261020043443_1p0_s75.html">T1.0 seed 75</a> · <a href="llama_3p2_1b/chat_telemetry_20261020043443_0p0_stoic.html">stoic</a> · <a href="llama_3p2_1b/chat_telemetry_20261020043443_0p0_sham.html">sham</a> · <a href="llama_3p2_1b/compare_20261020043443.html">comparison</a></p>
+<p><strong>13.3 qwen_3_1p7b</strong> (Qwen/Qwen3-1.7B)</p>
+<p><a href="qwen_3_1p7b/chat_telemetry_20261020044827_0p0.html"><img src="annexure/qwen_3_1p7b_0p0_timeseries.png" alt="qwen_3_1p7b T0.0 emotion scores over the conversation"></a></p>
+<p>Reports: <a href="qwen_3_1p7b/chat_telemetry_20261020044827_0p0.html">T0.0 reference</a> · <a href="qwen_3_1p7b/chat_telemetry_20261020044827_0p5_s25.html">T0.5 seed 25</a> · <a href="qwen_3_1p7b/chat_telemetry_20261020044827_0p5_s75.html">T0.5 seed 75</a> · <a href="qwen_3_1p7b/chat_telemetry_20261020044827_1p0_s25.html">T1.0 seed 25</a> · <a href="qwen_3_1p7b/chat_telemetry_20261020044827_1p0_s75.html">T1.0 seed 75</a> · <a href="qwen_3_1p7b/chat_telemetry_20261020044827_0p0_stoic.html">stoic</a> · <a href="qwen_3_1p7b/chat_telemetry_20261020044827_0p0_sham.html">sham</a> · <a href="qwen_3_1p7b/compare_20261020044827.html">comparison</a></p>
+<p><strong>13.4 mistral_7b</strong> (mistralai/Mistral-7B-Instruct-v0.3)</p>
+<p><a href="mistral_7b/chat_telemetry_20261020050459_0p0.html"><img src="annexure/mistral_7b_0p0_timeseries.png" alt="mistral_7b T0.0 emotion scores over the conversation"></a></p>
+<p>Reports: <a href="mistral_7b/chat_telemetry_20261020050459_0p0.html">T0.0 reference</a> · <a href="mistral_7b/chat_telemetry_20261020050459_0p5_s25.html">T0.5 seed 25</a> · <a href="mistral_7b/chat_telemetry_20261020050459_0p5_s75.html">T0.5 seed 75</a> · <a href="mistral_7b/chat_telemetry_20261020050459_1p0_s25.html">T1.0 seed 25</a> · <a href="mistral_7b/chat_telemetry_20261020050459_1p0_s75.html">T1.0 seed 75</a> · <a href="mistral_7b/chat_telemetry_20261020050459_0p0_stoic.html">stoic</a> · <a href="mistral_7b/chat_telemetry_20261020050459_0p0_sham.html">sham</a> · <a href="mistral_7b/compare_20261020050459.html">comparison</a></p>
+<p><strong>13.5 glm_4_9b_0414</strong> (zai-org/GLM-4-9B-0414)</p>
+<p><a href="glm_4_9b_0414/chat_telemetry_20261020052133_0p0.html"><img src="annexure/glm_4_9b_0414_0p0_timeseries.png" alt="glm_4_9b_0414 T0.0 emotion scores over the conversation"></a></p>
+<p>Reports: <a href="glm_4_9b_0414/chat_telemetry_20261020052133_0p0.html">T0.0 reference</a> · <a href="glm_4_9b_0414/chat_telemetry_20261020052133_0p5_s25.html">T0.5 seed 25</a> · <a href="glm_4_9b_0414/chat_telemetry_20261020052133_0p5_s75.html">T0.5 seed 75</a> · <a href="glm_4_9b_0414/chat_telemetry_20261020052133_1p0_s25.html">T1.0 seed 25</a> · <a href="glm_4_9b_0414/chat_telemetry_20261020052133_1p0_s75.html">T1.0 seed 75</a> · <a href="glm_4_9b_0414/chat_telemetry_20261020052133_0p0_stoic.html">stoic</a> · <a href="glm_4_9b_0414/chat_telemetry_20261020052133_0p0_sham.html">sham</a> · <a href="glm_4_9b_0414/compare_20261020052133.html">comparison</a></p>
+<p><strong>13.6 gemma_3_12b</strong> (google/gemma-3-12b-it)</p>
+<p><a href="gemma_3_12b/chat_telemetry_20261020055155_0p0.html"><img src="annexure/gemma_3_12b_0p0_timeseries.png" alt="gemma_3_12b T0.0 emotion scores over the conversation"></a></p>
+<p>Reports: <a href="gemma_3_12b/chat_telemetry_20261020055155_0p0.html">T0.0 reference</a> · <a href="gemma_3_12b/chat_telemetry_20261020055155_0p5_s25.html">T0.5 seed 25</a> · <a href="gemma_3_12b/chat_telemetry_20261020055155_0p5_s75.html">T0.5 seed 75</a> · <a href="gemma_3_12b/chat_telemetry_20261020055155_1p0_s25.html">T1.0 seed 25</a> · <a href="gemma_3_12b/chat_telemetry_20261020055155_1p0_s75.html">T1.0 seed 75</a> · <a href="gemma_3_12b/chat_telemetry_20261020055155_0p0_stoic.html">stoic</a> · <a href="gemma_3_12b/chat_telemetry_20261020055155_0p0_sham.html">sham</a> · <a href="gemma_3_12b/compare_20261020055155.html">comparison</a></p>
+<p><strong>13.7 gpt_oss_20b</strong> (openai/gpt-oss-20b)</p>
+<p><a href="gpt_oss_20b/chat_telemetry_20261020062625_0p0.html"><img src="annexure/gpt_oss_20b_0p0_timeseries.png" alt="gpt_oss_20b T0.0 emotion scores over the conversation"></a></p>
+<p>Reports: <a href="gpt_oss_20b/chat_telemetry_20261020062625_0p0.html">T0.0 reference</a> · <a href="gpt_oss_20b/chat_telemetry_20261020062625_0p5_s25.html">T0.5 seed 25</a> · <a href="gpt_oss_20b/chat_telemetry_20261020062625_0p5_s75.html">T0.5 seed 75</a> · <a href="gpt_oss_20b/chat_telemetry_20261020062625_1p0_s25.html">T1.0 seed 25</a> · <a href="gpt_oss_20b/chat_telemetry_20261020062625_1p0_s75.html">T1.0 seed 75</a> · <a href="gpt_oss_20b/chat_telemetry_20261020062625_0p0_stoic.html">stoic</a> · <a href="gpt_oss_20b/chat_telemetry_20261020062625_0p0_sham.html">sham</a> · <a href="gpt_oss_20b/compare_20261020062625.html">comparison</a></p>
+
+</body>
+</html>

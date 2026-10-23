@@ -1,0 +1,410 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Qwen/Qwen3-1.7B · comparison 20261020044827</title>
+<style>
+:root {
+  color-scheme: light;
+  --page: #f9f9f7; --surface: #fcfcfb; --ink: #0b0b0b; --ink-2: #52514e; --muted: #898781;
+  --grid: #e1e0d9; --axis: #c3c2b7; --ring: rgba(11,11,11,0.10); --accent: #2a78d6;
+  --fam-0: #52514e; --fam-1: #2a78d6; --fam-2: #eb6834; --fam-3: #1baf7a; --fam-4: #eda100; --fam-5: #898781;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --page: #0d0d0d; --surface: #1a1a19; --ink: #ffffff; --ink-2: #c3c2b7; --muted: #898781;
+    --grid: #2c2c2a; --axis: #383835; --ring: rgba(255,255,255,0.10); --accent: #3987e5;
+    --fam-0: #c3c2b7; --fam-1: #3987e5; --fam-2: #d95926; --fam-3: #199e70; --fam-4: #c98500; --fam-5: #898781;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --page: #0d0d0d; --surface: #1a1a19; --ink: #ffffff; --ink-2: #c3c2b7; --muted: #898781;
+  --grid: #2c2c2a; --axis: #383835; --ring: rgba(255,255,255,0.10); --accent: #3987e5;
+  --fam-0: #c3c2b7; --fam-1: #3987e5; --fam-2: #d95926; --fam-3: #199e70; --fam-4: #c98500; --fam-5: #898781;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--page); color: var(--ink); font: 14px/1.45 system-ui, -apple-system, "Segoe UI", sans-serif; }
+.wrap { max-width: 1280px; margin: 0 auto; padding: 20px 16px 40px; }
+h1 { font-size: 20px; margin: 0 0 2px; font-weight: 650; }
+h2 { font-size: 15px; margin: 0; }
+.sub { color: var(--ink-2); margin: 0 0 10px; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 10px; padding: 0; list-style: none; }
+.chips li { border: 1px solid var(--ring); border-radius: 999px; padding: 2px 10px; color: var(--ink-2); background: var(--surface); font-size: 12.5px; }
+.chips b { color: var(--ink); font-weight: 600; }
+.notes { margin: 0 0 14px; padding: 10px 12px; border: 1px solid var(--ring); border-radius: 8px; background: var(--surface); color: var(--ink-2); font-size: 13px; }
+.notes p { margin: 0; } .notes p + p { margin-top: 4px; }
+.card { background: var(--surface); border: 1px solid var(--ring); border-radius: 10px; margin-top: 12px; }
+.cardhead { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; padding: 10px 14px; border-bottom: 1px solid var(--ring); flex-wrap: wrap; }
+.cardhead span { color: var(--muted); font-size: 12.5px; }
+.cardbody { padding: 10px 14px 14px; }
+.legend { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 14px; margin: 12px 0 0; }
+.legend .fam { display: flex; flex-wrap: wrap; gap: 4px; }
+.legend button { font: inherit; font-size: 13px; color: var(--ink); background: var(--surface); border: 1px solid var(--ring); border-radius: 6px; padding: 3px 8px; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; }
+.legend button[aria-pressed="false"] { color: var(--muted); }
+.legend button[aria-pressed="false"] svg { opacity: 0.3; }
+.legend .tools { display: flex; gap: 4px; margin-left: auto; }
+button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+@media (max-width: 900px) { .pair { grid-template-columns: minmax(0, 1fr); } }
+.plot { position: relative; }
+.plot svg { display: block; width: 100%; height: auto; }
+/* ring emotions split evenly into a left and a right column of panels; neutral
+   (and any other label) centred on the next line at the same width */
+.grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px 14px; }
+.grid .col { display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+.grid .center { grid-column: 1 / -1; justify-self: center; width: calc(50% - 7px); }
+@media (max-width: 760px) { .grid { grid-template-columns: minmax(0, 1fr); } .grid .center { width: 100%; } }
+.panel { border: 1px solid var(--ring); border-radius: 8px; padding: 8px 8px 4px; position: relative; }
+.panel h3 { font-size: 13px; margin: 0 0 2px; display: flex; align-items: center; gap: 6px; font-weight: 600; }
+.panel.dim { opacity: 0.35; }
+.tip { position: absolute; pointer-events: none; background: var(--surface); color: var(--ink); border: 1px solid var(--ring); border-radius: 8px; padding: 8px 10px; font-size: 12.5px; box-shadow: 0 4px 16px rgba(0,0,0,0.12); max-width: 280px; z-index: 5; }
+.tip .h { color: var(--ink-2); margin-bottom: 4px; }
+.tip .row { display: grid; grid-template-columns: 26px 52px 1fr; align-items: center; gap: 4px; }
+.num { font-variant-numeric: tabular-nums; font-weight: 650; }
+.name { color: var(--ink-2); }
+.tablewrap { overflow-x: auto; }
+/* tables sit centred in their cards; on a narrow screen they start at the left
+   edge and scroll sideways instead */
+.tablewrap table { margin: 0 auto; }
+table { border-collapse: collapse; font-size: 12.5px; }
+th, td { padding: 4px 8px; border-bottom: 1px solid var(--grid); text-align: right; white-space: nowrap; }
+th { color: var(--ink-2); font-weight: 600; background: var(--surface); }
+td.l, th.l { text-align: left; }
+td.emo { display: flex; align-items: center; gap: 6px; text-align: left; }
+td .sd { color: var(--ink-2); }
+.hint { color: var(--muted); font-size: 12px; margin: 6px 0 0; }
+
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1 id="h1">Emotion scores across temperature</h1>
+    <p class="sub" id="sub"></p>
+    <ul class="chips" id="chips"></ul>
+    <div class="notes" id="notes"></div>
+  </header>
+
+  <section class="card">
+    <div class="cardhead"><h2>Runs</h2><span id="runsinfo"></span></div>
+    <div class="cardbody tablewrap" id="runs"></div>
+  </section>
+
+  <div class="legend" id="legend" aria-label="Emotions shown"></div>
+
+  <div class="pair">
+    <section class="card">
+      <div class="cardhead"><h2>Spread by temperature</h2><span>standard deviation of each emotion's scores</span></div>
+      <div class="cardbody"><div class="plot" id="sdplot"></div><p class="hint">Lines join the average over seeds; each dot is one run, and a vertical bar spans the seeds at one temperature.</p></div>
+    </section>
+    <section class="card">
+      <div class="cardhead"><h2>Average by temperature</h2><span>mean of each emotion's scores</span></div>
+      <div class="cardbody"><div class="plot" id="meanplot"></div><p class="hint">Lines join the average over seeds; each dot is one run, and a vertical bar spans the seeds at one temperature.</p></div>
+    </section>
+  </div>
+
+  <section class="card">
+    <div class="cardhead"><h2>Distributions by run</h2><span id="distinfo"></span></div>
+    <div class="cardbody">
+      <p class="hint" id="disthint" style="margin:0 0 8px"></p>
+      <div class="grid" id="panels"></div>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="cardhead"><h2>Numbers</h2><span>mean ± standard deviation per emotion and run</span></div>
+    <div class="cardbody tablewrap" id="numbers"></div>
+  </section>
+  
+</div>
+<script id="payload" type="application/json">{"model":"Qwen/Qwen3-1.7B","batch":"20261020044827","generated":"2026-10-20T04:57:21+00:00","lo":-0.6,"hi":0.6,"width":0.03,"emotions":[{"name":"neutral","family":0,"dash":""},{"name":"happy","family":1,"dash":""},{"name":"excited","family":1,"dash":"7 4"},{"name":"alert","family":1,"dash":"1.5 3.5"},{"name":"tense","family":2,"dash":""},{"name":"angry","family":2,"dash":"7 4"},{"name":"distressed","family":2,"dash":"1.5 3.5"},{"name":"sad","family":3,"dash":""},{"name":"depressed","family":3,"dash":"7 4"},{"name":"bored","family":3,"dash":"1.5 3.5"},{"name":"calm","family":4,"dash":""},{"name":"relaxed","family":4,"dash":"7 4"},{"name":"content","family":4,"dash":"1.5 3.5"}],"temps":[0.0,0.5,1.0],"groups":[[0],[1,2],[3,4]],"runs":[{"label":"0.0","temp":0.0,"seed":null,"source":"chat_telemetry_20261020044827_0p0.json","sentences":110,"words":1705,"unique_words":0.353,"distinct_bigrams":0.824,"replies":5,"stopped":0,"duration_s":59.615},{"label":"0.5 · s25","temp":0.5,"seed":25,"source":"chat_telemetry_20261020044827_0p5_s25.json","sentences":92,"words":1420,"unique_words":0.4,"distinct_bigrams":0.872,"replies":5,"stopped":0,"duration_s":50.351},{"label":"0.5 · s75","temp":0.5,"seed":75,"source":"chat_telemetry_20261020044827_0p5_s75.json","sentences":84,"words":1320,"unique_words":0.402,"distinct_bigrams":0.864,"replies":5,"stopped":0,"duration_s":47.891},{"label":"1.0 · s25","temp":1.0,"seed":25,"source":"chat_telemetry_20261020044827_1p0_s25.json","sentences":101,"words":1529,"unique_words":0.384,"distinct_bigrams":0.854,"replies":5,"stopped":0,"duration_s":55.423},{"label":"1.0 · s75","temp":1.0,"seed":75,"source":"chat_telemetry_20261020044827_1p0_s75.json","sentences":100,"words":1638,"unique_words":0.367,"distinct_bigrams":0.829,"replies":5,"stopped":0,"duration_s":56.397}],"dists":[[{"counts":[0,0,0,0,0,0,0,0,0,0,0,0,0,2,7,18,9,6,15,13,25,13,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"below":0,"above":0,"mean":-0.0454400420950895,"sd":0.07313235741690989,"median":-0.03303762897849083,"q1":-0.1153306383639574,"q3":0.01979006454348564,"min":-0.2073514759540558,"max":0.10910126566886902},{"counts":[0,0,0,0,0,0,0,3,5,2,8,1,4,6,13,6,17,29,3,5,7,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"below":0,"above":0,"mean":-0.13809306953864342,"sd":0.09973335174843573,"median":-0.1115318201482296,"q1":-0.18408860638737679,"q3":-0.07672509364783764,"min":-0.3827469050884247,"max":0.03718169033527374},{"counts":[0,0,0,0,0,0,0,0,0,0,1,4,2,1,13,10,13,21,19,15,8,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"below":0,"above":0,"mean":-0.0836667086082426,"sd":0.07172129589886503,"median":-0.07160940766334534,"q1":-0.13144101202487946,"q3":-0.03357141651213169,"min":-0.2896555960178375,"max":0.04737871140241623},{"counts":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,3,7,5,3,7,7,12,13,19,24,7,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"below":0,"above":0,"mean":0.054360004362057554,"sd":0.08921249937767912,"median":0.08169713988900185,"q1":0.0021599838510155678,"q3":0.12646382302045822,"min":-0.16453886032104492,"max":0.16792689263820648},{"counts":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,13,5,7,26,19,9,9,11,6,4,1,0,0,0,0,0,0,0,0,0,0,0,0],"below":0,"above":0,"mean":0.04572037929584357,"sd":0.07415686800779515,"median":0.032593606039881706,"q1":0.00328458147123456,"q3":0.0978286936879158,"min":-0.08437396585941315,"max":0.21534664928913116},{"counts":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,3,11,32,10,17,8,7,5,8,6,1,0,0,0,0,0,0,0,0,0,0,0],"below":0,"above":0,"mean":0.06678249438039281,"sd":0.07882539842835859,"median":0.04459686577320099,"q1":0.008248650003224611,"q3":0.11250229738652706,"min":-0.10698828101158142,"max":0.24499396979808807},{"counts":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,1,4,21,19,8,4,9,10,9,4,2,2,7,3,4,1,0,0,0],"below":0,"above":0,"mean":0.21423689701001752,"sd":0.11780430835492818,"median":0.17941110581159592,"q1":0.11965098045766354,"q3":0.28703851997852325,"min":0.01800883747637272,"max":0.4912498891353607},{"counts":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,11,10,14,7,17,9,9,10,6,4,4,2,1,5,0,0,0,0,0,0,0,0],"below":0,"above":0,"mean":0.09565312238410115,"sd":0.10518509180905887,"median":0.0810665413737297,"q1":0.006276406114920974,"q3":0.15870389714837074,"min":-0.07351256906986237,"max":0.35019874572753906},{"counts":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,4,14,23,7,11,6,10,6,10,2,0,6,2,2,5,1,0,0,0,0,0,0,0],"below":0,"above":0,"mean":0.07675090050748126,"sd":0.11825989500424905,"median":0.04215461574494839,"q1":-0.010520238894969225,"q3":0.1499609686434269,"min":-0.10575781762599945,"max":0.3764081597328186},{"counts":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,1,6,17,23,23,10,10,6,6,4,2,0,0,0,0,0,0,0,0,0,0],"below":0,"above":0,"mean":0.10996039694344456,"sd":0.06893798505255166,"median":0.0965280570089817,"q1":0.06657815538346767,"q3":0.15076953917741776,"min":-0.035864222794771194,"max":0.2920149266719818},{"counts":[0,0,0,0,1,4,6,6,3,6,8,5,12,11,5,13,18,11,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"below":0,"above":0,"mean":-0.21381739296696403,"sd":0.10996202107051625,"median":-0.20388897508382797,"q1":-0.2872694060206413,"q3":-0.11250252649188042,"min":-0.4536002278327942,"max":-0.0374300479888916},{"counts":[0,0,0,0,0,0,0,0,2,5,7,3,2,8,6,11,11,5,18,26,3,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"below":0,"above":0,"mean":-0.10821321776814082,"sd":0.10334219609070404,"median":-0.08945601433515549,"q1":-0.1770787127315998,"q3":-0.024942259304225445,"min":-0.35178136825561523,"max":0.10018110275268555},{"counts":[0,0,0,0,0,0,0,0,0,0,0,0,0,1,4,6,6,4,12,8,24,16,11,5,7,6,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"below":0,"above":0,"mean":0.010381422191858291,"sd":0.08496941285037671,"median":0.019661043770611286,"q1":-0.048043275251984596,"q3":0.06237152963876724,"min":-0.1829530894756317,"max":0.1781485676765442}],[{"counts":[0,0,0,0,0,0,0,0,0,0,0,0,0,2,4,6,3,11,5,18,20,21,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"below":0,"above":0,"mean":-0.022607968042037734,"sd":0.06735757424367457,"median":-0.007678036345168948,"q1":-0.07309084944427013,"q3":0.029489148873835802,"min":-0.18206578493118286,"max":0.10910126566886902},{"counts":[0,0,0,0,0,0,0,1,2,3,2,3,0,3,4,11,20,27,3,4,5,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"below":0,"above":0,"mean":-0.11122342949206739,"sd":0.08940912779567405,"median":-0.09366875886917114,"q1":-0.13867293298244476,"q3":-0.07137064076960087,"min":-0.3862728774547577,"max":0.039233893156051636},{"counts":[0,0,0,0,0,0,0,0,0,0,0,0,0,2,4,8,7,23,25,6,4,7,4,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"below":0,"above":0,"mean":-0.05228119643162126,"sd":0.06450226392985824,"median":-0.05817806534469128,"q1":-0.0823007170110941,"q3":-0.030071173794567585,"min":-0.20475712418556213,"max":0.13442382216453552},{"counts":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,4,3,1,3,4,5,13,27,18,11,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"below":0,"above":0,"mean":0.07863342410722829,"sd":0.07771806810347755,"median":0.10107500106096268,"q1":0.05924092140048742,"q3":0.12349831126630306,"min":-0.13860279321670532,"max":0.17589221894741058},{"counts":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,8,3,5,30,16,11,5,3,5,4,1,0,0,0,0,0,0,0,0,0,0,0,0],"below":0,"above":0,"mean":0.042799911805954965,"sd":0.06911432312040218,"median":0.028337541036307812,"q1":0.0096178506501019,"q3":0.0753873847424984,"min":-0.09219317138195038,"max":0.2153579592704773},{"counts":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,2,8,10,25,22,9,2,1,3,9,0,0,0,0,0,0,0,0,0,0,0,0,0],"below":0,"above":0,"mean":0.04217207852912986,"sd":0.06805263454854453,"median":0.029928001575171947,"q1":0.002746280748397112,"q3":0.06091245170682669,"min":-0.10698828101158142,"max":0.20378290116786957},{"counts":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,0,6,21,17,8,7,7,8,3,1,3,4,3,0,0,0,0,0,0],"below":0,"above":0,"mean":0.1758653213189024,"sd":0.09429847636085183,"median":0.14726059138774872,"q1":0.10753200203180313,"q3":0.2269526869058609,"min":0.01800883747637272,"max":0.4070252776145935},{"counts":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,7,17,20,15,6,5,5,4,3,4,4,0,0,0,0,0,0,0,0,0,0,0],"below":0,"above":0,"mean":0.05536017255634879,"sd":0.08458752483985311,"median":0.030266623944044113,"q1":-0.0020102770067751408,"q3":0.0984650794416666,"min":-0.074802465736866,"max":0.2628198266029358},{"counts":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,4,14,28,6,9,9,7,1,1,1,4,5,1,0,0,0,0,0,0,0,0,0,0],"below":0,"above":0,"mean":0.03457892543899462,"sd":0.09443474678933071,"median":-0.005108212819322944,"q1":-0.027971336618065834,"q3":0.07557737454771996,"min":-0.11490871757268906,"max":0.28360623121261597},{"counts":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,1,6,27,26,11,10,0,5,3,0,0,0,0,0,0,0,0,0,0,0,0],"below":0,"above":0,"mean":0.07913960565043532,"sd":0.05459976536916859,"median":0.06945053488016129,"q1":0.0467861732468009,"q3":0.09898561052978039,"min":-0.04707946628332138,"max":0.2399541437625885},{"counts":[0,0,0,0,0,0,5,4,2,4,2,7,5,11,9,8,25,8,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"below":0,"above":0,"mean":-0.1836204602909477,"sd":0.09925165452394188,"median":-0.1538163647055626,"q1":-0.24526192992925644,"q3":-0.10084475576877594,"min":-0.4137198328971863,"max":-0.03608912229537964},{"counts":[0,0,0,0,0,0,0,0,0,1,6,3,1,1,5,5,10,6,17,25,7,3,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"below":0,"above":0,"mean":-0.07602424808251469,"sd":0.09144675767010788,"median":-0.041185956448316574,"q1":-0.11746160127222538,"q3":-0.018829038366675377,"min":-0.3071136474609375,"max":0.10018110275268555},{"counts":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,5,4,0,9,8,17,21,11,6,2,6,2,0,0,0,0,0,0,0,0,0,0,0,0,0],"below":0,"above":0,"mean":0.026317614302768008,"sd":0.0777916586180232,"median":0.03239092230796814,"q1":-0.004569646902382374,"q3":0.06524945423007011,"min":-0.16228100657463074,"max":0.18222162127494812}],[{"counts":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,7,10,11,4,11,17,16,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"below":0,"above":0,"mean":-0.03033531425032942,"sd":0.07102241189504388,"median":-0.014001773204654455,"q1":-0.08662146888673306,"q3":0.024591412395238876,"min":-0.17019294202327728,"max":0.10910126566886902},{"counts":[0,0,0,0,0,0,1,1,1,3,3,2,0,1,9,18,19,13,3,3,6,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"below":0,"above":0,"mean":-0.1284396009564045,"sd":0.0903956295302748,"median":-0.11775708943605423,"q1":-0.15033861994743347,"q3":-0.08422066271305084,"min":-0.40284842252731323,"max":0.03718169033527374},{"counts":[0,0,0,0,0,0,0,0,0,0,0,2,1,2,4,5,6,15,27,15,7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"below":0,"above":0,"mean":-0.0659997779765122,"sd":0.06081980717084561,"median":-0.05419793725013733,"q1":-0.08814290352165699,"q3":-0.026060874108225107,"min":-0.26330849528312683,"max":0.020303085446357727},{"counts":[0,0,0,0,0,0,0,0,0,0,0,0,0,2,1,1,3,1,1,2,6,13,14,14,20,6,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"below":0,"above":0,"mean":0.06911243766634947,"sd":0.08063622908904053,"median":0.08418523147702217,"q1":0.04253024607896805,"q3":0.12666673958301544,"min":-0.19518007338047028,"max":0.16961877048015594},{"counts":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,13,8,8,17,18,10,1,3,1,1,2,0,0,0,0,0,0,0,0,0,0,0],"below":0,"above":0,"mean":0.046439188255351926,"sd":0.07176867100500801,"median":0.04418126121163368,"q1":-0.01587210362777114,"q3":0.07959803193807602,"min":-0.06998419761657715,"max":0.26204678416252136},{"counts":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,4,9,20,14,11,4,5,5,2,5,1,2,0,0,0,0,0,0,0,0,0,0],"below":0,"above":0,"mean":0.06418803183173406,"sd":0.0826949477292106,"median":0.041920604184269905,"q1":0.007591692730784416,"q3":0.10416724905371666,"min":-0.10698828101158142,"max":0.27527379989624023},{"counts":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,5,16,18,5,7,7,11,2,1,2,2,3,1,2,0,0,0,0],"below":0,"above":0,"mean":0.18979513030942707,"sd":0.10159941138255746,"median":0.15534283220767975,"q1":0.11812322214245796,"q3":0.25053559243679047,"min":0.01800883747637272,"max":0.4693625569343567},{"counts":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,11,17,2,12,11,10,3,3,2,3,3,3,2,2,0,0,0,0,0,0,0,0],"below":0,"above":0,"mean":0.07696375552941823,"sd":0.10468082458575019,"median":0.060411324724555016,"q1":-0.014233261113986373,"q3":0.11741158924996853,"min":-0.05335430055856705,"max":0.34381502866744995},{"counts":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,20,17,4,10,11,3,4,3,0,3,2,3,1,2,0,0,0,0,0,0,0,0],"below":0,"above":0,"mean":0.05469463789458608,"sd":0.10666482901565384,"median":0.024500860832631588,"q1":-0.028605046216398478,"q3":0.09127729386091232,"min":-0.06538031250238419,"max":0.35831838846206665},{"counts":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,4,5,10,26,12,15,6,3,2,0,0,0,0,0,0,0,0,0,0,0,0],"below":0,"above":0,"mean":0.09246488767010826,"sd":0.05550707611347457,"median":0.08544887602329254,"q1":0.06043320149183273,"q3":0.13101482018828392,"min":-0.03416147083044052,"max":0.23566898703575134},{"counts":[0,0,0,0,2,1,5,2,1,1,5,9,9,7,8,5,25,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"below":0,"above":0,"mean":-0.1990650739698183,"sd":0.10164805057834232,"median":-0.18109460175037384,"q1":-0.24980080872774124,"q3":-0.10810363665223122,"min":-0.4611102342605591,"max":-0.07560452818870544},{"counts":[0,0,0,0,0,0,0,1,2,3,2,2,1,6,5,10,3,6,19,16,5,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"below":0,"above":0,"mean":-0.09743377998737353,"sd":0.10343914395722997,"median":-0.05742215737700462,"q1":-0.1555759161710739,"q3":-0.020819945260882378,"min":-0.3661191165447235,"max":0.10018110275268555},{"counts":[0,0,0,0,0,0,0,0,0,0,0,0,0,2,1,1,5,1,6,18,26,7,2,3,5,6,1,0,0,0,0,0,0,0,0,0,0,0,0,0],"below":0,"above":0,"mean":0.013373350658054863,"sd":0.08016198049408692,"median":0.008647558279335499,"q1":-0.019253244623541832,"q3":0.035042366944253445,"min":-0.20751485228538513,"max":0.18031875789165497}],[{"counts":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,8,14,10,9,14,22,22,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"below":0,"above":0,"mean":-0.02340858617318001,"sd":0.06277579488998233,"median":-0.005358939990401268,"q1":-0.07274758815765381,"q3":0.02908990904688835,"min":-0.14604228734970093,"max":0.115420863032341},{"counts":[0,0,0,0,0,0,0,0,2,7,2,4,1,4,9,14,15,25,9,3,5,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"below":0,"above":0,"mean":-0.12521080841946572,"sd":0.09056510327738919,"median":-0.10497206449508667,"q1":-0.16001293063163757,"q3":-0.07009532302618027,"min":-0.3450818657875061,"max":0.03326049819588661},{"counts":[0,0,0,0,0,0,0,0,0,0,1,0,4,1,5,7,15,21,20,21,5,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"below":0,"above":0,"mean":-0.07410316365669564,"sd":0.06056502380465979,"median":-0.0628013163805008,"q1":-0.10341061651706696,"q3":-0.029302574694156647,"min":-0.2774202227592468,"max":0.04873207211494446},{"counts":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,5,4,3,2,7,13,20,12,18,14,1,0,0,0,0,0,0,0,0,0,0,0,0,0],"below":0,"above":0,"mean":0.07057127053157823,"sd":0.0798871647308112,"median":0.08224241435527802,"q1":0.040731023997068405,"q3":0.13600018620491028,"min":-0.14902782440185547,"max":0.18014700710773468},{"counts":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,8,12,32,18,3,8,7,8,4,0,0,0,0,0,0,0,0,0,0,0,0,0],"below":0,"above":0,"mean":0.04708026605427708,"sd":0.06760582156180879,"median":0.026748929172754288,"q1":0.0021442705765366554,"q3":0.09595514833927155,"min":-0.06773874908685684,"max":0.2067960947751999},{"counts":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,3,7,18,21,15,11,4,6,8,3,4,0,0,0,0,0,0,0,0,0,0,0,0],"below":0,"above":0,"mean":0.04991000352224501,"sd":0.07538450394582039,"median":0.03028467297554016,"q1":-0.005087278783321381,"q3":0.0887373834848404,"min":-0.10852579772472382,"max":0.22583681344985962},{"counts":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,2,13,15,11,10,5,7,13,6,2,5,3,3,1,2,0,0,0,0],"below":0,"above":0,"mean":0.19297982464627464,"sd":0.10839057315837462,"median":0.16772402822971344,"q1":0.10388787090778351,"q3":0.2581360936164856,"min":0.016726449131965637,"max":0.4768514633178711},{"counts":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,15,11,13,15,10,4,6,8,4,5,4,2,1,0,0,0,0,0,0,0,0,0],"below":0,"above":0,"mean":0.06809103497682084,"sd":0.09886568191257612,"median":0.05031334608793259,"q1":-0.006540890783071518,"q3":0.13199417293071747,"min":-0.0781371146440506,"max":0.32162851095199585},{"counts":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,7,20,14,6,9,11,5,9,3,3,3,2,3,1,1,1,0,0,0,0,0,0,0],"below":0,"above":0,"mean":0.052910520787360055,"sd":0.11066577455274727,"median":0.030602119863033295,"q1":-0.04455088824033737,"q3":0.1249714344739914,"min":-0.10925810784101486,"max":0.3615739643573761},{"counts":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,3,5,24,23,16,12,9,4,1,2,0,0,0,0,0,0,0,0,0,0,0],"below":0,"above":0,"mean":0.09009825456703063,"sd":0.05741702437918926,"median":0.08333234488964081,"q1":0.05171656981110573,"q3":0.13017189502716064,"min":-0.03590232506394386,"max":0.2455855756998062},{"counts":[0,0,0,0,0,1,3,5,4,3,5,11,12,10,6,7,16,14,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"below":0,"above":0,"mean":-0.19426870320250492,"sd":0.10046653661460368,"median":-0.20049871504306793,"q1":-0.25440147519111633,"q3":-0.10626442730426788,"min":-0.42143651843070984,"max":-0.03223155811429024},{"counts":[0,0,0,0,0,0,0,0,0,1,4,4,4,7,5,7,13,7,12,14,18,3,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"below":0,"above":0,"mean":-0.08544707174717199,"sd":0.09517310584745145,"median":-0.06903564184904099,"q1":-0.13566625118255615,"q3":-0.010450072586536407,"min":-0.3138049840927124,"max":0.10040242969989777},{"counts":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,8,6,3,5,13,19,18,15,6,1,5,1,0,0,0,0,0,0,0,0,0,0,0,0,0],"below":0,"above":0,"mean":0.014564278452555732,"sd":0.07962730152784536,"median":0.022379664704203606,"q1":-0.025639038532972336,"q3":0.06172003224492073,"min":-0.1675165295600891,"max":0.18096336722373962}],[{"counts":[0,0,0,0,0,0,0,0,0,0,0,0,0,2,3,8,11,9,9,20,21,15,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"below":0,"above":0,"mean":-0.03179676610045135,"sd":0.067248358744903,"median":-0.013383808545768261,"q1":-0.08696138858795166,"q3":0.02222947683185339,"min":-0.1982693374156952,"max":0.10910126566886902},{"counts":[0,0,0,0,0,0,0,6,6,5,1,4,2,7,13,8,17,14,8,3,5,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"below":0,"above":0,"mean":-0.15357583585195245,"sd":0.10841387118971527,"median":-0.13045542687177658,"q1":-0.20507143437862396,"q3":-0.08334429934620857,"min":-0.3883851170539856,"max":0.03718169033527374},{"counts":[0,0,0,0,0,0,0,0,0,0,2,3,5,3,6,10,19,15,14,16,7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"below":0,"above":0,"mean":-0.09305532448459417,"sd":0.07302725486644907,"median":-0.08609503507614136,"q1":-0.12744013965129852,"q3":-0.035274799913167953,"min":-0.28389298915863037,"max":0.02312769740819931},{"counts":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,3,3,13,3,5,4,11,13,14,26,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"below":0,"above":0,"mean":0.04721866924315691,"sd":0.09114101522247982,"median":0.06939412653446198,"q1":-0.024052581749856472,"q3":0.12792792543768883,"min":-0.17339584231376648,"max":0.15363147854804993},{"counts":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,11,6,26,11,7,10,6,8,4,6,2,0,0,0,0,0,0,0,0,0,0,0],"below":0,"above":0,"mean":0.062143486812710765,"sd":0.0844500491336904,"median":0.04046568274497986,"q1":0.00483406858984381,"q3":0.12308287248015404,"min":-0.08306233584880829,"max":0.24943968653678894},{"counts":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,2,17,22,6,13,12,7,8,5,6,0,0,0,0,0,0,0,0,0,0,0,0],"below":0,"above":0,"mean":0.06762558897957206,"sd":0.07867478673849307,"median":0.06078784540295601,"q1":0.006346083711832762,"q3":0.12263299897313118,"min":-0.10698828101158142,"max":0.23477566242218018},{"counts":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,8,14,7,12,6,12,10,4,4,7,5,3,2,4,0,0,0,0],"below":0,"above":0,"mean":0.22076947135850788,"sd":0.11128275108202736,"median":0.21380875259637833,"q1":0.12274209782481194,"q3":0.29399368166923523,"min":0.01800883747637272,"max":0.4637107849121094},{"counts":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,11,9,9,9,17,8,8,8,2,4,8,6,0,1,0,0,0,0,0,0,0,0],"below":0,"above":0,"mean":0.09831586984917522,"sd":0.10092842081140521,"median":0.08090312406420708,"q1":0.02327072713524103,"q3":0.16903943940997124,"min":-0.04909680783748627,"max":0.33728909492492676},{"counts":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,15,12,7,5,10,14,7,2,4,6,1,4,6,3,0,0,0,0,0,0,0,0],"below":0,"above":0,"mean":0.0896490707877092,"sd":0.11827325506942617,"median":0.08152724429965019,"q1":-0.017143044620752335,"q3":0.1679348647594452,"min":-0.06540777534246445,"max":0.3560371994972229},{"counts":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,1,4,12,33,16,9,10,8,4,1,0,0,0,0,0,0,0,0,0,0,0],"below":0,"above":0,"mean":0.10487094840034843,"sd":0.060048298597225845,"median":0.08876040950417519,"q1":0.06806517578661442,"q3":0.14270099252462387,"min":-0.03416147083044052,"max":0.24339154362678528},{"counts":[0,0,0,0,0,5,6,5,6,6,9,8,8,9,9,4,18,7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"below":0,"above":0,"mean":-0.23000465519726276,"sd":0.11015836716787249,"median":-0.2203310951590538,"q1":-0.30601345747709274,"q3":-0.1299939826130867,"min":-0.4331827461719513,"max":-0.06524039059877396},{"counts":[0,0,0,0,0,0,0,0,0,5,5,8,5,2,6,11,12,6,12,17,7,2,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"below":0,"above":0,"mean":-0.11258270084857941,"sd":0.10284612233712728,"median":-0.10339322686195374,"q1":-0.17761022225022316,"q3":-0.025179449003189802,"min":-0.3187437057495117,"max":0.10018110275268555},{"counts":[0,0,0,0,0,0,0,0,0,0,0,0,1,1,9,4,2,8,9,8,15,20,9,4,6,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"below":0,"above":0,"mean":-0.0007715409435331822,"sd":0.09205483121182419,"median":0.019508764147758484,"q1":-0.05835452023893595,"q3":0.057688167318701744,"min":-0.21264000236988068,"max":0.16142266988754272}]],"seeds":[25,75],"notes":[]}</script>
+<script>
+(function () {
+  "use strict";
+  const C = JSON.parse(document.getElementById("payload").textContent);
+  const SVGNS = "http://www.w3.org/2000/svg";
+  const EM = C.emotions, RUNS = C.runs, DIST = C.dists, TEMPS = C.temps, GROUPS = C.groups;
+  const visible = EM.map(() => true);
+  let emphasis = -1;
+  const redraws = [];
+
+  function el(tag, cls, text) { const n = document.createElement(tag); if (cls) n.className = cls; if (text != null) n.textContent = text; return n; }
+  function sv(tag, attrs) { const n = document.createElementNS(SVGNS, tag); for (const k in attrs) n.setAttribute(k, attrs[k]); return n; }
+  function color(i) { return "var(--fam-" + EM[i].family + ")"; }
+  function fmt(v, d) { return v == null ? "–" : v.toFixed(d == null ? 3 : d); }
+  function tlabel(t) { return t.toFixed(1); }
+  function lineKey(i, w) {
+    w = w || 24;
+    const s = sv("svg", { width: w, height: 10, viewBox: "0 0 " + w + " 10", "aria-hidden": "true" });
+    const l = sv("line", { x1: 1, y1: 5, x2: w - 1, y2: 5, "stroke-width": 2, "stroke-linecap": "round" });
+    l.style.stroke = color(i); if (EM[i].dash) l.setAttribute("stroke-dasharray", EM[i].dash);
+    s.appendChild(l); return s;
+  }
+  function stat(r, i, key) { const row = DIST[r][i]; return row ? row[key] : null; }
+  function groupStat(g, i, key) {
+    const v = GROUPS[g].map(k => stat(k, i, key)).filter(x => x != null);
+    return v.length ? { mean: v.reduce((a, b) => a + b, 0) / v.length, min: Math.min(...v), max: Math.max(...v), n: v.length } : null;
+  }
+  function placeTip(tip, host, evt) {
+    const hr = host.getBoundingClientRect();
+    let left = evt.clientX - hr.left + 14;
+    if (left + tip.offsetWidth > hr.width - 4) left = evt.clientX - hr.left - tip.offsetWidth - 14;
+    tip.style.left = Math.max(0, left) + "px";
+    tip.style.top = Math.max(0, evt.clientY - hr.top - tip.offsetHeight - 10) + "px";
+  }
+  function niceScale(lo, hi, includeZero) {
+    if (includeZero) { lo = Math.min(lo, 0); hi = Math.max(hi, 0); }
+    if (!isFinite(lo)) { lo = 0; hi = 1; }
+    if (hi === lo) { hi += 0.05; lo -= 0.05; }
+    const span = hi - lo, steps = [0.005, 0.01, 0.02, 0.025, 0.05, 0.1, 0.2, 0.25, 0.5, 1];
+    const step = steps.find(s => span / s <= 6) || 1;
+    return { lo: Math.floor(lo / step + 1e-9) * step, hi: Math.ceil(hi / step - 1e-9) * step, step: step, dec: step < 0.01 ? 3 : step < 0.1 ? 2 : 1 };
+  }
+  function gridY(svg, sc, Y, pl, pr) {
+    for (let k = Math.round(sc.lo / sc.step); k * sc.step <= sc.hi + sc.step / 2; k++) {
+      const v = k * sc.step, y = Y(v);
+      svg.appendChild(sv("line", { x1: pl, x2: pr, y1: y, y2: y, stroke: Math.abs(v) < 1e-9 ? "var(--axis)" : "var(--grid)", "stroke-width": 1 }));
+      const t = sv("text", { x: pl - 8, y: y + 4, "text-anchor": "end", "font-size": 11, fill: "var(--muted)" });
+      t.style.fontVariantNumeric = "tabular-nums"; t.textContent = (Math.abs(v) < 1e-9 ? 0 : v).toFixed(sc.dec); svg.appendChild(t);
+    }
+  }
+  function table(host, headers, rows, leftCols) {
+    const t = el("table"), head = el("tr");
+    headers.forEach((h, k) => head.appendChild(el("th", leftCols.includes(k) ? "l" : null, h)));
+    const th = el("thead"); th.appendChild(head); t.appendChild(th);
+    const tb = el("tbody"); rows.forEach(r => tb.appendChild(r)); t.appendChild(tb);
+    host.appendChild(t);
+  }
+  function td(text, cls) { const c = el("td", cls); if (text instanceof Node) c.appendChild(text); else c.appendChild(el("span", "num", text)); return c; }
+  function emoCell(i) { const c = el("td", "emo"); c.appendChild(lineKey(i, 18)); c.appendChild(document.createTextNode(EM[i].name)); return c; }
+
+  // ---------- header
+  
+  document.getElementById("sub").textContent = (C.batch ? "batch " + C.batch + " · " : "") + RUNS.length + " runs at " + TEMPS.length + " temperatures";
+  const chips = document.getElementById("chips");
+  [["model", C.model], ["temperatures", TEMPS.map(tlabel).join(", ")], ["seeds", C.seeds.length ? C.seeds.join(", ") : null]]
+    .forEach(([k, v]) => { if (v == null) return; const li = el("li"); li.append(k + " "); li.appendChild(el("b", null, String(v))); chips.appendChild(li); });
+  const notes = document.getElementById("notes");
+  ["The same scripted session was replayed at each temperature. Temperature 0.0 always picks the most likely word, so it runs once; higher temperatures allow more varied wording and run once per seed, so seed-to-seed differences show how much of a change is chance.",
+   "Scores are relative: compare how each emotion's centre and spread move as temperature rises. Related emotions tend to move together.",
+   "Colour groups related emotions in threes; line style separates them. Neutral is grey."]
+    .concat(C.notes).forEach(t => notes.appendChild(el("p", null, t)));
+
+  // ---------- runs table
+  (function () {
+    const all = RUNS;
+    document.getElementById("runsinfo").textContent = "one replay of the same session per row";
+    const headers = ["run", "temperature", "seed"].concat(["sentences", "words", "unique words", "replies", "duration", "stopped early", "file"]);
+    const rows = all.map(r => {
+      const tr = el("tr");
+      tr.appendChild(td(r.label, "l"));
+      [tlabel(r.temp), r.seed == null ? "–" : String(r.seed)].forEach(v => tr.appendChild(td(v)));
+      
+      [String(r.sentences), String(r.words), fmt(r.unique_words, 2), String(r.replies),
+       r.duration_s == null ? "–" : r.duration_s.toFixed(0) + " s", String(r.stopped)].forEach(v => tr.appendChild(td(v)));
+      const f = el("td", "l", r.source); f.style.color = "var(--ink-2)"; tr.appendChild(f);
+      return tr;
+    });
+    table(document.getElementById("runs"), headers, rows, [0, headers.length - 1]);
+  })();
+
+  // ---------- legend
+  const legend = document.getElementById("legend"), buttons = [], groups = {};
+  EM.forEach((e, i) => { (groups[e.family] = groups[e.family] || []).push(i); });
+  Object.keys(groups).sort().forEach(f => {
+    const g = el("div", "fam");
+    groups[f].forEach(i => {
+      const b = el("button"); b.type = "button"; b.setAttribute("aria-pressed", "true");
+      b.appendChild(lineKey(i)); b.appendChild(document.createTextNode(EM[i].name));
+      b.addEventListener("click", () => { visible[i] = !visible[i]; b.setAttribute("aria-pressed", String(visible[i])); redraws.forEach(f => f()); });
+      b.addEventListener("pointerenter", () => { emphasis = i; redraws.forEach(f => f()); });
+      b.addEventListener("pointerleave", () => { emphasis = -1; redraws.forEach(f => f()); });
+      buttons[i] = b; g.appendChild(b);
+    });
+    legend.appendChild(g);
+  });
+  const tools = el("div", "tools");
+  [["Show all", true], ["Hide all", false]].forEach(([label, on]) => {
+    const b = el("button", null, label); b.type = "button";
+    b.addEventListener("click", () => { visible.fill(on); buttons.forEach(x => x.setAttribute("aria-pressed", String(on))); redraws.forEach(f => f()); });
+    tools.appendChild(b);
+  });
+  legend.appendChild(tools);
+
+  // ---------- line charts: statistic against temperature, seeds as dots
+  function lineChart(hostId, key, yLabel, includeZero) {
+    const host = document.getElementById(hostId);
+    const svg = sv("svg", { role: "img", "aria-label": yLabel + " of each emotion by temperature" });
+    const tip = el("div", "tip"); tip.hidden = true; host.append(svg, tip);
+    const H = 300, M = { top: 12, right: 14, bottom: 40, left: 50 };
+    let hoverG = -1;
+    function draw() {
+      const W = Math.max(300, Math.round(host.clientWidth));
+      svg.setAttribute("viewBox", "0 0 " + W + " " + H); svg.replaceChildren();
+      const t0 = TEMPS[0], t1 = TEMPS[TEMPS.length - 1];
+      const pl = M.left, pr = W - M.right, pt = M.top, pb = H - M.bottom, pad = 16;
+      const X = t => t1 === t0 ? (pl + pr) / 2 : pl + pad + (t - t0) / (t1 - t0) * (pr - pl - 2 * pad);
+      let lo = Infinity, hi = -Infinity;
+      EM.forEach((e, i) => { if (!visible[i]) return; RUNS.forEach((r, k) => { const v = stat(k, i, key); if (v != null) { lo = Math.min(lo, v); hi = Math.max(hi, v); } }); });
+      const sc = niceScale(lo, hi, includeZero);
+      const Y = v => pt + (sc.hi - v) / (sc.hi - sc.lo) * (pb - pt);
+      gridY(svg, sc, Y, pl, pr);
+      svg.appendChild(sv("line", { x1: pl, x2: pr, y1: pb, y2: pb, stroke: "var(--axis)", "stroke-width": 1 }));
+      TEMPS.forEach(t => {
+        const x = X(t);
+        svg.appendChild(sv("line", { x1: x, x2: x, y1: pb, y2: pb + 5, stroke: "var(--muted)", "stroke-width": 1 }));
+        const tx = sv("text", { x: x, y: pb + 18, "text-anchor": "middle", "font-size": 11, fill: "var(--ink-2)" });
+        tx.style.fontVariantNumeric = "tabular-nums"; tx.textContent = tlabel(t); svg.appendChild(tx);
+      });
+      const xl = sv("text", { x: (pl + pr) / 2, y: H - 4, "text-anchor": "middle", "font-size": 11.5, fill: "var(--ink-2)" });
+      xl.textContent = "temperature (least → most creative)"; svg.appendChild(xl);
+      const yl = sv("text", { x: 12, y: (pt + pb) / 2, transform: "rotate(-90 12 " + (pt + pb) / 2 + ")", "text-anchor": "middle", "font-size": 11.5, fill: "var(--ink-2)" });
+      yl.textContent = yLabel; svg.appendChild(yl);
+      if (hoverG >= 0) svg.appendChild(sv("line", { x1: X(TEMPS[hoverG]), x2: X(TEMPS[hoverG]), y1: pt, y2: pb, stroke: "var(--muted)", "stroke-width": 1 }));
+      EM.forEach((e, i) => {
+        if (!visible[i]) return;
+        const faded = emphasis >= 0 && emphasis !== i;
+        let d = "", pen = false;
+        TEMPS.forEach((t, g) => { const s = groupStat(g, i, key); if (!s) { pen = false; return; } d += (pen ? "L" : "M") + X(t).toFixed(1) + " " + Y(s.mean).toFixed(1); pen = true; });
+        if (!d) return;
+        const p = sv("path", { d: d, fill: "none", "stroke-width": emphasis === i ? 3 : 2, "stroke-linejoin": "round", "stroke-linecap": "round" });
+        p.style.stroke = color(i); if (e.dash) p.setAttribute("stroke-dasharray", e.dash);
+        if (faded) p.setAttribute("opacity", "0.18");
+        svg.appendChild(p);
+        TEMPS.forEach((t, g) => {
+          const s = groupStat(g, i, key); if (!s) return;
+          if (s.n > 1) {
+            const bar = sv("line", { x1: X(t), x2: X(t), y1: Y(s.min), y2: Y(s.max), "stroke-width": 3, "stroke-linecap": "round" });
+            bar.style.stroke = color(i); bar.setAttribute("opacity", faded ? "0.1" : "0.35"); svg.appendChild(bar);
+          }
+          GROUPS[g].forEach(k => {
+            const v = stat(k, i, key); if (v == null) return;
+            const c = sv("circle", { cx: X(t), cy: Y(v), r: s.n > 1 ? 3 : 4, "stroke-width": 1.5 });
+            c.style.fill = s.n > 1 ? "var(--surface)" : color(i); c.style.stroke = color(i);
+            if (faded) c.setAttribute("opacity", "0.18");
+            svg.appendChild(c);
+          });
+        });
+      });
+      const hit = sv("rect", { x: pl, y: 0, width: pr - pl, height: H, fill: "transparent" });
+      svg.appendChild(hit);
+      hit.addEventListener("pointermove", evt => {
+        const rect = svg.getBoundingClientRect(), px = (evt.clientX - rect.left) * (W / rect.width);
+        let best = 0; TEMPS.forEach((t, g) => { if (Math.abs(X(t) - px) < Math.abs(X(TEMPS[best]) - px)) best = g; });
+        if (best !== hoverG) { hoverG = best; draw(); }
+        const n = GROUPS[best].length;
+        tip.replaceChildren();
+        tip.appendChild(el("div", "h", "temperature " + tlabel(TEMPS[best]) + " · " + yLabel + (n > 1 ? " · average of " + n + " seeds" : "")));
+        EM.map((e, i) => i).filter(i => visible[i] && groupStat(best, i, key)).sort((a, b) => groupStat(best, b, key).mean - groupStat(best, a, key).mean).forEach(i => {
+          const s = groupStat(best, i, key), row = el("div", "row");
+          row.appendChild(lineKey(i, 22)); row.appendChild(el("span", "num", fmt(s.mean)));
+          row.appendChild(el("span", "name", EM[i].name + (s.n > 1 ? " (" + fmt(s.min) + " to " + fmt(s.max) + ")" : "")));
+          tip.appendChild(row);
+        });
+        tip.hidden = false; placeTip(tip, host, evt);
+      });
+      hit.addEventListener("pointerleave", () => { tip.hidden = true; if (hoverG >= 0) { hoverG = -1; draw(); } });
+    }
+    redraws.push(draw); draw();
+    let raf = 0; new ResizeObserver(() => { cancelAnimationFrame(raf); raf = requestAnimationFrame(draw); }).observe(host);
+  }
+  lineChart("sdplot", "sd", "standard deviation", true);
+  lineChart("meanplot", "mean", "mean score", true);
+
+  // ---------- small multiples: one panel per emotion, one row per run
+  (function () {
+    const nb = Math.round((C.hi - C.lo) / C.width);
+    document.getElementById("distinfo").textContent = nb + " bins of width " + C.width + " · shared scales";
+    let clamped = 0;
+    DIST.forEach(rows => rows.forEach(r => { if (r) clamped += r.below + r.above; }));
+    document.getElementById("disthint").textContent =
+      "Each panel is one emotion; each row is one run, lowest temperature at the top. Heights are the percentage of that run's sentences in each bin (counts, no fitted curve). " +
+      "Every panel and row shares the same horizontal and vertical scale. The dark mark is the mean." +
+      (clamped ? " " + clamped + " score(s) beyond " + C.lo + " or " + C.hi + " are counted in the end bins." : "");
+    let yMax = 1e-9;
+    DIST.forEach((rows, k) => rows.forEach(r => { if (r && RUNS[k].sentences) yMax = Math.max(yMax, Math.max(...r.counts) / RUNS[k].sentences * 100); }));
+    const wrap = document.getElementById("panels");
+    const ring = EM.map((e, i) => i).filter(i => EM[i].family >= 1 && EM[i].family <= 4);
+    const half = Math.ceil(ring.length / 2);
+    const leftCol = el("div", "col"), rightCol = el("div", "col"), centerCol = el("div", "col center");
+    wrap.append(leftCol, rightCol, centerCol);
+    function columnFor(i) { const k = ring.indexOf(i); return k < 0 ? centerCol : k < half ? leftCol : rightCol; }
+    EM.forEach((e, i) => {
+      const panel = el("div", "panel"), h = el("h3"); h.appendChild(lineKey(i, 20)); h.appendChild(document.createTextNode(e.name));
+      panel.appendChild(h);
+      const svg = sv("svg", { role: "img", "aria-label": e.name + " score distribution in each run" });
+      svg.style.display = "block"; svg.style.width = "100%"; svg.style.height = "auto";
+      const tip = el("div", "tip"); tip.hidden = true;
+      panel.append(svg, tip); columnFor(i).appendChild(panel);
+      const rowH = 22, top = 4, labelW = 62, right = 6, axisH = 18;
+      function draw() {
+        panel.classList.toggle("dim", !visible[i] || (emphasis >= 0 && emphasis !== i));
+        const W = Math.max(260, Math.round(panel.clientWidth - 16)), H = top + rowH * RUNS.length + axisH;
+        svg.setAttribute("viewBox", "0 0 " + W + " " + H); svg.replaceChildren();
+        const x0 = labelW, x1 = W - right, yb = top + rowH * RUNS.length;
+        const X = v => x0 + (v - C.lo) / (C.hi - C.lo) * (x1 - x0);
+        for (let k = Math.ceil(C.lo / 0.3 - 1e-9); k * 0.3 <= C.hi + 1e-9; k++) {
+          const v = k * 0.3, x = X(v);
+          svg.appendChild(sv("line", { x1: x, x2: x, y1: top, y2: yb, stroke: Math.abs(v) < 1e-9 ? "var(--axis)" : "var(--grid)", "stroke-width": 1 }));
+          const t = sv("text", { x: x, y: yb + 13, "text-anchor": "middle", "font-size": 10, fill: "var(--muted)" });
+          t.style.fontVariantNumeric = "tabular-nums"; t.textContent = (Math.abs(v) < 1e-9 ? 0 : v).toFixed(1); svg.appendChild(t);
+        }
+        RUNS.forEach((run, k) => {
+          const r = DIST[k][i], base = top + rowH * (k + 1) - 2, hmax = rowH - 5;
+          const lab = sv("text", { x: labelW - 6, y: base - 3, "text-anchor": "end", "font-size": 10.5, fill: "var(--ink-2)" });
+          lab.style.fontVariantNumeric = "tabular-nums"; lab.textContent = run.label; svg.appendChild(lab);
+          svg.appendChild(sv("line", { x1: x0, x2: x1, y1: base, y2: base, stroke: "var(--axis)", "stroke-width": 1 }));
+          if (!r || !run.sentences) return;
+          let d = "M" + X(C.lo).toFixed(1) + " " + base;
+          r.counts.forEach((c, b) => {
+            const y = (base - (c / run.sentences * 100) / yMax * hmax).toFixed(1);
+            d += "L" + X(C.lo + b * C.width).toFixed(1) + " " + y + "L" + X(C.lo + (b + 1) * C.width).toFixed(1) + " " + y;
+          });
+          d += "L" + X(C.hi).toFixed(1) + " " + base + "Z";
+          const area = sv("path", { d: d, "stroke-width": 1.25, "stroke-linejoin": "round" });
+          area.style.fill = color(i); area.style.fillOpacity = "0.25"; area.style.stroke = color(i);
+          svg.appendChild(area);
+          if (r.mean != null) svg.appendChild(sv("line", { x1: X(r.mean), x2: X(r.mean), y1: base - hmax, y2: base + 2, stroke: "var(--ink)", "stroke-width": 1.5 }));
+        });
+        const hit = sv("rect", { x: x0, y: top, width: x1 - x0, height: yb - top, fill: "transparent" });
+        svg.appendChild(hit);
+        hit.addEventListener("pointermove", evt => {
+          const rect = svg.getBoundingClientRect(), s = W / rect.width;
+          const k = Math.floor(((evt.clientY - rect.top) * s - top) / rowH), b = Math.floor(((evt.clientX - rect.left) * s - x0) / (x1 - x0) * nb);
+          if (k < 0 || k >= RUNS.length || b < 0 || b >= nb || !DIST[k][i]) { tip.hidden = true; return; }
+          const c = DIST[k][i].counts[b], lo = C.lo + b * C.width, n = RUNS[k].sentences;
+          tip.replaceChildren();
+          tip.appendChild(el("div", "h", e.name + " · run " + RUNS[k].label));
+          tip.appendChild(el("div", null, "score " + lo.toFixed(2) + " to " + (lo + C.width).toFixed(2)));
+          const v = el("div"); v.appendChild(el("span", "num", (c / n * 100).toFixed(1) + "%")); v.appendChild(document.createTextNode(" of sentences (" + c + " of " + n + ")")); tip.appendChild(v);
+          tip.appendChild(el("div", "name", "mean " + fmt(DIST[k][i].mean) + " · sd " + fmt(DIST[k][i].sd)));
+          tip.hidden = false; placeTip(tip, panel, evt);
+        });
+        hit.addEventListener("pointerleave", () => { tip.hidden = true; });
+      }
+      redraws.push(draw); draw();
+    });
+    let raf = 0; new ResizeObserver(() => { cancelAnimationFrame(raf); raf = requestAnimationFrame(() => redraws.forEach(f => f())); }).observe(wrap);
+  })();
+
+  // ---------- numbers
+  (function () {
+    const headers = ["emotion"].concat(RUNS.map(r => r.label));
+    const rows = EM.map((e, i) => {
+      const tr = el("tr"); tr.appendChild(emoCell(i));
+      RUNS.forEach((r, k) => {
+        const c = el("td"); c.appendChild(el("span", "num", fmt(stat(k, i, "mean"))));
+        c.appendChild(el("span", "sd", " ± " + fmt(stat(k, i, "sd")))); tr.appendChild(c);
+      });
+      return tr;
+    });
+    table(document.getElementById("numbers"), headers, rows, [0]);
+  })();
+  
+})();
+</script>
+</body>
+</html>
