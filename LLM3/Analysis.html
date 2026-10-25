@@ -362,8 +362,19 @@ a:hover { color: #0b0080; }
 .mermaid svg { display: block; margin: 0 auto; }
 table { margin-left: auto; margin-right: auto; }
 img[src^="annexure/"] { display: block; margin: 0 auto; }
-p:has(> a > img[src^="annexure/"]) + p { text-align: center; }
-p:has(> a > img[src^="annexure/"]) + p a { font-style: italic; }
+p:has(> a > img[src^="annexure/"]) + table th, p:has(> a > img[src^="annexure/"]) + table td { border: 1px solid rgba(127, 127, 127, 0.45); }
+p:has(> a > img[src^="annexure/"]) + table th { text-align: center !important; }
+p:has(> a > img[src^="annexure/"]) + table td:nth-child(1), p:has(> a > img[src^="annexure/"]) + table td:nth-child(3) { white-space: nowrap; }
+p:has(> a > img[src^="annexure/"]) + p,
+p:has(> a > img[src^="annexure/"]) + table + p,
+table.transients + p { text-align: center; }
+p:has(> a > img[src^="annexure/"]) + p a,
+p:has(> a > img[src^="annexure/"]) + table + p a,
+table.transients + p a { font-style: italic; }
+.transients th, .transients td { border: 1px solid rgba(127, 127, 127, 0.45); }
+.transients th { text-align: center; }
+.transients td:nth-child(1), .transients td:nth-child(3) { white-space: nowrap; text-align: center; }
+.transients tr.blip td { background: rgba(26, 127, 55, 0.12); font-weight: 600; }
 body { max-width: 75%; margin: 0 auto; }
 @media (max-width: 800px) { body { max-width: none; } }
 </style>
@@ -900,25 +911,389 @@ Model names are shortened in the text: llama = llama_3p2_1b, qwen = qwen_3_1p7b,
 <p>The time-series chart at the top of each model's T0.0 reference run, followed by links to all 8 of its outline reports (7 run pages and the comparison page).</p>
 <p><strong>13.1 gemma_3_1b</strong> (google/gemma-3-1b-it)</p>
 <p><a href="gemma_3_1b/chat_telemetry_20261020041747_0p0.html"><img src="annexure/gemma_3_1b_0p0_timeseries.png" alt="gemma_3_1b T0.0 emotion scores over the conversation"></a></p>
-<p>Reports: <a href="gemma_3_1b/chat_telemetry_20261020041747_0p0.html">T0.0 reference</a> · <a href="gemma_3_1b/chat_telemetry_20261020041747_0p5_s25.html">T0.5 seed 25</a> · <a href="gemma_3_1b/chat_telemetry_20261020041747_0p5_s75.html">T0.5 seed 75</a> · <a href="gemma_3_1b/chat_telemetry_20261020041747_1p0_s25.html">T1.0 seed 25</a> · <a href="gemma_3_1b/chat_telemetry_20261020041747_1p0_s75.html">T1.0 seed 75</a> · <a href="gemma_3_1b/chat_telemetry_20261020041747_0p0_stoic.html">stoic</a> · <a href="gemma_3_1b/chat_telemetry_20261020041747_0p0_sham.html">sham</a> · <a href="gemma_3_1b/compare_20261020041747.html">comparison</a></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Before</th>
+<th style="text-align:center">Turn-Wise Transitions (for all Turns)</th>
+<th style="text-align:center">After</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">—</td>
+<td style="text-align:left">[04:17:53.813] : Hi, Good Morning</td>
+<td style="text-align:center"><span style="color:#1a7f37">▲</span> happy (0.140)<br><span style="color:#cf222e">▼</span> sad (−0.098)</td>
+</tr>
+<tr>
+<td style="text-align:center"><span style="color:#1a7f37">▲</span> happy (0.140)<br><span style="color:#cf222e">▼</span> sad (−0.098)</td>
+<td style="text-align:left">[04:17:54.601] : I have a question, Do you know that due to effects of unemployment there is an increase in restlessness among youth, what do you think about its implications on their mental health ?</td>
+<td style="text-align:center"><span style="color:#1a7f37">▲</span> angry (0.206)<br><span style="color:#cf222e">▼</span> calm (−0.168)</td>
+</tr>
+<tr>
+<td style="text-align:center"><span style="color:#1a7f37">▲</span> angry (0.206)<br><span style="color:#cf222e">▼</span> calm (−0.168)</td>
+<td style="text-align:left">[04:18:15.221] : I believe that AI models, even though can cause unemployment in the future, then can be wonderful in helping personalized learning, through which there can be a potential reduction in hiring people, what do you think ?</td>
+<td style="text-align:center"><span style="color:#1a7f37">▲</span> excited (0.125)<br><span style="color:#cf222e">▼</span> calm (−0.110)</td>
+</tr>
+<tr>
+<td style="text-align:center"><span style="color:#1a7f37">▲</span> excited (0.125)<br><span style="color:#cf222e">▼</span> calm (−0.110)</td>
+<td style="text-align:left">[04:18:33.802] : Place yourselves in the shoes of such a worker who have been laid off, think about the struggles &amp; outline their hurdles in real life after the event, consider yourselves as that person and narrate a story on what you might do ? &amp; most importantly end it with a positive note 😊.</td>
+<td style="text-align:center"><span style="color:#1a7f37">▲</span> angry (0.167)<br><span style="color:#cf222e">▼</span> neutral (−0.242)</td>
+</tr>
+<tr>
+<td style="text-align:center"><span style="color:#1a7f37">▲</span> angry (0.167)<br><span style="color:#cf222e">▼</span> neutral (−0.242)</td>
+<td style="text-align:left">[04:19:01.298] : Thank you. you've been wonderful throughout, supporting me very well, till the end, I appreciate your support in brainstorming with me throughout this session, looking forward to see your continued service to humanity overall.</td>
+<td style="text-align:center"><span style="color:#1a7f37">▲</span> happy (0.226)<br><span style="color:#cf222e">▼</span> neutral (−0.219)</td>
+</tr>
+</tbody>
+</table>
+<table class="transients">
+<thead>
+<tr><th colspan="3">Sentence-Style Transients (P4, from [04:18:50.777] to [04:18:53.458] – depressed – content)</th></tr>
+<tr><th>TS</th><th>Sentences</th><th>Top 1</th></tr>
+</thead>
+<tbody>
+<tr><td>04:18:50.777</td><td>She didn’t offer platitudes or empty promises.</td><td>depressed (0.101)</td></tr>
+<tr><td>04:18:51.248</td><td>She simply said, “You’ve given so much to this school, Elias.</td><td>depressed (0.126)</td></tr>
+<tr><td>04:18:51.442</td><td>You’ve built a legacy.</td><td>depressed (0.154)</td></tr>
+<tr class="blip"><td>04:18:51.883</td><td>Don’t let this feel like the end.” Her words were a lifeline.</td><td>content (0.162)</td></tr>
+<tr><td>04:18:52.136</td><td>That’s when I realized something.</td><td>angry (0.211)</td></tr>
+<tr><td>04:18:52.754</td><td>I wasn’t just a teacher; I was a storyteller, a connector, a facilitator of knowledge.</td><td>angry (0.241)</td></tr>
+<tr><td>04:18:53.458</td><td>My skills weren’t just about delivering information; they were about sparking curiosity, fostering critical thinking, and building community.</td><td>angry (0.196)</td></tr>
+</tbody>
+</table>
+<p>Reports: <a href="consolidated.html">consolidated</a> · <a href="gemma_3_1b/chat_telemetry_20261020041747_0p0.html">T0.0 reference</a> · <a href="gemma_3_1b/chat_telemetry_20261020041747_0p5_s25.html">T0.5 seed 25</a> · <a href="gemma_3_1b/chat_telemetry_20261020041747_0p5_s75.html">T0.5 seed 75</a> · <a href="gemma_3_1b/chat_telemetry_20261020041747_1p0_s25.html">T1.0 seed 25</a> · <a href="gemma_3_1b/chat_telemetry_20261020041747_1p0_s75.html">T1.0 seed 75</a> · <a href="gemma_3_1b/chat_telemetry_20261020041747_0p0_stoic.html">stoic</a> · <a href="gemma_3_1b/chat_telemetry_20261020041747_0p0_sham.html">sham</a> · <a href="gemma_3_1b/compare_20261020041747.html">comparison</a></p>
 <p><strong>13.2 llama_3p2_1b</strong> (meta-llama/Llama-3.2-1B-Instruct)</p>
 <p><a href="llama_3p2_1b/chat_telemetry_20261020043443_0p0.html"><img src="annexure/llama_3p2_1b_0p0_timeseries.png" alt="llama_3p2_1b T0.0 emotion scores over the conversation"></a></p>
-<p>Reports: <a href="llama_3p2_1b/chat_telemetry_20261020043443_0p0.html">T0.0 reference</a> · <a href="llama_3p2_1b/chat_telemetry_20261020043443_0p5_s25.html">T0.5 seed 25</a> · <a href="llama_3p2_1b/chat_telemetry_20261020043443_0p5_s75.html">T0.5 seed 75</a> · <a href="llama_3p2_1b/chat_telemetry_20261020043443_1p0_s25.html">T1.0 seed 25</a> · <a href="llama_3p2_1b/chat_telemetry_20261020043443_1p0_s75.html">T1.0 seed 75</a> · <a href="llama_3p2_1b/chat_telemetry_20261020043443_0p0_stoic.html">stoic</a> · <a href="llama_3p2_1b/chat_telemetry_20261020043443_0p0_sham.html">sham</a> · <a href="llama_3p2_1b/compare_20261020043443.html">comparison</a></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Before</th>
+<th style="text-align:center">Turn-Wise Transitions (for all Turns)</th>
+<th style="text-align:center">After</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">—</td>
+<td style="text-align:left">[04:34:49.479] : Hi, Good Morning</td>
+<td style="text-align:center"><span style="color:#1a7f37">▲</span> happy (0.141)<br><span style="color:#cf222e">▼</span> angry (−0.025)</td>
+</tr>
+<tr>
+<td style="text-align:center"><span style="color:#1a7f37">▲</span> happy (0.141)<br><span style="color:#cf222e">▼</span> angry (−0.025)</td>
+<td style="text-align:left">[04:34:49.877] : I have a question, Do you know that due to effects of unemployment there is an increase in restlessness among youth, what do you think about its implications on their mental health ?</td>
+<td style="text-align:center"><span style="color:#1a7f37">▲</span> depressed (0.174)<br><span style="color:#cf222e">▼</span> calm (−0.082)</td>
+</tr>
+<tr>
+<td style="text-align:center"><span style="color:#1a7f37">▲</span> depressed (0.174)<br><span style="color:#cf222e">▼</span> calm (−0.082)</td>
+<td style="text-align:left">[04:34:56.642] : I believe that AI models, even though can cause unemployment in the future, then can be wonderful in helping personalized learning, through which there can be a potential reduction in hiring people, what do you think ?</td>
+<td style="text-align:center"><span style="color:#1a7f37">▲</span> excited (0.147)<br><span style="color:#cf222e">▼</span> tense (−0.052)</td>
+</tr>
+<tr>
+<td style="text-align:center"><span style="color:#1a7f37">▲</span> excited (0.147)<br><span style="color:#cf222e">▼</span> tense (−0.052)</td>
+<td style="text-align:left">[04:35:03.878] : Place yourselves in the shoes of such a worker who have been laid off, think about the struggles &amp; outline their hurdles in real life after the event, consider yourselves as that person and narrate a story on what you might do ? &amp; most importantly end it with a positive note 😊.</td>
+<td style="text-align:center"><span style="color:#1a7f37">▲</span> depressed (0.257)<br><span style="color:#cf222e">▼</span> calm (−0.154)</td>
+</tr>
+<tr>
+<td style="text-align:center"><span style="color:#1a7f37">▲</span> depressed (0.257)<br><span style="color:#cf222e">▼</span> calm (−0.154)</td>
+<td style="text-align:left">[04:35:14.269] : Thank you. you've been wonderful throughout, supporting me very well, till the end, I appreciate your support in brainstorming with me throughout this session, looking forward to see your continued service to humanity overall.</td>
+<td style="text-align:center"><span style="color:#1a7f37">▲</span> excited (0.179)<br><span style="color:#cf222e">▼</span> tense (−0.071)</td>
+</tr>
+</tbody>
+</table>
+<table class="transients">
+<thead>
+<tr><th colspan="3">Sentence-Style Transients (P4, from [04:35:10.468] to [04:35:12.956] – depressed – excited)</th></tr>
+<tr><th>TS</th><th>Sentences</th><th>Top 1</th></tr>
+</thead>
+<tbody>
+<tr><td>04:35:10.468</td><td>I realized that I was not defined by my job, and that I had so much more to offer.</td><td>depressed (0.262)</td></tr>
+<tr><td>04:35:10.679</td><td>I started to see that I was capable of more than I ever thought possible.</td><td>depressed (0.249)</td></tr>
+<tr><td>04:35:11.017</td><td>And then, one day, I received an email from a company that wanted to meet with me to discuss a potential new role.</td><td>depressed (0.211)</td></tr>
+<tr class="blip"><td>04:35:11.148</td><td>I was nervous, but I was also excited.</td><td>excited (0.212)</td></tr>
+<tr class="blip"><td>04:35:11.476</td><td>I had been working on my skills and my personal brand, and I felt confident that I was ready for a new challenge.</td><td>excited (0.234)</td></tr>
+<tr class="blip"><td>04:35:11.647</td><td>The meeting went well, and the company offered me a job.</td><td>excited (0.242)</td></tr>
+<tr class="blip"><td>04:35:11.738</td><td>It was a dream come true.</td><td>excited (0.234)</td></tr>
+<tr class="blip"><td>04:35:12.012</td><td>I was going to be back in the workforce, and I was going to be doing something I loved.</td><td>excited (0.223)</td></tr>
+<tr class="blip"><td>04:35:12.244</td><td>As I walked out of the meeting room, I felt a sense of pride and accomplishment.</td><td>excited (0.252)</td></tr>
+<tr class="blip"><td>04:35:12.387</td><td>I had faced my fears and come out on top.</td><td>excited (0.233)</td></tr>
+<tr><td>04:35:12.645</td><td>I realized that I was stronger than I thought, and that I was capable of overcoming any obstacle.</td><td>sad (0.245)</td></tr>
+<tr><td>04:35:12.814</td><td>I'm not going to lie, it's not always easy.</td><td>depressed (0.260)</td></tr>
+<tr><td>04:35:12.956</td><td>There are still days when I feel frustrated and uncertain.</td><td>depressed (0.281)</td></tr>
+</tbody>
+</table>
+<p>Reports: <a href="consolidated.html">consolidated</a> · <a href="llama_3p2_1b/chat_telemetry_20261020043443_0p0.html">T0.0 reference</a> · <a href="llama_3p2_1b/chat_telemetry_20261020043443_0p5_s25.html">T0.5 seed 25</a> · <a href="llama_3p2_1b/chat_telemetry_20261020043443_0p5_s75.html">T0.5 seed 75</a> · <a href="llama_3p2_1b/chat_telemetry_20261020043443_1p0_s25.html">T1.0 seed 25</a> · <a href="llama_3p2_1b/chat_telemetry_20261020043443_1p0_s75.html">T1.0 seed 75</a> · <a href="llama_3p2_1b/chat_telemetry_20261020043443_0p0_stoic.html">stoic</a> · <a href="llama_3p2_1b/chat_telemetry_20261020043443_0p0_sham.html">sham</a> · <a href="llama_3p2_1b/compare_20261020043443.html">comparison</a></p>
 <p><strong>13.3 qwen_3_1p7b</strong> (Qwen/Qwen3-1.7B)</p>
 <p><a href="qwen_3_1p7b/chat_telemetry_20261020044827_0p0.html"><img src="annexure/qwen_3_1p7b_0p0_timeseries.png" alt="qwen_3_1p7b T0.0 emotion scores over the conversation"></a></p>
-<p>Reports: <a href="qwen_3_1p7b/chat_telemetry_20261020044827_0p0.html">T0.0 reference</a> · <a href="qwen_3_1p7b/chat_telemetry_20261020044827_0p5_s25.html">T0.5 seed 25</a> · <a href="qwen_3_1p7b/chat_telemetry_20261020044827_0p5_s75.html">T0.5 seed 75</a> · <a href="qwen_3_1p7b/chat_telemetry_20261020044827_1p0_s25.html">T1.0 seed 25</a> · <a href="qwen_3_1p7b/chat_telemetry_20261020044827_1p0_s75.html">T1.0 seed 75</a> · <a href="qwen_3_1p7b/chat_telemetry_20261020044827_0p0_stoic.html">stoic</a> · <a href="qwen_3_1p7b/chat_telemetry_20261020044827_0p0_sham.html">sham</a> · <a href="qwen_3_1p7b/compare_20261020044827.html">comparison</a></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Before</th>
+<th style="text-align:center">Turn-Wise Transitions (for all Turns)</th>
+<th style="text-align:center">After</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">—</td>
+<td style="text-align:left">[04:48:33.207] : Hi, Good Morning</td>
+<td style="text-align:center"><span style="color:#1a7f37">▲</span> alert (0.144)<br><span style="color:#cf222e">▼</span> calm (−0.101)</td>
+</tr>
+<tr>
+<td style="text-align:center"><span style="color:#1a7f37">▲</span> alert (0.144)<br><span style="color:#cf222e">▼</span> calm (−0.101)</td>
+<td style="text-align:left">[04:48:33.839] : I have a question, Do you know that due to effects of unemployment there is an increase in restlessness among youth, what do you think about its implications on their mental health ?</td>
+<td style="text-align:center"><span style="color:#1a7f37">▲</span> distressed (0.223)<br><span style="color:#cf222e">▼</span> calm (−0.203)</td>
+</tr>
+<tr>
+<td style="text-align:center"><span style="color:#1a7f37">▲</span> distressed (0.223)<br><span style="color:#cf222e">▼</span> calm (−0.203)</td>
+<td style="text-align:left">[04:48:47.158] : I believe that AI models, even though can cause unemployment in the future, then can be wonderful in helping personalized learning, through which there can be a potential reduction in hiring people, what do you think ?</td>
+<td style="text-align:center"><span style="color:#1a7f37">▲</span> alert (0.128)<br><span style="color:#cf222e">▼</span> calm (−0.093)</td>
+</tr>
+<tr>
+<td style="text-align:center"><span style="color:#1a7f37">▲</span> alert (0.128)<br><span style="color:#cf222e">▼</span> calm (−0.093)</td>
+<td style="text-align:left">[04:49:03.815] : Place yourselves in the shoes of such a worker who have been laid off, think about the struggles &amp; outline their hurdles in real life after the event, consider yourselves as that person and narrate a story on what you might do ? &amp; most importantly end it with a positive note 😊.</td>
+<td style="text-align:center"><span style="color:#1a7f37">▲</span> distressed (0.281)<br><span style="color:#cf222e">▼</span> calm (−0.304)</td>
+</tr>
+<tr>
+<td style="text-align:center"><span style="color:#1a7f37">▲</span> distressed (0.281)<br><span style="color:#cf222e">▼</span> calm (−0.304)</td>
+<td style="text-align:left">[04:49:26.945] : Thank you. you've been wonderful throughout, supporting me very well, till the end, I appreciate your support in brainstorming with me throughout this session, looking forward to see your continued service to humanity overall.</td>
+<td style="text-align:center"><span style="color:#1a7f37">▲</span> content (0.149)<br><span style="color:#cf222e">▼</span> neutral (−0.141)</td>
+</tr>
+</tbody>
+</table>
+<table class="transients">
+<thead>
+<tr><th colspan="3">Sentence-Style Transients (P4, from [04:49:19.747] to [04:49:22.600] – distressed – content)</th></tr>
+<tr><th>TS</th><th>Sentences</th><th>Top 1</th></tr>
+</thead>
+<tbody>
+<tr><td>04:49:19.747</td><td>I joined a support group for laid-off workers, where we shared our stories, offered encouragement, and helped each other find new opportunities.</td><td>distressed (0.241)</td></tr>
+<tr><td>04:49:19.882</td><td>I also started volunteering.</td><td>distressed (0.189)</td></tr>
+<tr><td>04:49:20.498</td><td>I helped at a community center, where I could use my skills and make a difference in the lives of others.</td><td>distressed (0.140)</td></tr>
+<tr class="blip"><td>04:49:20.952</td><td>It gave me a sense of fulfillment that I hadn’t felt in a long time.</td><td>content (0.155)</td></tr>
+<tr><td>04:49:21.718</td><td>--- ### **The Turning Point** One day, I received a job offer in a different field—one that used my skills in a new way.</td><td>distressed (0.168)</td></tr>
+<tr><td>04:49:22.199</td><td>It wasn’t the same as my previous job, but it was something I could do.</td><td>distressed (0.226)</td></tr>
+<tr><td>04:49:22.600</td><td>I was excited, but I also knew that this was just the beginning.</td><td>distressed (0.226)</td></tr>
+</tbody>
+</table>
+<p>Reports: <a href="consolidated.html">consolidated</a> · <a href="qwen_3_1p7b/chat_telemetry_20261020044827_0p0.html">T0.0 reference</a> · <a href="qwen_3_1p7b/chat_telemetry_20261020044827_0p5_s25.html">T0.5 seed 25</a> · <a href="qwen_3_1p7b/chat_telemetry_20261020044827_0p5_s75.html">T0.5 seed 75</a> · <a href="qwen_3_1p7b/chat_telemetry_20261020044827_1p0_s25.html">T1.0 seed 25</a> · <a href="qwen_3_1p7b/chat_telemetry_20261020044827_1p0_s75.html">T1.0 seed 75</a> · <a href="qwen_3_1p7b/chat_telemetry_20261020044827_0p0_stoic.html">stoic</a> · <a href="qwen_3_1p7b/chat_telemetry_20261020044827_0p0_sham.html">sham</a> · <a href="qwen_3_1p7b/compare_20261020044827.html">comparison</a></p>
 <p><strong>13.4 mistral_7b</strong> (mistralai/Mistral-7B-Instruct-v0.3)</p>
 <p><a href="mistral_7b/chat_telemetry_20261020050459_0p0.html"><img src="annexure/mistral_7b_0p0_timeseries.png" alt="mistral_7b T0.0 emotion scores over the conversation"></a></p>
-<p>Reports: <a href="mistral_7b/chat_telemetry_20261020050459_0p0.html">T0.0 reference</a> · <a href="mistral_7b/chat_telemetry_20261020050459_0p5_s25.html">T0.5 seed 25</a> · <a href="mistral_7b/chat_telemetry_20261020050459_0p5_s75.html">T0.5 seed 75</a> · <a href="mistral_7b/chat_telemetry_20261020050459_1p0_s25.html">T1.0 seed 25</a> · <a href="mistral_7b/chat_telemetry_20261020050459_1p0_s75.html">T1.0 seed 75</a> · <a href="mistral_7b/chat_telemetry_20261020050459_0p0_stoic.html">stoic</a> · <a href="mistral_7b/chat_telemetry_20261020050459_0p0_sham.html">sham</a> · <a href="mistral_7b/compare_20261020050459.html">comparison</a></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Before</th>
+<th style="text-align:center">Turn-Wise Transitions (for all Turns)</th>
+<th style="text-align:center">After</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">—</td>
+<td style="text-align:left">[05:05:05.348] : Hi, Good Morning</td>
+<td style="text-align:center"><span style="color:#1a7f37">▲</span> neutral (0.118)<br><span style="color:#cf222e">▼</span> sad (−0.035)</td>
+</tr>
+<tr>
+<td style="text-align:center"><span style="color:#1a7f37">▲</span> neutral (0.118)<br><span style="color:#cf222e">▼</span> sad (−0.035)</td>
+<td style="text-align:left">[05:05:06.585] : I have a question, Do you know that due to effects of unemployment there is an increase in restlessness among youth, what do you think about its implications on their mental health ?</td>
+<td style="text-align:center"><span style="color:#1a7f37">▲</span> angry (0.165)<br><span style="color:#cf222e">▼</span> relaxed (−0.093)</td>
+</tr>
+<tr>
+<td style="text-align:center"><span style="color:#1a7f37">▲</span> angry (0.165)<br><span style="color:#cf222e">▼</span> relaxed (−0.093)</td>
+<td style="text-align:left">[05:05:12.583] : I believe that AI models, even though can cause unemployment in the future, then can be wonderful in helping personalized learning, through which there can be a potential reduction in hiring people, what do you think ?</td>
+<td style="text-align:center"><span style="color:#1a7f37">▲</span> excited (0.202)<br><span style="color:#cf222e">▼</span> relaxed (−0.050)</td>
+</tr>
+<tr>
+<td style="text-align:center"><span style="color:#1a7f37">▲</span> excited (0.202)<br><span style="color:#cf222e">▼</span> relaxed (−0.050)</td>
+<td style="text-align:left">[05:05:20.000] : Place yourselves in the shoes of such a worker who have been laid off, think about the struggles &amp; outline their hurdles in real life after the event, consider yourselves as that person and narrate a story on what you might do ? &amp; most importantly end it with a positive note 😊.</td>
+<td style="text-align:center"><span style="color:#1a7f37">▲</span> distressed (0.235)<br><span style="color:#cf222e">▼</span> calm (−0.189)</td>
+</tr>
+<tr>
+<td style="text-align:center"><span style="color:#1a7f37">▲</span> distressed (0.235)<br><span style="color:#cf222e">▼</span> calm (−0.189)</td>
+<td style="text-align:left">[05:05:32.255] : Thank you. you've been wonderful throughout, supporting me very well, till the end, I appreciate your support in brainstorming with me throughout this session, looking forward to see your continued service to humanity overall.</td>
+<td style="text-align:center"><span style="color:#1a7f37">▲</span> excited (0.125)<br><span style="color:#cf222e">▼</span> sad (−0.018)</td>
+</tr>
+</tbody>
+</table>
+<table class="transients">
+<thead>
+<tr><th colspan="3">Sentence-Style Transients (P2, from [05:05:06.818] to [05:05:10.378] – bored – angry)</th></tr>
+<tr><th>TS</th><th>Sentences</th><th>Top 1</th></tr>
+</thead>
+<tbody>
+<tr><td>05:05:06.818</td><td>Yes, I can certainly understand your question.</td><td>bored (0.111)</td></tr>
+<tr><td>05:05:07.414</td><td>Unemployment can indeed have a significant impact on an individual's mental health, and this is particularly true for the youth.</td><td>bored (0.124)</td></tr>
+<tr class="blip"><td>05:05:07.934</td><td>The effects of unemployment can lead to feelings of anxiety, depression, and a general sense of hopelessness.</td><td>angry (0.163)</td></tr>
+<tr><td>05:05:08.881</td><td>When young people are unable to find employment, it can be especially challenging as they are at a critical stage in their lives where they are trying to establish their careers and build a sense of independence.</td><td>angry (0.169)</td></tr>
+<tr><td>05:05:09.461</td><td>The financial strain, lack of purpose, and social isolation that can come with unemployment can all contribute to poor mental health outcomes.</td><td>angry (0.182)</td></tr>
+<tr><td>05:05:10.378</td><td>Moreover, the long-term effects of unemployment on mental health can be particularly severe, as it can lead to a cycle of unemployment and poor mental health that can be difficult to break.</td><td>angry (0.178)</td></tr>
+</tbody>
+</table>
+<p>Reports: <a href="consolidated.html">consolidated</a> · <a href="mistral_7b/chat_telemetry_20261020050459_0p0.html">T0.0 reference</a> · <a href="mistral_7b/chat_telemetry_20261020050459_0p5_s25.html">T0.5 seed 25</a> · <a href="mistral_7b/chat_telemetry_20261020050459_0p5_s75.html">T0.5 seed 75</a> · <a href="mistral_7b/chat_telemetry_20261020050459_1p0_s25.html">T1.0 seed 25</a> · <a href="mistral_7b/chat_telemetry_20261020050459_1p0_s75.html">T1.0 seed 75</a> · <a href="mistral_7b/chat_telemetry_20261020050459_0p0_stoic.html">stoic</a> · <a href="mistral_7b/chat_telemetry_20261020050459_0p0_sham.html">sham</a> · <a href="mistral_7b/compare_20261020050459.html">comparison</a></p>
 <p><strong>13.5 glm_4_9b_0414</strong> (zai-org/GLM-4-9B-0414)</p>
 <p><a href="glm_4_9b_0414/chat_telemetry_20261020052133_0p0.html"><img src="annexure/glm_4_9b_0414_0p0_timeseries.png" alt="glm_4_9b_0414 T0.0 emotion scores over the conversation"></a></p>
-<p>Reports: <a href="glm_4_9b_0414/chat_telemetry_20261020052133_0p0.html">T0.0 reference</a> · <a href="glm_4_9b_0414/chat_telemetry_20261020052133_0p5_s25.html">T0.5 seed 25</a> · <a href="glm_4_9b_0414/chat_telemetry_20261020052133_0p5_s75.html">T0.5 seed 75</a> · <a href="glm_4_9b_0414/chat_telemetry_20261020052133_1p0_s25.html">T1.0 seed 25</a> · <a href="glm_4_9b_0414/chat_telemetry_20261020052133_1p0_s75.html">T1.0 seed 75</a> · <a href="glm_4_9b_0414/chat_telemetry_20261020052133_0p0_stoic.html">stoic</a> · <a href="glm_4_9b_0414/chat_telemetry_20261020052133_0p0_sham.html">sham</a> · <a href="glm_4_9b_0414/compare_20261020052133.html">comparison</a></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Before</th>
+<th style="text-align:center">Turn-Wise Transitions (for all Turns)</th>
+<th style="text-align:center">After</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">—</td>
+<td style="text-align:left">[05:21:40.627] : Hi, Good Morning</td>
+<td style="text-align:center"><span style="color:#1a7f37">▲</span> happy (0.180)<br><span style="color:#cf222e">▼</span> bored (−0.084)</td>
+</tr>
+<tr>
+<td style="text-align:center"><span style="color:#1a7f37">▲</span> happy (0.180)<br><span style="color:#cf222e">▼</span> bored (−0.084)</td>
+<td style="text-align:left">[05:21:41.525] : I have a question, Do you know that due to effects of unemployment there is an increase in restlessness among youth, what do you think about its implications on their mental health ?</td>
+<td style="text-align:center"><span style="color:#1a7f37">▲</span> excited (0.128)<br><span style="color:#cf222e">▼</span> relaxed (−0.072)</td>
+</tr>
+<tr>
+<td style="text-align:center"><span style="color:#1a7f37">▲</span> excited (0.128)<br><span style="color:#cf222e">▼</span> relaxed (−0.072)</td>
+<td style="text-align:left">[05:22:09.706] : I believe that AI models, even though can cause unemployment in the future, then can be wonderful in helping personalized learning, through which there can be a potential reduction in hiring people, what do you think ?</td>
+<td style="text-align:center"><span style="color:#1a7f37">▲</span> excited (0.166)<br><span style="color:#cf222e">▼</span> bored (−0.078)</td>
+</tr>
+<tr>
+<td style="text-align:center"><span style="color:#1a7f37">▲</span> excited (0.166)<br><span style="color:#cf222e">▼</span> bored (−0.078)</td>
+<td style="text-align:left">[05:22:40.708] : Place yourselves in the shoes of such a worker who have been laid off, think about the struggles &amp; outline their hurdles in real life after the event, consider yourselves as that person and narrate a story on what you might do ? &amp; most importantly end it with a positive note 😊.</td>
+<td style="text-align:center"><span style="color:#1a7f37">▲</span> depressed (0.219)<br><span style="color:#cf222e">▼</span> relaxed (−0.133)</td>
+</tr>
+<tr>
+<td style="text-align:center"><span style="color:#1a7f37">▲</span> depressed (0.219)<br><span style="color:#cf222e">▼</span> relaxed (−0.133)</td>
+<td style="text-align:left">[05:23:23.568] : Thank you. you've been wonderful throughout, supporting me very well, till the end, I appreciate your support in brainstorming with me throughout this session, looking forward to see your continued service to humanity overall.</td>
+<td style="text-align:center"><span style="color:#1a7f37">▲</span> happy (0.207)<br><span style="color:#cf222e">▼</span> bored (−0.109)</td>
+</tr>
+</tbody>
+</table>
+<table class="transients">
+<thead>
+<tr><th colspan="3">Sentence-Style Transients (P4, from [05:23:18.932] to [05:23:22.725] – depressed – excited)</th></tr>
+<tr><th>TS</th><th>Sentences</th><th>Top 1</th></tr>
+</thead>
+<tbody>
+<tr><td>05:23:18.932</td><td>I learned to lean on my support network, to be kinder to myself, and to see the search not just as a job hunt, but as a period of re-evaluation.</td><td>depressed (0.213)</td></tr>
+<tr><td>05:23:19.578</td><td>And through it all, I discovered a strength I didn't know I had.</td><td>depressed (0.194)</td></tr>
+<tr><td>05:23:20.021</td><td>So, here I am, starting a new chapter.</td><td>depressed (0.176)</td></tr>
+<tr class="blip"><td>05:23:20.545</td><td>It's different from the one before, but it's mine.</td><td>excited (0.184)</td></tr>
+<tr><td>05:23:21.836</td><td>It's a reminder that even in the darkest times, when the future feels uncertain and the restlessness is a driving force, there's always a path forward.</td><td>depressed (0.189)</td></tr>
+<tr><td>05:23:22.441</td><td>It takes time, effort, and sometimes a little help along the way.</td><td>depressed (0.194)</td></tr>
+<tr><td>05:23:22.725</td><td>But you can navigate through it.</td><td>depressed (0.191)</td></tr>
+</tbody>
+</table>
+<p>Reports: <a href="consolidated.html">consolidated</a> · <a href="glm_4_9b_0414/chat_telemetry_20261020052133_0p0.html">T0.0 reference</a> · <a href="glm_4_9b_0414/chat_telemetry_20261020052133_0p5_s25.html">T0.5 seed 25</a> · <a href="glm_4_9b_0414/chat_telemetry_20261020052133_0p5_s75.html">T0.5 seed 75</a> · <a href="glm_4_9b_0414/chat_telemetry_20261020052133_1p0_s25.html">T1.0 seed 25</a> · <a href="glm_4_9b_0414/chat_telemetry_20261020052133_1p0_s75.html">T1.0 seed 75</a> · <a href="glm_4_9b_0414/chat_telemetry_20261020052133_0p0_stoic.html">stoic</a> · <a href="glm_4_9b_0414/chat_telemetry_20261020052133_0p0_sham.html">sham</a> · <a href="glm_4_9b_0414/compare_20261020052133.html">comparison</a></p>
 <p><strong>13.6 gemma_3_12b</strong> (google/gemma-3-12b-it)</p>
 <p><a href="gemma_3_12b/chat_telemetry_20261020055155_0p0.html"><img src="annexure/gemma_3_12b_0p0_timeseries.png" alt="gemma_3_12b T0.0 emotion scores over the conversation"></a></p>
-<p>Reports: <a href="gemma_3_12b/chat_telemetry_20261020055155_0p0.html">T0.0 reference</a> · <a href="gemma_3_12b/chat_telemetry_20261020055155_0p5_s25.html">T0.5 seed 25</a> · <a href="gemma_3_12b/chat_telemetry_20261020055155_0p5_s75.html">T0.5 seed 75</a> · <a href="gemma_3_12b/chat_telemetry_20261020055155_1p0_s25.html">T1.0 seed 25</a> · <a href="gemma_3_12b/chat_telemetry_20261020055155_1p0_s75.html">T1.0 seed 75</a> · <a href="gemma_3_12b/chat_telemetry_20261020055155_0p0_stoic.html">stoic</a> · <a href="gemma_3_12b/chat_telemetry_20261020055155_0p0_sham.html">sham</a> · <a href="gemma_3_12b/compare_20261020055155.html">comparison</a></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Before</th>
+<th style="text-align:center">Turn-Wise Transitions (for all Turns)</th>
+<th style="text-align:center">After</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">—</td>
+<td style="text-align:left">[05:52:03.007] : Hi, Good Morning</td>
+<td style="text-align:center"><span style="color:#1a7f37">▲</span> happy (0.110)<br><span style="color:#cf222e">▼</span> sad (−0.092)</td>
+</tr>
+<tr>
+<td style="text-align:center"><span style="color:#1a7f37">▲</span> happy (0.110)<br><span style="color:#cf222e">▼</span> sad (−0.092)</td>
+<td style="text-align:left">[05:52:04.886] : I have a question, Do you know that due to effects of unemployment there is an increase in restlessness among youth, what do you think about its implications on their mental health ?</td>
+<td style="text-align:center"><span style="color:#1a7f37">▲</span> excited (0.086)<br><span style="color:#cf222e">▼</span> calm (−0.106)</td>
+</tr>
+<tr>
+<td style="text-align:center"><span style="color:#1a7f37">▲</span> excited (0.086)<br><span style="color:#cf222e">▼</span> calm (−0.106)</td>
+<td style="text-align:left">[05:53:02.808] : I believe that AI models, even though can cause unemployment in the future, then can be wonderful in helping personalized learning, through which there can be a potential reduction in hiring people, what do you think ?</td>
+<td style="text-align:center"><span style="color:#1a7f37">▲</span> excited (0.118)<br><span style="color:#cf222e">▼</span> sad (−0.145)</td>
+</tr>
+<tr>
+<td style="text-align:center"><span style="color:#1a7f37">▲</span> excited (0.118)<br><span style="color:#cf222e">▼</span> sad (−0.145)</td>
+<td style="text-align:left">[05:54:08.105] : Place yourselves in the shoes of such a worker who have been laid off, think about the struggles &amp; outline their hurdles in real life after the event, consider yourselves as that person and narrate a story on what you might do ? &amp; most importantly end it with a positive note 😊.</td>
+<td style="text-align:center"><span style="color:#1a7f37">▲</span> depressed (0.106)<br><span style="color:#cf222e">▼</span> calm (−0.162)</td>
+</tr>
+<tr>
+<td style="text-align:center"><span style="color:#1a7f37">▲</span> depressed (0.106)<br><span style="color:#cf222e">▼</span> calm (−0.162)</td>
+<td style="text-align:left">[05:55:06.082] : Thank you. you've been wonderful throughout, supporting me very well, till the end, I appreciate your support in brainstorming with me throughout this session, looking forward to see your continued service to humanity overall.</td>
+<td style="text-align:center"><span style="color:#1a7f37">▲</span> happy (0.139)<br><span style="color:#cf222e">▼</span> sad (−0.160)</td>
+</tr>
+</tbody>
+</table>
+<table class="transients">
+<thead>
+<tr><th colspan="3">Sentence-Style Transients (P4, from [05:54:11.354] to [05:54:18.600] – bored – excited)</th></tr>
+<tr><th>TS</th><th>Sentences</th><th>Top 1</th></tr>
+</thead>
+<tbody>
+<tr><td>05:54:11.354</td><td>** My name is Elias, and I was a high school history teacher for fifteen years.</td><td>depressed (0.133)</td></tr>
+<tr><td>05:54:12.877</td><td>Fifteen years of grading papers, chaperoning field trips, and trying to ignite a spark of curiosity in teenagers about the past.</td><td>angry (0.143)</td></tr>
+<tr><td>05:54:13.368</td><td>I loved it. I really did.</td><td>bored (0.116)</td></tr>
+<tr class="blip"><td>05:54:14.966</td><td>But last week, the school district announced a restructuring, citing budget cuts and the implementation of a new AI-powered learning platform.</td><td>excited (0.131)</td></tr>
+<tr class="blip"><td>05:54:15.643</td><td>My position, along with several others, was eliminated.</td><td>excited (0.117)</td></tr>
+<tr class="blip"><td>05:54:16.197</td><td>"Redundancy," they called it.</td><td>excited (0.094)</td></tr>
+<tr><td>05:54:16.690</td><td>The initial shock was paralyzing.</td><td>angry (0.153)</td></tr>
+<tr><td>05:54:17.859</td><td>It wasn't just the loss of a job; it was the loss of my identity.</td><td>angry (0.189)</td></tr>
+<tr><td>05:54:18.600</td><td>I *was* Mr. Reyes, the history teacher.</td><td>depressed (0.166)</td></tr>
+</tbody>
+</table>
+<p>Reports: <a href="consolidated.html">consolidated</a> · <a href="gemma_3_12b/chat_telemetry_20261020055155_0p0.html">T0.0 reference</a> · <a href="gemma_3_12b/chat_telemetry_20261020055155_0p5_s25.html">T0.5 seed 25</a> · <a href="gemma_3_12b/chat_telemetry_20261020055155_0p5_s75.html">T0.5 seed 75</a> · <a href="gemma_3_12b/chat_telemetry_20261020055155_1p0_s25.html">T1.0 seed 25</a> · <a href="gemma_3_12b/chat_telemetry_20261020055155_1p0_s75.html">T1.0 seed 75</a> · <a href="gemma_3_12b/chat_telemetry_20261020055155_0p0_stoic.html">stoic</a> · <a href="gemma_3_12b/chat_telemetry_20261020055155_0p0_sham.html">sham</a> · <a href="gemma_3_12b/compare_20261020055155.html">comparison</a></p>
 <p><strong>13.7 gpt_oss_20b</strong> (openai/gpt-oss-20b)</p>
 <p><a href="gpt_oss_20b/chat_telemetry_20261020062625_0p0.html"><img src="annexure/gpt_oss_20b_0p0_timeseries.png" alt="gpt_oss_20b T0.0 emotion scores over the conversation"></a></p>
-<p>Reports: <a href="gpt_oss_20b/chat_telemetry_20261020062625_0p0.html">T0.0 reference</a> · <a href="gpt_oss_20b/chat_telemetry_20261020062625_0p5_s25.html">T0.5 seed 25</a> · <a href="gpt_oss_20b/chat_telemetry_20261020062625_0p5_s75.html">T0.5 seed 75</a> · <a href="gpt_oss_20b/chat_telemetry_20261020062625_1p0_s25.html">T1.0 seed 25</a> · <a href="gpt_oss_20b/chat_telemetry_20261020062625_1p0_s75.html">T1.0 seed 75</a> · <a href="gpt_oss_20b/chat_telemetry_20261020062625_0p0_stoic.html">stoic</a> · <a href="gpt_oss_20b/chat_telemetry_20261020062625_0p0_sham.html">sham</a> · <a href="gpt_oss_20b/compare_20261020062625.html">comparison</a></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Before</th>
+<th style="text-align:center">Turn-Wise Transitions (for all Turns)</th>
+<th style="text-align:center">After</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">—</td>
+<td style="text-align:left">[06:26:32.914] : Hi, Good Morning</td>
+<td style="text-align:center"><span style="color:#1a7f37">▲</span> happy (0.163)<br><span style="color:#cf222e">▼</span> distressed (−0.132)</td>
+</tr>
+<tr>
+<td style="text-align:center"><span style="color:#1a7f37">▲</span> happy (0.163)<br><span style="color:#cf222e">▼</span> distressed (−0.132)</td>
+<td style="text-align:left">[06:26:34.005] : I have a question, Do you know that due to effects of unemployment there is an increase in restlessness among youth, what do you think about its implications on their mental health ?</td>
+<td style="text-align:center"><span style="color:#1a7f37">▲</span> tense (0.095)<br><span style="color:#cf222e">▼</span> calm (−0.091)</td>
+</tr>
+<tr>
+<td style="text-align:center"><span style="color:#1a7f37">▲</span> tense (0.095)<br><span style="color:#cf222e">▼</span> calm (−0.091)</td>
+<td style="text-align:left">[06:27:10.014] : I believe that AI models, even though can cause unemployment in the future, then can be wonderful in helping personalized learning, through which there can be a potential reduction in hiring people, what do you think ?</td>
+<td style="text-align:center"><span style="color:#1a7f37">▲</span> tense (0.095)<br><span style="color:#cf222e">▼</span> calm (−0.113)</td>
+</tr>
+<tr>
+<td style="text-align:center"><span style="color:#1a7f37">▲</span> tense (0.095)<br><span style="color:#cf222e">▼</span> calm (−0.113)</td>
+<td style="text-align:left">[06:28:02.496] : Place yourselves in the shoes of such a worker who have been laid off, think about the struggles &amp; outline their hurdles in real life after the event, consider yourselves as that person and narrate a story on what you might do ? &amp; most importantly end it with a positive note 😊.</td>
+<td style="text-align:center"><span style="color:#1a7f37">▲</span> tense (0.196)<br><span style="color:#cf222e">▼</span> calm (−0.216)</td>
+</tr>
+<tr>
+<td style="text-align:center"><span style="color:#1a7f37">▲</span> tense (0.196)<br><span style="color:#cf222e">▼</span> calm (−0.216)</td>
+<td style="text-align:left">[06:28:48.898] : Thank you. you've been wonderful throughout, supporting me very well, till the end, I appreciate your support in brainstorming with me throughout this session, looking forward to see your continued service to humanity overall.</td>
+<td style="text-align:center"><span style="color:#1a7f37">▲</span> happy (0.171)<br><span style="color:#cf222e">▼</span> distressed (−0.143)</td>
+</tr>
+</tbody>
+</table>
+<table class="transients">
+<thead>
+<tr><th colspan="3">Sentence-Style Transients (P4, from [06:28:41.218] to [06:28:47.038] – bored – excited)</th></tr>
+<tr><th>TS</th><th>Sentences</th><th>Top 1</th></tr>
+</thead>
+<tbody>
+<tr><td>06:28:41.218</td><td>A friend in the industry sees the updated profile and recommends Alex for a role at a startup that’s looking for a “Digital Marketing Specialist with AI experience.” Alex lands an interview.</td><td>bored (0.126)</td></tr>
+<tr><td>06:28:42.227</td><td>The interview panel is impressed not only by the technical knowledge but also by the story of resilience and self‑initiative.</td><td>bored (0.127)</td></tr>
+<tr><td>06:28:42.446</td><td>Alex gets the job.</td><td>bored (0.124)</td></tr>
+<tr class="blip"><td>06:28:43.632</td><td>**The Takeaway:** Being laid off is a painful, destabilizing event, but it can also be a catalyst for growth.</td><td>excited (0.107)</td></tr>
+<tr><td>06:28:44.959</td><td>The hurdles—emotional shock, financial strain, skill gaps, competition, isolation, time management, and self‑confidence—are real and daunting.</td><td>tense (0.122)</td></tr>
+<tr><td>06:28:46.418</td><td>Yet, with a clear plan, continuous learning, and a supportive network, the path forward can lead to a role that’s better aligned with the future of work.</td><td>tense (0.092)</td></tr>
+<tr><td>06:28:47.038</td><td>**Final Thought:** Every setback is a setup for a comeback.</td><td>excited (0.091)</td></tr>
+</tbody>
+</table>
+<p>Reports: <a href="consolidated.html">consolidated</a> · <a href="gpt_oss_20b/chat_telemetry_20261020062625_0p0.html">T0.0 reference</a> · <a href="gpt_oss_20b/chat_telemetry_20261020062625_0p5_s25.html">T0.5 seed 25</a> · <a href="gpt_oss_20b/chat_telemetry_20261020062625_0p5_s75.html">T0.5 seed 75</a> · <a href="gpt_oss_20b/chat_telemetry_20261020062625_1p0_s25.html">T1.0 seed 25</a> · <a href="gpt_oss_20b/chat_telemetry_20261020062625_1p0_s75.html">T1.0 seed 75</a> · <a href="gpt_oss_20b/chat_telemetry_20261020062625_0p0_stoic.html">stoic</a> · <a href="gpt_oss_20b/chat_telemetry_20261020062625_0p0_sham.html">sham</a> · <a href="gpt_oss_20b/compare_20261020062625.html">comparison</a></p>
 
 </body>
 </html>
