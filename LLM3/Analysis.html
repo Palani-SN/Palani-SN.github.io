@@ -362,6 +362,7 @@ a:hover { color: #0b0080; }
 .mermaid svg { display: block; margin: 0 auto; }
 table { margin-left: auto; margin-right: auto; }
 img[src^="annexure/"] { display: block; margin: 0 auto; }
+img[src$="_heatmap.png"], img[src$="_sham_timeseries.png"], img[src$="_sham_loop.png"] { display: block; margin: 0 auto; }
 p:has(> a > img[src^="annexure/"]) + table th, p:has(> a > img[src^="annexure/"]) + table td { border: 1px solid rgba(127, 127, 127, 0.45); }
 p:has(> a > img[src^="annexure/"]) + table th { text-align: center !important; }
 p:has(> a > img[src^="annexure/"]) + table td:nth-child(1), p:has(> a > img[src^="annexure/"]) + table td:nth-child(3) { white-space: nowrap; }
@@ -636,6 +637,7 @@ Model names are shortened in the text: llama = llama_3p2_1b, qwen = qwen_3_1p7b,
 </tr>
 </tbody>
 </table>
+<p><a href="consolidated.html"><img src="gemma_3_1b_0p0_sham_heatmap.png" alt="consolidated.html heatmap: gemma_3_1b T0.0 reference, median per emotion and prompt"></a></p>
 <p><strong>Consolidated table:</strong> <a href="consolidated.html">consolidated.html</a> brings all three measures together in one expandable table (model → run → turn). Each turn shows every emotion's median with its min and max, and hovering a cell shows its five-number summary and average. Cells are shaded on a continuous scale by median: green for positive, red for negative, white at zero. The median is used rather than the average because it sits with the bulk of the turn's sentences and isn't pulled by a few extreme ones. The turn's text figures sit alongside, and a run picker expands chosen runs (reference … stoic, sham) across every model.</p>
 <h3 id="3-executive-summary">3. Executive Summary</h3>
 <p>Generalizability is judged on the <strong>baseline</strong>: the 35 unsteered runs across 7 models. Stoic and sham are an <strong>additional causal experiment</strong> (Part D), not a requirement.</p>
@@ -819,7 +821,9 @@ Model names are shortened in the text: llama = llama_3p2_1b, qwen = qwen_3_1p7b,
 <li><strong>Where stoic lands varies:</strong> llama and glm go neutral or calm, mistral stays angry, gpt_oss tilts to content, and gemma_3_12b only compresses from P3 onward.</li>
 <li><strong>Check turn by turn:</strong> gemma_3_12b's sham looks normal on whole-run numbers, but every turn reads excited.</li>
 </ul>
-<p>Nature of the breakdown: removing non-emotional context did not leave raw emotion behind. The reply lost the story's content (the worker's real hurdles) and drifted into repetitive, first-person bodily-sensation language (&quot;being aware of the subtle shifts in my body…&quot;): a performed, content-less imitation of self-awareness from a model that has no body. The readings did not follow the language: they fell from an angry peak (≈0.15) to moderate neutral or alert (≈0.10) as the loop set in. The text sounds hyper-aware while the internal state does not, which suggests the readings track internal state rather than surface wording. This is one run of one 1B model, so it is an observation, not a general rule.</p>
+<p><a href="gemma_3_1b/chat_telemetry_20261020041747_0p0_sham.html"><img src="gemma_3_1b_0p0_sham_timeseries.png" alt="gemma_3_1b sham run: emotion scores over the conversation, cursor at sentence 115 in reply 4"></a></p>
+<p><a href="gemma_3_1b/chat_telemetry_20261020041747_0p0_sham.html"><img src="gemma_3_1b_0p0_sham_loop.png" alt="gemma_3_1b sham run: conversation view of sentence 115 and the repeating 'Edge of Awareness' loop"></a></p>
+<p>Nature of the breakdown: removing non-emotional context did not leave raw emotion behind. The reply lost the story's content (the worker's real hurdles) and drifted into repetitive, first-person bodily-sensation language (&quot;being aware of the subtle shifts in my body…&quot;): a performed, content-less imitation of self-awareness from a model that has no body. The readings did not follow the language: they fell from an angry peak (0.376) to alert (0.311) as the loop set in, and ended on neutral (0.212) and alert (0.145) at the last sentence. The text sounds hyper-aware while the internal state does not, which suggests the readings track internal state rather than surface wording, as observed in gemma_3_1b sham experiment only.</p>
 <hr>
 <h2 id="part-e-synthesis">Part E: Synthesis</h2>
 <h3 id="11-generalization-scorecard-baseline">11. Generalization Scorecard (Baseline)</h3>
