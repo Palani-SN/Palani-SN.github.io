@@ -1,0 +1,101 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="794" height="1123" viewBox="0 0 794 1123" font-family="Arial, Helvetica, sans-serif" xml:space="preserve">
+<title>Sathiyanarayanan Palani – Resume (page 2 of 2)</title>
+<rect width="794" height="1123" fill="#ffffff"/>
+<rect width="794" height="5" fill="#2f6bbd"/>
+<text x="46" y="58.0" font-size="12.4" font-weight="bold" fill="#1f2328"><tspan>LogExAnWebApp – Logical Expression Analysis</tspan></text>
+<text x="748" y="57.0" font-size="10.6" fill="#57606a" text-anchor="end">Mar 2022 – Oct 2022</text>
+<text x="46.0" y="75.2" font-size="10.5" fill="#1f2328"><a href="https://github.com/Palani-SN/LogExAnWebApp"><tspan fill="#2f6bbd" text-decoration="underline">Repo</tspan></a><tspan>  </tspan><tspan>·  </tspan><a href="https://github.com/Palani-SN/ansible-LogExAnWebApp-deployment"><tspan fill="#2f6bbd" text-decoration="underline">Ansible </tspan></a><a href="https://github.com/Palani-SN/ansible-LogExAnWebApp-deployment"><tspan fill="#2f6bbd" text-decoration="underline">deployment</tspan></a></text>
+<circle cx="49.2" cy="87.2" r="1.6" fill="#2f6bbd"/>
+<text x="57.0" y="90.9" font-size="11.1" fill="#1f2328"><tspan>Solver </tspan><tspan>that </tspan><tspan>reverse-calculates </tspan><tspan>logical </tspan><tspan>expressions, </tspan><tspan>finding </tspan><tspan>the </tspan><tspan>variable </tspan><tspan>values </tspan><tspan>that </tspan><tspan>make </tspan><tspan>a </tspan><tspan>condition </tspan><tspan>true </tspan><tspan>or </tspan><tspan>false</tspan></text>
+<circle cx="49.2" cy="102.9" r="1.6" fill="#2f6bbd"/>
+<text x="57.0" y="106.6" font-size="11.1" fill="#1f2328"><tspan>FastAPI </tspan><tspan>REST </tspan><tspan>backend </tspan><tspan>(DICT/JSON, </tspan><tspan>DataFrame/Markdown) </tspan><tspan>with </tspan><tspan>a </tspan><tspan>Flask </tspan><tspan>UI; </tspan><tspan>multi-environment </tspan><tspan>deployment </tspan><tspan>via </tspan><tspan>Ansible</tspan></text>
+<text x="46.0" y="122.0" font-size="10.5" fill="#57606a"><tspan font-weight="bold">Tech:</tspan><tspan> </tspan><tspan>Python, </tspan><tspan>FastAPI, </tspan><tspan>Uvicorn, </tspan><tspan>Flask, </tspan><tspan>Ansible</tspan></text>
+<text x="46" y="151.2" font-size="12.4" font-weight="bold" fill="#2f6bbd" letter-spacing="1.2">PROFESSIONAL EXPERIENCE</text>
+<line x1="46" y1="156.2" x2="748" y2="156.2" stroke="#2f6bbd" stroke-width="1"/>
+<text x="46" y="179.2" font-size="12.4" font-weight="bold" fill="#1f2328"><tspan>Telemetry Software Data Engineer · Intel SRR, Bangalore</tspan></text>
+<text x="748" y="178.2" font-size="10.6" fill="#57606a" text-anchor="end">Nov 2023 – Present</text>
+<circle cx="49.2" cy="193.0" r="1.6" fill="#2f6bbd"/>
+<text x="57.0" y="196.7" font-size="11.1" fill="#1f2328"><tspan font-weight="bold">ETL </tspan><tspan font-weight="bold">Pipeline:</tspan><tspan> </tspan><tspan>Architected </tspan><tspan>scalable </tspan><tspan>data </tspan><tspan>harvesting </tspan><tspan>pipelines </tspan><tspan>for </tspan><tspan>bulk </tspan><tspan>insertion </tspan><tspan>to </tspan><tspan>Elasticsearch, </tspan><tspan>aggregating </tspan><tspan>timeseries </tspan><tspan>metrics </tspan><tspan>from </tspan></text>
+<text x="57.0" y="212.4" font-size="11.1" fill="#1f2328"><tspan>centralized </tspan><tspan>TSDB </tspan><tspan>cluster</tspan></text>
+<circle cx="49.2" cy="224.4" r="1.6" fill="#2f6bbd"/>
+<text x="57.0" y="228.1" font-size="11.1" fill="#1f2328"><tspan font-weight="bold">Telemetry </tspan><tspan font-weight="bold">UI:</tspan><tspan> </tspan><tspan>Built </tspan><tspan>scalable </tspan><tspan>web </tspan><tspan>UI </tspan><tspan>framework </tspan><tspan>using </tspan><tspan>MVC </tspan><tspan>architecture </tspan><tspan>and </tspan><tspan>Dash, </tspan><tspan>visualizing </tspan><tspan>KPIs </tspan><tspan>for </tspan><tspan>distributed </tspan><tspan>systems</tspan></text>
+<circle cx="49.2" cy="240.1" r="1.6" fill="#2f6bbd"/>
+<text x="57.0" y="243.8" font-size="11.1" fill="#1f2328"><tspan font-weight="bold">EBDT </tspan><tspan font-weight="bold">(Event-Based </tspan><tspan font-weight="bold">Distributed </tspan><tspan font-weight="bold">Tracing):</tspan><tspan> </tspan><tspan>Proposed </tspan><tspan>and </tspan><tspan>prototyped </tspan><tspan>distributed </tspan><tspan>tracing </tspan><tspan>architecture </tspan><tspan>inspired </tspan><tspan>by </tspan><tspan>OpenTelemetry </tspan><tspan>for </tspan></text>
+<text x="57.0" y="259.5" font-size="11.1" fill="#1f2328"><tspan>enhanced </tspan><tspan>observability; </tspan><tspan>submitted </tspan><tspan>to </tspan><tspan>ETTC </tspan><tspan>2025 </tspan><tspan>(declined </tspan><tspan>as </tspan><tspan>out </tspan><tspan>of </tspan><tspan>scope)</tspan></text>
+<circle cx="49.2" cy="271.5" r="1.6" fill="#2f6bbd"/>
+<text x="57.0" y="275.2" font-size="11.1" fill="#1f2328"><tspan font-weight="bold">QTOPP:</tspan><tspan> </tspan><tspan>Built </tspan><tspan>queued </tspan><tspan>task </tspan><tspan>processing </tspan><tspan>system </tspan><tspan>on </tspan><tspan>process </tspan><tspan>pools </tspan><tspan>as </tspan><tspan>headless </tspan><tspan>CI/CD </tspan><tspan>runner </tspan><tspan>for </tspan><tspan>scheduled </tspan><tspan>statistical </tspan><tspan>calculations</tspan></text>
+<circle cx="49.2" cy="287.2" r="1.6" fill="#2f6bbd"/>
+<text x="57.0" y="290.9" font-size="11.1" fill="#1f2328"><tspan font-weight="bold">V&amp;V </tspan><tspan font-weight="bold">POC:</tspan><tspan> </tspan><tspan>Evaluated </tspan><tspan>and </tspan><tspan>prototyped </tspan><tspan>infrastructure </tspan><tspan>for </tspan><tspan>AI-assisted </tspan><tspan>verification </tspan><tspan>and </tspan><tspan>validation </tspan><tspan>using </tspan><tspan>pre-trained </tspan><tspan>models</tspan></text>
+<text x="46" y="315.1" font-size="12.4" font-weight="bold" fill="#1f2328"><tspan>Semiconductor S/W Product Development Engineer · UST Global, Bangalore</tspan></text>
+<text x="748" y="314.1" font-size="10.6" fill="#57606a" text-anchor="end">May 2022 – Oct 2023</text>
+<circle cx="49.2" cy="328.9" r="1.6" fill="#2f6bbd"/>
+<text x="57.0" y="332.6" font-size="11.1" fill="#1f2328"><tspan>Built </tspan><tspan>Python </tspan><tspan>automation </tspan><tspan>test </tspan><tspan>framework </tspan><tspan>with </tspan><tspan>GitHub </tspan><tspan>Actions </tspan><tspan>CI/CD </tspan><tspan>and </tspan><tspan>custom </tspan><tspan>runners </tspan><tspan>for </tspan><tspan>telemetry </tspan><tspan>testing</tspan></text>
+<circle cx="49.2" cy="344.6" r="1.6" fill="#2f6bbd"/>
+<text x="57.0" y="348.3" font-size="11.1" fill="#1f2328"><tspan>Implemented </tspan><tspan>Serial-Over-LAN </tspan><tspan>using </tspan><tspan>IPMI </tspan><tspan>with </tspan><tspan>monitoring </tspan><tspan>threads </tspan><tspan>for </tspan><tspan>auto-retry </tspan><tspan>during </tspan><tspan>target </tspan><tspan>reboot</tspan></text>
+<circle cx="49.2" cy="360.3" r="1.6" fill="#2f6bbd"/>
+<text x="57.0" y="364.0" font-size="11.1" fill="#1f2328"><tspan>Collected </tspan><tspan>performance </tspan><tspan>KPIs </tspan><tspan>from </tspan><tspan>thermal/power </tspan><tspan>subsystems </tspan><tspan>via </tspan><tspan>Redfish </tspan><tspan>(DMTF </tspan><tspan>spec) </tspan><tspan>using </tspan><tspan>OData </tspan><tspan>queries </tspan><tspan>over </tspan><tspan>REST </tspan><tspan>APIs</tspan></text>
+<circle cx="49.2" cy="376.0" r="1.6" fill="#2f6bbd"/>
+<text x="57.0" y="379.7" font-size="11.1" fill="#1f2328"><tspan>Developed </tspan><tspan>scripts </tspan><tspan>to </tspan><tspan>upload </tspan><tspan>register </tspan><tspan>values </tspan><tspan>to </tspan><tspan>InfluxDB </tspan><tspan>using </tspan><tspan>low-latency </tspan><tspan>line </tspan><tspan>protocol </tspan><tspan>for </tspan><tspan>real-time </tspan><tspan>visualization</tspan></text>
+<text x="46" y="403.9" font-size="12.4" font-weight="bold" fill="#1f2328"><tspan>Senior Engineer (Founding Team) · Ielektron Technologies, Chennai</tspan></text>
+<text x="748" y="402.9" font-size="10.6" fill="#57606a" text-anchor="end">Oct 2018 – Dec 2021</text>
+<text x="46.0" y="421.4" font-size="11.1" fill="#1f2328"><tspan>One </tspan><tspan>of </tspan><tspan>the </tspan><tspan>first </tspan><tspan>5 </tspan><tspan>employees. </tspan><tspan>Stayed </tspan><tspan>as </tspan><tspan>the </tspan><tspan>company </tspan><tspan>grew </tspan><tspan>to </tspan><tspan>~300 </tspan><tspan>over </tspan><tspan>4.5 </tspan><tspan>years. </tspan><tspan>Played </tspan><tspan>a </tspan><tspan>critical </tspan><tspan>role </tspan><tspan>in </tspan><tspan>shaping </tspan><tspan>initial </tspan><tspan>phase </tspan><tspan>of </tspan><tspan>prototypes </tspan></text>
+<text x="46.0" y="437.1" font-size="11.1" fill="#1f2328"><tspan>and </tspan><tspan>guiding </tspan><tspan>peers, </tspan><tspan>operating </tspan><tspan>as </tspan><tspan>an </tspan><tspan>early-stage </tspan><tspan>key </tspan><tspan>contributor </tspan><tspan>during </tspan><tspan>the </tspan><tspan>formative </tspan><tspan>phase </tspan><tspan>of </tspan><tspan>the </tspan><tspan>startup.</tspan></text>
+<text x="62" y="455.3" font-size="11.2" font-weight="bold" fill="#2f6bbd"><tspan>Software Validation Engineer – MBRDI ADAS (as external)</tspan></text>
+<text x="748" y="455.3" font-size="10.2" fill="#57606a" text-anchor="end">Apr 2019 – Dec 2021</text>
+<circle cx="65.2" cy="468.1" r="1.6" fill="#2f6bbd"/>
+<text x="73.0" y="471.8" font-size="11.1" fill="#1f2328"><tspan>Wrote </tspan><tspan>Python </tspan><tspan>test </tspan><tspan>scripts </tspan><tspan>for </tspan><tspan>automated </tspan><tspan>validation </tspan><tspan>of </tspan><tspan>ADAS </tspan><tspan>measurements </tspan><tspan>on </tspan><tspan>HIL </tspan><tspan>scenarios </tspan><tspan>from </tspan><tspan>DOORS </tspan><tspan>requirements</tspan></text>
+<circle cx="65.2" cy="483.8" r="1.6" fill="#2f6bbd"/>
+<text x="73.0" y="487.5" font-size="11.1" fill="#1f2328"><tspan>Automated </tspan><tspan>HIL </tspan><tspan>processes </tspan><tspan>via </tspan><tspan>SSH </tspan><tspan>using </tspan><tspan>paramiko </tspan><tspan>and </tspan><tspan>SCP</tspan></text>
+<circle cx="65.2" cy="499.5" r="1.6" fill="#2f6bbd"/>
+<text x="73.0" y="503.2" font-size="11.1" fill="#1f2328"><tspan>Built </tspan><tspan>custom </tspan><tspan>framework </tspan><tspan>for </tspan><tspan>automated </tspan><tspan>test </tspan><tspan>case </tspan><tspan>generation </tspan><tspan>using </tspan><tspan>pandas </tspan><tspan>dataframes </tspan><tspan>as </tspan><tspan>pre-HIL </tspan><tspan>execution </tspan><tspan>task</tspan></text>
+<circle cx="65.2" cy="515.2" r="1.6" fill="#2f6bbd"/>
+<text x="73.0" y="518.9" font-size="11.1" fill="#1f2328"><tspan>Performed </tspan><tspan>runtime </tspan><tspan>dynamic </tspan><tspan>analysis </tspan><tspan>of </tspan><tspan>ADAS </tspan><tspan>utility </tspan><tspan>modules </tspan><tspan>using </tspan><tspan>ASTREE, </tspan><tspan>unit/L2 </tspan><tspan>testing </tspan><tspan>with </tspan><tspan>Google </tspan><tspan>Test </tspan><tspan>(C++)</tspan></text>
+<text x="62" y="536.1" font-size="11.2" font-weight="bold" fill="#2f6bbd"><tspan>Python Developer – SAFRAN Aerospace (as external)</tspan></text>
+<text x="748" y="536.1" font-size="10.2" fill="#57606a" text-anchor="end">Oct 2018 – Mar 2019</text>
+<circle cx="65.2" cy="548.9" r="1.6" fill="#2f6bbd"/>
+<text x="73.0" y="552.6" font-size="11.1" fill="#1f2328"><tspan>Built </tspan><tspan>multi-display </tspan><tspan>broadcast </tspan><tspan>system </tspan><tspan>over </tspan><tspan>local </tspan><tspan>network </tspan><tspan>using </tspan><tspan>TCP/IP</tspan></text>
+<circle cx="65.2" cy="564.6" r="1.6" fill="#2f6bbd"/>
+<text x="73.0" y="568.3" font-size="11.1" fill="#1f2328"><tspan>Created </tspan><tspan>3D </tspan><tspan>scalar </tspan><tspan>plot </tspan><tspan>visualizations </tspan><tspan>for </tspan><tspan>sensor </tspan><tspan>data </tspan><tspan>using </tspan><tspan>Plotly</tspan></text>
+<circle cx="65.2" cy="580.3" r="1.6" fill="#2f6bbd"/>
+<text x="73.0" y="584.0" font-size="11.1" fill="#1f2328"><tspan>Developed </tspan><tspan>event </tspan><tspan>classification </tspan><tspan>algorithm </tspan><tspan>based </tspan><tspan>on </tspan><tspan>volumetric </tspan><tspan>data </tspan><tspan>normal </tspan><tspan>distribution </tspan><tspan>analysis</tspan></text>
+<text x="46" y="608.2" font-size="12.4" font-weight="bold" fill="#1f2328"><tspan>Embedded Software Developer (Founding Team) · Ielektron Technologies, Chennai</tspan></text>
+<text x="748" y="607.2" font-size="10.6" fill="#57606a" text-anchor="end">Jul 2017 – Sep 2018</text>
+<circle cx="49.2" cy="622.0" r="1.6" fill="#2f6bbd"/>
+<text x="57.0" y="625.7" font-size="11.1" fill="#1f2328"><tspan>Improved </tspan><tspan>embedded </tspan><tspan>software </tspan><tspan>unit </tspan><tspan>and </tspan><tspan>functional </tspan><tspan>testing </tspan><tspan>practices</tspan></text>
+<circle cx="49.2" cy="637.7" r="1.6" fill="#2f6bbd"/>
+<text x="57.0" y="641.4" font-size="11.1" fill="#1f2328"><tspan>Built </tspan><tspan>multi-branch </tspan><tspan>CI/CD </tspan><tspan>pipeline </tspan><tspan>in </tspan><tspan>Jenkins </tspan><tspan>with </tspan><tspan>GitHub </tspan><tspan>app </tspan><tspan>integration </tspan><tspan>and </tspan><tspan>Slack </tspan><tspan>notifications</tspan></text>
+<circle cx="49.2" cy="653.4" r="1.6" fill="#2f6bbd"/>
+<text x="57.0" y="657.1" font-size="11.1" fill="#1f2328"><tspan>Developed </tspan><tspan>semi-automated </tspan><tspan>hardware </tspan><tspan>testing </tspan><tspan>platform </tspan><tspan>for </tspan><tspan>Renesas </tspan><tspan>microcontrollers </tspan><tspan>using </tspan><tspan>IronPython </tspan><tspan>Renesas </tspan><tspan>APIs</tspan></text>
+<text x="46" y="686.3" font-size="12.4" font-weight="bold" fill="#2f6bbd" letter-spacing="1.2">TECHNICAL SKILLS</text>
+<line x1="46" y1="691.3" x2="748" y2="691.3" stroke="#2f6bbd" stroke-width="1"/>
+<text x="46.0" y="710.8" font-size="11.1" fill="#1f2328"><tspan font-weight="bold">Languages:</tspan><tspan> </tspan><tspan>Python, </tspan><tspan>C/C++, </tspan><tspan>Shell/Batch </tspan><tspan>scripting</tspan></text>
+<text x="46.0" y="726.5" font-size="11.1" fill="#1f2328"><tspan font-weight="bold">LLM </tspan><tspan font-weight="bold">&amp; </tspan><tspan font-weight="bold">ML:</tspan><tspan> </tspan><tspan>PyTorch, </tspan><tspan>Transformers, </tspan><tspan>OpenCV, </tspan><tspan>TensorFlow, </tspan><tspan>Keras, </tspan><tspan>scikit-learn, </tspan><tspan>Sparse </tspan><tspan>Autoencoders, </tspan><tspan>activation </tspan><tspan>steering, </tspan><tspan>interpretability </tspan></text>
+<text x="46.0" y="742.2" font-size="11.1" fill="#1f2328"><tspan>research, </tspan><tspan>Claude </tspan><tspan>Code, </tspan><tspan>Copilot </tspan><tspan>CLI, </tspan><tspan>google-genai, </tspan><tspan>agent </tspan><tspan>architectures, </tspan><tspan>evaluation </tspan><tspan>frameworks, </tspan><tspan>dspy, </tspan><tspan>LangChain, </tspan><tspan>LangGraph, </tspan><tspan>Moshi-ASR, </tspan></text>
+<text x="46.0" y="757.9" font-size="11.1" fill="#1f2328"><tspan>Moshi-TTS, </tspan><tspan>delayed-streams-modelling</tspan></text>
+<text x="46.0" y="773.6" font-size="11.1" fill="#1f2328"><tspan font-weight="bold">Web </tspan><tspan font-weight="bold">Development:</tspan><tspan> </tspan><tspan>FastAPI, </tspan><tspan>Flask, </tspan><tspan>React, </tspan><tspan>Next.js, </tspan><tspan>shadcn/ui</tspan></text>
+<text x="46.0" y="789.3" font-size="11.1" fill="#1f2328"><tspan font-weight="bold">Data </tspan><tspan font-weight="bold">&amp; </tspan><tspan font-weight="bold">Databases:</tspan><tspan> </tspan><tspan>pandas, </tspan><tspan>polars, </tspan><tspan>numpy, </tspan><tspan>PostgreSQL, </tspan><tspan>MySQL, </tspan><tspan>SQLAlchemy, </tspan><tspan>InfluxDB, </tspan><tspan>Elasticsearch</tspan></text>
+<text x="46.0" y="805.0" font-size="11.1" fill="#1f2328"><tspan font-weight="bold">Visualization:</tspan><tspan> </tspan><tspan>Matplotlib, </tspan><tspan>Plotly, </tspan><tspan>Dash</tspan></text>
+<text x="46.0" y="820.7" font-size="11.1" fill="#1f2328"><tspan font-weight="bold">DevOps </tspan><tspan font-weight="bold">&amp; </tspan><tspan font-weight="bold">Cloud:</tspan><tspan> </tspan><tspan>Docker, </tspan><tspan>Kubernetes, </tspan><tspan>Terraform, </tspan><tspan>Helm, </tspan><tspan>Jenkins, </tspan><tspan>GitHub </tspan><tspan>Actions, </tspan><tspan>GCP </tspan><tspan>(Cloud </tspan><tspan>Run, </tspan><tspan>Artifact </tspan><tspan>Registry), </tspan><tspan>AWS </tspan><tspan>(EKS </tspan><tspan>basics)</tspan></text>
+<text x="46.0" y="836.4" font-size="11.1" fill="#1f2328"><tspan font-weight="bold">Protocols:</tspan><tspan> </tspan><tspan>TCP/IP, </tspan><tspan>UDP, </tspan><tspan>HTTP, </tspan><tspan>MQTT, </tspan><tspan>WebRTC, </tspan><tspan>WebSockets, </tspan><tspan>Redfish/OData</tspan></text>
+<text x="46.0" y="852.1" font-size="11.1" fill="#1f2328"><tspan font-weight="bold">Testing:</tspan><tspan> </tspan><tspan>pytest, </tspan><tspan>Google </tspan><tspan>Test, </tspan><tspan>unit/integration </tspan><tspan>testing</tspan></text>
+<text x="46" y="876.3" font-size="12.4" font-weight="bold" fill="#2f6bbd" letter-spacing="1.2">EDUCATION</text>
+<line x1="46" y1="881.3" x2="748" y2="881.3" stroke="#2f6bbd" stroke-width="1"/>
+<text x="46" y="904.3" font-size="12.4" font-weight="bold" fill="#1f2328"><tspan>B.E. Electrical &amp; Electronics Engineering · Anna University (AIHT)</tspan></text>
+<text x="748" y="903.3" font-size="10.6" fill="#57606a" text-anchor="end">2013 – 2017</text>
+<text x="46.0" y="921.5" font-size="10.6" fill="#57606a"><tspan>First </tspan><tspan>Class </tspan><tspan>· </tspan><tspan>Final </tspan><tspan>Project: </tspan><tspan>Automatic </tspan><tspan>Attendance </tspan><tspan>System </tspan><tspan>using </tspan><tspan>Face </tspan><tspan>Recognition </tspan><tspan>(OpenCV, </tspan><tspan>Raspberry </tspan><tspan>Pi)</tspan></text>
+<text x="46" y="950.7" font-size="12.4" font-weight="bold" fill="#2f6bbd" letter-spacing="1.2">PARTICIPATIONS &amp; RECOGNITION</text>
+<line x1="46" y1="955.7" x2="748" y2="955.7" stroke="#2f6bbd" stroke-width="1"/>
+<circle cx="49.2" cy="971.5" r="1.6" fill="#2f6bbd"/>
+<text x="57.0" y="975.2" font-size="11.1" fill="#1f2328"><tspan>European </tspan><tspan>Test </tspan><tspan>&amp; </tspan><tspan>Telemetry </tspan><tspan>Conference </tspan><tspan>2025 </tspan><tspan>– </tspan><tspan>Paper </tspan><tspan>Submission </tspan><tspan>(2025)</tspan></text>
+<circle cx="49.2" cy="987.2" r="1.6" fill="#2f6bbd"/>
+<text x="57.0" y="990.9" font-size="11.1" fill="#1f2328"><tspan>Google </tspan><tspan>Gemini </tspan><tspan>Long-Context </tspan><tspan>Kaggle </tspan><tspan>Competition </tspan><tspan>Participant </tspan><tspan>(2024)</tspan></text>
+<circle cx="49.2" cy="1002.9" r="1.6" fill="#2f6bbd"/>
+<text x="57.0" y="1006.6" font-size="11.1" fill="#1f2328"><tspan>Civicus </tspan><tspan>Nelson </tspan><tspan>Mandela </tspan><tspan>&amp; </tspan><tspan>Graca </tspan><tspan>Machel </tspan><tspan>Innovation </tspan><tspan>Awards </tspan><tspan>Participant </tspan><tspan>(2024)</tspan></text>
+<circle cx="49.2" cy="1018.6" r="1.6" fill="#2f6bbd"/>
+<text x="57.0" y="1022.3" font-size="11.1" fill="#1f2328"><tspan>OpenCV </tspan><tspan>AI </tspan><tspan>Scavenger </tspan><tspan>Hunt </tspan><tspan>– </tspan><tspan>Week </tspan><tspan>4 </tspan><tspan>Winner </tspan><tspan>(2022)</tspan></text>
+<circle cx="49.2" cy="1034.3" r="1.6" fill="#2f6bbd"/>
+<text x="57.0" y="1038.0" font-size="11.1" fill="#1f2328"><tspan>Hacktoberfest </tspan><tspan>2022 </tspan><tspan>– </tspan><tspan>Contributor</tspan></text>
+<circle cx="49.2" cy="1050.0" r="1.6" fill="#2f6bbd"/>
+<text x="57.0" y="1053.7" font-size="11.1" fill="#1f2328"><tspan>1st </tspan><tspan>Prize </tspan><tspan>– </tspan><tspan>Inter-Department </tspan><tspan>Working </tspan><tspan>Model </tspan><tspan>Development </tspan><tspan>Competition </tspan><tspan>during </tspan><tspan>UG </tspan><tspan>(2015)</tspan></text>
+<text x="748" y="1105" font-size="8.5" fill="#57606a" text-anchor="end">Sathiyanarayanan Palani · Page 2 of 2</text>
+</svg>
