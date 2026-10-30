@@ -13,7 +13,7 @@ Software Engineer with 9+ years building production systems and 2+ years develop
 - Built FNMA, a full-stack fact-checking platform (React, Python, Flutter, LLM APIs) designed to combat misinformation—WEF's #1 global risk—through adaptive behavioral systems
 - Published 6 PyPI packages with 86k+ downloads, demonstrating commitment to public goods and developer enablement
 - Implemented Anthropic's Sparse Autoencoder methodology for LLM interpretability research across 4 projects
-- 4.5 years as Founding Engineer building telemetry infrastructure, ETL pipelines, and scalable web applications
+- Founding engineer at Ielektron for 4.5 years (one of the first 5 employees, through growth to ~300); later built telemetry infrastructure, ETL pipelines and web applications at Intel.
 - Eager to help mission-driven organizations (education, healthcare, nonprofits) deploy AI safely and effectively
 
 ---
