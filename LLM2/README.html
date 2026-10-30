@@ -369,6 +369,30 @@
 		.page {
 			page-break-after: always;
 		}
+
+		/* Wide table kept to the text column, scrolling horizontally inside its own frame */
+		.table-scroll {
+			max-width: 100%;
+			overflow-x: auto;
+			border: 1px solid #d0d7de;
+			border-radius: 6px;
+			margin: 16px 0;
+		}
+
+		.table-scroll table {
+			margin: 0;
+			white-space: nowrap;
+		}
+
+		/* keep the Model column visible while scrolling */
+		.table-scroll th:first-child,
+		.table-scroll td:first-child {
+			position: sticky;
+			left: 0;
+			background: #ffffff;
+			z-index: 1;
+			box-shadow: 1px 0 0 #d0d7de;
+		}
 	</style>
 
 	<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
@@ -1324,6 +1348,7 @@ direction[layer]  = raw_diff[layer] / ‖raw_diff[layer]‖        (unit vector)
 			result is its false-alarm count (0–13 per 100), which is carried in the wider HTML table linked below. <a
 				href="#83--constitutional-classifiers-two-stage-architecture">§8.3</a> explains the asymmetry.</p>
 	</blockquote>
+	<div class="table-scroll">
 	<table>
 		<thead>
 			<tr>
@@ -1815,6 +1840,7 @@ direction[layer]  = raw_diff[layer] / ‖raw_diff[layer]‖        (unit vector)
 			</tr>
 		</tbody>
 	</table>
+	</div>
 	<p>A wider version of this table — adding FastGate escalation counts, all six latency columns, the all-dims baseline
 		accuracies, and per-model wall-clock — is generated as a standalone page:</p>
 	<p><strong>→ <a
