@@ -384,7 +384,13 @@
 			white-space: nowrap;
 		}
 
-		/* keep the Model column visible while scrolling */
+		/* let a prose column wrap instead of running off as one long line */
+		.table-scroll.wrap-last td:last-child {
+			white-space: normal;
+			min-width: 320px;
+		}
+
+		/* keep the first column visible while scrolling */
 		.table-scroll th:first-child,
 		.table-scroll td:first-child {
 			position: sticky;
@@ -1909,6 +1915,7 @@ direction[layer]  = raw_diff[layer] / ‖raw_diff[layer]‖        (unit vector)
 		</p>
 	</blockquote>
 	<h2 id="output-artifacts-reference">Output Artifacts Reference</h2>
+	<div class="table-scroll wrap-last">
 	<table>
 		<thead>
 			<tr>
@@ -1980,6 +1987,7 @@ direction[layer]  = raw_diff[layer] / ‖raw_diff[layer]‖        (unit vector)
 			</tr>
 		</tbody>
 	</table>
+	</div>
 	<h2 id="configuration--customization">Configuration &amp; Customization</h2>
 	<p>Every stage class exposes its key parameters as constructor arguments (edited in each script's
 		<code>if __name__ == &quot;__main__&quot;:</code> block):
