@@ -2156,7 +2156,7 @@ direction[layer]  = raw_diff[layer] / ‖raw_diff[layer]‖        (unit vector)
 			remain valid after a checkpoint update, or does representational drift require re-fitting it every time the
 			underlying weights change?</li>
 		<li><strong>Weight-space cross-model transfer.</strong> <a href="#cross-model-transfer">§10</a> settles the
-			<em>procedural</em> question — refitting the same Cohen's-d selection on 21 models across seven families
+			<em>procedural</em> question — refitting the same Cohen's-d selection on 21 models across 11 families
 			yields 91.0–99.5% OOD accuracy every time, with no per-model tuning. The harder question is untouched: can a
 			signature <em>vector</em> fitted on model A be applied directly to model B's hidden states? Differing
 			<code>d_model</code>, differing layer counts, and no shared basis between two independently trained residual
